@@ -1,8 +1,13 @@
-#include iostream
+#include <iostream>
+#include <fstream>
+#include <sting>
+#include <cmath>
+#include <vector>
 
 using namespace std;
 
-main(){
+main()
+{
 	cout << "Hello World!" << endl;
 
 	return(0);
