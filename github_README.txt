@@ -17,5 +17,20 @@ LOCAL COMPUTER
       - Write a Commit message with the title of the change and a description
         following a return character.
       - Click Commit to master
+      - Finally, click Push at the bottom of the tab.
+    - At the bottom of the tab, there is a branch button and an action button.
+      - The branch button can access different branches in the project and can
+        create new ones.
+      - The action button will display the suggested action. Right click on it
+        to see all actions.
 
 CAMPUS CLUSTER
+  - Download repository to cluster: git clone https://github.com/pcarzon/ICCING.git
+  - Update repository: git pull
+  - Upload changes to github:
+    - git add .
+    - git commit -m "Commit Message here"
+    - git push
+  - See branches of project: git branch -a
+  - Switch to different branch: git checkout Test
+  - Merge a branch to the main: git merge branch Test
