@@ -1,6 +1,8 @@
 CC = g++
 DEBUG = -g
 CFLAGS = -std=c++11 -Wall -c $(DEBUG)
+CXXFLAGS = $(shell pkg-config --cflags opencv)
+LIBS = $(shell pkg-config --libs opencv)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
@@ -29,8 +31,8 @@ splitting.o : splitting.h event.h splitting.cpp
 main.o : $(HEADER_FILES) main.cpp
 	$(CC) $(CCFLAGS) main.cpp
 
-iccing :  $(OBJECT_FILES)
-	$(CC) $(CCFLAGS) $(OBJECT_FILES) -o iccing
+iccing :  main.o
+	$(CC) $(CCFLAGS) main.o -o iccing
 
 clean :
 	rm -f $(OBJECT_FILES)
