@@ -19,7 +19,7 @@ int main (void)
 
 	Event testEvent;
 
-	testEvent.SampleEnergy(1, "Hello!");
+	testEvent.SampleEnergy(1, 1.0);
 	cout << "Hello World!" << endl;
 
 	return 0;
