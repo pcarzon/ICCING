@@ -15,7 +15,11 @@ using namespace std;
 
 int main (void)
 {
+	IO inputOutputObject;
+
 	Event testEvent;
+
+	testEvent.SampleEnergy(1, 1.0);
 	cout << "Hello World!" << endl;
 
 	return 0;

@@ -21,14 +21,16 @@ private:
   double seed;
 
 	void CopyEvent(const Event &e);
+
 public:
+
   Event();
   ~Event();
 
   Event(const Event &original);
   Event& operator=(const Event& original);
 
-  void SampleEnergy(int location, int radius);
+  void SampleEnergy(int location, double radius);
   void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
 
 };

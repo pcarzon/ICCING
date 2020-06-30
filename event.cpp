@@ -26,7 +26,7 @@ Event& Event::operator= (const Event& original)
 	return *this;
 }
 
-void Event::SampleEnergy(int location, int radius)
+void Event::SampleEnergy(int location, double radius)
 {
 
 }
