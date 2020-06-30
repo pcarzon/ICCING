@@ -26,12 +26,12 @@ Event& Event::operator= (const Event& original)
 	return *this;
 }
 
-vector<vector<double>> Event::SampleEnergy(int location, int radius)
+void Event::SampleEnergy(int location, int radius)
 {
 
 }
 
 void Event::UpdateDensity(int densityType, vector<vector<double>> inputDensity)
 {
-  
+
 }

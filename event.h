@@ -14,6 +14,7 @@ private:
 
   vector<vector<double>> initial_energy;
   vector<vector<vector<double>>> density;
+  vector<vector<double>> sampled_energy;
 
   double total_initial_energy;
   double total_energy;
@@ -27,7 +28,7 @@ public:
   Event(const Event &original);
   Event& operator=(const Event& original);
 
-  vector<vector<double>> SampleEnergy(int location, int radius);
+  void SampleEnergy(int location, int radius);
   void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
 
 };
