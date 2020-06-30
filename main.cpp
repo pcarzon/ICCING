@@ -15,7 +15,7 @@ using namespace std;
 
 int main (void)
 {
-	IO inputOutputObject;
+	IO inputOutputObject("/projects/jnorhos/pcarzon/ICCING/testInput/000.dat", "/projects/jnorhos/pcarzon/ICCING/testOutput/000.dat", 0, 0);
 
 	Event testEvent;
 
