@@ -12,8 +12,8 @@ IO::~IO()
 {
   input_file = "";
   output_file = "";
-  input_type = "";
-  output_type = "";
+  input_type = 0;
+  output_type = 0;
 }
 
 IO::IO(const IO &original)
