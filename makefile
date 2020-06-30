@@ -33,5 +33,5 @@ iccing :  $(OBJECT_FILES)
 	$(CC) $(LFLAGS) $(OBJECT_FILES) -o iccing
 
 clean :
-	rm -f $(OBJECT_FILES)
+	rm -f $(OBJECT_FILES) iccing
 	echo Clean done
