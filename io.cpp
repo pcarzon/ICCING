@@ -52,6 +52,8 @@ void IO::OutputEccentricities(const Eccentricity &ecc)
 
 Event IO::ReadEvent()
 {
+  ifstream in;
+  in.open(input_file);
   Event inputEvent;
   return inputEvent;
 }
