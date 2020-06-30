@@ -30,7 +30,7 @@ main.o : $(HEADER_FILES) main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 iccing :  $(OBJECT_FILES)
-	$(CC) $(CFLAGS) $(OBJECT_FILES) -o iccing
+	$(CC) $(LFLAGS) $(OBJECT_FILES) -o iccing
 
 clean :
 	rm -f $(OBJECT_FILES)
