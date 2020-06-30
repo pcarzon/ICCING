@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "event.h"
+#include "ecc.h"
 
 using namespace std;
 
