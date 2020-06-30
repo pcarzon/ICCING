@@ -15,6 +15,7 @@ using namespace std;
 
 int main (void)
 {
+	Event testEvent;
 	cout << "Hello World!" << endl;
 
 	return 0;
