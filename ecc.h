@@ -1,7 +1,7 @@
 #ifndef Eccentricity_H
 #define Eccentricity_H
 
-#include <Eccentricitystream>
+#include <iostream>
 #include <string>
 #include <cmath>
 #include <vector>
