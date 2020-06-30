@@ -1,5 +1,5 @@
 #include <iostream>
-#include <sting>
+#include <string>
 #include <cmath>
 #include <vector>
 
