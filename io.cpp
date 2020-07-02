@@ -4,7 +4,7 @@ IO::IO(string configFile)
 {
 
   ifstream input;
-  input.open(teamFile);
+  input.open(configFile);
 
   string var_type;
 
