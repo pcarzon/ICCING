@@ -17,9 +17,10 @@ IO::IO(string configFile)
 
   while (!input.eof())
 	{
+    input >> var_type;
+    decltype(input.peek()) var;
+    input >> var;
 
-    input >> oldvar;
-    auto var = static_cast<auto>(oldvar);
     switch(mapConfigParams[var_type])
     {
       case inputfile:
