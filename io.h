@@ -71,7 +71,7 @@ public:
   IO(const IO &original);
   IO& operator=(const IO& original);
 
-  Event ReadEvent();
+  vector<vector<double>> ReadEvent();
   void WriteEvent(const Event &event);
 };
 #endif
