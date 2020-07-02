@@ -52,6 +52,9 @@ private:
   double grid_max;
   double grid_step;
 
+  int grid_points;
+  vector<vector<double>> carrier;
+
   void Initialize();
 
 	void CopyIO(const IO &e);
