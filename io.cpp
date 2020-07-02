@@ -18,7 +18,7 @@ IO::IO(string configFile)
 	{
 
     input >> var_type;
-    
+
     switch(mapConfigParams[var_type])
     {
       case inputfile:
@@ -87,6 +87,11 @@ IO::IO(string configFile)
         break;
     }
   }
+
+  cout << input_file << endl;
+  cout << input_type << endl;
+  cout << num_events << endl;
+  cout << grid_max << endl;
 }
 
 IO::~IO()
