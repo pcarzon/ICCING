@@ -20,8 +20,8 @@ IO::IO(string configFile)
     input >> var_type;
     cout << "peek  " << input.peek() << endl;
     /*decltype(input.peek()) var;
-    input >> var;*/
-    string var;
+    input >> var;
+
     switch(mapConfigParams[var_type])
     {
       case inputfile:
@@ -88,7 +88,7 @@ IO::IO(string configFile)
 
         grid_step = var;
         break;
-    }
+    }*/
 /*    switch(mapConfigParams[var_type])
     {
       case inputfile:
