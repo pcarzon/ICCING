@@ -86,10 +86,8 @@ IO::IO(string configFile)
     }
   }
 
-  cout << input_file << endl;
-  cout << input_type << endl;
-  cout << num_events << endl;
-  cout << grid_max << endl;
+  grid_points = grid_max/grid_step;
+  carrier.resize(grid_points, vector<int>(grid_points, 0));
 }
 
 IO::~IO()
@@ -171,12 +169,12 @@ void IO::OutputEccentricities(const Eccentricity &ecc)
 
 }
 
-Event IO::ReadEvent()
+vector<vector<double>> IO::ReadEvent()
 {
   ifstream in;
   in.open(input_file);
 
-  Event inputEvent;
+
 
   return inputEvent;
 }
