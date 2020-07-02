@@ -19,7 +19,7 @@ IO::IO(string configFile)
 	{
 
     input >> oldvar;
-    auto var = oldvar;
+    auto var = static_cast<auto>(oldvar);
     switch(mapConfigParams[var_type])
     {
       case inputfile:
