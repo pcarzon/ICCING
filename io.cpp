@@ -171,11 +171,17 @@ void IO::OutputEccentricities(const Eccentricity &ecc)
 
 vector<vector<double>> IO::ReadEvent()
 {
-  ifstream in;
-  in.open(input_file);
+  ifstream input;
+  input.open(input_file);
 
+  int x, y;
+  double value;
 
-
+  while (!input.eof())
+  {
+      input >> x >> y >> value;
+      carrier[x][y] = value;
+  }
   return carrier;
 }
 
