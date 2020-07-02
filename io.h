@@ -19,20 +19,20 @@ private:
 
   static enum ConfigParams
   {
-    input_file,
-    output_file,
-    input_type,
-    output_type,
+    inputfile,
+    outputfile,
+    inputtype,
+    outputtype,
 
-    num_events,
-    reduced_thickness,
-    mult_fluctuations,
-    cross_section,
-    nucleon_width,
-    b_min,
-    b_max,
-    grid_max,
-    grid_step
+    numevents,
+    reducedthickness,
+    multfluctuations,
+    crosssection,
+    nucleonwidth,
+    bmin,
+    bmax,
+    gridmax,
+    gridstep
   };
 
   static std::map<string, ConfigParams> mapConfigParams;

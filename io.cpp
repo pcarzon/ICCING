@@ -18,8 +18,7 @@ IO::IO(string configFile)
 	{
 
     input >> var_type;
-    auto var;
-    input >> var;
+    
     switch(mapConfigParams[var_type])
     {
       case inputfile:
