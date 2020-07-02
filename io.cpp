@@ -3,6 +3,8 @@
 IO::IO(string configFile)
 {
 
+  Initialize();
+
   ifstream input;
   input.open(configFile);
 
@@ -16,70 +18,71 @@ IO::IO(string configFile)
 	{
 
     input >> var_type;
-
-    switch(var_type)
+    auto var;
+    input >> var;
+    switch(mapConfigParams[var_type])
     {
-      case "input_file":
+      case input_file:
         input >> svar;
         input_file = svar;
         break;
 
-      case "output_file":
+      case output_file:
         input >> svar;
         output_file = svar;
         break;
 
-      case "input_type":
+      case input_type:
         input >> ivar;
         input_type = ivar;
         break;
 
-      case "output_type":
+      case output_type:
         input >> ivar;
         output_type = ivar;
         break;
 
-      case "num_events":
+      case num_events:
         input >> ivar;
         num_events = ivar;
         break;
 
-      case "reduced_thickness":
+      case reduced_thickness:
         input >> ivar;
         reduced_thickness = ivar;
         break;
 
-      case "mult_fluctuations":
+      case mult_fluctuations:
         input >> dvar;
         mult_fluctuations = dvar;
         break;
 
-      case "cross_section":
+      case cross_section:
         input >> dvar;
         cross_section = dvar;
         break;
 
-      case "nucleon_width":
+      case nucleon_width:
         input >> dvar;
         nucleon_width = dvar;
         break;
 
-      case "b_min":
+      case b_min:
         input >> ivar;
         b_min = ivar;
         break;
 
-      case "b_max":
+      case b_max:
         input >> ivar;
         b_max = ivar;
         break;
 
-      case "grid_max":
+      case grid_max:
         input >> dvar;
         grid_max = dvar;
         break;
 
-      case "grid_step":
+      case grid_step:
         input >> dvar;
         grid_step = dvar;
         break;
@@ -132,6 +135,23 @@ IO& IO::operator= (const IO& original)
 {
 	CopyIO(original);
 	return *this;
+}
+
+void IO::Initialize()
+{
+  mapConfigParams["input_file"] = input_file;
+  mapConfigParams["output_file"] = output_file;
+  mapConfigParams["input_type"] = input_type;
+  mapConfigParams["output_type"] = output_type;
+  mapConfigParams["num_events"] = num_events;
+  mapConfigParams["reduced_thickness"] = reduced_thickness;
+  mapConfigParams["mult_fluctuations"] = mult_fluctuations;
+  mapConfigParams["cross_section"] = cross_section;
+  mapConfigParams["nucleon_width"] = nucleon_width;
+  mapConfigParams["b_min"] = b_min;
+  mapConfigParams["b_max"] = b_max;
+  mapConfigParams["grid_max"] = grid_max;
+  mapConfigParams["grid_step"] = grid_step;
 }
 
 void IO::OutputFullDensityGrids(const Event &event)

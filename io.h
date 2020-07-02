@@ -6,6 +6,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <map>
 
 #include "event.h"
 #include "ecc.h"
@@ -15,6 +16,26 @@ using namespace std;
 class IO
 {
 private:
+
+  static enum ConfigParams
+  {
+    input_file,
+    output_file,
+    input_type,
+    output_type,
+
+    num_events,
+    reduced_thickness,
+    mult_fluctuations,
+    cross_section,
+    nucleon_width,
+    b_min,
+    b_max,
+    grid_max,
+    grid_step
+  };
+
+  static std::map<string, ConfigParams> mapConfigParams;
 
   string input_file;
   string output_file;
@@ -30,6 +51,8 @@ private:
   int b_max;
   double grid_max;
   double grid_step;
+
+  static void Initialize();
 
 	void CopyIO(const IO &e);
 
