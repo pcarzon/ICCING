@@ -21,6 +21,16 @@ private:
   int input_type;
   int output_type;
 
+  int num_events;
+  int reduced_thickness;
+  double mult_fluctuations;
+  double cross_section;
+  double nucleon_width;
+  int b_min;
+  int b_max;
+  double grid_max;
+  double grid_step;
+
 	void CopyIO(const IO &e);
 
   void OutputFullDensityGrids(const Event &event);
@@ -29,7 +39,7 @@ private:
 
 public:
 
-  IO(string input, string output, int iType, int oType);
+  IO(string configFile);
   ~IO();
 
   IO(const IO &original);
