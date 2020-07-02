@@ -18,9 +18,10 @@ IO::IO(string configFile)
   while (!input.eof())
 	{
     input >> var_type;
-    decltype(input.peek()) var;
-    input >> var;
-
+    cout << "peek  " << input.peek() << endl;
+    /*decltype(input.peek()) var;
+    input >> var;*/
+    string var;
     switch(mapConfigParams[var_type])
     {
       case inputfile:
