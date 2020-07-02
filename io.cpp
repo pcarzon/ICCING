@@ -13,17 +13,85 @@ IO::IO(string configFile)
   string svar;
   int ivar;
   double dvar;
+  string oldvar;
 
   while (!input.eof())
 	{
 
-    input >> var_type;
-
+    input >> oldvar;
+    auto var = oldvar;
     switch(mapConfigParams[var_type])
     {
       case inputfile:
-        input >> svar;
-        input_file = svar;
+
+        input_file = var;
+        break;
+
+      case outputfile:
+
+        output_file = var;
+        break;
+
+      case inputtype:
+
+        input_type = var;
+        break;
+
+      case outputtype:
+
+        output_type = var;
+        break;
+
+      case numevents:
+
+        num_events = var;
+        break;
+
+      case reducedthickness:
+
+        reduced_thickness = var;
+        break;
+
+      case multfluctuations:
+
+        mult_fluctuations = var;
+        break;
+
+      case crosssection:
+
+        cross_section = var;
+        break;
+
+      case nucleonwidth:
+
+        nucleon_width = var;
+        break;
+
+      case bmin:
+
+        b_min = var;
+        break;
+
+      case bmax:
+
+        b_max = var;
+        break;
+
+      case gridmax:
+
+        grid_max = var;
+        break;
+
+      case gridstep:
+
+        grid_step = var;
+        break;
+    }
+/*    switch(mapConfigParams[var_type])
+    {
+      case inputfile:
+        input >> var;
+        input_file = var;
         break;
 
       case outputfile:
@@ -85,7 +153,7 @@ IO::IO(string configFile)
         input >> dvar;
         grid_step = dvar;
         break;
-    }
+    }*/
   }
 
   cout << input_file << endl;
