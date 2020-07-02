@@ -13,10 +13,10 @@
 
 using namespace std;
 
-int main (void)
+int main (int argc, char *argv[])
 {
-	IO inputOutputObject("/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf");
-
+	IO inputOutputObject(argv[1]);
+/*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	Event testEvent;
 
 	testEvent.SampleEnergy(1, 1.0);
