@@ -176,7 +176,7 @@ vector<vector<double>> IO::ReadEvent()
 
 
 
-  return inputEvent;
+  return carrier;
 }
 
 void IO::WriteEvent(const Event &event)
