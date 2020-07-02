@@ -35,7 +35,7 @@ private:
     gridstep
   };
 
-  static std::map<string, ConfigParams> mapConfigParams;
+  std::map<string, ConfigParams> mapConfigParams;
 
   string input_file;
   string output_file;
