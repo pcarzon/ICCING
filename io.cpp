@@ -87,7 +87,7 @@ IO::IO(string configFile)
   }
 
   grid_points = grid_max/grid_step;
-  carrier.resize(grid_points, vector<int>(grid_points, 0));
+  carrier.resize(grid_points, vector<double>(grid_points, 0));
 }
 
 IO::~IO()
