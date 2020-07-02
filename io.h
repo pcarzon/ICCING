@@ -17,7 +17,7 @@ class IO
 {
 private:
 
-  static enum ConfigParams
+  enum ConfigParams
   {
     inputfile,
     outputfile,
