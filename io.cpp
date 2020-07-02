@@ -176,10 +176,12 @@ vector<vector<double>> IO::ReadEvent()
 
   int x, y;
   double value;
-
+  input.getline();
   while (!input.eof())
   {
-      input >> x >> y >> value;
+      input >> x;
+      input >> y;
+      input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
   }
