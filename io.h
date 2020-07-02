@@ -52,7 +52,7 @@ private:
   double grid_max;
   double grid_step;
 
-  static void Initialize();
+  void Initialize();
 
 	void CopyIO(const IO &e);
 
