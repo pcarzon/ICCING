@@ -181,6 +181,7 @@ vector<vector<double>> IO::ReadEvent()
   {
       input >> x >> y >> value;
       carrier[x][y] = value;
+      cout << carrier[x][y] << endl;
   }
   return carrier;
 }
