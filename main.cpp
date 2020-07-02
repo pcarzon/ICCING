@@ -15,7 +15,7 @@ using namespace std;
 
 int main (void)
 {
-	IO inputOutputObject("/projects/jnorhos/pcarzon/ICCING/testInput/ic0.dat", "/projects/jnorhos/pcarzon/ICCING/testOutput/ic0.dat", 0, 0);
+	IO inputOutputObject("/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf");
 
 	Event testEvent;
 
