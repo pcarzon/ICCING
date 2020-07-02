@@ -176,7 +176,7 @@ vector<vector<double>> IO::ReadEvent()
 
   int x, y;
   double value;
-  input.getline();
+	input.ignore(10000, '\n');
   while (!input.eof())
   {
       input >> x;
