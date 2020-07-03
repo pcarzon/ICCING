@@ -56,7 +56,7 @@ IO::IO(string configFile)
     }
   }
 
-  grid_points = grid_max/grid_step;
+  grid_points = 2*(grid_max/grid_step);
   carrier.resize(grid_points, vector<double>(grid_points, 0));
   cout << "carrier size " << carrier.size() << " " << carrier[0].size() << endl;
 }
