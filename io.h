@@ -72,6 +72,6 @@ public:
   IO& operator=(const IO& original);
 
   vector<vector<double>> ReadEvent();
-  void WriteEvent(const Event &event);
+  void WriteEvent(Event &event);
 };
 #endif
