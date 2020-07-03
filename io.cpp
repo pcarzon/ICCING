@@ -153,6 +153,7 @@ vector<vector<double>> IO::ReadEvent()
   {
       //cout << "Here it is " << int(input.peek()) << endl;
       input >> readx >> ready >> value;
+      if (input.peek() == '\n') {break;}
       x = readx/grid_step - 1 + grid_points/2;
       cout << x << endl;
       //input >> value;
