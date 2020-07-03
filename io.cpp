@@ -151,7 +151,7 @@ vector<vector<double>> IO::ReadEvent()
   while (!input.eof())
   {
       input >> value;
-
+      cout << "Here it is " << value << endl;
       x = value/grid_step - 1 + grid_points/2;
       cout << x << endl;
       input >> value;
