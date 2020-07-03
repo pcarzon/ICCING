@@ -149,7 +149,7 @@ vector<vector<double>> IO::ReadEvent()
   double value;
 	input.ignore(10000, '\n');
 
-  while (!input.eof() && input.peek() != '\n')
+  while (!input.eof() )
   {
       //cout << "Here it is " << int(input.peek()) << endl;
       input >> value;
@@ -162,6 +162,7 @@ vector<vector<double>> IO::ReadEvent()
       input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
+      input.ignore(10000, '\n');
   }
   return carrier;
 }
