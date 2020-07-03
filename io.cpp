@@ -152,11 +152,11 @@ vector<vector<double>> IO::ReadEvent()
   {
       input >> value;
 
-      x = value/grid_step - 1;
+      x = value/grid_step - 1 + grid_points/2;
       cout << x << endl;
       input >> value;
 
-      y = value/grid_step - 1;
+      y = value/grid_step - 1 + grid_points/2;
       cout << y << endl;
       input >> value;
       carrier[x][y] = value;
