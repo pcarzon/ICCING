@@ -164,6 +164,7 @@ vector<vector<double>> IO::ReadEvent()
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
 input.ignore(10000, '\n');
+if (input.peek() == '\n') {break;}
   }
   return carrier;
 }
