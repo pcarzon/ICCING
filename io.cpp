@@ -10,84 +10,55 @@ IO::IO(string configFile)
 
   string var_type;
 
-  string svar;
-  int ivar;
-  double dvar;
-
   while (!input.eof())
 	{
     input >> var_type;
     switch(mapConfigParams[var_type])
     {
       case inputfile:
-        input >> svar;
-        input_file = svar;
-        break;
+        input >> input_file; break;
 
       case outputfile:
-        input >> svar;
-        output_file = svar;
-        break;
+        input >> output_file; break;
 
       case inputtype:
-        input >> ivar;
-        input_type = ivar;
-        break;
+        input >> input_type; break;
 
       case outputtype:
-        input >> ivar;
-        output_type = ivar;
-        break;
+        input >> output_type; break;
 
       case numevents:
-        input >> ivar;
-        num_events = ivar;
-        break;
+        input >> num_events; break;
 
       case reducedthickness:
-        input >> ivar;
-        reduced_thickness = ivar;
-        break;
+        input >> reduced_thickness; break;
 
       case multfluctuations:
-        input >> dvar;
-        mult_fluctuations = dvar;
-        break;
+        input >> mult_fluctuations; break;
 
       case crosssection:
-        input >> dvar;
-        cross_section = dvar;
-        break;
+        input >> cross_section; break;
 
       case nucleonwidth:
-        input >> dvar;
-        nucleon_width = dvar;
-        break;
+        input >> nucleon_width; break;
 
       case bmin:
-        input >> ivar;
-        b_min = ivar;
-        break;
+        input >> b_min; break;
 
       case bmax:
-        input >> ivar;
-        b_max = ivar;
-        break;
+        input >> b_max; break;
 
       case gridmax:
-        input >> dvar;
-        grid_max = dvar;
-        break;
+        input >> grid_max;  break;
 
       case gridstep:
-        input >> dvar;
-        grid_step = dvar;
-        break;
+        input >> grid_step; break;
     }
   }
 
   grid_points = grid_max/grid_step;
   carrier.resize(grid_points, vector<double>(grid_points, 0));
+  cout << "carrier size " << carrier.size() << " " << carrier[0].size() << endl;
 }
 
 IO::~IO()
@@ -180,7 +151,9 @@ vector<vector<double>> IO::ReadEvent()
   while (!input.eof())
   {
       input >> x;
+      x /= grid_step;
       input >> y;
+      y /= grid_step;
       input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
