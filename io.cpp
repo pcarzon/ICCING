@@ -146,23 +146,23 @@ vector<vector<double>> IO::ReadEvent()
   input.open(input_file);
 
   int x, y;
-  double value;
+  double readx,ready,value;
 	input.ignore(10000, '\n');
 
   while (!input.eof() && input.peek() != '\n\n')
   {
       //cout << "Here it is " << int(input.peek()) << endl;
-      input >> value;
-      x = value/grid_step - 1 + grid_points/2;
+      input >> readx >> ready >> value;
+      x = readx/grid_step - 1 + grid_points/2;
       cout << x << endl;
-      input >> value;
+      //input >> value;
 
-      y = value/grid_step - 1 + grid_points/2;
+      y = ready/grid_step - 1 + grid_points/2;
       cout << y << endl;
-      input >> value;
+    //  input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
-    
+
   }
   return carrier;
 }
