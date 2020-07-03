@@ -34,5 +34,6 @@ public:
   void SampleEnergy(int location, double radius);
   void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
 
+  vector<vector<double>> GetInitialEnergy() { return initial_energy; }
 };
 #endif

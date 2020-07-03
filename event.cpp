@@ -2,7 +2,7 @@
 
 Event::Event()
 {
-
+  initial_energy.resize(401, vector<double>(401, 0));
 }
 
 Event::~Event()

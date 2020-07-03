@@ -57,7 +57,7 @@ IO::IO(string configFile)
   }
 
   grid_points = 2*(grid_max/grid_step);
-  carrier.resize(grid_points, vector<double>(grid_points, 0));
+  carrier.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
   cout << "carrier size " << carrier.size() << " " << carrier[0].size() << endl;
 }
 
@@ -169,5 +169,27 @@ vector<vector<double>> IO::ReadEvent()
 
 void IO::WriteEvent(const Event &event)
 {
+  ofstream output;
+  output.open(output_file);
+
+  vector<vector<double>> output_energy = event.GetInitialEnergy();
+  double x, y, value;
+
+  input.ignore(10000, '\n');
+
+  for (int i = 0; i < output_energy.size(); i++)
+  {
+    for (int j = 0; j < output_energy[0].size(); j++)
+    {
+      if (output_energy[i][j] != 0)
+      {
+        x = (i + grid_points/2)*grid_step ;
+        y = (j + grid_points/2)*grid_step;
+        value = output_energy[i][j];
+
+        output << x << y << value << endl;
+      }
+    }
+  }
 
 }
