@@ -155,8 +155,8 @@ vector<vector<double>> IO::ReadEvent()
 
       input >> readx >> ready >> value;
 
-      x = readx/grid_step + grid_points/2;
-      y = ready/grid_step + grid_points/2;
+      x = (readx + grid_max)/grid_step;
+      y = (ready + grid_max)/grid_step;
 
       carrier[x][y] = value;
 
@@ -181,11 +181,11 @@ void IO::WriteEvent(Event &event)
     {
       if (output_energy[i][j] != 0)
       {
-        x = (i + grid_points/2)*grid_step ;
-        y = (j + grid_points/2)*grid_step;
+        x = -grid_max + i*grid_step;
+        y = -grid_max + j*grid_step;
         value = output_energy[i][j];
 
-        output << x << y << value << endl;
+        output << x << " " << y << " " << value << endl;
       }
     }
   }
