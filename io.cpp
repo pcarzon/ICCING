@@ -151,9 +151,11 @@ vector<vector<double>> IO::ReadEvent()
   while (!input.eof())
   {
       input >> x;
-      x /= grid_step;
+      x = x/grid_step - 1;
+      cout << x << endl;
       input >> y;
-      y /= grid_step;
+      y = y/grid_step - 1;
+      cout << y << endl;
       input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
