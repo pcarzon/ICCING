@@ -149,7 +149,7 @@ vector<vector<double>> IO::ReadEvent()
   double readx,ready,value;
 	input.ignore(10000, '\n');
 
-  while (!input.eof() && input.peek() != '\n\n')
+  while (!input.eof())
   {
       //cout << "Here it is " << int(input.peek()) << endl;
       input >> readx >> ready >> value;
