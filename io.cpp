@@ -149,10 +149,9 @@ vector<vector<double>> IO::ReadEvent()
   double value;
 	input.ignore(10000, '\n');
 
-  while (!input.eof())
+  while (!input.eof() && input >> value =! '\n')
   {
-      cout << "Here it is " << int(input.peek()) << endl;
-      input >> value;
+      //cout << "Here it is " << int(input.peek()) << endl;
       x = value/grid_step - 1 + grid_points/2;
       cout << x << endl;
       input >> value;
