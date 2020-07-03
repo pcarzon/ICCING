@@ -167,15 +167,13 @@ vector<vector<double>> IO::ReadEvent()
   return carrier;
 }
 
-void IO::WriteEvent(const Event &event)
+void IO::WriteEvent(Event &event)
 {
   ofstream output;
   output.open(output_file);
 
   vector<vector<double>> output_energy = event.GetInitialEnergy();
   double x, y, value;
-
-  input.ignore(10000, '\n');
 
   for (int i = 0; i < output_energy.size(); i++)
   {
