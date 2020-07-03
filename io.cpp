@@ -148,9 +148,10 @@ vector<vector<double>> IO::ReadEvent()
   int x, y;
   double value;
 	input.ignore(10000, '\n');
+  input >> value;
   while (!input.eof())
   {
-      input >> value;
+
       cout << "Here it is " << value << endl;
       x = value/grid_step - 1 + grid_points/2;
       cout << x << endl;
@@ -161,6 +162,7 @@ vector<vector<double>> IO::ReadEvent()
       input >> value;
       carrier[x][y] = value;
       cout << value << carrier[x][y] << endl;
+      input >> value;
   }
   return carrier;
 }
