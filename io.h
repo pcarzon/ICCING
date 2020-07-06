@@ -8,9 +8,6 @@
 #include <vector>
 #include <map>
 
-#include "event.h"
-#include "ecc.h"
-
 using namespace std;
 
 class Event;
