@@ -226,6 +226,7 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> density_grid, string fi
         value = density_grid[i][j];
 
         output << x << " " << y << " " << value << endl;
+        cout << x << " " << y << " " << value << endl;
       }
     }
   }
@@ -259,7 +260,7 @@ vector<vector<double>> IO::ReadEvent()
 
       x = (readx + grid_max)/grid_step;
       y = (ready + grid_max)/grid_step;
-
+      cout << x << " " << y << " " << value << endl;
       carrier[x][y] = value;
 
       input.ignore(10000, '\n');
