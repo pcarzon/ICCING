@@ -25,7 +25,7 @@ cout << "Passed Initialize\n";
     //  uses var_type as key to map then reads value to class variable
     switch(mapConfigParams[var_type])
     {
-      case inputfile: input >> input_file; break;
+      case inputfolder: input >> input_folder; break;
 
       case outputfolder:  input >> output_folder; break;
 
@@ -66,7 +66,7 @@ cout << "Passed Initialize\n";
 
 IO::~IO()
 {
-  input_file = "";
+  input_folder = "";
   output_folder = "";
   input_type = 0;
   output_type = 0;
@@ -93,7 +93,7 @@ IO::IO(const IO &original)
 
 void IO::CopyIO(const IO &e)
 {
-  input_file = e.input_file;
+  input_folder = e.input_folder;
   output_folder = e.output_folder;
   input_type = e.input_type;
   output_type = e.output_type;
@@ -121,7 +121,7 @@ IO& IO::operator= (const IO& original)
 
 void IO::Initialize()
 {
-  input_file = "";
+  input_folder = "";
   output_folder = "";
   input_type = 0;
   output_type = 0;
@@ -140,7 +140,7 @@ void IO::Initialize()
   t_b = false;
   //#CONFIGPARAM
 
-  mapConfigParams["input_file"] = inputfile;
+  mapConfigParams["input_folder"] = inputfolder;
   mapConfigParams["output_folder"] = outputfolder;
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
@@ -163,7 +163,7 @@ void IO::OutputConfig(string file_name)
   ofstream output;
   output.open(file_name);
 
-  output << "input_file " << input_file
+  output << "input_folder " << input_folder
     << "\noutput_folder " << output_folder
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type;
@@ -246,10 +246,15 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 Event IO::ReadEvent()
 {
   ifstream input;
-  input.open(input_file);
-cout << input_file << endl;
+  input.open(input_folder + "ic0.dat");
+cout << input_folder << endl;
 
   Event event_in;
+
+  event_in.grid_max = grid_max;
+  event_in.grid_step = grid_step;
+  event_in.grid_points = grid_points;
+
   //vector<vector<double>> carrier;
   //  Initialize input grid to 0 with dimensions grid_points
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
@@ -274,6 +279,28 @@ cout << input_file << endl;
   }
   input.close();
 
+  if (t_a)
+  {
+    input.open(input_folder + "TA0.dat");
+    event_in.t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+
+    input.ignore(10000, '\n');
+
+    while (!input.eof())
+    {
+
+        input >> readx >> ready >> value;
+
+        x = (readx + grid_max)/grid_step;
+        y = (ready + grid_max)/grid_step;
+        //cout << x << " " << y << " " << value << endl;
+        event_in.t_a[x][y] = value;
+
+        input.ignore(10000, '\n');
+        if (input.peek() == '\n') {break;}
+    }
+    input.close();
+  }
   return event_in;
 }
 

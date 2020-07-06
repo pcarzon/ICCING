@@ -22,7 +22,7 @@ private:
   //    TO ADD CONFIG PARAMETER SEARCH THIS TAG: #CONFIGPARAM
   enum ConfigParams
   {
-    inputfile,
+    inputfolder,
     outputfolder,
     inputtype,
     outputtype,
@@ -47,7 +47,7 @@ private:
   std::map<string, ConfigParams> mapConfigParams;
 
   //  These are the file variables
-  string input_file;
+  string input_folder;
   string output_folder;
   int input_type;
   int output_type;

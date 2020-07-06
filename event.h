@@ -15,6 +15,10 @@ class Event
 {
 private:
 
+  double grid_max;
+  double grid_step;
+  int grid_points;
+
   vector<vector<double>> initial_energy;
   vector<vector<double>> t_a;
   vector<vector<double>> t_b;
