@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 
+#include "io.h"
 using namespace std;
 
 class IO;
