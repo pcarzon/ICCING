@@ -164,7 +164,7 @@ void IO::OutputConfig(string file_name)
   output.open(file_name);
 
   output << "input_file " << input_file
-    << "\nout_file " << output_folder
+    << "\noutput_folder " << output_folder
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type;
 
