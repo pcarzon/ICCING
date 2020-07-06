@@ -7,10 +7,10 @@
 #include <cmath>
 #include <vector>
 #include <map>
-
+#include "event.h"
 using namespace std;
 
-class Event;
+//class Event;
 class Eccentricity;
 
 class IO
