@@ -98,7 +98,7 @@ public:
   IO& operator=(const IO& original);
 
   //  Reads a single event
-  vector<vector<double>> ReadEvent();
+  Event ReadEvent();
   //  Writes a single event to output file
   void WriteEvent(Event &event);
 };

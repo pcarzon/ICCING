@@ -45,6 +45,6 @@ public:
   vector<vector<double>> GetTa() { return t_a; }
   vector<vector<double>> GetTb() { return t_b; }
 
-  friend vector<vector<double>> IO::ReadEvent();
+  friend Event IO::ReadEvent();
 };
 #endif
