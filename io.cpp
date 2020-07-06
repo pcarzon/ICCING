@@ -1,70 +1,69 @@
 #include "io.h"
 
+//  Class constructor, must specify path to configuration file
 IO::IO(string configFile)
 {
-
+  // Initialze map for reading in config parameters
   Initialize();
 
+  //  config input stream
   ifstream input;
   input.open(configFile);
 
+  //  Used to record parameter type read from file
   string var_type;
 
+  //  Loop through config file
   while (!input.eof())
 	{
+    //  Read parameter type
     input >> var_type;
+
+    //  Switch through the possible parameter types
+    //  uses var_type as key to map then reads value to class variable
     switch(mapConfigParams[var_type])
     {
-      case inputfile:
-        input >> input_file; break;
+      case inputfile: input >> input_file; break;
 
-      case outputfile:
-        input >> output_file; break;
+      case outputfolder:  input >> output_folder; break;
 
-      case inputtype:
-        input >> input_type; break;
+      case inputtype: input >> input_type; break;
 
-      case outputtype:
-        input >> output_type; break;
+      case outputtype:  input >> output_type; break;
 
-      case numevents:
-        input >> num_events; break;
+      case numevents: input >> num_events; break;
 
-      case reducedthickness:
-        input >> reduced_thickness; break;
+      case reducedthickness:  input >> reduced_thickness; break;
 
-      case multfluctuations:
-        input >> mult_fluctuations; break;
+      case multfluctuations:  input >> mult_fluctuations; break;
 
-      case crosssection:
-        input >> cross_section; break;
+      case crosssection:  input >> cross_section; break;
 
-      case nucleonwidth:
-        input >> nucleon_width; break;
+      case nucleonwidth:  input >> nucleon_width; break;
 
-      case bmin:
-        input >> b_min; break;
+      case bmin:  input >> b_min; break;
 
-      case bmax:
-        input >> b_max; break;
+      case bmax:  input >> b_max; break;
 
-      case gridmax:
-        input >> grid_max;  break;
+      case gridmax: input >> grid_max;  break;
 
-      case gridstep:
-        input >> grid_step; break;
-    }
-  }
+      case gridstep:  input >> grid_step; break;
 
+      case ta:  input >> t_a; break;
+
+      case tb:  input >> t_b; break;
+      //#CONFIGPARAM
+    }// End of switch
+  }// End of while loop
+
+  //  Calculate # grid_points from config file
   grid_points = 2*(grid_max/grid_step);
-  carrier.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
-  cout << "carrier size " << carrier.size() << " " << carrier[0].size() << endl;
 }
 
 IO::~IO()
 {
   input_file = "";
-  output_file = "";
+  output_folder = "";
   input_type = 0;
   output_type = 0;
 
@@ -77,6 +76,10 @@ IO::~IO()
   b_max = 0;
   grid_max = 0.0;
   grid_step = 0.0;
+
+  t_a = false;
+  t_b = false;
+  //#CONFIGPARAM
 }
 
 IO::IO(const IO &original)
@@ -87,7 +90,7 @@ IO::IO(const IO &original)
 void IO::CopyIO(const IO &e)
 {
   input_file = e.input_file;
-  output_file = e.output_file;
+  output_folder = e.output_folder;
   input_type = e.input_type;
   output_type = e.output_type;
 
@@ -100,6 +103,10 @@ void IO::CopyIO(const IO &e)
   b_max = e.b_max;
   grid_max = e.grid_max;
   grid_step = e.grid_step;
+
+  t_a = e.t_a;
+  t_b = e.t_b;
+  //#CONFIGPARAM
 }
 
 IO& IO::operator= (const IO& original)
@@ -110,8 +117,27 @@ IO& IO::operator= (const IO& original)
 
 void IO::Initialize()
 {
+  input_file = "";
+  output_folder = "";
+  input_type = 0;
+  output_type = 0;
+
+  num_events = 0;
+  reduced_thickness = 0;
+  mult_fluctuations = 0.0;
+  cross_section = 0.0;
+  nucleon_width = 0.0;
+  b_min = 0;
+  b_max = 0;
+  grid_max = 0.0;
+  grid_step = 0.0;
+
+  t_a = false;
+  t_b = false;
+  //#CONFIGPARAM
+  
   mapConfigParams["input_file"] = inputfile;
-  mapConfigParams["output_file"] = outputfile;
+  mapConfigParams["output_folder"] = outputfolder;
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
   mapConfigParams["num_events"] = numevents;
@@ -123,19 +149,91 @@ void IO::Initialize()
   mapConfigParams["b_max"] = bmax;
   mapConfigParams["grid_max"] = gridmax;
   mapConfigParams["grid_step"] = gridstep;
+  mapConfigParams["t_a"] = ta;
+  mapConfigParams["t_b"] = tb;
+  //#CONFIGPARAM
 }
 
-void IO::OutputFullDensityGrids(const Event &event)
+void IO::OutputConfig(string file_name)
 {
+  ofstream output;
+  output.open(file_name);
 
+  out << "input_file " << input_file
+    << "\nout_file " << output_folder
+    << "\ninput_type " << input_type
+    << "\noutput_type " << output_type;
+
+  out << "\n\nnum_events " << num_events
+    << "\nreduced_thickness " << reduced_thickness
+    << "\nmult_fluctuations " << mult_fluctuations
+    << "\ncross_section " << cross_section
+    << "\nnucleon_width " << nucleon_width
+    << "\nb_min " << b_min
+    << "\nb_max " << b_max
+    << "\ngrid_max " << grid_max
+    << "\ngrid_step " << grid_step;
+
+    out << "\n\nt_a " << t_a
+      << "\nt_b " << t_b;
+    //#CONFIGPARAM
+
+    output.close();
 }
 
-void IO::OutputSparseDensityGrids(const Event &event)
+void IO::OutputFullDensityGrids(vector<vector<double>> density_grid, string file_name)
 {
+  ofstream output;
+  output.open(file_name);
 
+  double x, y, value;
+
+  for (int i = 0; i < density_grid.size(); i++)
+  {
+    for (int j = 0; j < density_grid[0].size(); j++)
+    {
+      x = -grid_max + i*grid_step;
+      y = -grid_max + j*grid_step;
+      value = density_grid[i][j];
+
+      out << x << " " << y << " " << value;
+
+      if (j == density_grid[0].size() - 1)
+      { out << endl;  }
+      else
+      { out << " "; }
+    }
+  }
+
+  output.close();
 }
 
-void IO::OutputEccentricities(const Eccentricity &ecc)
+void IO::OutputSparseDensityGrids(vector<vector<double>> density_grid, string file_name)
+{
+  ofstream output;
+  output.open(file_name);
+
+  double x, y, value;
+
+  for (int i = 0; i < density_grid.size(); i++)
+  {
+    for (int j = 0; j < density_grid[0].size(); j++)
+    {
+      if (density_grid[i][j] != 0)
+      {
+        x = -grid_max + i*grid_step;
+        y = -grid_max + j*grid_step;
+        value = density_grid[i][j];
+
+        out << x << " " << y << " " << value << endl;
+      }
+    }
+  }
+
+  output.close();
+}
+
+void IO::OutputEccentricities(const Eccentricity &ecc, string file_name)
 {
 
 }
@@ -144,6 +242,10 @@ vector<vector<double>> IO::ReadEvent()
 {
   ifstream input;
   input.open(input_file);
+
+  vector<vector<double>> carrier;
+  //  Initialize input grid to 0 with dimensions grid_points
+  carrier.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
   int x, y;
   double readx,ready,value;
@@ -163,30 +265,45 @@ vector<vector<double>> IO::ReadEvent()
       input.ignore(10000, '\n');
       if (input.peek() == '\n') {break;}
   }
+  input.close();
 
   return carrier;
 }
 
 void IO::WriteEvent(Event &event)
 {
-  ofstream output;
-  output.open(output_file);
+  vector<vector<double>> output_energy;
 
-  vector<vector<double>> output_energy = event.GetInitialEnergy();
-  double x, y, value;
-
-  for (int i = 0; i < output_energy.size(); i++)
+  if (output_type == 0)
   {
-    for (int j = 0; j < output_energy[0].size(); j++)
-    {
-      if (output_energy[i][j] != 0)
-      {
-        x = -grid_max + i*grid_step;
-        y = -grid_max + j*grid_step;
-        value = output_energy[i][j];
+    output_energy = event.GetInitialEnergy();
+    OutputFullDensityGrids(output_energy, output_folder + "ic0.dat");
 
-        output << x << " " << y << " " << value << endl;
-      }
+    if (t_a)
+    {
+      output_energy = event.GetTa();
+      OutputFullDensityGrids(output_energy, output_folder + "ta0.dat");
+    }
+    if (t_b)
+    {
+      output_energy = event.GetTb();
+      OutputFullDensityGrids(output_energy, output_folder + "tb0.dat");
+    }
+  }
+  else if (output_type == 1)
+  {
+    output_energy = event.GetInitialEnergy();
+    OutputSparseDensityGrids(output_energy, output_folder + "ic0.dat");
+
+    if (t_a)
+    {
+      output_energy = event.GetTa();
+      OutputSparseDensityGrids(output_energy, output_folder + "ta0.dat");
+    }
+    if (t_b)
+    {
+      output_energy = event.GetTb();
+      OutputSparseDensityGrids(output_energy, output_folder + "tb0.dat");
     }
   }
 

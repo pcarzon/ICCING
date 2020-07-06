@@ -8,6 +8,8 @@ Event::Event()
 Event::~Event()
 {
   initial_energy.clear();
+  t_a.clear();
+  t_b.clear();
   density.clear();
   sampled_energy.clear();
 
@@ -24,6 +26,8 @@ Event::Event(const Event &original)
 void Event::CopyEvent(const Event &e)
 {
   initial_energy = e.initial_energy;
+  t_a = e.t_a;
+  t_b = e.t_b;
   density = e.density;
   sampled_energy = e.sampled_energy;
 

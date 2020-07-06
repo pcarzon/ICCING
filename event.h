@@ -13,6 +13,8 @@ class Event
 private:
 
   vector<vector<double>> initial_energy;
+  vector<vector<double>> t_a;
+  vector<vector<double>> t_b;
   vector<vector<vector<double>>> density;
   vector<vector<double>> sampled_energy;
 
@@ -35,5 +37,7 @@ public:
   void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
 
   vector<vector<double>> GetInitialEnergy() { return initial_energy; }
+  vector<vector<double>> GetTa() { return t_a; }
+  vector<vector<double>> GetTb() { return t_b; }
 };
 #endif
