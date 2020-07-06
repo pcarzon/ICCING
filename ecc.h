@@ -6,9 +6,9 @@
 #include <cmath>
 #include <vector>
 
-#include "event.h"
-
 using namespace std;
+
+class Event;
 
 class Eccentricity
 {
