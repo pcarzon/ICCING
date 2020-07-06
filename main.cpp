@@ -18,7 +18,7 @@ int main (int argc, char *argv[])
 	IO inputOutputObject(argv[1]);
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	Event testEvent;
-	testEvent.ReadInitialEnergy(inputOutputObject.ReadEvent());
+	testEvent = inputOutputObject.ReadEvent());
 	inputOutputObject.WriteEvent(testEvent);
 	cout << "Hello World!" << endl;
 

@@ -13,6 +13,8 @@
 
 using namespace std;
 
+class Event;
+
 class IO
 {
 private:

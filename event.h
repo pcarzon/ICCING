@@ -10,6 +10,8 @@
 
 using namespace std;
 
+class IO;
+
 class Event
 {
 private:
