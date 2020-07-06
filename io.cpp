@@ -247,7 +247,7 @@ vector<vector<double>> IO::ReadEvent()
 {
   ifstream input;
   input.open(input_file);
-
+cout << input_file << endl;
   vector<vector<double>> carrier;
   //  Initialize input grid to 0 with dimensions grid_points
   carrier.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
