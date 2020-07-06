@@ -135,7 +135,7 @@ void IO::Initialize()
   t_a = false;
   t_b = false;
   //#CONFIGPARAM
-  
+
   mapConfigParams["input_file"] = inputfile;
   mapConfigParams["output_folder"] = outputfolder;
   mapConfigParams["input_type"] = inputtype;
@@ -159,12 +159,12 @@ void IO::OutputConfig(string file_name)
   ofstream output;
   output.open(file_name);
 
-  out << "input_file " << input_file
+  output << "input_file " << input_file
     << "\nout_file " << output_folder
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type;
 
-  out << "\n\nnum_events " << num_events
+  output << "\n\nnum_events " << num_events
     << "\nreduced_thickness " << reduced_thickness
     << "\nmult_fluctuations " << mult_fluctuations
     << "\ncross_section " << cross_section
@@ -174,7 +174,7 @@ void IO::OutputConfig(string file_name)
     << "\ngrid_max " << grid_max
     << "\ngrid_step " << grid_step;
 
-    out << "\n\nt_a " << t_a
+    output << "\n\nt_a " << t_a
       << "\nt_b " << t_b;
     //#CONFIGPARAM
 
@@ -196,12 +196,12 @@ void IO::OutputFullDensityGrids(vector<vector<double>> density_grid, string file
       y = -grid_max + j*grid_step;
       value = density_grid[i][j];
 
-      out << x << " " << y << " " << value;
+      output << x << " " << y << " " << value;
 
       if (j == density_grid[0].size() - 1)
-      { out << endl;  }
+      { output << endl;  }
       else
-      { out << " "; }
+      { output << " "; }
     }
   }
 
@@ -225,7 +225,7 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> density_grid, string fi
         y = -grid_max + j*grid_step;
         value = density_grid[i][j];
 
-        out << x << " " << y << " " << value << endl;
+        output << x << " " << y << " " << value << endl;
       }
     }
   }
