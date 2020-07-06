@@ -5,10 +5,11 @@ IO::IO(string configFile)
 {
   // Initialze map for reading in config parameters
   Initialize();
-
+cout << "Passed Initialize\n";
   //  config input stream
   ifstream input;
   input.open(configFile);
+  cout << "Opened File\n";
 
   //  Used to record parameter type read from file
   string var_type;
@@ -18,6 +19,7 @@ IO::IO(string configFile)
 	{
     //  Read parameter type
     input >> var_type;
+    cout << "Reading Config\n";
 
     //  Switch through the possible parameter types
     //  uses var_type as key to map then reads value to class variable
@@ -55,6 +57,7 @@ IO::IO(string configFile)
       //#CONFIGPARAM
     }// End of switch
   }// End of while loop
+  cout << "Read Config\n";
 
   //  Calculate # grid_points from config file
   grid_points = 2*(grid_max/grid_step);
