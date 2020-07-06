@@ -243,7 +243,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 
 }
 
-vector<vector<double>> IO::ReadEvent()
+Event IO::ReadEvent()
 {
   ifstream input;
   input.open(input_file);
