@@ -11,6 +11,7 @@
 using namespace std;
 
 class IO;
+class Eccentricity;
 
 class Event
 {
