@@ -233,7 +233,7 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> density_grid, string fi
   output.close();
 }
 
-void IO::OutputEccentricities(const Eccentricity &ecc, string file_name)
+void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 {
 
 }
