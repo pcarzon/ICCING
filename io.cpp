@@ -51,7 +51,8 @@ cout << "Passed Initialize\n";
 
       case gridstep:  input >> grid_step; break;
 
-      case ta:  input >> t_a; break;
+      case ta:  input >> t_a; cout << "Read t_a " << t_a << endl;
+ break;
 
       case tb:  input >> t_b; break;
       //#CONFIGPARAM
