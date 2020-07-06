@@ -2,7 +2,7 @@
 
 Event::Event()
 {
-  initial_energy.resize(401, vector<double>(401, 0));
+
 }
 
 Event::~Event()
@@ -44,6 +44,7 @@ Event& Event::operator= (const Event& original)
 
 void Event::ReadInitialEnergy(vector<vector<double>> initEnergy)
 {
+  initial_energy.resize(401, vector<double>(401, 0));
   initial_energy = initEnergy;
 }
 

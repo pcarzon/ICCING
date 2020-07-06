@@ -39,5 +39,7 @@ public:
   vector<vector<double>> GetInitialEnergy() { return initial_energy; }
   vector<vector<double>> GetTa() { return t_a; }
   vector<vector<double>> GetTb() { return t_b; }
+
+  friend vector<vector<double>> IO::ReadEvent();
 };
 #endif

@@ -248,9 +248,11 @@ vector<vector<double>> IO::ReadEvent()
   ifstream input;
   input.open(input_file);
 cout << input_file << endl;
-  vector<vector<double>> carrier;
+
+  Event event_in;
+  //vector<vector<double>> carrier;
   //  Initialize input grid to 0 with dimensions grid_points
-  carrier.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+  event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
   int x, y;
   double readx,ready,value;
@@ -265,14 +267,14 @@ cout << input_file << endl;
       x = (readx + grid_max)/grid_step;
       y = (ready + grid_max)/grid_step;
       //cout << x << " " << y << " " << value << endl;
-      carrier[x][y] = value;
+      event_in.initial_energy[x][y] = value;
 
       input.ignore(10000, '\n');
       if (input.peek() == '\n') {break;}
   }
   input.close();
 
-  return carrier;
+  return event_in;
 }
 
 void IO::WriteEvent(Event &event)
