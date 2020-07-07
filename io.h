@@ -27,6 +27,7 @@ private:
     inputtype,
     outputtype,
 
+    firstevent,
     numevents,
     reducedthickness,
     multfluctuations,
@@ -53,6 +54,8 @@ private:
   int output_type;
 
   //  These are variables that are specified in the configuration file
+  int first_event;
+  int current_event;
   int num_events;
   int reduced_thickness;
   double mult_fluctuations;
@@ -98,5 +101,7 @@ public:
   Event ReadEvent();
   //  Writes a single event to output file
   void WriteEvent(Event &event);
+
+  bool LastEvent();
 };
 #endif

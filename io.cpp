@@ -33,6 +33,8 @@ cout << "Passed Initialize\n";
 
       case outputtype:  input >> output_type; break;
 
+      case firstevent: input >> first_event; break;
+
       case numevents: input >> num_events; break;
 
       case reducedthickness:  input >> reduced_thickness; break;
@@ -60,6 +62,7 @@ cout << "Passed Initialize\n";
   }// End of while loop
   cout << "Read Config\n";
 
+  current_event = first_event;
   //  Calculate # grid_points from config file
   grid_points = 2*(grid_max/grid_step);
 }
@@ -71,6 +74,7 @@ IO::~IO()
   input_type = 0;
   output_type = 0;
 
+  first_event = 0;
   num_events = 0;
   reduced_thickness = 0;
   mult_fluctuations = 0.0;
@@ -98,6 +102,7 @@ void IO::CopyIO(const IO &e)
   input_type = e.input_type;
   output_type = e.output_type;
 
+  first_event = e.first_event;
   num_events = e.num_events;
   reduced_thickness = e.reduced_thickness;
   mult_fluctuations = e.mult_fluctuations;
@@ -126,6 +131,7 @@ void IO::Initialize()
   input_type = 0;
   output_type = 0;
 
+  first_event = 0;
   num_events = 0;
   reduced_thickness = 0;
   mult_fluctuations = 0.0;
@@ -144,6 +150,7 @@ void IO::Initialize()
   mapConfigParams["output_folder"] = outputfolder;
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
+  mapConfigParams["first_event"] = firstevent;
   mapConfigParams["num_events"] = numevents;
   mapConfigParams["reduced_thickness"] = reducedthickness;
   mapConfigParams["mult_fluctuations"] = multfluctuations;
@@ -168,7 +175,8 @@ void IO::OutputConfig(string file_name)
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type;
 
-  output << "\n\nnum_events " << num_events
+  output << "\n\nfirst_event " << first_event
+    << "\n\nnum_events " << num_events
     << "\nreduced_thickness " << reduced_thickness
     << "\nmult_fluctuations " << mult_fluctuations
     << "\ncross_section " << cross_section
@@ -246,8 +254,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 Event IO::ReadEvent()
 {
   ifstream input;
-  input.open(input_folder + "ic0.dat");
-cout << input_folder << endl;
+  input.open(input_folder + "ic" + current_event + ".dat");
 
   Event event_in;
 
@@ -281,7 +288,7 @@ cout << input_folder << endl;
 
   if (t_a)
   {
-    input.open(input_folder + "TA0.dat");
+    input.open(input_folder + "TA" + current_event + ".dat");
     event_in.t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
@@ -301,6 +308,31 @@ cout << input_folder << endl;
     }
     input.close();
   }
+  if (t_b)
+  {
+    input.open(input_folder + "TB" + current_event + ".dat");
+    event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+
+    input.ignore(10000, '\n');
+
+    while (!input.eof())
+    {
+
+        input >> readx >> ready >> value;
+
+        x = (readx + grid_max)/grid_step;
+        y = (ready + grid_max)/grid_step;
+        //cout << x << " " << y << " " << value << endl;
+        event_in.t_b[x][y] = value;
+
+        input.ignore(10000, '\n');
+        if (input.peek() == '\n') {break;}
+    }
+    input.close();
+  }
+
+  current_event++;
+
   return event_in;
 }
 
@@ -311,34 +343,42 @@ void IO::WriteEvent(Event &event)
   if (output_type == 0)
   {
     output_energy = event.GetInitialEnergy();
-    OutputFullDensityGrids(output_energy, output_folder + "ic0.dat");
+    OutputFullDensityGrids(output_energy, output_folder + "ic" + current_event + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputFullDensityGrids(output_energy, output_folder + "ta0.dat");
+      OutputFullDensityGrids(output_energy, output_folder + "TA" + current_event + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputFullDensityGrids(output_energy, output_folder + "tb0.dat");
+      OutputFullDensityGrids(output_energy, output_folder + "TB" + current_event + ".dat");
     }
   }
   else if (output_type == 1)
   {
     output_energy = event.GetInitialEnergy();
-    OutputSparseDensityGrids(output_energy, output_folder + "ic0.dat");
+    OutputSparseDensityGrids(output_energy, output_folder + "ic" + current_event + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputSparseDensityGrids(output_energy, output_folder + "ta0.dat");
+      OutputSparseDensityGrids(output_energy, output_folder + "TA" + current_event + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputSparseDensityGrids(output_energy, output_folder + "tb0.dat");
+      OutputSparseDensityGrids(output_energy, output_folder + "TB" + current_event + ".dat");
     }
   }
 
 }
+
+  bool IO::LastEvent()
+  {
+    if (current_event == num_events)
+    { return true;  }
+    else
+    { return false; }
+  }
