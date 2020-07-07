@@ -52,11 +52,11 @@ void Event::UpdateDensity(int densityType, vector<vector<double>> inputDensity)
 
 void Event::CleanEvent()
 {
-  initial_energy.clear();
-  t_a.clear();
-  t_b.clear();
-  density.clear();
-  sampled_energy.clear();
+  delete initial_energy;
+  delete t_a;
+  delete t_b;
+  delete density;
+  delete sampled_energy;
 
   total_initial_energy = 0;
   total_energy = 0;
