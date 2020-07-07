@@ -73,7 +73,7 @@ private:
   // This is calculated to be 2*(grid_max/grid_step)
   int grid_points;
 
-  Event* event_in;
+  Event event_in;
 
   //  This function initializes the map used to read the config file
   void Initialize();
@@ -100,9 +100,9 @@ public:
   IO& operator=(const IO& original);
 
   //  Reads a single event
-  Event* ReadEvent();
+  Event ReadEvent();
   //  Writes a single event to output file
-  void WriteEvent(Event* event);
+  void WriteEvent(Event event);
 
   bool LastEvent();
 };

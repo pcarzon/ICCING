@@ -22,10 +22,11 @@ int main (int argc, char *argv[])
 
 	while (!inputOutputObject.LastEvent())
 	{
-		Event* testEvent;
+		Event testEvent;
 		testEvent = inputOutputObject.ReadEvent();
 		inputOutputObject.WriteEvent(testEvent);
-		testEvent->CleanEvent();
+	//	(&testEvent)->~Event();
+		new (&testEvent) Event();
 	}
 	cout << "Hello World!" << endl;
 

@@ -251,20 +251,20 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 
 }
 
-Event* IO::ReadEvent()
+Event IO::ReadEvent()
 {
   ifstream input;
   input.open(input_folder + "ic" + to_string(current_event) + ".dat");
   cout << input_folder + "ic" + to_string(current_event) + ".dat" << endl;
-  event_in->CleanEvent();
+  event_in.CleanEvent();
 
-  event_in->grid_max = grid_max;
-  event_in->grid_step = grid_step;
-  event_in->grid_points = grid_points;
+  event_in.grid_max = grid_max;
+  event_in.grid_step = grid_step;
+  event_in.grid_points = grid_points;
 
   //vector<vector<double>> carrier;
   //  Initialize input grid to 0 with dimensions grid_points
-  event_in->initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+  event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
   int x, y;
   double readx,ready,value;
@@ -279,7 +279,7 @@ Event* IO::ReadEvent()
       x = (readx + grid_max)/grid_step;
       y = (ready + grid_max)/grid_step;
       //cout << x << " " << y << " " << value << endl;
-      event_in->initial_energy[x][y] = value;
+      event_in.initial_energy[x][y] = value;
 
       input.ignore(10000, '\n');
       if (input.peek() == '\n') {break;}
@@ -289,7 +289,7 @@ Event* IO::ReadEvent()
   if (t_a)
   {
     input.open(input_folder + "TA" + to_string(current_event) + ".dat");
-    event_in->t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+    event_in.t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
 
@@ -301,7 +301,7 @@ Event* IO::ReadEvent()
         x = (readx + grid_max)/grid_step;
         y = (ready + grid_max)/grid_step;
         //cout << x << " " << y << " " << value << endl;
-        event_in->t_a[x][y] = value;
+        event_in.t_a[x][y] = value;
 
         input.ignore(10000, '\n');
         if (input.peek() == '\n') {break;}
@@ -311,7 +311,7 @@ Event* IO::ReadEvent()
   if (t_b)
   {
     input.open(input_folder + "TB" + to_string(current_event) + ".dat");
-    event_in->t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+    event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
 
@@ -323,7 +323,7 @@ Event* IO::ReadEvent()
         x = (readx + grid_max)/grid_step;
         y = (ready + grid_max)/grid_step;
         //cout << x << " " << y << " " << value << endl;
-        event_in->t_b[x][y] = value;
+        event_in.t_b[x][y] = value;
 
         input.ignore(10000, '\n');
         if (input.peek() == '\n') {break;}
@@ -336,39 +336,39 @@ Event* IO::ReadEvent()
   return event_in;
 }
 
-void IO::WriteEvent(Event* event)
+void IO::WriteEvent(Event event)
 {
   vector<vector<double>> output_energy;
 
   if (output_type == 0)
   {
-    output_energy = event->GetInitialEnergy();
+    output_energy = event.GetInitialEnergy();
     OutputFullDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
-      output_energy = event->GetTa();
+      output_energy = event.GetTa();
       OutputFullDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
-      output_energy = event->GetTb();
+      output_energy = event.GetTb();
       OutputFullDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }
   else if (output_type == 1)
   {
-    output_energy = event->GetInitialEnergy();
+    output_energy = event.GetInitialEnergy();
     OutputSparseDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
-      output_energy = event->GetTa();
+      output_energy = event.GetTa();
       OutputSparseDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
-      output_energy = event->GetTb();
+      output_energy = event.GetTb();
       OutputSparseDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }
