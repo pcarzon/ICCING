@@ -40,7 +40,7 @@ public:
   Event& operator=(const Event& original);
 
   void ReadInitialEnergy(vector<vector<double>> initEnergy);
-  void SampleEnergy(int location, double radius);
+  double SampleEnergy(int location, double radius);
   void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
 
   vector<vector<double>> GetInitialEnergy() { return initial_energy; }

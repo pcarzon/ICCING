@@ -40,7 +40,7 @@ void Event::ReadInitialEnergy(vector<vector<double>> initEnergy)
   initial_energy = initEnergy;
 }
 
-void Event::SampleEnergy(int location, double radius)
+double Event::SampleEnergy(int location, double radius)
 {
 
 }
