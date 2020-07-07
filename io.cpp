@@ -254,7 +254,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 Event IO::ReadEvent()
 {
   ifstream input;
-  input.open(input_folder + "ic" + static_cast<string>(current_event) + ".dat");
+  input.open(input_folder + "ic" + to_string(current_event) + ".dat");
 
   Event event_in;
 
@@ -288,7 +288,7 @@ Event IO::ReadEvent()
 
   if (t_a)
   {
-    input.open(input_folder + "TA" + static_cast<string>(current_event) + ".dat");
+    input.open(input_folder + "TA" + to_string(current_event) + ".dat");
     event_in.t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
@@ -310,7 +310,7 @@ Event IO::ReadEvent()
   }
   if (t_b)
   {
-    input.open(input_folder + "TB" + static_cast<string>(current_event) + ".dat");
+    input.open(input_folder + "TB" + to_string(current_event) + ".dat");
     event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
@@ -343,33 +343,33 @@ void IO::WriteEvent(Event &event)
   if (output_type == 0)
   {
     output_energy = event.GetInitialEnergy();
-    OutputFullDensityGrids(output_energy, output_folder + "ic" + static_cast<string>(current_event) + ".dat");
+    OutputFullDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputFullDensityGrids(output_energy, output_folder + "TA" + static_cast<string>(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputFullDensityGrids(output_energy, output_folder + "TB" + static_cast<string>(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }
   else if (output_type == 1)
   {
     output_energy = event.GetInitialEnergy();
-    OutputSparseDensityGrids(output_energy, output_folder + "ic" + static_cast<string>(current_event) + ".dat");
+    OutputSparseDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputSparseDensityGrids(output_energy, output_folder + "TA" + static_cast<string>(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputSparseDensityGrids(output_energy, output_folder + "TB" + static_cast<string>(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }
 
