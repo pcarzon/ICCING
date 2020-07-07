@@ -7,15 +7,7 @@ Event::Event()
 
 Event::~Event()
 {
-  initial_energy.clear();
-  t_a.clear();
-  t_b.clear();
-  density.clear();
-  sampled_energy.clear();
-
-  total_initial_energy = 0;
-  total_energy = 0;
-  seed = 0;
+  CleanEvent();
 }
 
 Event::Event(const Event &original)
@@ -56,4 +48,17 @@ void Event::SampleEnergy(int location, double radius)
 void Event::UpdateDensity(int densityType, vector<vector<double>> inputDensity)
 {
 
+}
+
+void Event::CleanEvent()
+{
+  initial_energy.clear();
+  t_a.clear();
+  t_b.clear();
+  density.clear();
+  sampled_energy.clear();
+
+  total_initial_energy = 0;
+  total_energy = 0;
+  seed = 0;
 }
