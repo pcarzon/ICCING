@@ -73,8 +73,6 @@ private:
   // This is calculated to be 2*(grid_max/grid_step)
   int grid_points;
 
-  Event event_in;
-
   //  This function initializes the map used to read the config file
   void Initialize();
 
