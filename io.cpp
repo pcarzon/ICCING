@@ -256,7 +256,7 @@ Event IO::ReadEvent()
   ifstream input;
   input.open(input_folder + "ic" + to_string(current_event) + ".dat");
   cout << input_folder + "ic" + to_string(current_event) + ".dat" << endl;
-  Event event_in;
+  event_in.CleanEvent();
 
   event_in.grid_max = grid_max;
   event_in.grid_step = grid_step;
