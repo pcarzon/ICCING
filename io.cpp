@@ -336,7 +336,7 @@ Event IO::ReadEvent()
   return event_in;
 }
 
-void IO::WriteEvent(Event &event)
+void IO::WriteEvent(Event event)
 {
   vector<vector<double>> output_energy;
 

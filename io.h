@@ -102,7 +102,7 @@ public:
   //  Reads a single event
   Event ReadEvent();
   //  Writes a single event to output file
-  void WriteEvent(Event &event);
+  void WriteEvent(Event event);
 
   bool LastEvent();
 };
