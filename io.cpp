@@ -336,39 +336,39 @@ Event* IO::ReadEvent()
   return event_in;
 }
 
-void IO::WriteEvent(Event &event)
+void IO::WriteEvent(Event* event)
 {
   vector<vector<double>> output_energy;
 
   if (output_type == 0)
   {
-    output_energy = event.GetInitialEnergy();
+    output_energy = event->GetInitialEnergy();
     OutputFullDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
-      output_energy = event.GetTa();
+      output_energy = event->GetTa();
       OutputFullDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
-      output_energy = event.GetTb();
+      output_energy = event->GetTb();
       OutputFullDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }
   else if (output_type == 1)
   {
-    output_energy = event.GetInitialEnergy();
+    output_energy = event->GetInitialEnergy();
     OutputSparseDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
-      output_energy = event.GetTa();
+      output_energy = event->GetTa();
       OutputSparseDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
-      output_energy = event.GetTb();
+      output_energy = event->GetTb();
       OutputSparseDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
     }
   }

@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
 	{
 		Event* testEvent;
 		testEvent = inputOutputObject.ReadEvent();
-		inputOutputObject.WriteEvent(&testEvent);
+		inputOutputObject.WriteEvent(testEvent);
 		testEvent->CleanEvent();
 	}
 	cout << "Hello World!" << endl;
