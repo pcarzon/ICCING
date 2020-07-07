@@ -251,7 +251,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 
 }
 
-Event IO::ReadEvent()
+Event* IO::ReadEvent()
 {
   ifstream input;
   input.open(input_folder + "ic" + to_string(current_event) + ".dat");
