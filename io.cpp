@@ -331,8 +331,6 @@ Event IO::ReadEvent()
     input.close();
   }
 
-  current_event++;
-
   return event_in;
 }
 
@@ -373,6 +371,7 @@ void IO::WriteEvent(Event event)
     }
   }
 
+  current_event++;
 }
 
   bool IO::LastEvent()
