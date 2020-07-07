@@ -18,10 +18,11 @@ int main (int argc, char *argv[])
 {
 	IO inputOutputObject(argv[1]);
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
-	Event testEvent;
+	//Event testEvent;
 
 	while (!inputOutputObject.LastEvent())
 	{
+		Event testEvent;
 		testEvent = inputOutputObject.ReadEvent();
 		inputOutputObject.WriteEvent(testEvent);
 		testEvent.CleanEvent();
