@@ -23,7 +23,7 @@ public:
   void Charm() { current_charge = charm;  }
 
   vector<double> GetCharge() {  return current_charge;  }
-}
+};
 
 struct Quarks
 {
@@ -40,12 +40,12 @@ public:
   }
   double GetAlpha () {  return alpha; }
   vector<double> GetPosition () {  return position; }
-}
+};
 
 struct Sample
 {
   double e_tot;
   double q_s;
-}
+};
 
 #endif

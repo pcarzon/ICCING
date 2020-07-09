@@ -40,12 +40,12 @@ void Event::ReadInitialEnergy(vector<vector<double>> initEnergy)
   initial_energy = initEnergy;
 }
 
-double Event::SampleEnergy(int location, double radius)
+Sample Event::SampleEnergy(int location, double radius)
 {
 
 }
 
-void Event::UpdateDensity(int densityType, vector<vector<double>> inputDensity)
+void Event::UpdateDensity(Quarks quark_density)
 {
 
 }
