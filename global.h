@@ -31,7 +31,7 @@ private:
   Charge flavor;
 
   double alpha;
-  vector<double> position[2];
+  vector<double> position(2, 0);
 
 public:
   void CreateQuarks (Charge flavor_, double alpha_, double delta_x_, double delta_y_)
