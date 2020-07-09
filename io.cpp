@@ -29,8 +29,8 @@ IO::IO(string configFile)
       //  case ConfigParam (Does var_type map to ConfigParam?)
       //  input >> input_var (Read in value of var_type)
       //  break; (Stop checking switch and move on)
-      case inputfolder: input >> input_folder; break;
-      case outputfolder:  input >> output_folder; break;
+      case trentoinputdir: input >> trento_input_dir; break;
+      case outputdir:  input >> output_dir; break;
       case inputtype: input >> input_type; break;
       case outputtype:  input >> output_type; break;
       case firstevent: input >> first_event; break;
@@ -71,8 +71,8 @@ IO::~IO()
 //##########################################################################################
 void IO::CopyIO(const IO &e)
 {
-  input_folder = e.input_folder;
-  output_folder = e.output_folder;
+  trento_input_dir = e.trento_input_dir;
+  output_dir = e.output_dir;
   input_type = e.input_type;
   output_type = e.output_type;
 
@@ -123,8 +123,8 @@ void IO::Initialize()
   //******************************************************************************************
   //  Set variables to default values
   //******************************************************************************************
-  input_folder = "";
-  output_folder = "";
+  trento_input_dir = "";
+  output_dir = "";
   input_type = 0;
   output_type = 0;
 
@@ -146,8 +146,8 @@ void IO::Initialize()
   //******************************************************************************************
   //  Initialze map for reading in config file
   //******************************************************************************************
-  mapConfigParams["input_folder"] = inputfolder;
-  mapConfigParams["output_folder"] = outputfolder;
+  mapConfigParams["trento_input_dir"] = trentoinputdir;
+  mapConfigParams["output_dir"] = outputdir;
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
   mapConfigParams["first_event"] = firstevent;
@@ -175,8 +175,8 @@ void IO::OutputConfig(string file_name)
   ofstream output;
   output.open(file_name);
 
-  output << "input_folder " << input_folder
-    << "\noutput_folder " << output_folder
+  output << "trento_input_dir " << trento_input_dir
+    << "\noutput_dir " << output_dir
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type;
 
@@ -269,8 +269,8 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 Event IO::ReadEvent()
 {
   ifstream input;
-  input.open(input_folder + "ic" + to_string(current_event) + ".dat");
-  cout << input_folder + "ic" + to_string(current_event) + ".dat" << endl;
+  input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
+  cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
   Event event_in;
 
   event_in.grid_max = grid_max;
@@ -303,7 +303,7 @@ Event IO::ReadEvent()
 
   if (t_a)
   {
-    input.open(input_folder + "TA" + to_string(current_event) + ".dat");
+    input.open(trento_input_dir + "TA" + to_string(current_event) + ".dat");
     event_in.t_a.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
@@ -325,7 +325,7 @@ Event IO::ReadEvent()
   }
   if (t_b)
   {
-    input.open(input_folder + "TB" + to_string(current_event) + ".dat");
+    input.open(trento_input_dir + "TB" + to_string(current_event) + ".dat");
     event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
     input.ignore(10000, '\n');
@@ -356,33 +356,33 @@ void IO::WriteEvent(Event event)
   if (output_type == 0)
   {
     output_energy = event.GetInitialEnergy();
-    OutputFullDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
+    OutputFullDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputFullDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputFullDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
   else if (output_type == 1)
   {
     output_energy = event.GetInitialEnergy();
-    OutputSparseDensityGrids(output_energy, output_folder + "ic" + to_string(current_event) + ".dat");
+    OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)
     {
       output_energy = event.GetTa();
-      OutputSparseDensityGrids(output_energy, output_folder + "TA" + to_string(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)
     {
       output_energy = event.GetTb();
-      OutputSparseDensityGrids(output_energy, output_folder + "TB" + to_string(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
 

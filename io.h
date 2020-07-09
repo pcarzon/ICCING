@@ -35,8 +35,8 @@ private:
   {
     //  Equivalent to a data type with values that can be those inside
     //  ConfigParams is used to identify parameters from config file
-    inputfolder,
-    outputfolder,
+    trentoinputdir,
+    outputdir,
     inputtype,
     outputtype,
 
