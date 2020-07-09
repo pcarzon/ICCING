@@ -26,7 +26,7 @@ Splitter& Splitter::operator= (const Splitter& original)
 	return *this;
 }
 
-void Splitter::Split(double q_s)
+Charges Splitter::Split(double q_s)
 {
-  
+
 }

@@ -31,6 +31,7 @@ private:
 
 	void CopyEvent(const Event &e);
 
+  double RollGlue(double e_tot);  //  See: RollGlue in ICCING_v0_1_8.nb
 public:
 
   Event();
@@ -40,12 +41,15 @@ public:
   Event& operator=(const Event& original);
 
   void ReadInitialEnergy(vector<vector<double>> initEnergy);
-  double SampleEnergy(int location, double radius);
-  void UpdateDensity(int densityType, vector<vector<double>> inputDensity);
+  Sample SampleEnergy(); //  See: First 2 commands in While in DistributeCharge in ICCING_v0_1_8.nb
+    //  Calls RollGlue
+  void UpdateDensity(Quarks quark_density);
 
   vector<vector<double>> GetInitialEnergy() { return initial_energy; }
   vector<vector<double>> GetTa() { return t_a; }
   vector<vector<double>> GetTb() { return t_b; }
+
+
 
   void CleanEvent();
 

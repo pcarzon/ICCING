@@ -6,11 +6,9 @@
 #include <cmath>
 #include <vector>
 
-#include "event.h"
+#include "global.h"
 
 using namespace std;
-
-class Event;
 
 class Splitter
 {
@@ -26,6 +24,6 @@ public:
   Splitter(const Splitter &original);
   Splitter& operator=(const Splitter& original);
 
-  void Split(double q_s);
+  Quarks SplitSample(Sample sampled_energy);  //  See: SplittingSample in ICCING_v0_1_8.nb
 };
 #endif
