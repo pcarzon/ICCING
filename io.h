@@ -87,7 +87,6 @@ private:
   double alpha_s;
   double alpha_min;
   double r_max;
-  double e_thresh;
 
   //******************************************************************************************
   //  EOS Config parameters
