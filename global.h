@@ -36,7 +36,7 @@ private:
 public:
   void CreateQuarks (Charge flavor_, double alpha_, double delta_x_, double delta_y_)
   {
-    flavor = flavor_; alpha = alpha_; position[1] = delta_x_; position[2] = delta_y_;
+    flavor = flavor_; alpha = alpha_; position[0] = delta_x_; position[1] = delta_y_;
   }
   double GetAlpha () {  return alpha; }
   vector<double> GetPosition () {  return position; }
