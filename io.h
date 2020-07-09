@@ -42,10 +42,6 @@ private:
 
     firstevent,
     lastevent,
-    reducedthickness,
-    multfluctuations,
-    crosssection,
-    nucleonwidth,
     bmin,
     bmax,
     gridmax,

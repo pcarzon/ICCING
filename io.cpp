@@ -35,10 +35,6 @@ IO::IO(string configFile)
       case outputtype:  input >> output_type; break;
       case firstevent: input >> first_event; break;
       case lastevent: input >> last_event; break;
-      case reducedthickness:  input >> reduced_thickness; break;
-      case multfluctuations:  input >> mult_fluctuations; break;
-      case crosssection:  input >> cross_section; break;
-      case nucleonwidth:  input >> nucleon_width; break;
       case bmin:  input >> b_min; break;
       case bmax:  input >> b_max; break;
       case gridmax: input >> grid_max;  break;
@@ -78,10 +74,6 @@ void IO::CopyIO(const IO &e)
 
   first_event = e.first_event;
   last_event = e.last_event;
-  reduced_thickness = e.reduced_thickness;
-  mult_fluctuations = e.mult_fluctuations;
-  cross_section = e.cross_section;
-  nucleon_width = e.nucleon_width;
   b_min = e.b_min;
   b_max = e.b_max;
   grid_max = e.grid_max;
@@ -130,10 +122,6 @@ void IO::Initialize()
 
   first_event = 0;
   last_event = 0;
-  reduced_thickness = 0;
-  mult_fluctuations = 0.0;
-  cross_section = 0.0;
-  nucleon_width = 0.0;
   b_min = 0;
   b_max = 0;
   grid_max = 0.0;
@@ -152,10 +140,6 @@ void IO::Initialize()
   mapConfigParams["output_type"] = outputtype;
   mapConfigParams["first_event"] = firstevent;
   mapConfigParams["last_event"] = lastevent;
-  mapConfigParams["reduced_thickness"] = reducedthickness;
-  mapConfigParams["mult_fluctuations"] = multfluctuations;
-  mapConfigParams["cross_section"] = crosssection;
-  mapConfigParams["nucleon_width"] = nucleonwidth;
   mapConfigParams["b_min"] = bmin;
   mapConfigParams["b_max"] = bmax;
   mapConfigParams["grid_max"] = gridmax;
@@ -182,10 +166,6 @@ void IO::OutputConfig(string file_name)
 
   output << "\n\nfirst_event " << first_event
     << "\n\nlast_event " << last_event
-    << "\nreduced_thickness " << reduced_thickness
-    << "\nmult_fluctuations " << mult_fluctuations
-    << "\ncross_section " << cross_section
-    << "\nnucleon_width " << nucleon_width
     << "\nb_min " << b_min
     << "\nb_max " << b_max
     << "\ngrid_max " << grid_max
