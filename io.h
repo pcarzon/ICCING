@@ -78,10 +78,6 @@ private:
   //******************************************************************************************
   //  Event Config parameters
   //******************************************************************************************
-  int reduced_thickness;
-  double mult_fluctuations;
-  double cross_section;
-  double nucleon_width;
   double kappa; //  Used for Qs grid
   double rad;
   double qrad;
