@@ -26,7 +26,7 @@ Splitter& Splitter::operator= (const Splitter& original)
 	return *this;
 }
 
-Charges Splitter::Split(double q_s)
+Quarks Splitter::SplitSample(Sample sampled_energy)
 {
 
 }
