@@ -275,7 +275,7 @@ void IO::OutputConfig(string file_name)
     << "\nfirst_event " << first_event
     << "\nlast_event " << last_event
     << "\nt_a " << t_a
-    << "\nt_b " << t_b
+    << "\nt_b " << t_b;
 
   output
     << "\n\nkappa_ " << kappa_
@@ -516,17 +516,17 @@ void IO::WriteEvent(Event event)
   //******************************************************************************************
   if (output_type == 0)
   {
-    output_energy = event.GetInitialEnergy();
+    output_energy = event.initial_energy;
     OutputFullDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)  //  Output T_a if flag is true
     {
-      output_energy = event.GetTa();
+      output_energy = event.t_a;
       OutputFullDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)  //  Output T_b if flag is true
     {
-      output_energy = event.GetTb();
+      output_energy = event.t_b;
       OutputFullDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
@@ -535,17 +535,17 @@ void IO::WriteEvent(Event event)
   //******************************************************************************************
   else if (output_type == 1)
   {
-    output_energy = event.GetInitialEnergy();
+    output_energy = event.initial_energy;
     OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
     if (t_a)  //  Output T_a if flag is true
     {
-      output_energy = event.GetTa();
+      output_energy = event.t_a;
       OutputSparseDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
     }
     if (t_b)  //  Output T_b if flag is true
     {
-      output_energy = event.GetTb();
+      output_energy = event.t_b;
       OutputSparseDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
