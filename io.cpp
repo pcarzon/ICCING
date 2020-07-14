@@ -64,10 +64,15 @@ IO::IO(string configFile)
       case gridstep:  input >> grid_step; break;
       case tau0:  input >> tau_0; break;
       case ethresh:  input >> e_thresh; break;
+      case chargetype:  input >> charge_type; break;
 
       //#CONFIGPARAM
     }// End of switch
   }// End of while loop
+
+  //  Setting flag for type of charge tracked
+  if(charge_type == "BSQ") {  tracked_charge = 0; }
+  else if (charge_type == "UDS") {  tracked_charge = 1; }
 
   current_event = first_event;  //  Set current_event to first_event
 
@@ -126,8 +131,12 @@ void IO::CopyIO(const IO &e)
   grid_step = e.grid_step;
   tau_0 = e.tau_0;
   e_thresh = e.e_thresh;
-
+  charge_type = e.charge_type;
   //#CONFIGPARAM
+
+  tracked_charge = e.tracked_charge;
+  current_event = e.current_event;
+  grid_points = e.grid_points;
 }
 //__________________________________________________________________________________________
 
@@ -196,8 +205,12 @@ void IO::Initialize()
   grid_step = 0.0;
   tau_0 = 0.0;
   e_thresh = 0.0;
-
+  charge_type = "";
   //#CONFIGPARAM
+
+  tracked_charge = 0;
+  current_event = 0;
+  grid_points = 0;
 
   //******************************************************************************************
   //  Initialze map for reading in config file
@@ -237,6 +250,7 @@ void IO::Initialize()
   mapConfigParams["grid_step"] = gridstep;
   mapConfigParams["tau_0"] = tau0;
   mapConfigParams["e_thresh"] = ethresh;
+  mapConfigParams["charge_type"] = chargetype;
   //#CONFIGPARAM
 }
 //__________________________________________________________________________________________
@@ -287,7 +301,8 @@ void IO::OutputConfig(string file_name)
     << "\ngrid_max " << grid_max
     << "\ngrid_step " << grid_step
     << "\ntau_0 " << tau_0
-     << "\ne_thresh " << e_thresh;
+    << "\ne_thresh " << e_thresh
+    << "\ncharge_type " << charge_type;
     //#CONFIGPARAM
 
     output.close();

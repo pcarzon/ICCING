@@ -15,23 +15,23 @@ using namespace std;
 struct Charge
 {
 private:
-  // BSQ/UDS flag to change charges
   //  Predefined mass and charge vectors for gluon and quarks
-  vector<double> gluon = {0., 0., 0., 0.};
-  vector<double> up = {0.0023, 0.33333333, 0., 0.66666666};
-  vector<double> down = {0.0048, 0.33333333, 0., -0.33333333};
-  vector<double> strange = {0.095, 0.33333333, -1, -0.33333333};
-  vector<double> charm = {1.29, 0.33333333, 0., 0.66666666};
+  //    particle_type[BSQ=0,UDS=1][Mass=0,baryon#=1,em_charge=2,strangeness=3]
+  vector<double> gluon = {{0., 0., 0., 0.},{0., 0., 0., 0.}};
+  vector<double> up = {{0.0023, 0.33333333, 0., 0.66666666},{0.0023, 1., 0., 0.}};
+  vector<double> down = {{0.0048, 0.33333333, 0., -0.33333333},{0.0048, 0., 1., 0.}};
+  vector<double> strange = {{0.095, 0.33333333, -1., -0.33333333},{0.095, 0., 0., 1.}};
+  vector<double> charm = {{1.29, 0.33333333, 0., 0.66666666},{1.29, 0., 0., 0.}};
 
   //  Stores the currently set particle
   vector<double> current_charge;
 public:
   //  Function to set the charge of the Charge object
-  void Gluon() {  current_charge = gluon; }
-  void Up() { current_charge = up;  }
-  void Down() { current_charge = down;  }
-  void Strange() { current_charge = strange;  }
-  void Charm() { current_charge = charm;  }
+  void Gluon(int charge_type) {  current_charge = gluon[charge_type]; }
+  void Up(int charge_type) { current_charge = up[charge_type];  }
+  void Down(int charge_type) { current_charge = down[charge_type];  }
+  void Strange(int charge_type) { current_charge = strange[charge_type];  }
+  void Charm(int charge_type) { current_charge = charm[charge_type];  }
 
   //  Returns the set charge of the object
   vector<double> GetCharge() {  return current_charge;  }

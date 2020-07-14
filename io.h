@@ -68,7 +68,8 @@ private:
     gridmax,
     gridstep,
     tau0,
-    ethresh
+    ethresh,
+    chargetype
     //#CONFIGPARAM
   };
 
@@ -128,7 +129,9 @@ private:
   double grid_step;
   double tau_0; //  EOS, Event, Splitting
   double e_thresh; // Splitting and event
+  string charge_type; //  Flag for tracking BSQ or UDS charges
 
+  int tracked_charge;
   int current_event;  //  Tracks what event is being handled
   int grid_points;  // This is calculated to be 2*(grid_max/grid_step)
   //#CONFIGPARAM
