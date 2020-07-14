@@ -58,7 +58,7 @@ public:
   }
   double GetAlpha () {  return alpha; } //  Returns momentum fraction
   vector<double> GetPosition () {  return position; } //  Returns quark pair position
-  vector<double> GetCharge() {  return flavor.GetCharge;  }
+  vector<double> GetCharge() {  return flavor.GetCharge();  }
 };
 //__________________________________________________________________________________________
 
