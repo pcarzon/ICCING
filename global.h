@@ -17,11 +17,11 @@ struct Charge
 private:
   //  Predefined mass and charge vectors for gluon and quarks
   //    particle_type[BSQ=0,UDS=1][Mass=0,baryon#=1,em_charge=2,strangeness=3]
-  vector<double> gluon = {{0., 0., 0., 0.},{0., 0., 0., 0.}};
-  vector<double> up = {{0.0023, 0.33333333, 0., 0.66666666},{0.0023, 1., 0., 0.}};
-  vector<double> down = {{0.0048, 0.33333333, 0., -0.33333333},{0.0048, 0., 1., 0.}};
-  vector<double> strange = {{0.095, 0.33333333, -1., -0.33333333},{0.095, 0., 0., 1.}};
-  vector<double> charm = {{1.29, 0.33333333, 0., 0.66666666},{1.29, 0., 0., 0.}};
+  vector<vector<double>> gluon = {{0., 0., 0., 0.},{0., 0., 0., 0.}};
+  vector<vector<double>> up = {{0.0023, 0.33333333, 0., 0.66666666},{0.0023, 1., 0., 0.}};
+  vector<vector<double>> down = {{0.0048, 0.33333333, 0., -0.33333333},{0.0048, 0., 1., 0.}};
+  vector<vector<double>> strange = {{0.095, 0.33333333, -1., -0.33333333},{0.095, 0., 0., 1.}};
+  vector<vector<double>> charm = {{1.29, 0.33333333, 0., 0.66666666},{1.29, 0., 0., 0.}};
 
   //  Stores the currently set particle
   vector<double> current_charge;
