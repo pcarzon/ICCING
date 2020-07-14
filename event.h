@@ -1,59 +1,109 @@
 #ifndef Event_H
 #define Event_H
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  C++ Libraries
+//##########################################################################################
 #include <iostream>
 #include <string>
 #include <cmath>
 #include <vector>
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  ICCING Header Files
+//##########################################################################################
 #include "global.h"
+//__________________________________________________________________________________________
+
 using namespace std;
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Class Declarations
+//##########################################################################################
 class IO;
 class Eccentricity;
+//__________________________________________________________________________________________
 
 class Event
 {
 private:
-
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Event Input Parameters
+  //##########################################################################################
+  double kappa_; //  Used for Qs grid
+  double rad_;
+  double qrad_;
+  double lambda_;
   double grid_max;
   double grid_step;
   int grid_points;
+  //__________________________________________________________________________________________
 
-  vector<vector<double>> initial_energy;
-  vector<vector<double>> t_a;
-  vector<vector<double>> t_b;
-  vector<vector<vector<double>>> density;
-  vector<vector<double>> sampled_energy;
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Density Grids
+  //##########################################################################################
+  vector<vector<double>> initial_energy;  //  Input Energy density
+  vector<vector<double>> t_a; //  Target Input Energy density
+  vector<vector<double>> t_b; //  Projectile Input Energy density
+  vector<vector<vector<double>>> density; //  ICCING densities: 0(gluon), 1(baryon), 2(em_charge), 3(strange), 4(charm)
+  vector<vector<double>> sampled_energy;  //  Sample from initial_energy for ICCING algorithm
 
-  double total_initial_energy;
-  double total_energy;
-  double seed;
+  double total_initial_energy;  //  Records initial total of initial_energy
+  double total_energy;  //  Keeps track of the total of initial_energy as ICCING runs
+  double seed;  //  Records the random seed used in event
+  //__________________________________________________________________________________________
 
-	void CopyEvent(const Event &e);
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Internal Functions
+  //##########################################################################################
+	//  Copy function for Event class, called by operator= and implicit copy functions
+  void CopyEvent(const Event &e);
 
-  double RollGlue(double e_tot);  //  See: RollGlue in ICCING_v0_1_8.nb
+  //  See: RollGlue in ICCING_v0_1_8.nb
+  double RollGlue(double e_tot);
+  //__________________________________________________________________________________________
+
 public:
 
-  Event();
-  ~Event();
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Basic Class Functions
+  //##########################################################################################
+  Event();  // Class Constructor
+  ~Event(); //  Class Destructor
 
-  Event(const Event &original);
-  Event& operator=(const Event& original);
+  Event(const Event &original); //  Implicit copy function, newIOObject(oldIOObject)
+  Event& operator=(const Event& original);  //  Defines what happens when you use = operator on class
+  //__________________________________________________________________________________________
 
-  void ReadInitialEnergy(vector<vector<double>> initEnergy);
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Event Specific Functions
+  //##########################################################################################
+  //  Sample Initial Energy for ICCING algorithm
   Sample SampleEnergy(); //  See: First 2 commands in While in DistributeCharge in ICCING_v0_1_8.nb
     //  Calls RollGlue
+
+  //  Propogates Results of Splitter
   void UpdateDensity(Quarks quark_density);
 
-  vector<vector<double>> GetInitialEnergy() { return initial_energy; }
-  vector<vector<double>> GetTa() { return t_a; }
-  vector<vector<double>> GetTb() { return t_b; }
-
-
-
+  //  Clears Event variables as a cautionary measure
   void CleanEvent();
+  //__________________________________________________________________________________________
 
+  //__________________________________________________________________________________________
+  //##########################################################################################
+  //  Friend Classes
+  //##########################################################################################
+  //  IO class can access private variables of Event class
   friend class IO;
+  //__________________________________________________________________________________________
 };
 #endif

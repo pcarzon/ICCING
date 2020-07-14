@@ -30,25 +30,45 @@ private:
 //  Configuration Parameters
 //##########################################################################################
 //    TO ADD CONFIG PARAMETER SEARCH THIS TAG: #CONFIGPARAM
-
   enum ConfigParams
   {
     //  Equivalent to a data type with values that can be those inside
     //  ConfigParams is used to identify parameters from config file
     trentoinputdir,
+    quarkinputfile,
+    eosfile,
     outputdir,
     inputtype,
     outputtype,
 
+    eventlabel,
     firstevent,
     lastevent,
+    ta,
+    tb,
+
+    kappa,
+    rad,
+    qrad,
+    lambda,
+
+    dipolemodel,
+    alphas,
+    alphamin,
+    rmax,
+
+    eosemmitlines,
+    eosscol,
+    eosecol,
+    atrento,
+    echop,
+
     bmin,
     bmax,
     gridmax,
     gridstep,
-
-    ta,
-    tb
+    tau0,
+    ethresh
     //#CONFIGPARAM
   };
 
@@ -58,6 +78,7 @@ private:
   //  File variables
   string trento_input_dir;
   string quark_input_file;
+  string eos_file;
   string output_dir;
   int input_type; //  Type of input: 0 = Full Density Grid, 1 = Sparse Density Grid
   int output_type;  // Type of output: 0 = Full Density Grids, 1 = Sparse Density Grids
@@ -74,10 +95,10 @@ private:
   //******************************************************************************************
   //  Event Config parameters
   //******************************************************************************************
-  double kappa; //  Used for Qs grid
-  double rad;
-  double qrad;
-  double lambda;
+  double kappa_; //  Used for Qs grid
+  double rad_;
+  double qrad_;
+  double lambda_;
 
   //******************************************************************************************
   //  Splitter Config parameters
@@ -91,7 +112,6 @@ private:
   //******************************************************************************************
   //  EOS Config parameters
   //******************************************************************************************
-  string eos_file;
   int eos_emmit_lines;
   int eos_s_col;
   int eos_e_col;
