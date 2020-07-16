@@ -36,8 +36,8 @@ private:
   //  Event Input Parameters
   //##########################################################################################
   double kappa_; //  Used for Qs grid
-  double rad_;
-  double qrad_;
+  double gluon_rad;
+  double quark_rad;
   double lambda_;
   double grid_max;
   double grid_step;
@@ -53,7 +53,8 @@ private:
   vector<vector<double>> t_a; //  Target Input Energy density
   vector<vector<double>> t_b; //  Projectile Input Energy density
   vector<vector<vector<double>>> density; //  ICCING densities: 0(gluon), 1(baryon), 2(em_charge), 3(strange), 4(charm)
-  vector<vector<double>> sampled_energy;  //  Sample from initial_energy for ICCING algorithm
+  vector<vector<bool>> gluon_dist;  //  Sample from initial_energy for ICCING algorithm
+  vector<vector<double>> quark_dist; //  Projectile Input Energy density
 
   double total_initial_energy;  //  Records initial total of initial_energy
   double total_energy;  //  Keeps track of the total of initial_energy as ICCING runs

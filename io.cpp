@@ -311,6 +311,59 @@ void IO::OutputConfig(string file_name)
 
 //__________________________________________________________________________________________
 //##########################################################################################
+// Initialize the Event Object
+//##########################################################################################
+Event IO::InitializeEvent()
+{
+  Event event_in; //  Temp Event object used to store event specific data
+
+  //  Set variables in event with data from configFile
+  event_in.kappa_ = kappa_;
+  event_in.lambda_ = lambda_;
+  event_in.grid_max = grid_max;
+  event_in.grid_step = grid_step;
+  event_in.grid_points = grid_points;
+
+  //  Initialize input grid to 0 with dimensions grid_points + 1
+  event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
+
+  event_in.gluon_rad = round(rad_/grid_step);
+  event_in.quark_rad = round(qrad_/grid_step);
+
+  event_in.gluon_dist.resize(2*gluon_rad + 3, vector<bool>(2*gluon_rad + 3, false));
+  event_in.quark_dist.resize(2*quark_rad + 3, vector<double>(2*quark_rad + 3, 0.));
+
+  for (int i = gluon_rad; i < 2*gluon_rad + 3; i++)
+  {
+    for (int j = 0; j < 2*gluon_rad + 3; j++)
+    {
+      if (i <= gluon_rad && j <= sqrt(pow(gluon_rad,2) - pow(j,2)))
+      {
+        event_in.gluon_dist[i][j] = true;
+        event_in.gluon_dist[-i][-j] = true;
+      }
+    }
+  }
+
+  ofstream output;
+  output.open(output_dir + "gluon_dist_test_1.dat");
+  for (int i = 0; i < event_in.gluon_dist[0].size(); i++)
+  {
+    for (int j = 0; j < event_in.gluon_dist[0].size(); j++)
+    {
+      output << event_in.gluon_dist[i][j];
+
+      if (j == event_in.gluon_dist[0].size() - 1)
+      { output << endl;  }  //  If at end of row, go to next row
+      else
+      { output << " "; }  //  If not at end of row, add space
+    }
+  }
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
 // Initialize the Splitter Object
 //##########################################################################################
 Splitter IO::InitializeSplitter()
@@ -432,18 +485,6 @@ Event IO::ReadEvent()
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
 
   Event event_in; //  Temp Event object used to store event specific data
-
-  //  Set variables in event with data from configFile
-  event_in.kappa_ = kappa_;
-  event_in.rad_ = rad_;
-  event_in.qrad_ = qrad_;
-  event_in.lambda_ = lambda_;
-  event_in.grid_max = grid_max;
-  event_in.grid_step = grid_step;
-  event_in.grid_points = grid_points;
-
-  //  Initialize input grid to 0 with dimensions grid_points + 1
-  event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
 
   // Loop input variables
   int x, y;

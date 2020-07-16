@@ -39,8 +39,8 @@ void Event::CopyEvent(const Event &e)
 {
 
   kappa_ = e.kappa_;
-  rad_ = e.rad_;
-  qrad_ = e.qrad_;
+  gluon_rad = e.gluon_rad;
+  quark_rad = e.quark_rad;
   lambda_ = e.lambda_;
   grid_max = e.grid_max;
   grid_step = e.grid_step;
@@ -50,7 +50,8 @@ void Event::CopyEvent(const Event &e)
   t_a = e.t_a;
   t_b = e.t_b;
   density = e.density;
-  sampled_energy = e.sampled_energy;
+  gluon_dist = e.gluon_dist;
+  quark_dist = e.quark_dist;
 
   total_initial_energy = e.total_initial_energy;
   total_energy = e.total_energy;
@@ -131,7 +132,8 @@ void Event::CleanEvent()
   t_a.clear();
   t_b.clear();
   density.clear();
-  sampled_energy.clear();
+  gluon_dist.clear();
+  quark_dist.clear();
 
   total_initial_energy = 0;
   total_energy = 0;

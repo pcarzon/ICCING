@@ -174,6 +174,7 @@ public:
 //##########################################################################################
 //  IO Specific Functions
 //##########################################################################################
+  Event InitializeEvent();
   Splitter InitializeSplitter();
   ProbDist InitializeProbDist();
 //  EOS InitializeEOS();
