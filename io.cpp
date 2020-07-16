@@ -316,7 +316,7 @@ void IO::OutputConfig(string file_name)
 Event IO::InitializeEvent()
 {
   Event event_in; //  Temp Event object used to store event specific data
-
+  cout << "We're in!" << endl;
   //  Set variables in event with data from configFile
   event_in.kappa_ = kappa_;
   event_in.lambda_ = lambda_;
@@ -329,10 +329,11 @@ Event IO::InitializeEvent()
 
   event_in.gluon_rad = round(rad_/grid_step);
   event_in.quark_rad = round(qrad_/grid_step);
+  cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
   event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<bool>(2*event_in.gluon_rad + 3, false));
   event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
-
+  cout << "grid created" << endl;
   for (int i = event_in.gluon_rad; i < event_in.gluon_dist[0].size() - 1; i++)
   {
     for (int j = 0; j < event_in.gluon_dist[0].size() - 1; j++)
