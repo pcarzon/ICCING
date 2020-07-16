@@ -341,6 +341,7 @@ Event IO::InitializeEvent()
       {
         event_in.gluon_dist[i][j] = true;
         event_in.gluon_dist[-i][-j] = true;
+        cout << event_in.gluon_dist[i][j];
       }
     }
   }
