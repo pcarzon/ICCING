@@ -336,11 +336,11 @@ Event IO::InitializeEvent()
   event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
   cout << event_in.gluon_dist[0].size() << endl;
 
-  int ox = 8;
-  int oy = 8;
-  for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
+  int ox = event_in.gluon_rad + 1;
+  int oy = event_in.gluon_rad + 1;
+  for (int i = -event_in.gluon_rad; i < event_in.gluon_rad; i++)
   {
-    int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+    int height = static_cast<int>(sqrt(event_in.gluon_rad*event_in.gluon_rad - i*i));
     for (int j = -height; j < height; j++)
     {
       event_in.gluon_dist[i + ox][j + oy] = 1;
