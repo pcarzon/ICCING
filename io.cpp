@@ -332,12 +332,12 @@ Event IO::InitializeEvent()
   cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
 //  event_in.gluon_dist.resize(19, vector<int>(19, 0));
-  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
+  event_in.gluon_dist.resize(2*event_in.gluon_rad + 2, vector<int>(2*event_in.gluon_rad + 2, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
   cout << event_in.gluon_dist[0].size() << endl;
 
-  int ox = event_in.gluon_rad + 1;
-  int oy = event_in.gluon_rad + 1;
+  int ox = event_in.gluon_rad;
+  int oy = event_in.gluon_rad;
   for (int i = -event_in.gluon_rad; i < event_in.gluon_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.gluon_rad*event_in.gluon_rad - i*i));
