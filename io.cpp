@@ -331,18 +331,20 @@ Event IO::InitializeEvent()
   event_in.quark_rad = round(qrad_/grid_step);
   cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
-  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
+  event_in.gluon_dist.resize(19, vector<int>(19, 0));
+//  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
   cout << event_in.gluon_dist[0].size() << endl;
-  for (int i = 0; i < event_in.gluon_dist[0].size(); i++)
+
+  for (int i = 0; i < 19; i++)
   {
-    for (int j = event_in.gluon_rad+1; j < event_in.gluon_dist[0].size(); j++)
+    for (int j = 0; j < 19; j++)
     {
       //cout << "in again" << endl;
-      if (i < event_in.gluon_rad && j < round(sqrt(pow(event_in.gluon_rad,2) - pow(j,2))))
+      if (i < 8 && j < round(sqrt(pow(8,2) - pow(j,2))))
       {
         event_in.gluon_dist[i][j] = 1;
-        event_in.gluon_dist[event_in.gluon_rad-i][event_in.gluon_rad-j] = 1;
+      //  event_in.gluon_dist[event_in.gluon_rad-i][event_in.gluon_rad-j] = 1;
         cout << event_in.gluon_dist[i][j] << endl;
       }
     }
