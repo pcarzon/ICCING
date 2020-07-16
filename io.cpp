@@ -332,7 +332,7 @@ Event IO::InitializeEvent()
   cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
 //  event_in.gluon_dist.resize(19, vector<int>(19, 0));
-  event_in.gluon_dist.resize(2*event_in.gluon_rad + 1, vector<int>(2*event_in.gluon_rad + 1, 0));
+  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
   cout << event_in.gluon_dist[0].size() << endl;
 
