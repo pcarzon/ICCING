@@ -331,7 +331,7 @@ Event IO::InitializeEvent()
   event_in.quark_rad = round(qrad_/grid_step);
   cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
-  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<bool>(2*event_in.gluon_rad + 3, false));
+  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
   cout << "grid created" << endl;
   for (int i = event_in.gluon_rad+1; i < event_in.gluon_dist[0].size() - 1; i++)
@@ -341,9 +341,9 @@ Event IO::InitializeEvent()
       cout << "in again" << endl;
       if (i <= event_in.gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
       {
-        event_in.gluon_dist[i][j] = true;
-        event_in.gluon_dist[-i][-j] = true;
-        cout << "true" << endl;
+        event_in.gluon_dist[i][j] = 1;
+        event_in.gluon_dist[-i][-j] = 1;
+        cout << event_in.gluon_dist[i][j] << endl;
       }
     }
   }
@@ -354,10 +354,8 @@ Event IO::InitializeEvent()
   {
     for (int j = 0; j < event_in.gluon_dist[0].size(); j++)
     {
-      if (event_in.gluon_dist[i][j])
-      { output << 1;  }
-      else
-      { output << 0;  }
+      output << event_in.gluon_dist[i][j];
+
 
       if (j == event_in.gluon_dist[0].size() - 1)
       { output << endl;  }  //  If at end of row, go to next row
