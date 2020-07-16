@@ -69,6 +69,9 @@ private:
 
   //  See: RollGlue in ICCING_v0_1_8.nb
   double RollGlue(double e_tot);
+
+  //  See: RollGlue in ICCING_v0_1_8.nb
+  double GetQs(vector<int> circlist);
   //__________________________________________________________________________________________
 
 public:

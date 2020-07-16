@@ -31,7 +31,21 @@ Splitter& Splitter::operator= (const Splitter& original)
 	return *this;
 }
 
+Charge Splitter::RollFlavor(double Qs)
+{
+  Charge create_charge;
+
+  return create_charge;
+}
+
 Quarks Splitter::SplitSample(Sample sampled_energy)
 {
+  Quarks create_quarks;
+  Charge set_charge;
 
+  set_charge = RollFlavor(sampled_energy.q_s);
+
+  create_quarks.CreateQuarks(set_charge, 0.1, 0.1, 0.1);
+
+  return create_quarks;
 }
