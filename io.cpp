@@ -333,13 +333,13 @@ Event IO::InitializeEvent()
 
   event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<int>(2*event_in.gluon_rad + 3, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
-  cout << "grid created" << endl;
+  cout << event_in.gluon_dist[0].size() << endl;
   for (int i = event_in.gluon_rad+1; i < event_in.gluon_dist[0].size() - 1; i++)
   {
     for (int j = 0; j < event_in.gluon_dist[0].size() - 1; j++)
     {
-      cout << "in again" << endl;
-      if (i <= event_in.gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
+      //cout << "in again" << endl;
+      if (i < event_in.gluon_rad && j < sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
       {
         event_in.gluon_dist[i][j] = 1;
         event_in.gluon_dist[-i][-j] = 1;
