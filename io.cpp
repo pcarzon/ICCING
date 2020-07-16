@@ -355,13 +355,13 @@ Event IO::InitializeEvent()
   {
     for (int j = 0; j < event_in.gluon_dist[0].size(); j++)
     {
-      output << event_in.gluon_dist[i][j];
+      output << i << "\t" << j << "\t" << event_in.gluon_dist[i][j] << endl;
 
 
-      if (j == event_in.gluon_dist[0].size()-1)
+    /*  if (j == event_in.gluon_dist[0].size()-1)
       { output << endl;  }  //  If at end of row, go to next row
       else
-      { output << "\t"; }  //  If not at end of row, add space
+      { output << "\t"; }  //  If not at end of row, add space*/
     }
   }
   output.close();
