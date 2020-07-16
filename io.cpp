@@ -333,9 +333,9 @@ Event IO::InitializeEvent()
   event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<bool>(2*event_in.gluon_rad + 3, false));
   event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
 
-  for (int i = event_in.gluon_rad; i < 2*event_in.gluon_rad + 3; i++)
+  for (int i = event_in.gluon_rad; i < event_in.gluon_dist[0].size() - 1; i++)
   {
-    for (int j = 0; j < 2*event_in.gluon_rad + 3; j++)
+    for (int j = 0; j < event_in.gluon_dist[0].size() - 1; j++)
     {
       if (i <= event_in.gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
       {
