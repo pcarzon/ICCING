@@ -346,7 +346,6 @@ Event IO::InitializeEvent()
       event_in.gluon_dist[i + ox][j + oy] = 1;
       //  event_in.gluon_dist[event_in.gluon_rad-i][event_in.gluon_rad-j] = 1;
       //  cout << event_in.gluon_dist[i][j] << endl;
-      }
     }
   }
 
