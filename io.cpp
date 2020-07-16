@@ -330,14 +330,14 @@ Event IO::InitializeEvent()
   event_in.gluon_rad = round(rad_/grid_step);
   event_in.quark_rad = round(qrad_/grid_step);
 
-  event_in.gluon_dist.resize(2*gluon_rad + 3, vector<bool>(2*gluon_rad + 3, false));
-  event_in.quark_dist.resize(2*quark_rad + 3, vector<double>(2*quark_rad + 3, 0.));
+  event_in.gluon_dist.resize(2*event_in.gluon_rad + 3, vector<bool>(2*event_in.gluon_rad + 3, false));
+  event_in.quark_dist.resize(2*event_in.quark_rad + 3, vector<double>(2*event_in.quark_rad + 3, 0.));
 
-  for (int i = gluon_rad; i < 2*gluon_rad + 3; i++)
+  for (int i = event_in.gluon_rad; i < 2*event_in.gluon_rad + 3; i++)
   {
-    for (int j = 0; j < 2*gluon_rad + 3; j++)
+    for (int j = 0; j < 2*event_in.gluon_rad + 3; j++)
     {
-      if (i <= gluon_rad && j <= sqrt(pow(gluon_rad,2) - pow(j,2)))
+      if (i <= gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
       {
         event_in.gluon_dist[i][j] = true;
         event_in.gluon_dist[-i][-j] = true;
