@@ -337,7 +337,7 @@ Event IO::InitializeEvent()
   {
     for (int j = 0; j < 2*event_in.gluon_rad + 3; j++)
     {
-      if (i <= gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
+      if (i <= event_in.gluon_rad && j <= sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
       {
         event_in.gluon_dist[i][j] = true;
         event_in.gluon_dist[-i][-j] = true;
@@ -360,7 +360,6 @@ Event IO::InitializeEvent()
     }
   }
   output.close();
-  return exit;
 }
 //__________________________________________________________________________________________
 
