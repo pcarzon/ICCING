@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Class IO;
+class IO;
 
 class ProbDist
 {
@@ -24,6 +24,6 @@ public:
   ProbDist(const ProbDist &original);
   ProbDist& operator=(const ProbDist& original);
 
-	fiend class IO;
+	friend class IO;
 };
 #endif
