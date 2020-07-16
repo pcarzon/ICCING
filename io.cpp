@@ -359,6 +359,8 @@ Event IO::InitializeEvent()
       { output << " "; }  //  If not at end of row, add space
     }
   }
+  output.close();
+  return exit;
 }
 //__________________________________________________________________________________________
 

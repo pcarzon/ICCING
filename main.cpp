@@ -20,13 +20,14 @@ int main (int argc, char *argv[])
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	//Event testEvent;
 	Splitter machine = inOut.InitializeSplitter();
-	
+
 	while (!inOut.LastEvent())
 	{
 		Event testEvent;
-		testEvent = inOut.ReadEvent();
-		inOut.WriteEvent(testEvent);
-		testEvent.CleanEvent();
+		testEvent = inOut.InitializeEvent();
+	//	testEvent = inOut.ReadEvent();
+	//	inOut.WriteEvent(testEvent);
+	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
 	//	new (&testEvent) Event();
 	}
