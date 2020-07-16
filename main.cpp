@@ -16,15 +16,16 @@ using namespace std;
 //class IO;
 int main (int argc, char *argv[])
 {
-	IO inputOutputObject(argv[1]);
+	IO inOut(argv[1]);
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	//Event testEvent;
-
-	while (!inputOutputObject.LastEvent())
+	Splitter machine = inOut.InitializeSplitter();
+	
+	while (!inOut.LastEvent())
 	{
 		Event testEvent;
-		testEvent = inputOutputObject.ReadEvent();
-		inputOutputObject.WriteEvent(testEvent);
+		testEvent = inOut.ReadEvent();
+		inOut.WriteEvent(testEvent);
 		testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
 	//	new (&testEvent) Event();

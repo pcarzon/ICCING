@@ -8,6 +8,8 @@
 
 using namespace std;
 
+Class IO;
+
 class ProbDist
 {
 private:
@@ -22,5 +24,6 @@ public:
   ProbDist(const ProbDist &original);
   ProbDist& operator=(const ProbDist& original);
 
+	fiend class IO;
 };
 #endif

@@ -41,6 +41,7 @@ private:
   double lambda_;
   double grid_max;
   double grid_step;
+  double e_thresh;
   int grid_points;
   //__________________________________________________________________________________________
 

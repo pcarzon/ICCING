@@ -17,6 +17,11 @@ Splitter::Splitter(const Splitter &original)
 
 void Splitter::CopySplitter(const Splitter &e)
 {
+  flavor_chemistry = e.flavor_chemistry;
+	dipole_model = e.dipole_model;
+	alpha_s = e.alpha_s;
+	alpha_min = e.alpha_min;
+	r_max = e.r_max;
 
 }
 

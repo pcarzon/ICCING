@@ -172,6 +172,10 @@ public:
 //##########################################################################################
 //  IO Specific Functions
 //##########################################################################################
+  Splitter InitializeSplitter();
+  ProbDist InitializeProbDist();
+//  EOS InitializeEOS();
+
   Event ReadEvent();  //  Read single event
 
   void WriteEvent(Event event); //  Writes single event to file
