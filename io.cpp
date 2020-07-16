@@ -361,7 +361,7 @@ Event IO::InitializeEvent()
       if (j == event_in.gluon_dist[0].size()-1)
       { output << endl;  }  //  If at end of row, go to next row
       else
-      { output << " "; }  //  If not at end of row, add space
+      { output << "\t"; }  //  If not at end of row, add space
     }
   }
   output.close();
