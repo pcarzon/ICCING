@@ -339,7 +339,7 @@ Event IO::InitializeEvent()
     for (int j = event_in.gluon_rad+1; j < event_in.gluon_dist[0].size(); j++)
     {
       //cout << "in again" << endl;
-      if (i < event_in.gluon_rad && j < sqrt(pow(event_in.gluon_rad,2) - pow(j,2)))
+      if (i < event_in.gluon_rad && j < round(sqrt(pow(event_in.gluon_rad,2) - pow(j,2))))
       {
         event_in.gluon_dist[i][j] = 1;
         event_in.gluon_dist[event_in.gluon_rad-i][event_in.gluon_rad-j] = 1;
