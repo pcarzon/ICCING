@@ -342,7 +342,7 @@ Event IO::InitializeEvent()
       {
         event_in.gluon_dist[i][j] = true;
         event_in.gluon_dist[-i][-j] = true;
-        cout << event_in.gluon_dist[i][j];
+        cout << "true" << endl;
       }
     }
   }
@@ -353,7 +353,10 @@ Event IO::InitializeEvent()
   {
     for (int j = 0; j < event_in.gluon_dist[0].size(); j++)
     {
-      output << event_in.gluon_dist[i][j];
+      if (event_in.gluon_dist[i][j])
+      { output << 1;  }
+      else
+      { output << 0;  }
 
       if (j == event_in.gluon_dist[0].size() - 1)
       { output << endl;  }  //  If at end of row, go to next row

@@ -21,10 +21,12 @@ int main (int argc, char *argv[])
 	//Event testEvent;
 	Splitter machine = inOut.InitializeSplitter();
 
+	Event testEvent;
+	testEvent = inOut.InitializeEvent();
+	
 	while (!inOut.LastEvent())
 	{
-		Event testEvent;
-		testEvent = inOut.InitializeEvent();
+
 	//	testEvent = inOut.ReadEvent();
 	//	inOut.WriteEvent(testEvent);
 	//	testEvent.CleanEvent();
