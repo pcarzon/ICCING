@@ -109,6 +109,8 @@ double Event::GetQs(int x_center, int y_center)
   { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
   { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
+  cout << "glue end x = " << glue_x_end << endl;
+  cout << "glue end y = " << glue_y_end << endl;
 
   for (int i = glue_x_start; i < glue_x_end; i++)
   {
@@ -134,16 +136,16 @@ Sample Event::SampleEnergy()
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/gluon_rad_test_0.dat");
   double temp_qs;
-  for (int i = 0; i < t_b.size(); i++)
+/*  for (int i = 0; i < t_b.size(); i++)
   {
     for (int j = 0; j < t_b.size(); j++)
     {
       temp_qs = GetQs(i,j);
       output << i*grid_step << " " << j*grid_step << " " << temp_qs << endl;
     }
-  }
+  }*/
   extracted_energy.e_tot = RollGlue(10);
-  extracted_energy.q_s = GetQs(4,4);
+  extracted_energy.q_s = GetQs(195,195);
 
   output.close();
   return extracted_energy;
