@@ -6,6 +6,7 @@
 //  C++ Libraries
 //##########################################################################################
 #include <iostream>
+#include <ofstream>
 #include <string>
 #include <cmath>
 #include <vector>
