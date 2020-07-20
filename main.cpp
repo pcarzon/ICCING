@@ -24,8 +24,8 @@ int main (int argc, char *argv[])
 	Event testEvent, initializedEvent;
 	initializedEvent = inOut.InitializeEvent();
 
-	while (!inOut.LastEvent())
-	{
+//	while (!inOut.LastEvent())
+	//{
 
 		testEvent = inOut.ReadEvent(initializedEvent);
 		testEvent.SampleEnergy();
@@ -33,7 +33,7 @@ int main (int argc, char *argv[])
 	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
 	//	new (&testEvent) Event();
-	}
+	//}
 	cout << "Hello World!" << endl;
 
 	return 0;
