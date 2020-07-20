@@ -24,15 +24,15 @@ int main (int argc, char *argv[])
 	Event testEvent;
 	testEvent = inOut.InitializeEvent();
 
-	while (!inOut.LastEvent())
-	{
+//	while (!inOut.LastEvent())
+//	{
 
 		testEvent = inOut.ReadEvent(testEvent);
 		inOut.WriteEvent(testEvent);
 		testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
 	//	new (&testEvent) Event();
-	}
+//	}
 	cout << "Hello World!" << endl;
 
 	return 0;
