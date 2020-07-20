@@ -131,11 +131,21 @@ Sample Event::SampleEnergy()
 {
   Sample extracted_energy;
 
-
+  ofstream output;
+  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/gluon_rad_test_0.dat");
+  double temp_qs;
+  for (int i = 0; i < t_b.size(); i++)
+  {
+    for (int j = 0; j < t_b.size(); j++)
+    {
+      temp_qs = GetQs(i,j);
+      output << i*grid_step << " " << j*grid_step << " " << temp_qs << endl;
+    }
+  }
   extracted_energy.e_tot = RollGlue(10);
   extracted_energy.q_s = GetQs(4,4);
 
-
+  output.close();
   return extracted_energy;
 }
 //__________________________________________________________________________________________
