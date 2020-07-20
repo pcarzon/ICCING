@@ -21,17 +21,17 @@ int main (int argc, char *argv[])
 	//Event testEvent;
 	Splitter machine = inOut.InitializeSplitter();
 
-	Event testEvent;
-	testEvent = inOut.InitializeEvent();
+	Event testEvent, initializedEvent;
+	initializedEvent = inOut.InitializeEvent();
 
 	while (!inOut.LastEvent())
 	{
 
-		testEvent = inOut.ReadEvent(testEvent);
+		testEvent = inOut.ReadEvent(initializedEvent);
 		inOut.WriteEvent(testEvent);
 	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
-		new (&testEvent) Event();
+	//	new (&testEvent) Event();
 	}
 	cout << "Hello World!" << endl;
 
