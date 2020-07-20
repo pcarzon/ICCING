@@ -29,9 +29,9 @@ int main (int argc, char *argv[])
 
 		testEvent = inOut.ReadEvent(testEvent);
 		inOut.WriteEvent(testEvent);
-		testEvent.CleanEvent();
+	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
-	//	new (&testEvent) Event();
+		new (&testEvent) Event();
 //	}
 	cout << "Hello World!" << endl;
 
