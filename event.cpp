@@ -37,6 +37,7 @@ Event::Event(const Event &original)
 //##########################################################################################
 void Event::CopyEvent(const Event &e)
 {
+  cout << "started copying event" << endl;
 
   kappa_ = e.kappa_;
   gluon_rad = e.gluon_rad;
@@ -56,6 +57,9 @@ void Event::CopyEvent(const Event &e)
   total_initial_energy = e.total_initial_energy;
   total_energy = e.total_energy;
   seed = e.seed;
+
+  cout << "Finished copying event" << endl;
+
 }
 //__________________________________________________________________________________________
 

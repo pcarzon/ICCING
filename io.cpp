@@ -468,6 +468,8 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 //##########################################################################################
 Event IO::ReadEvent(Event event_in)
 {
+  cout << "started reading event" << endl;
+
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
@@ -562,6 +564,7 @@ Event IO::ReadEvent(Event event_in)
     }
     input.close();  //  Close input stream
   }
+  cout << "Finished reading event" << endl;
 
   return event_in;  //  Return event with data
 }
