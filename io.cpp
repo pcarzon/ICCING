@@ -344,6 +344,7 @@ Event IO::InitializeEvent()
       event_in.gluon_dist[i + ox][j + oy] = 1;
     }
   }
+  cout << "Finish initializing event" << endl;
 
   return event_in;
 }
