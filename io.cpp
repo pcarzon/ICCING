@@ -630,7 +630,7 @@ void IO::WriteEvent(Event event)
 //##########################################################################################
 bool IO::LastEvent()
 {
-  if (current_event == last_event)
+  if (current_event > last_event)
   { return true;  }
   else
   { return false; }
