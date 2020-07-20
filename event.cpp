@@ -131,6 +131,7 @@ Sample Event::SampleEnergy()
 
 
   extracted_energy.e_tot = RollGlue(10);
+  extracted_energy.q_s = GetQs(4,4);
 
 
   return extracted_energy;
