@@ -575,6 +575,7 @@ Event IO::ReadEvent(Event event_in)
 void IO::WriteEvent(Event event)
 {
   vector<vector<double>> output_energy;
+  cout << "Start writing event" << endl;
 
   //******************************************************************************************
   //  Output Full Density Grids
@@ -614,6 +615,7 @@ void IO::WriteEvent(Event event)
       OutputSparseDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
+  cout << "Finish writing event" << endl;
 
   current_event++;  //  Used for tracking which event has been processed
 }
