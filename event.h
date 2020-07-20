@@ -72,7 +72,10 @@ private:
   double RollGlue(double e_tot);
 
   //  See: RollGlue in ICCING_v0_1_8.nb
-  double GetQs(vector<int> circlist);
+  double GetQs(int x_center, int y_center);
+
+  //  See: RollGlue in ICCING_v0_1_8.nb
+  double GetEtot(int x_center, int y_center);
   //__________________________________________________________________________________________
 
 public:

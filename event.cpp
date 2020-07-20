@@ -86,10 +86,31 @@ double Event::RollGlue(double e_tot)
 //##########################################################################################
 //  Select energy of gluon
 //##########################################################################################
-double Event::GetQs(vector<int> circlist)
+double Event::GetQs(int x_center, int y_center)
 {
-  double q_s = 20;
+  int glue_x_start = 0;
+  int glue_y_start = 0;
+  int glue_x_end = gluon_dist.size();
+  int glue_y_end = gluon_dist.size();
+  double q_s = 0;
 
+  if (x_center - gluon_rad < 0)
+  { glue_x_start = -(x_center - gluon_rad);  }
+  if (y_center - gluon_rad < 0)
+  { glue_y_start = -(y_center - gluon_rad);  }
+
+  if (x_center + gluon_rad > t_b.size())
+  { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
+  if (y_center + gluon_rad > t_b.size())
+  { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
+
+  for (int i = glue_x_start; i < glue_x_end; i++)
+  {
+    for (int j = glue_y_start; j < glue_y_end; j++)
+    {
+      q_s += t_b[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
+    }
+  }
   return q_s;
 }
 //__________________________________________________________________________________________
@@ -103,10 +124,10 @@ double Event::GetQs(vector<int> circlist)
 Sample Event::SampleEnergy()
 {
   Sample extracted_energy;
-  vector<int> circlelist = {0,1,2,3,4,5};
+
 
   extracted_energy.e_tot = RollGlue(10);
-  extracted_energy.q_s = GetQs(circlelist);
+
 
   return extracted_energy;
 }

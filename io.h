@@ -179,7 +179,7 @@ public:
   ProbDist InitializeProbDist();
 //  EOS InitializeEOS();
 
-  Event ReadEvent();  //  Read single event
+  Event ReadEvent(Event event_in);  //  Read single event
 
   void WriteEvent(Event event); //  Writes single event to file
 

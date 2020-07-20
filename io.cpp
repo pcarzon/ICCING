@@ -329,12 +329,10 @@ Event IO::InitializeEvent()
 
   event_in.gluon_rad = round(rad_/grid_step);
   event_in.quark_rad = round(qrad_/grid_step);
-  cout << event_in.gluon_rad << endl << event_in.quark_rad << endl;
 
 //  event_in.gluon_dist.resize(19, vector<int>(19, 0));
-  event_in.gluon_dist.resize(2*event_in.gluon_rad + 2, vector<int>(2*event_in.gluon_rad + 2, 0));
+  event_in.gluon_dist.resize(2*event_in.gluon_rad + 1, vector<int>(2*event_in.gluon_rad + 1, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
-  cout << event_in.gluon_dist[0].size() << endl;
 
   int ox = event_in.gluon_rad;
   int oy = event_in.gluon_rad;
@@ -344,27 +342,8 @@ Event IO::InitializeEvent()
     for (int j = -height; j < height; j++)
     {
       event_in.gluon_dist[i + ox][j + oy] = 1;
-      //  event_in.gluon_dist[event_in.gluon_rad-i][event_in.gluon_rad-j] = 1;
-      //  cout << event_in.gluon_dist[i][j] << endl;
     }
   }
-
-  ofstream output;
-  output.open(output_dir + "gluon_dist_test_1.dat");
-  for (int i = 0; i < event_in.gluon_dist[0].size(); i++)
-  {
-    for (int j = 0; j < event_in.gluon_dist[0].size(); j++)
-    {
-      output << i << "\t" << j << "\t" << event_in.gluon_dist[i][j] << endl;
-
-
-    /*  if (j == event_in.gluon_dist[0].size()-1)
-      { output << endl;  }  //  If at end of row, go to next row
-      else
-      { output << "\t"; }  //  If not at end of row, add space*/
-    }
-  }
-  output.close();
 
   return event_in;
 }
@@ -486,13 +465,11 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 //    Create Event and set densities and variables
 //    (Assumes sparse file with only valued points, need to generalize this)
 //##########################################################################################
-Event IO::ReadEvent()
+Event IO::ReadEvent(Event event_in)
 {
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
-
-  Event event_in; //  Temp Event object used to store event specific data
 
   // Loop input variables
   int x, y;
