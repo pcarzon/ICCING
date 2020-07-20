@@ -28,7 +28,7 @@ int main (int argc, char *argv[])
 	{
 
 		testEvent = inOut.ReadEvent(initializedEvent);
-		testEvent.Sample();
+		testEvent.SampleEnergy();
 		inOut.WriteEvent(testEvent);
 	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
