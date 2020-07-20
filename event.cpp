@@ -37,7 +37,7 @@ Event::Event(const Event &original)
 //##########################################################################################
 void Event::CopyEvent(const Event &e)
 {
-  cout << "started copying event" << endl;
+//  cout << "started copying event" << endl;
 
   kappa_ = e.kappa_;
   gluon_rad = e.gluon_rad;
@@ -58,7 +58,7 @@ void Event::CopyEvent(const Event &e)
   total_energy = e.total_energy;
   seed = e.seed;
 
-  cout << "Finished copying event" << endl;
+//  cout << "Finished copying event" << endl;
 
 }
 //__________________________________________________________________________________________
@@ -102,7 +102,9 @@ double Event::GetQs(int x_center, int y_center)
   { glue_x_start = -(x_center - gluon_rad);  }
   if (y_center - gluon_rad < 0)
   { glue_y_start = -(y_center - gluon_rad);  }
-
+cout << "glue length = " << gluon_dist.size() << endl;
+cout << "glue start x = " << glue_x_start << endl;
+cout << "glue start y = " << glue_y_start << endl;
   if (x_center + gluon_rad > t_b.size())
   { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
