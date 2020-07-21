@@ -146,7 +146,7 @@ Sample Event::SampleEnergy()
     }
   }*/
   extracted_energy.e_tot = RollGlue(10);
-  extracted_energy.q_s = GetQs(195,195);
+  extracted_energy.q_s = GetQs(395,395);
 
   output.close();
   return extracted_energy;
