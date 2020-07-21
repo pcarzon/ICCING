@@ -344,7 +344,29 @@ Event IO::InitializeEvent()
       event_in.gluon_dist[i + ox][j + oy] = 1;
     }
   }
-  cout << "Finish initializing event" << endl;
+
+  int ox_quark = event_in.quark_rad;
+  int oy_quark = event_in.quark_rad;
+  double point;
+  for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
+  {
+    int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+    for (int j = -height; j < height; j++)
+    {
+      point = sqrt(pow((event_in.quark_rad - i)*grid_step,2) + pow((event_in.quark_rad - j)*grid_step,2));
+      event_in.quark_dist[i + ox][j + oy] = 1/(grid_step*grid_step*tau_0)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+    }
+  }
+
+  ofstream output;
+  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
+  for (int i = 0; i < event_in.quark_dist.size(); i++)
+  {
+    for (int j = 0; j < event_in.quark_dist.size(); j++)
+      output << i*grid_step << " " << j*grid_step << " " << event_in.quark_dist[i][j] << endl;
+  }
+output.close();
+cout << "Finish initializing event" << endl;
 
   return event_in;
 }
