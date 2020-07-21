@@ -149,7 +149,7 @@ Sample Event::SampleEnergy()
       temp = GetQs(i,j);
       if (temp_qs > 0)
       {
-        output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot endl;
+        output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot << endl;
       }
     }
   }
