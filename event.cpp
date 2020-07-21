@@ -142,7 +142,10 @@ Sample Event::SampleEnergy()
     for (int j = 0; j < t_b.size()-gluon_rad; j++)
     {
       temp_qs = GetQs(i,j);
-      output << i*grid_step << " " << j*grid_step << " " << temp_qs << endl;
+      if (temp_qs > 0)
+      {
+        output << i*grid_step << " " << j*grid_step << " " << temp_qs << endl;
+      }
     }
   }
   //extracted_energy.e_tot = RollGlue(10);
