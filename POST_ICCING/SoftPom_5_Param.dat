@@ -1,0 +1,34 @@
+Event Summary:	
+Etot [GeV] = 	755.39292724465
+# u-pairs = 	3.
+# d-pairs = 	12.999999999999998
+# s-pairs = 	2.999999999999999
+# c-pairs = 	0.
+Emax [GeV/fm3] = 	95.60425634427715
+Bmax [1/fm3] = 	1.5533462128302746
+Bmin [1/fm3] = 	-1.8600531844297898
+Smax [1/fm3] = 	2.304022042462296
+Smin [1/fm3] = 	-2.304022042462296
+Qmax [1/fm3] = 	2.7719718300262373
+Qmin [1/fm3] = 	-1.8673189802257577
+
+CGC Parameters:	
+dipole model = 	MV
+lambda = 	1.08
+Cutoff = 	0.001
+kappa = 	1
+alphaS = 	0.3
+alphaMin = 	0.01
+rmax = 	1
+
+Splitting Parameters:	
+gluon radius = 	0.5
+quark radius = 	0.5
+Ethreshold = 	0.25
+Trento a-factor = 	119
+Tau0 = 	0.6
+Echop = 	1/100000000000000000000
+
+HydroInput.dat Format:	
+#GridPoints	dx	dy	Etot	xmin	ymin
+x	y	E	rhoB	rhoS	rhoQ
