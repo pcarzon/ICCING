@@ -109,6 +109,7 @@ double Event::GetQs(int x_center, int y_center)
   { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
   { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
+  cout << "t_b size = " << t_b.size() << endl;
   cout << "glue end x = " << glue_x_end << endl;
   cout << "glue end y = " << glue_y_end << endl;
 
