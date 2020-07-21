@@ -90,13 +90,14 @@ double Event::RollGlue(double e_tot)
 //##########################################################################################
 //  Select energy of gluon
 //##########################################################################################
-double Event::GetQs(int x_center, int y_center)
+Sample Event::GetQs(int x_center, int y_center)
 {
   int glue_x_start = 0;
   int glue_y_start = 0;
   int glue_x_end = gluon_dist.size();
   int glue_y_end = gluon_dist.size();
   double q_s = 0;
+  double e_tot = 0;
 
   if (x_center - gluon_rad < 0)
   { glue_x_start = -(x_center - gluon_rad);  }
@@ -109,18 +110,22 @@ double Event::GetQs(int x_center, int y_center)
   { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
   { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
-  cout << "t_b size = " << t_b.size() << endl;
-  cout << "glue end x = " << glue_x_end << endl;
-  cout << "glue end y = " << glue_y_end << endl;
+//  cout << "t_b size = " << t_b.size() << endl;
+//  cout << "glue end x = " << glue_x_end << endl;
+//  cout << "glue end y = " << glue_y_end << endl;
 
   for (int i = glue_x_start; i < glue_x_end; i++)
   {
     for (int j = glue_y_start; j < glue_y_end; j++)
     {
       q_s += t_b[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
+      e_tot += initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
     }
   }
-  return q_s;
+  Sample samp;
+  samp.q_s = q_s;
+  samp.e_tot = e_tot;
+  return samp;
 }
 //__________________________________________________________________________________________
 
@@ -136,15 +141,15 @@ Sample Event::SampleEnergy()
 
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/gluon_rad_test_0.dat");
-  double temp_qs;
+  Sample temp;
   for (int i = 0; i < t_b.size()-gluon_rad; i++)
   {
     for (int j = 0; j < t_b.size()-gluon_rad; j++)
     {
-      temp_qs = GetQs(i,j);
+      temp = GetQs(i,j);
       if (temp_qs > 0)
       {
-        output << i*grid_step << " " << j*grid_step << " " << temp_qs << endl;
+        output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot endl;
       }
     }
   }
