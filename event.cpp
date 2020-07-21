@@ -147,7 +147,7 @@ Sample Event::SampleEnergy()
     for (int j = 0; j < t_b.size()-gluon_rad; j++)
     {
       temp = GetQs(i,j);
-      if (temp_qs > 0)
+      if (temp.e_tot > 0)
       {
         output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot << endl;
       }
