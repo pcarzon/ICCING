@@ -358,7 +358,7 @@ Event IO::InitializeEvent()
       normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
-
+cout << normalization << endl;
   for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
