@@ -353,7 +353,7 @@ Event IO::InitializeEvent()
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
   for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
-    int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j <= height; j++)
     {
       //point = 0;
@@ -365,7 +365,7 @@ Event IO::InitializeEvent()
 cout << normalization << endl;
   for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
-    int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j <= height; j++)
     {
       point = sqrt(pow(i,2) + pow(j,2));
