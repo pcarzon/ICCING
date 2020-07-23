@@ -356,7 +356,7 @@ Event IO::InitializeEvent()
     {
       point = 0;
       //point = sqrt(pow((i - event_in.quark_rad),2) + pow((j - event_in.quark_rad),2));
-      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      normalization = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
 cout << normalization << endl;
