@@ -377,6 +377,7 @@ Event IO::InitializeEvent()
   for (int i = 0; i < event_in.quark_dist.size(); i++)
   {
     for (int j = 0; j < event_in.quark_dist.size(); j++)
+    {
     //  output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
   }
 output.close();
