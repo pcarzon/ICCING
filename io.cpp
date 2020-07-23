@@ -358,18 +358,18 @@ Event IO::InitializeEvent()
     {
       //point = 0;
       point = sqrt(pow((i),2) + pow((j),2));
-      normalization = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
-      output << i << " " << j << " " << normalization << endl;
+      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      //output << i << " " << j << " " << normalization << endl;
     }
   }
-//cout << normalization << endl;
+cout << normalization << endl;
   for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j < height; j++)
     {
-      point = sqrt(pow((i - event_in.quark_rad)*grid_step,2) + pow((j - event_in.quark_rad)*grid_step,2));
-      event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad*grid_step,2))));
+      point = sqrt(pow(i,2) + pow(j,2));
+      event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
 
@@ -378,7 +378,7 @@ Event IO::InitializeEvent()
   {
     for (int j = 0; j < event_in.quark_dist.size(); j++)
     {
-    //  output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
+      output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
   }}
 output.close();
 cout << "Finish initializing event" << endl;
