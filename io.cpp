@@ -351,10 +351,10 @@ Event IO::InitializeEvent()
   double normalization = 0;
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
-  for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
+  for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
-    for (int j = -height; j < height; j++)
+    for (int j = -height; j <= height; j++)
     {
       //point = 0;
       point = sqrt(pow((i),2) + pow((j),2));
@@ -363,10 +363,10 @@ Event IO::InitializeEvent()
     }
   }
 cout << normalization << endl;
-  for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
+  for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
-    for (int j = -height; j < height; j++)
+    for (int j = -height; j <= height; j++)
     {
       point = sqrt(pow(i,2) + pow(j,2));
       event_in.quark_dist[i + ox_quark][j + oy_quark] = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
