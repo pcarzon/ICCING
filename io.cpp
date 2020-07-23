@@ -354,20 +354,17 @@ Event IO::InitializeEvent()
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j < height; j++)
     {
-      point = sqrt(pow((i - event_in.quark_rad)*grid_step,2) + pow((j - event_in.quark_rad)*grid_step,2));
-      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad*grid_step,2))));
+      point = sqrt(pow((i - event_in.quark_rad),2) + pow((j - event_in.quark_rad),2));
+      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
+
   for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j < height; j++)
     {
       point = sqrt(pow((i - event_in.quark_rad)*grid_step,2) + pow((j - event_in.quark_rad)*grid_step,2));
-      cout << "point = " << point << endl;
-      cout << "prefactor = " << 1/(grid_step*grid_step*tau_0) << endl;
-      cout << "exponent = " << exp(-((pow(point,2))/(2*pow(event_in.quark_rad*grid_step,2)))) << endl;
-
       event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad*grid_step,2))));
     }
   }
