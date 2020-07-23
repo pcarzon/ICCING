@@ -349,17 +349,20 @@ Event IO::InitializeEvent()
   int oy_quark = event_in.quark_rad;
   double point;
   double normalization = 0;
+  ofstream output;
+  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
   for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j < height; j++)
     {
       //point = 0;
-      point = sqrt(pow((8 - event_in.quark_rad),2) + pow((0 - event_in.quark_rad),2));
+      point = sqrt(pow((i - event_in.quark_rad),2) + pow((j - event_in.quark_rad),2));
       normalization = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      output << i << " " << j << " " << normalization << endl;
     }
   }
-cout << normalization << endl;
+//cout << normalization << endl;
   for (int i = -event_in.quark_rad; i < event_in.quark_rad; i++)
   {
     int height = static_cast<int>(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
@@ -370,12 +373,11 @@ cout << normalization << endl;
     }
   }
 
-  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
+
   for (int i = 0; i < event_in.quark_dist.size(); i++)
   {
     for (int j = 0; j < event_in.quark_dist.size(); j++)
-      output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
+    //  output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
   }
 output.close();
 cout << "Finish initializing event" << endl;
