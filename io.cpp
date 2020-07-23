@@ -379,7 +379,7 @@ Event IO::InitializeEvent()
     for (int j = 0; j < event_in.quark_dist.size(); j++)
     {
     //  output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
-  }
+  }}
 output.close();
 cout << "Finish initializing event" << endl;
 
