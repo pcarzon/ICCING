@@ -355,7 +355,7 @@ Event IO::InitializeEvent()
     for (int j = -height; j < height; j++)
     {
       //point = 0;
-      point = sqrt(pow((7 - event_in.quark_rad),2) + pow((8 - event_in.quark_rad),2));
+      point = sqrt(pow((8 - event_in.quark_rad),2) + pow((0 - event_in.quark_rad),2));
       normalization = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
