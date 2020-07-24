@@ -11,6 +11,7 @@
 using namespace std;
 
 class IO;
+extern default_random_engine get_random_number;
 
 class Splitter
 {
