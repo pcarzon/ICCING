@@ -75,7 +75,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   Charge set_charge;
   double gluon_energy_frac;
 
-  gluon_energy_frac = RollGlue(SampleEnergy.e_tot);
+  gluon_energy_frac = RollGlue(sampled_energy.e_tot);
   set_charge = RollFlavor(sampled_energy.q_s);
 
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
