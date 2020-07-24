@@ -70,6 +70,8 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
+  get_random_number.seed(time(NULL));
+
   //  Setting flag for type of charge tracked
   if(charge_type == "BSQ") {  tracked_charge = 0; }
   else if (charge_type == "UDS") {  tracked_charge = 1; }
