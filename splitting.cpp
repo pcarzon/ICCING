@@ -45,7 +45,7 @@ double Splitter::RollGlue(double e_tot)
   int num = 0;
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
-  uniform_real_distribution<double> get_probability(0.0, pow(1/e_thresh, lambda_));
+  uniform_real_distribution<double> get_probability(0.0, 1/pow(e_thresh, lambda_));
 
   cout << "begin RollGlue " << get_probability.max() << " " << e_tot << endl;
   while (num < 10)
