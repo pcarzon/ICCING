@@ -45,6 +45,7 @@ private:
     outputdir,
     inputtype,
     outputtype,
+    seed,
 
     eventlabel,
     firstevent,
@@ -88,6 +89,7 @@ private:
   string output_dir;
   int input_type; //  Type of input: 0 = Full Density Grid, 1 = Sparse Density Grid
   int output_type;  // Type of output: 0 = Full Density Grids, 1 = Sparse Density Grids
+  int seed_;
 
   //******************************************************************************************
   //  Internal Config parameters

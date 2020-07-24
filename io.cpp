@@ -35,7 +35,7 @@ IO::IO(string configFile)
       case outputdir:  input >> output_dir; break;
       case inputtype: input >> input_type; break;
       case outputtype:  input >> output_type; break;
-
+      case seed: input >> seed_; break;
       case eventlabel: input >> event_label; break;
       case firstevent: input >> first_event; break;
       case lastevent: input >> last_event; break;
@@ -70,7 +70,7 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
-  get_random_number.seed(time(NULL));
+  get_random_number.seed(seed_);
 
   //  Setting flag for type of charge tracked
   if(charge_type == "BSQ") {  tracked_charge = 0; }
@@ -104,6 +104,7 @@ void IO::CopyIO(const IO &e)
   output_dir = e.output_dir;
   input_type = e.input_type;
   output_type = e.output_type;
+  seed_ = e.seed_;
 
   event_label = e.event_label;
   first_event = e.first_event;
@@ -178,6 +179,7 @@ void IO::Initialize()
   output_dir = "";
   input_type = 0;
   output_type = 0;
+  seed_ = time(NULL);
 
   event_label = "";
   first_event = 0;
@@ -223,6 +225,7 @@ void IO::Initialize()
   mapConfigParams["output_dir"] = outputdir;
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
+  mapConfigParams["seed_"] = seed;
 
   mapConfigParams["event_label"] = eventlabel;
   mapConfigParams["first_event"] = firstevent;
@@ -270,7 +273,8 @@ void IO::OutputConfig(string file_name)
     << "trento_input_dir " << trento_input_dir
     << "\noutput_dir " << output_dir
     << "\ninput_type " << input_type
-    << "\noutput_type " << output_type;
+    << "\noutput_type " << output_type
+    << "\nseed_ " << seed_;
 
   output
     << "\n\nevent_label " << event_label
