@@ -39,7 +39,7 @@ Splitter& Splitter::operator= (const Splitter& original)
 //##########################################################################################
 double Splitter::RollGlue(double e_tot)
 {
-  int x, y;
+  double x, y;
   double e_glue = 0;
   bool got_glue = false;
   int num = 0;
@@ -48,14 +48,14 @@ double Splitter::RollGlue(double e_tot)
   uniform_real_distribution<double> get_probability(0.0, pow(1/e_thresh, lambda_));
 
   cout << "begin RollGlue " << get_probability.max() << " " << e_tot << endl;
-/*  while (!got_glue)
+  while (!got_glue)
   {
     x = get_energy(get_random_number);
     y = get_probability(get_random_number);
     cout << x << " " << y << " " << endl;
     num++;
     if (y > 1/pow(x, lambda_)) got_glue = true;
-  }*/
+  }
 
   return e_glue/e_tot;
 }
