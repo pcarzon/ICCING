@@ -125,11 +125,11 @@ Sample Event::GetGlue(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
-  int x;
-  int y;
+  int x = 0;
+  int y = 0;
   bool got_point = false;
   int num = 0;
-
+  cout << "begin SampleEnergy" << endl;
   while (!got_point)
   {
     x = get_grid_point(get_random_number);
