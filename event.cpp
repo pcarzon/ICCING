@@ -134,6 +134,7 @@ Sample Event::SampleEnergy()
   {
     x = get_grid_point(get_random_number);
     y = get_grid_point(get_random_number);
+    cout << x << " " << y << " " << initial_energy[x][y] << endl;
     num++;
     if (initial_energy[x][y] > 0) got_point = true;
   }
