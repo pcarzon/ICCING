@@ -22,6 +22,8 @@ private:
 	double alpha_s;
 	double alpha_min;
 	double r_max;
+	double e_thresh;
+	double lambda_;
 
 	//  See: RollGlue in ICCING_v0_1_8.nb
   double RollGlue(double e_tot);

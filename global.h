@@ -49,15 +49,17 @@ struct Quarks
 private:
   Charge flavor;  //  Stores what the quark charges are
 
+  double energy_fraction; //  Energy fraction of quarks
   double alpha; //  Momentum fraction of quark (fraction for anit-quark = 1 - alpha)
   vector<double> position{0, 0};  //  Stores the position of the quark pair
 
 public:
   //  Create quarks with given flavor, momentum fraction, and position
-  void CreateQuarks (Charge flavor_, double alpha_, double delta_x_, double delta_y_)
+  void CreateQuarks (Charge flavor_, double energy_fraction_, double alpha_, double delta_x_, double delta_y_)
   {
-    flavor = flavor_; alpha = alpha_; position[0] = delta_x_; position[1] = delta_y_;
+    flavor = flavor_; energy_fraction = energy_fraction_; alpha = alpha_; position[0] = delta_x_; position[1] = delta_y_;
   }
+  double GetEnergyFraction () {  return energy_fraction; } //  Returns energy fraction
   double GetAlpha () {  return alpha; } //  Returns momentum fraction
   vector<double> GetPosition () {  return position; } //  Returns quark pair position
   vector<double> GetCharge() {  return flavor.GetCharge();  }

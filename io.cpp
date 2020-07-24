@@ -393,6 +393,8 @@ Splitter IO::InitializeSplitter()
   init_splitter.alpha_s = alpha_s;
   init_splitter.alpha_min = alpha_min;
   init_splitter.r_max = r_max;
+  init_splitter.e_thresh = e_thresh;
+  init_splitter.lambda_ = lambda_;
 
   return init_splitter;
 }
