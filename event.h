@@ -46,7 +46,7 @@ private:
   double grid_step;
   double e_thresh;
   int grid_points;
-  uniform_int_distribution<int> get_grid_point(0,1);
+  uniform_int_distribution<int> get_grid_point;
   //__________________________________________________________________________________________
 
   //__________________________________________________________________________________________
