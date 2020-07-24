@@ -130,6 +130,7 @@ Sample Event::SampleEnergy()
   bool got_point = false;
   int num = 0;
   cout << "begin SampleEnergy " << get_random_number << endl;
+  cout << get_grid_point.min() << " " << get_grid_point.max() << endl;
   while (!got_point)
   {
     x = get_grid_point(get_random_number);
