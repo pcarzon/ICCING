@@ -366,7 +366,7 @@ Event IO::InitializeEvent()
     for (int j = -height; j <= height; j++)
     {
       point = sqrt(pow(i,2) + pow(j,2));
-      event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0))*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
 
