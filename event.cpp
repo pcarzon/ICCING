@@ -78,19 +78,7 @@ Event& Event::operator= (const Event& original)
 //##########################################################################################
 //  Select energy of gluon
 //##########################################################################################
-double Event::RollGlue(double e_tot)
-{
-  double e_glue = e_tot;
-
-  return e_glue;
-}
-//__________________________________________________________________________________________
-
-//__________________________________________________________________________________________
-//##########################################################################################
-//  Select energy of gluon
-//##########################################################################################
-Sample Event::GetQs(int x_center, int y_center)
+Sample Event::GetGlue(int x_center, int y_center)
 {
   int glue_x_start = 0;
   int glue_y_start = 0;
@@ -137,27 +125,41 @@ Sample Event::GetQs(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
-  Sample extracted_energy;
+  int x;
+  int y;
+  bool got_point = false;
+  int num = 0;
 
-  ofstream output;
+  while (!got_point)
+  {
+    x = get_grid_point();
+    y = get_grid_point();
+    num++;
+    if (initial_energy[x][y] > 0) got_point = true;
+  }
+  cout << "number of times through loop = " << num << endl;
+  cout << x << " " << y << " " << initial_energy[x][y] << endl;
+
+/*  ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/gluon_rad_test_0.dat");
   Sample temp;
   for (int i = 0; i < t_b.size()-gluon_rad; i++)
   {
     for (int j = 0; j < t_b.size()-gluon_rad; j++)
     {
-      temp = GetQs(i,j);
+      if (initial_energy[i][j] > 0)
+      {
+        temp = GetQs(i,j);
+      }
       if (temp.e_tot > 0)
       {
         output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot << endl;
       }
     }
   }
-  //extracted_energy.e_tot = RollGlue(10);
-//  extracted_energy.q_s = GetQs(395,395);
 
-  output.close();
-  return extracted_energy;
+  output.close();*/
+  return GetGlue(x,y);;
 }
 //__________________________________________________________________________________________
 

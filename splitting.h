@@ -22,6 +22,9 @@ private:
 	double alpha_min;
 	double r_max;
 
+	//  See: RollGlue in ICCING_v0_1_8.nb
+  double RollGlue(double e_tot);
+
 	Charge RollFlavor(double Qs);
 
 	void CopySplitter(const Splitter &e);

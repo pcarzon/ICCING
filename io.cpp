@@ -316,13 +316,14 @@ void IO::OutputConfig(string file_name)
 Event IO::InitializeEvent()
 {
   Event event_in; //  Temp Event object used to store event specific data
-  cout << "We're in!" << endl;
+
   //  Set variables in event with data from configFile
   event_in.kappa_ = kappa_;
   event_in.lambda_ = lambda_;
   event_in.grid_max = grid_max;
   event_in.grid_step = grid_step;
   event_in.grid_points = grid_points;
+  event_in.get_grid_point = uniform_int_distribution<int>(0, grid_points)
 
   //  Initialize input grid to 0 with dimensions grid_points + 1
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
@@ -330,58 +331,44 @@ Event IO::InitializeEvent()
   event_in.gluon_rad = round(rad_/grid_step);
   event_in.quark_rad = round(qrad_/grid_step);
 
-//  event_in.gluon_dist.resize(19, vector<int>(19, 0));
   event_in.gluon_dist.resize(2*event_in.gluon_rad + 1, vector<int>(2*event_in.gluon_rad + 1, 0));
   event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
 
+  //  Initialize gluon distribution
   int ox = event_in.gluon_rad;
   int oy = event_in.gluon_rad;
-  for (int i = -event_in.gluon_rad; i < event_in.gluon_rad; i++)
+  for (int i = -event_in.gluon_rad; i <= event_in.gluon_rad; i++)
   {
-    int height = static_cast<int>(sqrt(event_in.gluon_rad*event_in.gluon_rad - i*i));
-    for (int j = -height; j < height; j++)
+    int height = round(sqrt(event_in.gluon_rad*event_in.gluon_rad - i*i));
+    for (int j = -height; j <= height; j++)
     {
       event_in.gluon_dist[i + ox][j + oy] = 1;
     }
   }
 
+  //  Initialize quark distribution
   int ox_quark = event_in.quark_rad;
   int oy_quark = event_in.quark_rad;
   double point;
   double normalization = 0;
-  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/quark_rad_test.dat");
   for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
-  {
-    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+  {    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j <= height; j++)
     {
-      //point = 0;
       point = sqrt(pow((i),2) + pow((j),2));
       normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
-      //output << i << " " << j << " " << normalization << endl;
     }
   }
-cout << normalization << endl;
+
   for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
     int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
     for (int j = -height; j <= height; j++)
     {
       point = sqrt(pow(i,2) + pow(j,2));
-      event_in.quark_dist[i + ox_quark][j + oy_quark] = exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0))*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
-
-
-  for (int i = 0; i < event_in.quark_dist.size(); i++)
-  {
-    for (int j = 0; j < event_in.quark_dist.size(); j++)
-    {
-      output << i << " " << j << " " << event_in.quark_dist[i][j] << endl;
-  }}
-output.close();
-cout << "Finish initializing event" << endl;
 
   return event_in;
 }

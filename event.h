@@ -10,6 +10,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <random>
 //__________________________________________________________________________________________
 
 //__________________________________________________________________________________________
@@ -44,6 +45,7 @@ private:
   double grid_step;
   double e_thresh;
   int grid_points;
+  uniform_int_distribution<int> get_grid_point(0, 1);
   //__________________________________________________________________________________________
 
   //__________________________________________________________________________________________
@@ -70,10 +72,7 @@ private:
   void CopyEvent(const Event &e);
 
   //  See: RollGlue in ICCING_v0_1_8.nb
-  double RollGlue(double e_tot);
-
-  //  See: RollGlue in ICCING_v0_1_8.nb
-  Sample GetQs(int x_center, int y_center);
+  Sample GetGlue(int x_center, int y_center);
 
   //  See: RollGlue in ICCING_v0_1_8.nb
   double GetEtot(int x_center, int y_center);
