@@ -323,10 +323,10 @@ Event IO::InitializeEvent()
   event_in.grid_max = grid_max;
   event_in.grid_step = grid_step;
   event_in.grid_points = grid_points;
-  event_in.get_grid_point = uniform_int_distribution<int>(0, grid_points);
 
   //  Initialize input grid to 0 with dimensions grid_points + 1
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
+  event_in.get_grid_point = uniform_int_distribution<int>(0, event_in.initial_energy.size());
 
   event_in.gluon_rad = round(rad_/grid_step);
   event_in.quark_rad = round(qrad_/grid_step);
