@@ -54,7 +54,7 @@ double Splitter::RollGlue(double e_tot)
     y = get_probability(get_random_number);
     cout << x << " " << y << " " << endl;
     num++;
-    if (y > 1/pow(x, lambda_)) got_glue = true;
+    if (y > 1/pow(x, lambda_)) cout << "got it!"; //got_glue = true;
 //  }
 
   return e_glue/e_tot;
