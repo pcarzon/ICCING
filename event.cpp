@@ -132,8 +132,8 @@ Sample Event::SampleEnergy()
 
   while (!got_point)
   {
-    x = get_grid_point();
-    y = get_grid_point();
+    x = get_grid_point(GET_RANDOM);
+    y = get_grid_point(GET_RANDOM);
     num++;
     if (initial_energy[x][y] > 0) got_point = true;
   }
