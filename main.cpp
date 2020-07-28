@@ -8,7 +8,7 @@
 #include "eos.h"
 #include "event.h"
 #include "io.h"
-#include "functions.h"
+//#include "functions.h"
 #include "splitting.h"
 
 using namespace std;
