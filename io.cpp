@@ -460,7 +460,7 @@ void IO::InitializeEOS()
 
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/eos_test.dat");
-  eos_interped = CubicSpline(&energy, &entropy);
+  eos_interped = CubicSpline(*energy, *entropy);
 
   for (int i = 0; i < eos_interped.size(); i++)
   {
