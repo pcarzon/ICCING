@@ -17,7 +17,7 @@ class Splitter
 {
 private:
 
-	vector<vector<double>> flavor_chemistry;  //  flavor_chemistry[Qs(GeV)][quark_prob] quark_prob: 0 = Qs, 1 = up, 2 = down ...
+	vector<vector<SplineSet>> flavor_chemistry;  //  flavor_chemistry[Qs(GeV)][quark_prob] quark_prob: 0 = Qs, 1 = up, 2 = down ...
 	string dipole_model;  //  Future Update
 	double alpha_s;
 	double alpha_min;
