@@ -91,7 +91,7 @@ SplineSet SplineInterval(double value)
 
 double InterpolateValue(SplineSet poly, double value)
 {
-  double change_x = x - poly.x;
+  double change_x = value - poly.x;
   return (poly.a + poly.b*change_x + poly.c*pow(change_x, 2) + poly.d*pow(change_x, 3))
 }
 

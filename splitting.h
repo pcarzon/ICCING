@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "global.h"
+#include "functions.h"
 
 using namespace std;
 
