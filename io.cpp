@@ -464,7 +464,7 @@ void IO::InitializeEOS()
 
   for (int i = 0; i < eos_interped.size(); i++)
   {
-    output << eos_interped.x << " " << eos_interped.a << " " << eos_interped.b << " " << eos_interped.c << " " << eos_interped.d << endl;
+    output << eos_interped[i].x << " " << eos_interped[i].a << " " << eos_interped[i].b << " " << eos_interped[i].c << " " << eos_interped[i].d << endl;
   }
   output.close();
 }
