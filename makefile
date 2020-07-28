@@ -4,9 +4,9 @@ CFLAGS = -std=c++11 -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
-CPP_FILES = ecc.cpp eos.cpp event.cpp io.cpp main.cpp probdist.cpp splitting.cpp
-HEADER_FILES = ecc.h eos.h event.h io.h probdist.h splitting.h global.h
-OBJECT_FILES = ecc.o eos.o event.o io.o main.o probdist.o splitting.o
+CPP_FILES = ecc.cpp eos.cpp event.cpp io.cpp main.cpp splitting.cpp
+HEADER_FILES = ecc.h eos.h event.h io.h functions.h splitting.h global.h
+OBJECT_FILES = ecc.o eos.o event.o io.o main.o splitting.o
 
 event.o : event.h global.h event.cpp
 	$(CC) $(CFLAGS) event.cpp
@@ -20,10 +20,7 @@ eos.o : eos.h event.h eos.cpp
 io.o : io.h event.h io.cpp
 	$(CC) $(CFLAGS) io.cpp
 
-probdist.o : probdist.h event.h probdist.cpp
-	$(CC) $(CFLAGS) probdist.cpp
-
-splitting.o : splitting.h event.h global.h splitting.cpp
+splitting.o : splitting.h event.h global.h functions.h splitting.cpp
 	$(CC) $(CFLAGS) splitting.cpp
 
 main.o : $(HEADER_FILES) main.cpp

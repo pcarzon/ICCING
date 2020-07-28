@@ -70,7 +70,7 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
-  get_random_number.seed(seed_);
+  get_random_number.seed(seed_);  //  Set random seed from input or timestamp
 
   //  Setting flag for type of charge tracked
   if(charge_type == "BSQ") {  tracked_charge = 0; }
@@ -332,46 +332,68 @@ Event IO::InitializeEvent()
 
   //  Initialize input grid to 0 with dimensions grid_points + 1
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
+
+  //  Initialize distribution for selecting points from initial_energy
   event_in.get_grid_point = uniform_int_distribution<int>(0, event_in.initial_energy.size());
 
-  event_in.gluon_rad = round(rad_/grid_step);
-  event_in.quark_rad = round(qrad_/grid_step);
 
+  //******************************************************************************************
+  //  Initialze Gluon Distribution for sampling
+  //******************************************************************************************
+  event_in.gluon_rad = round(rad_/grid_step); //  Set radius of gluons
+  //  Set size of gluon_dist grid used to sample energy from initial_energy
   event_in.gluon_dist.resize(2*event_in.gluon_rad + 1, vector<int>(2*event_in.gluon_rad + 1, 0));
-  event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
 
   //  Initialize gluon distribution
-  int ox = event_in.gluon_rad;
-  int oy = event_in.gluon_rad;
-  for (int i = -event_in.gluon_rad; i <= event_in.gluon_rad; i++)
+  int ox = event_in.gluon_rad;  //  x-value of gluon_dist center
+  int oy = event_in.gluon_rad;  //  y-value of gluon_dist center
+
+  //  Loop through only points in radius of gluon and set to 1
+  for (int i = -event_in.gluon_rad; i <= event_in.gluon_rad; i++) //  This goes -radius to radius in x
   {
+    // This calculates the hight of the gluon_dist at a given x-value
     int height = round(sqrt(event_in.gluon_rad*event_in.gluon_rad - i*i));
-    for (int j = -height; j <= height; j++)
+    for (int j = -height; j <= height; j++) //  This loops over the points in circle at given x
     {
-      event_in.gluon_dist[i + ox][j + oy] = 1;
+      event_in.gluon_dist[i + ox][j + oy] = 1;  //  Set points in circle to 1 for calculations
     }
   }
+
+
+  //******************************************************************************************
+  //  Calculate Quark distribution for depositing densities
+  //******************************************************************************************
+  event_in.quark_rad = round(qrad_/grid_step); //  Set radius of quarks
+  //  Set size of quark_dist grid used to create quarks
+  event_in.quark_dist.resize(2*event_in.quark_rad + 1, vector<double>(2*event_in.quark_rad + 1, 0.));
 
   //  Initialize quark distribution
-  int ox_quark = event_in.quark_rad;
-  int oy_quark = event_in.quark_rad;
+  int ox_quark = event_in.quark_rad;  //  x-value of quark_dist center
+  int oy_quark = event_in.quark_rad;  //  y-value of quark_dist center
   double point;
   double normalization = 0;
-  for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
-  {    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
-    for (int j = -height; j <= height; j++)
+
+  //  Loop through only points in radius of quark to get normalization factor
+  for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)  //  This goes -radius to radius in x
+  {
+    // This calculates the hight of the quark_dist at a given x-value
+    int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
+    for (int j = -height; j <= height; j++) //  This loops over the points in circle at given x
     {
-      point = sqrt(pow((i),2) + pow((j),2));
-      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
+      point = sqrt(pow((i),2) + pow((j),2));  //  Get distance of point from center of circle
+      normalization += exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));  //  Add value at poinnt to a normalization factor
     }
   }
 
+  //  Loop through only points in radius of quark to get normalization factor
   for (int i = -event_in.quark_rad; i <= event_in.quark_rad; i++)
   {
+    // This calculates the hight of the quark_dist at a given x-value
     int height = round(sqrt(event_in.quark_rad*event_in.quark_rad - i*i));
-    for (int j = -height; j <= height; j++)
+    for (int j = -height; j <= height; j++) //  This loops over the points in circle at given x
     {
-      point = sqrt(pow(i,2) + pow(j,2));
+      point = sqrt(pow(i,2) + pow(j,2));  //  Get distance of point from center of circle
+      //  Calculate value of gaussian at point in circle
       event_in.quark_dist[i + ox_quark][j + oy_quark] = 1/(normalization*pow(grid_step,2)*tau_0)*exp(-((pow(point,2))/(2*pow(event_in.quark_rad,2))));
     }
   }
