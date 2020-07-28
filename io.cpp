@@ -425,12 +425,67 @@ Splitter IO::InitializeSplitter()
 
 //__________________________________________________________________________________________
 //##########################################################################################
-// Initialize the EOS Object
+// Initialize equation of state
 //##########################################################################################
-//EOS IO::InitializeEOS()
-//{
+void IO::InitializeEOS()
+{
+  //  Output file stream
+  ifstream input;
+  input.open(eos_file);
 
-//}
+  vector<double> energy;
+  vector<double> entropy;
+  double value;
+
+  int length;
+  input >> length;
+
+  //******************************************************************************************
+  //  Loop through file until end is reached
+  //******************************************************************************************
+  for (int i = 0; i < length; i++)
+  {
+    input >> value;
+    energy.push_back(value);
+
+    input >> value;
+
+    input >> value;
+    entropy.push_back(value)
+
+    input >> value;
+  }
+
+  input.close();
+
+  ofstream output;
+  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/eos_test.dat");
+  eos_interped = CubicSpline(energy, entropy);
+
+  for (int i = 0; i < eos_interped.size(); i++)
+  {
+    output << eos_interped.x << " " << eos_interped.a << " " << eos_interped.b << " " << eos_interped.c << " " << eos_interped.d << endl;
+  }
+  output.close();
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+// Convert event input to energy
+//##########################################################################################
+vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
+{
+//  for (int i = 0; i < input.size(); i++)
+//  {
+//    for (int j = 0; j < input[i].size(); j++)
+//    {
+
+
+//      input[i][j] = a_trento*InterpolateValue(poly, input[i][j]);
+//    }
+//  }
+}
 //__________________________________________________________________________________________
 
 //__________________________________________________________________________________________

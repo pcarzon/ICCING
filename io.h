@@ -21,6 +21,7 @@
 #include "event.h"
 #include "ecc.h"
 #include "splitting.h"
+#include "functions.h"
 //__________________________________________________________________________________________
 
 using namespace std;
@@ -110,7 +111,7 @@ private:
   //******************************************************************************************
   //  Splitter Config parameters
   //******************************************************************************************
-  vector<vector<double>> flavor_chemistry;  //  flavor_chemistry[Qs(GeV)][quark_prob] quark_prob: 0 = Qs, 1 = up, 2 = down ...
+  vector<vector<SplineSet>> flavor_chemistry;  //  flavor_chemistry[Qs(GeV)][quark_prob] quark_prob: 0 = Qs, 1 = up, 2 = down ...
   string dipole_model;  //  Future Update
   double alpha_s;
   double alpha_min;
@@ -124,7 +125,7 @@ private:
   int eos_e_col;
   double a_trento;
   double e_chop;
-
+  vector<SplineSet> eos_interped;
 
   //******************************************************************************************
   //  Multiple Use Config parameters
@@ -154,6 +155,8 @@ private:
   //  Copy function for IO class, called by operator= and implicit copy functions
 	void CopyIO(const IO &e);
 
+  vector<vector<double>> ConvertEvent(vector<vector<double>> input);
+
   //  Definitions of possible output formats
   void OutputConfig(string file_name);  //  Prints copy of config file to output directory for reference
   void OutputFullDensityGrids(vector<vector<double>> density_grid, string file_name); //  Prints full density grids with 0s
@@ -180,7 +183,7 @@ public:
 //##########################################################################################
   Event InitializeEvent();
   Splitter InitializeSplitter();
-//  EOS InitializeEOS();
+  void InitializeEOS();
 
   Event ReadEvent(Event event_in);  //  Read single event
 
