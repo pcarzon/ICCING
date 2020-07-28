@@ -451,7 +451,7 @@ void IO::InitializeEOS()
     input >> value;
 
     input >> value;
-    entropy.push_back(value)
+    entropy.push_back(value);
 
     input >> value;
   }
