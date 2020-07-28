@@ -13,9 +13,9 @@ using namespace std;
 
 class IO;
 extern default_random_engine get_random_number;
-extern vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
-extern SplineSet SplineInterval(double value);
-extern double InterpolateValue(SplineSet poly, double value);
+//extern vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
+//extern SplineSet SplineInterval(double value);
+//extern double InterpolateValue(SplineSet poly, double value);
 
 class Splitter
 {
