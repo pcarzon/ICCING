@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <vector<double>tor>
+#include <vector>
 #include <algorithm>
 #include <cmath>
 

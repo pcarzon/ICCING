@@ -21,7 +21,6 @@
 #include "event.h"
 #include "ecc.h"
 #include "splitting.h"
-#include "probdist.h"
 //__________________________________________________________________________________________
 
 using namespace std;
@@ -181,7 +180,6 @@ public:
 //##########################################################################################
   Event InitializeEvent();
   Splitter InitializeSplitter();
-  ProbDist InitializeProbDist();
 //  EOS InitializeEOS();
 
   Event ReadEvent(Event event_in);  //  Read single event
