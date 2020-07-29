@@ -75,6 +75,8 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   Charge set_charge;
   double gluon_energy_frac;
 
+  cout << "e_tot in SplitSample = " << sampled_energy.e_tot << endl;
+
   gluon_energy_frac = RollGlue(sampled_energy.e_tot);
   set_charge = RollFlavor(sampled_energy.q_s);
 
