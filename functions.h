@@ -20,6 +20,11 @@ struct SplineSet{
     double c;
     double d;
     double x;
+
+    friend bool operator< (const SplineSet& lhs, const double& rhs)
+    {
+      return lhs.x < rhs;
+    }
 };
 //__________________________________________________________________________________________
 
