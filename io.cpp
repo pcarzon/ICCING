@@ -478,6 +478,7 @@ void IO::ConvertEvent(vector<vector<double>> &input)
 {
   cout << "Start Convert Event\n";
   SplineSet range;
+  double energy;
   for (int i = 0; i < input.size(); i++)
   {
     for (int j = 0; j < input[i].size(); j++)
@@ -485,9 +486,10 @@ void IO::ConvertEvent(vector<vector<double>> &input)
   //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
   //    range = FindRange(eos_interped, input[i][j]);
   //    cout << "Got lower_bound " << range.x << endl;
-      if (input[i][j] > 0)
+    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+      if (energy > e_chop)
       {
-        input[i][j] = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+        input[i][j] = energy;
       }
     }
   }
