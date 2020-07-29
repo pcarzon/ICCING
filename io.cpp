@@ -483,7 +483,7 @@ vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
     {
       range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
 
-      input[i][j] = a_trento*InterpolateValue(*range, input[i][j]);
+    //  input[i][j] = a_trento*InterpolateValue(*range, input[i][j]);
     }
   }
 }
@@ -602,7 +602,7 @@ Event IO::ReadEvent(Event event_in)
   }
   input.close();  //  Close input stream
 
-  //event_in.initial_energy = ConvertEvent(event_in.initial_energy);
+  event_in.initial_energy = ConvertEvent(event_in.initial_energy);
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
