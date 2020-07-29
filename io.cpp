@@ -602,7 +602,7 @@ Event IO::ReadEvent(Event event_in)
   }
   input.close();  //  Close input stream
 
-  event_in.initial_energy = ConvertEvent(event_in.initial_energy);
+  //event_in.initial_energy = ConvertEvent(event_in.initial_energy);
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
