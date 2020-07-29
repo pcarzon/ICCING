@@ -139,7 +139,7 @@ Sample Event::SampleEnergy()
     cout << x << " " << y << " " << initial_energy[x][y] << endl;
     num++;
     if (initial_energy[x][y] > 0) got_point = true;
-  } while (!got_point)
+  } while (!got_point);
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
