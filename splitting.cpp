@@ -48,13 +48,13 @@ double Splitter::RollGlue(double e_tot)
   uniform_real_distribution<double> get_probability(0.0, 1/pow(e_thresh, lambda_));
 
   cout << "begin RollGlue " << get_probability.max() << " " << e_tot << endl;
-  while (num < 10)
+  while (!got_glue)
   {
     x = get_energy(get_random_number);
     y = get_probability(get_random_number);
     cout << x << " " << y << " " << endl;
     num++;
-    if (y < 1/pow(x, lambda_)) cout << "got it!"; //got_glue = true;
+    if (y < 1/pow(x, lambda_)) got_glue = true;
   }
 
   return e_glue/e_tot;
