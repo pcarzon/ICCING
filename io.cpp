@@ -476,14 +476,16 @@ void IO::InitializeEOS()
 //##########################################################################################
 vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
 {
+  cout << "Start Convert Event\n";
   vector<SplineSet>::iterator range;
   for (int i = 0; i < input.size(); i++)
   {
     for (int j = 0; j < input[i].size(); j++)
     {
       range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
-
+      cout << "Got lower_bound\n";
       input[i][j] = a_trento*InterpolateValue(*range, input[i][j]);
+      cout << "interpolated\n"; 
     }
   }
 }
@@ -601,7 +603,7 @@ Event IO::ReadEvent(Event event_in)
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
   }
   input.close();  //  Close input stream
-
+  cout << "Read Event\n";
   event_in.initial_energy = ConvertEvent(event_in.initial_energy);
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
