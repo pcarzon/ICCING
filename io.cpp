@@ -489,7 +489,9 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
       if (energy > e_chop)
       {
+        cout << input[i][j] << " <- " << energy << endl;
         input[i][j] = energy;
+        cout << input[i][j] << endl;
       }
     }
   }
