@@ -64,17 +64,20 @@ vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y)
 double InterpolateValue(SplineSet range, double value)
 {
   double change_x = value - range.x;
-  cout << change_x << endl;
+  //cout << change_x << endl;
   return (range.a + range.b*change_x + range.c*pow(change_x, 2) + range.d*pow(change_x, 3));
 }
 
 SplineSet FindRange(vector<SplineSet> &function, double value)
 {
+  SplineSet range;
+  range.x = 0;
   for (int i = 0; i < function.size(); i++)
   {
-    if (function[i].x > value)
+    if (function[i].x < value && function[i].x > range.x)
     {
-      return function[i];
+      range = function[i];
     }
   }
+  return range;
 }
