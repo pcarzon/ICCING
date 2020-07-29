@@ -483,10 +483,12 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     for (int j = 0; j < input[i].size(); j++)
     {
   //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
-      range = FindRange(eos_interped, input[i][j]);
+  //    range = FindRange(eos_interped, input[i][j]);
   //    cout << "Got lower_bound " << range.x << endl;
-      input[i][j] = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
-      cout << "interpolated\n";
+      if (input[i][j] > 0)
+      {
+        input[i][j] = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+      }
     }
   }
 }
