@@ -474,7 +474,7 @@ void IO::InitializeEOS()
 //##########################################################################################
 // Convert event input to energy
 //##########################################################################################
-vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
+void IO::ConvertEvent(vector<vector<double>> &input)
 {
   cout << "Start Convert Event\n";
   SplineSet range;
@@ -496,7 +496,7 @@ vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
 //##########################################################################################
 // Print Density Grids with filler 0s
 //##########################################################################################
-void IO::OutputFullDensityGrids(vector<vector<double>> density_grid, string file_name)
+void IO::OutputFullDensityGrids(vector<vector<double>> &density_grid, string file_name)
 {
   //  Output file stream
   ofstream output;
@@ -528,7 +528,7 @@ void IO::OutputFullDensityGrids(vector<vector<double>> density_grid, string file
 //##########################################################################################
 // Print Density Grids without filler 0s
 //##########################################################################################
-void IO::OutputSparseDensityGrids(vector<vector<double>> density_grid, string file_name)
+void IO::OutputSparseDensityGrids(vector<vector<double>> &density_grid, string file_name)
 {
   ofstream output;
   output.open(file_name);
@@ -570,7 +570,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 //    Create Event and set densities and variables
 //    (Assumes sparse file with only valued points, need to generalize this)
 //##########################################################################################
-Event IO::ReadEvent(Event event_in)
+Event IO::ReadEvent(Event &event_in)
 {
   cout << "started reading event" << endl;
 
@@ -680,7 +680,7 @@ Event IO::ReadEvent(Event event_in)
 //  Write Energy densities, eccentricities, and configFile
 //    Needs to be updated as code is being written
 //##########################################################################################
-void IO::WriteEvent(Event event)
+void IO::WriteEvent(Event &event)
 {
   vector<vector<double>> output_energy;
   cout << "Start writing event" << endl;

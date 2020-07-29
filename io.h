@@ -158,12 +158,12 @@ private:
   //  Copy function for IO class, called by operator= and implicit copy functions
 	void CopyIO(const IO &e);
 
-  vector<vector<double>> ConvertEvent(vector<vector<double>> input);
+  void ConvertEvent(vector<vector<double>> &input);
 
   //  Definitions of possible output formats
   void OutputConfig(string file_name);  //  Prints copy of config file to output directory for reference
-  void OutputFullDensityGrids(vector<vector<double>> density_grid, string file_name); //  Prints full density grids with 0s
-  void OutputSparseDensityGrids(vector<vector<double>> density_grid, string file_name);  //  Only prints valued points
+  void OutputFullDensityGrids(vector<vector<double>> &density_grid, string file_name); //  Prints full density grids with 0s
+  void OutputSparseDensityGrids(vector<vector<double>> &density_grid, string file_name);  //  Only prints valued points
   void OutputEccentricities(Eccentricity &ecc, string file_name); //  Prints eccentricities
 //__________________________________________________________________________________________
 
@@ -188,9 +188,9 @@ public:
   Splitter InitializeSplitter();
   void InitializeEOS();
 
-  Event ReadEvent(Event event_in);  //  Read single event
+  Event ReadEvent(Event &event_in);  //  Read single event
 
-  void WriteEvent(Event event); //  Writes single event to file
+  void WriteEvent(Event &event); //  Writes single event to file
 
   bool LastEvent(); //  Test for end of event list
 //__________________________________________________________________________________________
