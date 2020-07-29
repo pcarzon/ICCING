@@ -487,11 +487,11 @@ void IO::ConvertEvent(vector<vector<double>> &input)
   //    range = FindRange(eos_interped, input[i][j]);
   //    cout << "Got lower_bound " << range.x << endl;
     energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
-      if (energy > e_chop)
+      if (input[i][j] > 0)
       {
-        cout << input[i][j] << " <- " << energy << endl;
+  //      cout << input[i][j] << " <- " << energy << endl;
         input[i][j] = energy;
-        cout << input[i][j] << endl;
+  //      cout << input[i][j] << endl;
       }
     }
   }
