@@ -21,10 +21,10 @@ struct SplineSet{
     double d;
     double x;
 
-    friend bool operator< (const SplineSet& lhs, const double& rhs)
-    {
-      return lhs.x < rhs;
-    }
+//    friend bool operator< (const SplineSet& lhs, const double& rhs)
+//    {
+//      return lhs.x < rhs;
+//    }
 };
 //__________________________________________________________________________________________
 
@@ -38,5 +38,6 @@ vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
 
 double InterpolateValue(SplineSet range, double value);
 
+SplineSet FindRange(vector<SplineSet> function, double value);
 
 #endif
