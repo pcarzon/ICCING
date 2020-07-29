@@ -47,7 +47,7 @@ void Event::CopyEvent(const Event &e)
   grid_step = e.grid_step;
   grid_points = e.grid_points;
   get_grid_point = e.get_grid_point;
-  
+
   initial_energy = e.initial_energy;
   t_a = e.t_a;
   t_b = e.t_b;
@@ -132,14 +132,14 @@ Sample Event::SampleEnergy()
   int num = 0;
   cout << "begin SampleEnergy " << get_random_number << endl;
   cout << get_grid_point.min() << " " << get_grid_point.max() << endl;
-  while (!got_point)
+  do
   {
     x = get_grid_point(get_random_number);
     y = get_grid_point(get_random_number);
     cout << x << " " << y << " " << initial_energy[x][y] << endl;
     num++;
     if (initial_energy[x][y] > 0) got_point = true;
-  }
+  } while (!got_point)
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
