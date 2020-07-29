@@ -33,8 +33,8 @@ int main (int argc, char *argv[])
 
 //	while (!inOut.LastEvent())
 	//{
-		inOut.InitializeEOS();
 		testEvent = inOut.ReadEvent(initializedEvent);
+		inOut.InitializeEOS();
 		machine.SplitSample(testEvent.SampleEnergy());
 		inOut.WriteEvent(testEvent);
 	//	testEvent.CleanEvent();

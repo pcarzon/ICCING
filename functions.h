@@ -31,10 +31,7 @@ struct SplineSet{
 //##########################################################################################
 vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
 
-
-SplineSet SplineInterval(double value);
-
-double InterpolateValue(SplineSet poly, double value);
+double InterpolateValue(SplineSet range, double value);
 
 
 #endif
