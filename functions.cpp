@@ -77,6 +77,7 @@ SplineSet FindRange(vector<SplineSet> &function, double value)
   range.x = 0.1;
   for (int i = 0; i < function.size(); i++)
   {
+    range.x = function[i].x;
 //    if (function[i].x < value && function[i].x > range.x)
   if (function[i].x < value)
     {
