@@ -487,7 +487,7 @@ for (int i = 0; i < input.size(); i++)
     {
   //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
 //    cout << "Got lower_bound " << range.x << endl;
-    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+//    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
       if (input[i][j] > 0)
       {
   //      cout << input[i][j] << " <- " << energy << endl;
