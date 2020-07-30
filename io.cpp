@@ -551,7 +551,8 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> &density_grid, string f
 
   double x, y, value;
 
-  for (int i = 0; i < density_grid.size(); i++)
+//  for (int i = 0; i < density_grid.size(); i++)
+    for (int i = 0; i <= 55; i++)
   {
     for (int j = 0; j < density_grid[0].size(); j++)
     {
