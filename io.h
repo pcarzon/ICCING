@@ -188,9 +188,9 @@ public:
   Splitter InitializeSplitter();
   void InitializeEOS();
 
-  Event ReadEvent(Event &event_in);  //  Read single event
+  Event ReadEvent(Event event_in);  //  Read single event
 
-  void WriteEvent(Event &event); //  Writes single event to file
+  void WriteEvent(Event event); //  Writes single event to file
 
   bool LastEvent(); //  Test for end of event list
 //__________________________________________________________________________________________

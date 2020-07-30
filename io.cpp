@@ -576,7 +576,7 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 //    Create Event and set densities and variables
 //    (Assumes sparse file with only valued points, need to generalize this)
 //##########################################################################################
-Event IO::ReadEvent(Event &event_in)
+Event IO::ReadEvent(Event event_in)
 {
   cout << "started reading event" << endl;
 
@@ -686,7 +686,7 @@ Event IO::ReadEvent(Event &event_in)
 //  Write Energy densities, eccentricities, and configFile
 //    Needs to be updated as code is being written
 //##########################################################################################
-void IO::WriteEvent(Event &event)
+void IO::WriteEvent(Event event)
 {
   vector<vector<double>> output_energy;
   cout << "Start writing event" << endl;
