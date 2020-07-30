@@ -462,7 +462,7 @@ void IO::InitializeEOS()
 
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/eos_test.dat");
-  eos_interped = CubicSpline(energy, entropy);
+  eos_interped = CubicSpline(entropy, energy);
   cout << "eos 1st size " << eos_interped.size() << endl;
 
   for (int i = 0; i < eos_interped.size(); i++)
@@ -491,7 +491,7 @@ for (int i = 0; i < input.size(); i++)
     {
   //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
 //    cout << "Got lower_bound " << range.x << endl;
-    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+    energy = InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
       if (input[i][j] > 0)
       {
   //      cout << input[i][j] << " <- " << energy << endl;
