@@ -75,6 +75,8 @@ SplineSet FindRange(vector<SplineSet> function, double value)
 {
   SplineSet range;
   range.x = 0;
+  cout << "function size " << function.size() << " " << value << endl;
+
   for (int i = 0; i < function.size(); i++)
   {
     cout << function[i].x << " " << value << endl;
@@ -84,6 +86,6 @@ SplineSet FindRange(vector<SplineSet> function, double value)
       range = function[i];
     }
   }
-  exit;
+  exit();
   return range;
 }
