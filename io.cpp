@@ -429,6 +429,8 @@ Splitter IO::InitializeSplitter()
 //##########################################################################################
 void IO::InitializeEOS()
 {
+  cout << "start eos" << endl;
+
   //  Output file stream
   ifstream input;
   input.open(eos_file);
