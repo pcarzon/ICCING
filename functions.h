@@ -39,6 +39,6 @@ vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
 
 double InterpolateValue(SplineSet range, double value);
 
-SplineSet FindRange(vector<SplineSet> &function, double value);
+SplineSet FindRange(vector<SplineSet> function, double value);
 
 #endif
