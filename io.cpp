@@ -617,8 +617,8 @@ Event IO::ReadEvent(Event event_in)
       cout << "x " << x << " y " << y << " value " << value << endl;
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
-      if (x == 56)
-      cout << "x " << x << " y " << y << " value " << event_in.initial_energy[x][y] << endl;
+//      if (x == 56)
+//      cout << "x " << x << " y " << y << " value " << event_in.initial_energy[x][y] << endl;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
