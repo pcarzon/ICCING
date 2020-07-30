@@ -64,10 +64,10 @@ vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y)
 double InterpolateValue(SplineSet range, double value)
 {
   double change_x = value - range.x;
-  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/InterpolateValue_test.dat");
-  output << value << " " << range.x << " " << range.a << " " << range.b << " " << range.c << " " << range.d << endl;
-  output.close();
+//  ofstream output;
+//  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/InterpolateValue_test.dat");
+//  output << value << " " << range.x << " " << range.a << " " << range.b << " " << range.c << " " << range.d << endl;
+//  output.close();
   return (range.a + range.b*change_x + range.c*pow(change_x, 2) + range.d*pow(change_x, 3));
 }
 
