@@ -461,6 +461,7 @@ void IO::InitializeEOS()
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/eos_test.dat");
   eos_interped = CubicSpline(energy, entropy);
+  cout << "eos 1st size " << eos_interped.size() << endl;
 
   for (int i = 0; i < eos_interped.size(); i++)
   {
