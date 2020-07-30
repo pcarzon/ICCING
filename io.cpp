@@ -551,8 +551,7 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> &density_grid, string f
 
   double x, y, value;
 
-//  for (int i = 0; i < density_grid.size(); i++)
-    for (int i = 0; i <= 55; i++)
+  for (int i = 0; i < density_grid.size(); i++)
   {
     for (int j = 0; j < density_grid[0].size(); j++)
     {
@@ -612,9 +611,9 @@ Event IO::ReadEvent(Event event_in)
 
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
-      y = (ready + grid_max)/grid_step;
-      if (readx == -8.64)
-      cout << "x " << x << " y " << y << " value " << value << endl;
+      y = (int)round((ready + grid_max)/grid_step);
+  //    if (readx == -8.64)
+  //    cout << "x " << x << " y " << y << " value " << value << endl;
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
 //      if (x == 56)
