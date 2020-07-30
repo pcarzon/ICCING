@@ -126,6 +126,13 @@ Sample Event::GetGlue(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
+  for (int i = 54; i < 56; i++)
+  {
+    for (int j = 0; j < initial_energy.size(); j++)
+    {if (event_in.initial_energy[i][j] > 0)
+    cout << "x " << i << " y " << j << " value " << event_in.initial_energy[i][j] << endl;
+    }
+  }
   int x = 0;
   int y = 0;
   bool got_point = false;
