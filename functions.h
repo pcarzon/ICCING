@@ -22,10 +22,15 @@ struct SplineSet{
     double d;
     double x;
 
-//    friend bool operator< (const SplineSet& lhs, const double& rhs)
-//    {
-//      return lhs.x < rhs;
-//    }
+    SplineSet& operator=(const SplineSet& s)
+    {
+      a = s.a;
+      b = s.b;
+      c = s.c;
+      d = s.d;
+      x = s.x;
+    }
+
 };
 //__________________________________________________________________________________________
 

@@ -74,12 +74,10 @@ double InterpolateValue(SplineSet range, double value)
 SplineSet FindRange(vector<SplineSet> function, double value)
 {
   SplineSet range;
-  range.x = 0.1;
+  range.x = 0;
   for (int i = 0; i < function.size(); i++)
   {
-    range = function[i];
-//    if (function[i].x < value && function[i].x > range.x)
-  if (function[i].x < value)
+    if (function[i].x < value && function[i].x > range.x)
     {
       range = function[i];
     }
