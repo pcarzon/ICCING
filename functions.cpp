@@ -77,11 +77,13 @@ SplineSet FindRange(vector<SplineSet> function, double value)
   range.x = 0;
   for (int i = 0; i < function.size(); i++)
   {
+    cout << function[i].x << " " << value << endl;
 //    if (function[i].x < value && function[i].x > range.x)
   if (function[i].x < value)
     {
       range = function[i];
     }
   }
+  exit;
   return range;
 }
