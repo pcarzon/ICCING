@@ -477,7 +477,7 @@ void IO::InitializeEOS()
 //##########################################################################################
 // Convert event input to energy
 //##########################################################################################
-void IO::ConvertEvent(vector<vector<double>> &input)
+vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
 {
   cout << "Start Convert Event\n";
   SplineSet range;
@@ -621,7 +621,7 @@ Event IO::ReadEvent(Event event_in)
   }
   input.close();  //  Close input stream
   cout << "Read Event\n";
-  ConvertEvent(event_in.initial_energy);
+  event_in.initial_energy = ConvertEvent(event_in.initial_energy);
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************

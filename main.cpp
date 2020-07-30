@@ -35,9 +35,9 @@ int main (int argc, char *argv[])
 //	while (!inOut.LastEvent())
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
-		Sample testSample = testEvent.SampleEnergy();
-		cout << "e_tot after sample = " << testSample.e_tot << endl;
-		machine.SplitSample(testSample);
+//		Sample testSample = testEvent.SampleEnergy();
+	//	cout << "e_tot after sample = " << testSample.e_tot << endl;
+	//	machine.SplitSample(testSample);
 		inOut.WriteEvent(testEvent);
 	//	testEvent.CleanEvent();
 	//	(&testEvent)->~Event();
