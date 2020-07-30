@@ -129,8 +129,8 @@ Sample Event::SampleEnergy()
   for (int i = 54; i < 56; i++)
   {
     for (int j = 0; j < initial_energy.size(); j++)
-    {if (event_in.initial_energy[i][j] > 0)
-    cout << "x " << i << " y " << j << " value " << event_in.initial_energy[i][j] << endl;
+    {if (initial_energy[i][j] > 0)
+    cout << "x " << i << " y " << j << " value " << initial_energy[i][j] << endl;
     }
   }
   int x = 0;
