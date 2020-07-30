@@ -622,6 +622,9 @@ Event IO::ReadEvent(Event event_in)
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
+
+      readx = 0;
+      ready = 0;
   }
   input.close();  //  Close input stream
   cout << "Read Event\n";
