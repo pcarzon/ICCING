@@ -481,6 +481,7 @@ void IO::ConvertEvent(vector<vector<double>> &input)
   double energy;
     ofstream output;
     output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/InterpolateValue_test.dat");
+    cout << "eos size " << eos_interped.size() << endl;
 for (int i = 0; i < input.size(); i++)
   {
     for (int j = 0; j < input[i].size(); j++)
