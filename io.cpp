@@ -613,11 +613,11 @@ Event IO::ReadEvent(Event event_in)
       //  Take physical point and convert x and y values into grid indicies
       x = (readx + grid_max)/grid_step;
       y = (ready + grid_max)/grid_step;
-      if (readx == -8.7)
-      cout << "x " << x << " y " << y << " value " << value << endl;
+//      if (readx == -8.7)
+//      cout << "x " << x << " y " << y << " value " << value << endl;
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
-      if (readx == -8.7)
+      if (x == 55)
       cout << "x " << x << " y " << y << " value " << event_in.initial_energy[x][y] << endl;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
