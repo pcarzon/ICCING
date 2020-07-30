@@ -86,6 +86,6 @@ SplineSet FindRange(vector<SplineSet> function, double value)
       range = function[i];
     }
   }
-  exit();
+  exit(0);
   return range;
 }
