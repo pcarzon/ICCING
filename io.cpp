@@ -477,7 +477,7 @@ void IO::InitializeEOS()
 //##########################################################################################
 // Convert event input to energy
 //##########################################################################################
-vector<vector<double>> IO::ConvertEvent(vector<vector<double>> input)
+void IO::ConvertEvent(vector<vector<double>> &input)
 {
   cout << "Start Convert Event\n";
   SplineSet range;
@@ -491,7 +491,7 @@ for (int i = 0; i < input.size(); i++)
     {
   //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
 //    cout << "Got lower_bound " << range.x << endl;
-//    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
+    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
       if (input[i][j] > 0)
       {
   //      cout << input[i][j] << " <- " << energy << endl;
@@ -621,7 +621,7 @@ Event IO::ReadEvent(Event event_in)
   }
   input.close();  //  Close input stream
   cout << "Read Event\n";
-  event_in.initial_energy = ConvertEvent(event_in.initial_energy);
+  ConvertEvent(event_in.initial_energy);
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************

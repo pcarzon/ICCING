@@ -158,7 +158,7 @@ private:
   //  Copy function for IO class, called by operator= and implicit copy functions
 	void CopyIO(const IO &e);
 
-  vector<vector<double>> ConvertEvent(vector<vector<double>> input);
+  void ConvertEvent(vector<vector<double>> &input);
 
   //  Definitions of possible output formats
   void OutputConfig(string file_name);  //  Prints copy of config file to output directory for reference
