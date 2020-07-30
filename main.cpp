@@ -30,11 +30,11 @@ int main (int argc, char *argv[])
 
 	Event testEvent, initializedEvent;
 	initializedEvent = inOut.InitializeEvent();
+	inOut.InitializeEOS();
 
 //	while (!inOut.LastEvent())
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
-		inOut.InitializeEOS();
 		Sample testSample = testEvent.SampleEnergy();
 		cout << "e_tot after sample = " << testSample.e_tot << endl;
 		machine.SplitSample(testSample);
