@@ -25,7 +25,7 @@ int main (int argc, char *argv[])
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	Splitter machine = inOut.InitializeSplitter();
 
-/*	Event testEvent, initializedEvent;
+	Event testEvent, initializedEvent;
 
 	Sample testSample;
 	Quarks testQuarks;
@@ -49,6 +49,6 @@ int main (int argc, char *argv[])
 
 		inOut.WriteEvent(testEvent);
 	//}
-*/
+
 	return 0;
 }
