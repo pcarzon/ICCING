@@ -434,6 +434,7 @@ Splitter IO::InitializeSplitter()
   for (int i = 0; i < 4; i++)
   {
     init_splitter.flavor_chemistry[i] = CubicSpline(ratio_q_s, ratio_quarks[i]);
+    cout << init_splitter.flavor_chemistry[i][5].x << " " << init_splitter.flavor_chemistry[i][5].a << endl;
   }
 
   init_splitter.dipole_model = dipole_model;
