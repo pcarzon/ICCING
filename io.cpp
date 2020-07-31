@@ -192,7 +192,7 @@ void IO::Initialize()
   qrad_ = 0.0;
   lambda_ = 0.0;
 
-  dipole_model = "";
+  dipole_model = "BSQ";
   alpha_s = 0.0;
   alpha_min = 0.0;
   r_max = 0.0;
@@ -437,7 +437,8 @@ Splitter IO::InitializeSplitter()
     cout << init_splitter.flavor_chemistry[i][5].x << " " << init_splitter.flavor_chemistry[i][5].a << endl;
   }
 
-  init_splitter.dipole_model = dipole_model;
+  if (dipole_model == "BSQ")  { init_splitter.dipole_model = 0;  }
+  if (dipole_model == "UDS")  { init_splitter.dipole_model = 1;  }
   init_splitter.alpha_s = alpha_s;
   init_splitter.alpha_min = alpha_min;
   init_splitter.r_max = r_max;
