@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <numeric>
 
 #include "global.h"
 #include "functions.h"

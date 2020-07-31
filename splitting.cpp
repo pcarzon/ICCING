@@ -66,6 +66,27 @@ Charge Splitter::RollFlavor(double Qs)
 {
   Charge create_charge;
 
+  uniform_real_distribution<double> get_flavor(0, 1);
+
+  vector<double> q_s_range;
+  for (int i = 0; i < 4; i++)
+  {
+    q_s_range = alpha_s*InterpolateValue(FindRange(flavor_chemistry[i], Qs), Qs);
+  }
+
+  double probability = get_flavor(get_random_number);
+  vector<double>::iterator q_s_prob = q_s_range.begin();
+
+  if (0 <= probability && probability <= *q_s_range)
+  { create_charge.Gluon();  }
+  else if (*q_s_range < probability && probability <= accumulate(q_s_prob, q_s_prob + 1, 0))
+  { create_charge.Up();  }
+  else if (accumulate(q_s_prob, q_s_prob + 1, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 2, 0))
+  { create_charge.Down();  }
+  else if (accumulate(q_s_prob, q_s_prob + 2, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 3, 0))
+  { create_charge.Strange();  }
+  else
+  { create_charge.Charm();  }
   return create_charge;
 }
 
@@ -80,6 +101,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   gluon_energy_frac = RollGlue(sampled_energy.e_tot);
   set_charge = RollFlavor(sampled_energy.q_s);
 
+  cout << "Flavor " << set_charge.GetCharge()[0] << endl;
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
 
   return create_quarks;
