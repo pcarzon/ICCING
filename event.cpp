@@ -92,16 +92,11 @@ Sample Event::GetGlue(int x_center, int y_center)
   { glue_x_start = -(x_center - gluon_rad);  }
   if (y_center - gluon_rad < 0)
   { glue_y_start = -(y_center - gluon_rad);  }
-//cout << "glue length = " << gluon_dist.size() << endl;
-//cout << "glue start x = " << glue_x_start << endl;
-//cout << "glue start y = " << glue_y_start << endl;
+
   if (x_center + gluon_rad > t_b.size())
   { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
   { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
-//  cout << "t_b size = " << t_b.size() << endl;
-//  cout << "glue end x = " << glue_x_end << endl;
-//  cout << "glue end y = " << glue_y_end << endl;
 
   for (int i = glue_x_start; i < glue_x_end; i++)
   {
@@ -126,49 +121,21 @@ Sample Event::GetGlue(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
-//  for (int i = 54; i < 56; i++)
-//  {
-//    for (int j = 0; j < initial_energy.size(); j++)
-//    {if (initial_energy[i][j] > 0)
-//    cout << "x " << i << " y " << j << " value " << initial_energy[i][j] << endl;
-//    }
-//  }
   int x = 0;
   int y = 0;
   bool got_point = false;
   int num = 0;
-  cout << "begin SampleEnergy " << get_random_number << endl;
-  cout << get_grid_point.min() << " " << get_grid_point.max() << endl;
+
   while (!got_point)
   {
     x = get_grid_point(get_random_number);
     y = get_grid_point(get_random_number);
-    cout << x << " " << y << " " << initial_energy[x][y] << endl;
     num++;
     if (initial_energy[x][y] > 0) got_point = true;
   }
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
-/*  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/gluon_rad_test_0.dat");
-  Sample temp;
-  for (int i = 0; i < t_b.size()-gluon_rad; i++)
-  {
-    for (int j = 0; j < t_b.size()-gluon_rad; j++)
-    {
-      if (initial_energy[i][j] > 0)
-      {
-        temp = GetQs(i,j);
-      }
-      if (temp.e_tot > 0)
-      {
-        output << i*grid_step << " " << j*grid_step << " " << temp.q_s << " " << temp.e_tot << endl;
-      }
-    }
-  }
-
-  output.close();*/
   return GetGlue(x,y);;
 }
 //__________________________________________________________________________________________

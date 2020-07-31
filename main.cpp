@@ -8,12 +8,10 @@
 #include "eos.h"
 #include "event.h"
 #include "io.h"
-//#include "functions.h"
 #include "splitting.h"
 
 using namespace std;
-//class Event;
-//class IO;
+
 //__________________________________________________________________________________________
 //##########################################################################################
 //  Random Number Generators
@@ -25,7 +23,6 @@ int main (int argc, char *argv[])
 {
 	IO inOut(argv[1]);
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
-	//Event testEvent;
 	Splitter machine = inOut.InitializeSplitter();
 
 	Event testEvent, initializedEvent;
@@ -36,12 +33,8 @@ int main (int argc, char *argv[])
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
 		Sample testSample = testEvent.SampleEnergy();
-	//	cout << "e_tot after sample = " << testSample.e_tot << endl;
-	//	machine.SplitSample(testSample);
+		machine.SplitSample(testSample);
 		inOut.WriteEvent(testEvent);
-	//	testEvent.CleanEvent();
-	//	(&testEvent)->~Event();
-	//	new (&testEvent) Event();
 	//}
 	cout << "Hello World!" << endl;
 

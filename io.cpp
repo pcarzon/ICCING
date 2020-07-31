@@ -479,32 +479,17 @@ void IO::InitializeEOS()
 //##########################################################################################
 void IO::ConvertEvent(vector<vector<double>> &input)
 {
-  cout << "Start Convert Event\n";
   SplineSet range;
   double energy;
-    ofstream output;
-    output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/InterpolateValue_test.dat");
-    cout << "eos size " << eos_interped.size() << endl;
-for (int i = 0; i < input.size(); i++)
+
+  for (int i = 0; i < input.size(); i++)
   {
     for (int j = 0; j < input[i].size(); j++)
     {
-  //    range = lower_bound(eos_interped.begin(), eos_interped.end(), input[i][j]);
-//    cout << "Got lower_bound " << range.x << endl;
-    energy = a_trento*InterpolateValue(FindRange(eos_interped, input[i][j]), input[i][j]);
-      if (input[i][j] > 0)
-      {
-  //      cout << input[i][j] << " <- " << energy << endl;
-  range = FindRange(eos_interped, input[i][j]);
-
-    output << input[i][j] << " " << range.x << endl;
-  input[i][j] = energy;
-  //      cout << input[i][j] << endl;
-      }
+    energy = a_trento*InterpolateValue(FindRange(eos_interped, a_trento*input[i][j]), a_trento*input[i][j]);
     }
   }
     output.close();
-
 }
 //__________________________________________________________________________________________
 
@@ -588,8 +573,6 @@ void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
 //##########################################################################################
 Event IO::ReadEvent(Event event_in)
 {
-  cout << "started reading event" << endl;
-
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
@@ -612,22 +595,18 @@ Event IO::ReadEvent(Event event_in)
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
-  //    if (readx == -8.64)
-  //    cout << "x " << x << " y " << y << " value " << value << endl;
+
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
-//      if (x == 56)
-//      cout << "x " << x << " y " << y << " value " << event_in.initial_energy[x][y] << endl;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
 
-      readx = 0;
-      ready = 0;
   }
   input.close();  //  Close input stream
-  cout << "Read Event\n";
+
   ConvertEvent(event_in.initial_energy);
+
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
@@ -658,6 +637,8 @@ Event IO::ReadEvent(Event event_in)
         if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
     }
     input.close();  //  Close input stream
+
+    ConvertEvent(event_in.t_a);
   }
 
   //******************************************************************************************
@@ -690,8 +671,9 @@ Event IO::ReadEvent(Event event_in)
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
     }
     input.close();  //  Close input stream
+
+    ConvertEvent(event_in.t_b);
   }
-  cout << "Finished reading event" << endl;
 
   return event_in;  //  Return event with data
 }
