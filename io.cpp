@@ -412,7 +412,7 @@ Splitter IO::InitializeSplitter()
 
   double value;
   vector<double> ratio_q_s;
-  vector<vector<double>> ratio_quarks(4, );
+  vector<vector<double>> ratio_quarks(4);
 
   ifstream input;
   input.open(quark_input_file);
@@ -435,7 +435,7 @@ Splitter IO::InitializeSplitter()
   {
     init_splitter.flavor_chemistry[i] = CubicSpline(ratio_q_s, ratio_quarks[i]);
   }
-  
+
   init_splitter.dipole_model = dipole_model;
   init_splitter.alpha_s = alpha_s;
   init_splitter.alpha_min = alpha_min;
