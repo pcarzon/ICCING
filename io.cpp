@@ -489,7 +489,6 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     energy = a_trento*InterpolateValue(FindRange(eos_interped, a_trento*input[i][j]), a_trento*input[i][j]);
     }
   }
-    output.close();
 }
 //__________________________________________________________________________________________
 
