@@ -410,7 +410,32 @@ Splitter IO::InitializeSplitter()
 {
   Splitter init_splitter;
 
-  init_splitter.flavor_chemistry = flavor_chemistry;
+  double value;
+  vector<double> ratio_q_s;
+  vector<vector<double>> ratio_quarks(4, );
+
+  ifstream input;
+  input.open(quark_input_file);
+
+  while (!input.eof())
+  {
+    input >> value;
+    ratio_q_s.push_back(value);
+
+    for (int i = 0; i < 4; i++)
+    {
+      input >> value;
+      ratio_quarks[i].push_back(value);
+    }
+  }
+
+  init_splitter.flavor_chemistry.resize(4);
+
+  for (int i = 0; i < 4; i++)
+  {
+    init_splitter.flavor_chemistry[i] = CubicSpline(ratio_q_s, ratio_quarks[i]);
+  }
+  
   init_splitter.dipole_model = dipole_model;
   init_splitter.alpha_s = alpha_s;
   init_splitter.alpha_min = alpha_min;
@@ -460,16 +485,7 @@ void IO::InitializeEOS()
 
   input.close();
 
-  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/eos_test.dat");
   eos_interped = CubicSpline(entropy, energy);
-  cout << "eos 1st size " << eos_interped.size() << endl;
-
-  for (int i = 0; i < eos_interped.size(); i++)
-  {
-    output << eos_interped[i].x << " " << eos_interped[i].a << " " << eos_interped[i].b << " " << eos_interped[i].c << " " << eos_interped[i].d << endl;
-  }
-  output.close();
 }
 //__________________________________________________________________________________________
 

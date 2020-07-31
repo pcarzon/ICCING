@@ -26,17 +26,29 @@ int main (int argc, char *argv[])
 	Splitter machine = inOut.InitializeSplitter();
 
 	Event testEvent, initializedEvent;
+
+	Sample testSample;
+	Quarks testQuarks;
+
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
 //	while (!inOut.LastEvent())
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
-		Sample testSample = testEvent.SampleEnergy();
-		machine.SplitSample(testSample);
+
+		//	while (!testEvent.IsEventDone())
+			//{
+
+		testSample = testEvent.SampleEnergy();
+
+		testQuarks = machine.SplitSample(testSample)
+
+		testEvent.UpdateDensity(testQuarks);
+		//	}
+
 		inOut.WriteEvent(testEvent);
 	//}
-	cout << "Hello World!" << endl;
 
 	return 0;
 }
