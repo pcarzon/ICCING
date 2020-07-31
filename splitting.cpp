@@ -71,7 +71,7 @@ Charge Splitter::RollFlavor(double Qs)
   vector<double> q_s_range;
   for (int i = 0; i < 4; i++)
   {
-    q_s_range = alpha_s*InterpolateValue(FindRange(flavor_chemistry[i], Qs), Qs);
+    q_s_range.push_back(alpha_s*InterpolateValue(FindRange(flavor_chemistry[i], Qs), Qs));
   }
 
   double probability = get_flavor(get_random_number);
