@@ -78,15 +78,15 @@ Charge Splitter::RollFlavor(double Qs)
   vector<double>::iterator q_s_prob = q_s_range.begin();
 
   if (0 <= probability && probability <= *q_s_range)
-  { create_charge.Gluon();  }
+  { create_charge.Gluon(dipole_model);  }
   else if (*q_s_range < probability && probability <= accumulate(q_s_prob, q_s_prob + 1, 0))
-  { create_charge.Up();  }
+  { create_charge.Up(dipole_model);  }
   else if (accumulate(q_s_prob, q_s_prob + 1, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 2, 0))
-  { create_charge.Down();  }
+  { create_charge.Down(dipole_model);  }
   else if (accumulate(q_s_prob, q_s_prob + 2, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 3, 0))
-  { create_charge.Strange();  }
+  { create_charge.Strange(dipole_model);  }
   else
-  { create_charge.Charm();  }
+  { create_charge.Charm(dipole_model);  }
   return create_charge;
 }
 
