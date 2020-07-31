@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
 
 		testSample = testEvent.SampleEnergy();
 
-		testQuarks = machine.SplitSample(testSample)
+		testQuarks = machine.SplitSample(testSample);
 
 		testEvent.UpdateDensity(testQuarks);
 		//	}
