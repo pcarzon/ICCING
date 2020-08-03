@@ -648,14 +648,12 @@ Event IO::ReadEvent(Event event_in)
         y = (ready + grid_max)/grid_step;
 
         //  Set point in event's initial energy density grid
-        event_in.t_a[x][y] = value;
+        event_in.t_a[x][y] = kappa_*sqrt(value);
 
         input.ignore(10000, '\n');  //  Ignore rest of line
         if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
     }
     input.close();  //  Close input stream
-
-    ConvertEvent(event_in.t_a);
   }
 
   //******************************************************************************************
@@ -682,14 +680,12 @@ Event IO::ReadEvent(Event event_in)
       y = (ready + grid_max)/grid_step;
 
       //  Set point in event's initial energy density grid
-      event_in.t_b[x][y] = value;
+      event_in.t_b[x][y] = kappa_*sqrt(value);
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
     }
     input.close();  //  Close input stream
-
-    ConvertEvent(event_in.t_b);
   }
 
   return event_in;  //  Return event with data

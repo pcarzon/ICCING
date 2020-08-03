@@ -87,6 +87,7 @@ Sample Event::GetGlue(int x_center, int y_center)
   int glue_y_end = gluon_dist.size();
   double q_s = 0;
   double e_tot = 0;
+  int total_points = 0;
 
   if (x_center - gluon_rad < 0)
   { glue_x_start = -(x_center - gluon_rad);  }
@@ -104,11 +105,12 @@ Sample Event::GetGlue(int x_center, int y_center)
     {
       q_s += t_b[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
       e_tot += initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
+      total_points++;
     }
   }
   Sample samp;
-  samp.q_s = q_s;
-  samp.e_tot = e_tot;
+  samp.q_s = q_s/total_points;
+  samp.e_tot = pow(grid_step,2)*tau_0*e_tot;
   return samp;
 }
 //__________________________________________________________________________________________
