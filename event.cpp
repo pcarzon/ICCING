@@ -137,6 +137,7 @@ Sample Event::SampleEnergy()
     y = get_grid_point(get_random_number);
     num++;
     outsample = GetGlue(x,y);
+    cout << "testing: " << outsample.e_tot << " " << e_thresh << endl;
     if (initial_energy[x][y] > 0 && outsample.e_tot > e_thresh) got_point = true;
   }
   cout << "number of times through loop = " << num << endl;
