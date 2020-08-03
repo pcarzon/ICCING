@@ -40,14 +40,19 @@ Splitter& Splitter::operator= (const Splitter& original)
 double Splitter::RollGlue(double e_tot)
 {
   double x, y;
-  double e_glue = 0;
   bool got_glue = false;
   int num = 0;
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
-  uniform_real_distribution<double> get_probability(0.0, 1/pow(e_thresh, lambda_));
+  uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
 
   cout << "begin RollGlue " << get_probability.max() << " " << e_tot << endl;
+
+  ofstream output;
+  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/roll_glue_test.dat");
+
+  for (int i = 0; i < 10000; i++)
+  {
   while (!got_glue)
   {
     x = get_energy(get_random_number);
@@ -56,8 +61,10 @@ double Splitter::RollGlue(double e_tot)
     num++;
     if (y < 1/pow(x, lambda_)) got_glue = true;
   }
-
-  return e_glue/e_tot;
+    output << x << "\t" << 1/pow(x, lambda_) << endl;
+  }
+  return x/e_tot;
+  output.close();
 }
 //__________________________________________________________________________________________
 
@@ -77,6 +84,7 @@ Charge Splitter::RollFlavor(double Qs)
   double probability = get_flavor(get_random_number);
   vector<double>::iterator q_s_prob = q_s_range.begin();
 
+  // gluon prob = 1 - sum of q_s_range
   if (0 <= probability && probability <= *q_s_prob)
   { create_charge.Gluon(dipole_model);  }
   else if (*q_s_prob < probability && probability <= accumulate(q_s_prob, q_s_prob + 1, 0))
@@ -108,7 +116,8 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
 
   gluon_energy_frac = RollGlue(sampled_energy.e_tot);
   set_charge = RollFlavor(sampled_energy.q_s);
-
+  // If statement to check if 2*quark_mass < gluon_energy_frac*e_tot (add now)
+  //    If this is false go back to SampleEnergy and find new center point
   cout << "Flavor " << set_charge.GetCharge()[0] << endl;
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
 
