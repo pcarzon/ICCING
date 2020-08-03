@@ -327,6 +327,7 @@ Event IO::InitializeEvent()
   event_in.kappa_ = kappa_;
   event_in.lambda_ = lambda_;
   event_in.tau_0 = tau_0;
+  event_in.e_thresh = e_thresh;
   event_in.grid_max = grid_max;
   event_in.grid_step = grid_step;
   event_in.grid_points = grid_points;
