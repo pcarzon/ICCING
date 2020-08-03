@@ -90,10 +90,10 @@ Charge Splitter::RollFlavor(double Qs)
 
   cout << "flavor probs: "
   << probability << " "
-  << *q_s_prob << " "
-  << accumulate(q_s_prob, q_s_prob + 1, 0) << " "
-  << accumulate(q_s_prob, q_s_prob + 2, 0) << " "
-  << accumulate(q_s_prob, q_s_prob + 3, 0) << endl;
+  << q_s_range[0] << " "
+  << q_s_range[1] << " "
+  << q_s_range[2] << " "
+  << q_s_range[3] << endl;
   return create_charge;
 }
 
