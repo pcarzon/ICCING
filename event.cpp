@@ -45,6 +45,7 @@ void Event::CopyEvent(const Event &e)
   lambda_ = e.lambda_;
   grid_max = e.grid_max;
   grid_step = e.grid_step;
+  tau_0 = e.tau_0;
   grid_points = e.grid_points;
   get_grid_point = e.get_grid_point;
 

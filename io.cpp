@@ -326,6 +326,7 @@ Event IO::InitializeEvent()
   //  Set variables in event with data from configFile
   event_in.kappa_ = kappa_;
   event_in.lambda_ = lambda_;
+  event_in.tau_0 = tau_0;
   event_in.grid_max = grid_max;
   event_in.grid_step = grid_step;
   event_in.grid_points = grid_points;
