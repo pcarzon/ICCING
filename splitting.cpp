@@ -90,6 +90,7 @@ Charge Splitter::RollFlavor(double Qs)
 
   cout << "flavor probs: "
   << probability << " "
+  << Qs << " "
   << q_s_range[0] << " "
   << q_s_range[1] << " "
   << q_s_range[2] << " "
