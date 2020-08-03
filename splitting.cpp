@@ -87,6 +87,13 @@ Charge Splitter::RollFlavor(double Qs)
   { create_charge.Strange(dipole_model);  }
   else
   { create_charge.Charm(dipole_model);  }
+
+  cout << "flavor probs: "
+  << probability << " "
+  << *q_s_prob << " "
+  << accumulate(q_s_prob, q_s_prob + 1, 0) << " "
+  << accumulate(q_s_prob, q_s_prob + 2, 0) << " "
+  << accumulate(q_s_prob, q_s_prob + 3, 0) << endl;
   return create_charge;
 }
 
