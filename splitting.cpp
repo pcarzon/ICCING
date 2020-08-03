@@ -59,7 +59,7 @@ double Splitter::RollGlue(double e_tot)
     y = get_probability(get_random_number);
     output << x << "\t" << 1/pow(x, lambda_);
     num++;
-    if (y > 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
+    if (y < 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
   //  else {output << "\tno" << endl;}
   }
 //    output << x/e_tot << endl;
