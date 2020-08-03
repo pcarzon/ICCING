@@ -62,7 +62,7 @@ double Splitter::RollGlue(double e_tot)
     num++;
     if (y < 1/pow(x, lambda_)) got_glue = true;
   }
-    output << x << "\t" << 1/pow(x, lambda_) << endl;
+    output << x/etot << endl;
     got_glue = false;
   }
   return x/e_tot;
