@@ -46,6 +46,7 @@ void Event::CopyEvent(const Event &e)
   grid_max = e.grid_max;
   grid_step = e.grid_step;
   tau_0 = e.tau_0;
+  e_thresh = e.e_thresh;
   grid_points = e.grid_points;
   get_grid_point = e.get_grid_point;
 
@@ -128,18 +129,20 @@ Sample Event::SampleEnergy()
   int y = 0;
   bool got_point = false;
   int num = 0;
+  Sample outsample;
 
   while (!got_point)
   {
     x = get_grid_point(get_random_number);
     y = get_grid_point(get_random_number);
     num++;
-    if (initial_energy[x][y] > 0) got_point = true;
+    outsample = GetGlue(x,y);
+    if (initial_energy[x][y] > 0 && outsample.e_tot > e_thresh) got_point = true;
   }
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
-  return GetGlue(x,y);;
+  return GetGlue(x,y);
 }
 //__________________________________________________________________________________________
 

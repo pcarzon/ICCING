@@ -45,6 +45,7 @@ private:
   double grid_max;
   double grid_step;
   double tau_0;
+  double e_thresh;
   int grid_points;
   uniform_int_distribution<int> get_grid_point;
   //__________________________________________________________________________________________
