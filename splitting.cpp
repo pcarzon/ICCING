@@ -57,7 +57,7 @@ double Splitter::RollGlue(double e_tot)
   {
     x = get_energy(get_random_number);
     y = get_probability(get_random_number);
-    output << x << "\t" << 1/pow(x, lambda_);
+    output << x << " " << 1/pow(x, lambda_) << endl;
     num++;
     if (y < 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
   //  else {output << "\tno" << endl;}
