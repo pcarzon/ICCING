@@ -142,7 +142,7 @@ Sample Event::SampleEnergy()
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
-  return GetGlue(x,y);
+  return outsample;
 }
 //__________________________________________________________________________________________
 
