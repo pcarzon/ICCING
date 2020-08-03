@@ -50,13 +50,13 @@ double Splitter::RollGlue(double e_tot)
 
   ofstream output;
   output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/roll_glue_test.dat");
-
+  x = get_energy(get_random_number);
   for (int i = 0; i < 10000; i++)
   {
 //    cout << "what" << endl;
   while (!got_glue)
   {
-    x = get_energy(get_random_number);
+
     y = get_probability(get_random_number);
     output << x << "\t" << y << "\t" << 1/pow(x, lambda_);
     num++;
