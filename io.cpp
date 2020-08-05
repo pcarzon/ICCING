@@ -498,19 +498,18 @@ void IO::InitializeEOS()
 //##########################################################################################
 void IO::ConvertEvent(vector<vector<double>> &input)
 {
-  SplineSet range;
-  double energy;
 
   for (int i = 0; i < input.size(); i++)
   {
     for (int j = 0; j < input[i].size(); j++)
     {
-      energy = a_trento*input[i][j];
+      SplineSet range;
+      double energy;
+    energy = a_trento*input[i][j];
     range = FindRange(eos_interped, energy);
     input[i][j] = InterpolateValue(range, energy);
-    if (i == 55 && energy > 0)
+    if (i == 55 && input[i][j] > 0)
     cout << i << " " << j << " " << input[i][j] << endl;
-    energy = 0;
     }
   }
 }
