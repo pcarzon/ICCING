@@ -614,6 +614,8 @@ Event IO::ReadEvent(Event event_in)
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
 
+      if (x == 55)
+      cout << readx << " " << ready << endl;
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
 
