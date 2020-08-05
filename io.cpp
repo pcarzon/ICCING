@@ -503,12 +503,13 @@ void IO::ConvertEvent(vector<vector<double>> &input)
   {
     for (int j = 0; j < input[i].size(); j++)
     {
-      SplineSet range;
+      if (input[i][j] > 0)
+  {    SplineSet range;
       double energy;
     energy = a_trento*input[i][j];
     range = FindRange(eos_interped, energy);
-    if (i == 55 && input[i][j] > 0)
-    {cout << i << " " << j << " " << input[i][j] << endl;
+
+  //  cout << i << " " << j << " " << input[i][j] << endl;
     input[i][j] = InterpolateValue(range, energy);}
     }
   }
