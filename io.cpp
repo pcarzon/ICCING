@@ -506,8 +506,8 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     for (int j = 0; j < input[i].size(); j++)
     {
     input[i][j] = InterpolateValue(FindRange(eos_interped, a_trento*input[i][j]), a_trento*input[i][j]);
-    if (i == 55)
-    cout << i << " " << j << endl;
+    if (i == 55 && input[i][j] > 0)
+    cout << i << " " << j << " " << input[i][j] << endl;
 
     }
   }
