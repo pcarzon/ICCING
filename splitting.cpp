@@ -96,6 +96,12 @@ Charge Splitter::RollFlavor(double Qs)
   else
   { create_charge.Charm(dipole_model);  }
 
+  cout << "qs: "
+  << FindRange(flavor_chemistry[0], Qs).x << " "
+  << FindRange(flavor_chemistry[1], Qs).x << " "
+  << FindRange(flavor_chemistry[2], Qs).x << " "
+  << FindRange(flavor_chemistry[3], Qs).x << endl;
+
   cout << "flavor probs: "
   << probability << " "
   << Qs << " "
