@@ -508,8 +508,8 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     energy = a_trento*input[i][j];
     range = FindRange(eos_interped, energy);
     if (i == 55 && input[i][j] > 0)
-    cout << i << " " << j << " " << input[i][j] << endl;
-    input[i][j] = InterpolateValue(range, energy);
+    {cout << i << " " << j << " " << input[i][j] << endl;
+    input[i][j] = InterpolateValue(range, energy);}
     }
   }
 }
