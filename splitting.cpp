@@ -83,15 +83,15 @@ Charge Splitter::RollFlavor(double Qs)
   double c = alpha_s*InterpolateValue(FindRange(flavor_chemistry[3], Qs), Qs);
   double g = 1 - u - d - s - c;
   double probability = get_flavor(get_random_number);
-
+  probability = 0.12;
   // gluon prob = 1 - sum of q_s_range
-  if (0 <= probability && probability <= g)
+  if (1 >= probability && probability >= g)
   { create_charge.Gluon(dipole_model);  }
-  else if (g < probability && probability <= g + u)
+  else if (g > probability && probability >= g + u)
   { create_charge.Up(dipole_model);  }
-  else if (g + u < probability && probability <= g + u + d)
+  else if (g + u > probability && probability >= g + u + d)
   { create_charge.Down(dipole_model);  }
-  else if (g + u + d < probability && probability <= g + u + d + s)
+  else if (g + u + d > probability && probability >= g + u + d + s)
   { create_charge.Strange(dipole_model);  }
   else
   { create_charge.Charm(dipole_model);  }
