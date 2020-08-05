@@ -506,6 +506,9 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     for (int j = 0; j < input[i].size(); j++)
     {
     input[i][j] = InterpolateValue(FindRange(eos_interped, a_trento*input[i][j]), a_trento*input[i][j]);
+    if (i == 55)
+    cout << i << " " << j << endl;
+
     }
   }
 }
@@ -627,7 +630,7 @@ Event IO::ReadEvent(Event event_in)
   }
   input.close();  //  Close input stream
 
-//  ConvertEvent(event_in.initial_energy);
+  ConvertEvent(event_in.initial_energy);
 
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
