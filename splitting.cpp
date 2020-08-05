@@ -77,23 +77,22 @@ Charge Splitter::RollFlavor(double Qs)
 
   uniform_real_distribution<double> get_flavor(0, 1);
 
-  vector<double> q_s_range;
-  for (int i = 0; i < 4; i++)
-  {
-    q_s_range.push_back(alpha_s*InterpolateValue(FindRange(flavor_chemistry[i], Qs), Qs));
-  }
-
+  double u = alpha_s*InterpolateValue(FindRange(flavor_chemistry[0], Qs), Qs);
+  double d = alpha_s*InterpolateValue(FindRange(flavor_chemistry[1], Qs), Qs);
+  double s = alpha_s*InterpolateValue(FindRange(flavor_chemistry[2], Qs), Qs);
+  double c = alpha_s*InterpolateValue(FindRange(flavor_chemistry[3], Qs), Qs);
+  double g = 1 - u - d - s - c;
   double probability = get_flavor(get_random_number);
   vector<double>::iterator q_s_prob = q_s_range.begin();
 
   // gluon prob = 1 - sum of q_s_range
-  if (0 <= probability && probability <= *q_s_prob)
+  if (0 <= probability && probability <= g)
   { create_charge.Gluon(dipole_model);  }
-  else if (*q_s_prob < probability && probability <= accumulate(q_s_prob, q_s_prob + 1, 0))
+  else if (g < probability && probability <= g + u)
   { create_charge.Up(dipole_model);  }
-  else if (accumulate(q_s_prob, q_s_prob + 1, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 2, 0))
+  else if (g + u < probability && probability <= g + u + d)
   { create_charge.Down(dipole_model);  }
-  else if (accumulate(q_s_prob, q_s_prob + 2, 0) < probability && probability <= accumulate(q_s_prob, q_s_prob + 3, 0))
+  else if (g + u + d < probability && probability <= g + u + d + s)
   { create_charge.Strange(dipole_model);  }
   else
   { create_charge.Charm(dipole_model);  }
@@ -101,10 +100,11 @@ Charge Splitter::RollFlavor(double Qs)
   cout << "flavor probs: "
   << probability << " "
   << Qs << " "
-  << q_s_range[0] << " "
-  << q_s_range[1] << " "
-  << q_s_range[2] << " "
-  << q_s_range[3] << endl;
+  << g << " "
+  << u << " "
+  << d << " "
+  << s << " "
+  << c << endl;
   return create_charge;
 }
 
