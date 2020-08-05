@@ -40,11 +40,11 @@ int main (int argc, char *argv[])
 		//	while (!testEvent.IsEventDone())
 			//{
 
-		testSample = testEvent.SampleEnergy();
+	//	testSample = testEvent.SampleEnergy();
 
-		testQuarks = machine.SplitSample(testSample);
+		//testQuarks = machine.SplitSample(testSample);
 
-		testEvent.UpdateDensity(testQuarks);
+	//	testEvent.UpdateDensity(testQuarks);
 		//	}
 
 		inOut.WriteEvent(testEvent);
