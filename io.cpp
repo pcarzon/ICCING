@@ -691,7 +691,6 @@ Event IO::ReadEvent(Event event_in)
 
       //  Set point in event's initial energy density grid
       event_in.t_b[x][y] = kappa_*sqrt(value);
-      cout << event_in.t_b[x][y] << endl;
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
     }
