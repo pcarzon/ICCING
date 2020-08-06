@@ -83,36 +83,23 @@ Event& Event::operator= (const Event& original)
 //##########################################################################################
 Sample Event::GetGlue(int x_center, int y_center)
 {
-  int glue_x_start = 0;
-  int glue_y_start = 0;
-  int glue_x_end = gluon_dist.size();
-  int glue_y_end = gluon_dist.size();
-  double q_s = 0;
-  double e_tot = 0;
   int total_points = 0;
+  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
 
-  if (x_center - gluon_rad < 0)
-  { glue_x_start = -(x_center - gluon_rad);  }
-  if (y_center - gluon_rad < 0)
-  { glue_y_start = -(y_center - gluon_rad);  }
-
-  if (x_center + gluon_rad > t_b.size())
-  { glue_x_end = t_b.size() - (x_center + gluon_rad);  }
-  if (y_center + gluon_rad > t_b.size())
-  { glue_y_end = t_b.size() - (x_center + gluon_rad);  }
-
-  for (int i = glue_x_start; i < glue_x_end; i++)
+  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
-    for (int j = glue_y_start; j < glue_y_end; j++)
+    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
     {
       q_s += t_b[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
       e_tot += initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
       total_points++;
     }
   }
+
   Sample samp;
   samp.q_s = q_s/total_points;
   samp.e_tot = pow(grid_step,2)*tau_0*e_tot;
+
   return samp;
 }
 //__________________________________________________________________________________________
@@ -125,25 +112,35 @@ Sample Event::GetGlue(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
-  int x = 0;
-  int y = 0;
+  int x;
+  int y;
   bool got_point = false;
   int num = 0;
-  Sample outsample;
+  Sample out_sample;
 
   while (!got_point)
   {
     x = get_grid_point(get_random_number);
     y = get_grid_point(get_random_number);
     num++;
-    outsample = GetGlue(x,y);
-    cout << "testing: " << outsample.e_tot << " " << e_thresh << endl;
-    if (initial_energy[x][y] > 0 && outsample.e_tot > e_thresh) got_point = true;
+
+    out_sample = GetGlue(x,y);
+
+    if (initial_energy[x][y] > 0)
+    {
+      if (out_sample.e_tot < e_thresh)
+      {
+        UpdateEnergy(x, y, 1.);
+        continue;
+      }
+
+      got_point = true;
+    }
   }
   cout << "number of times through loop = " << num << endl;
   cout << x << " " << y << " " << initial_energy[x][y] << endl;
 
-  return outsample;
+  return out_sample;
 }
 //__________________________________________________________________________________________
 
@@ -153,7 +150,87 @@ Sample Event::SampleEnergy()
 //##########################################################################################
 void Event::UpdateDensity(Quarks quark_density)
 {
+  vector<double> position = quark_density.GetPosition()
+  if (quark_density.GetCharge()[0] == 0.)
+  {
+    UpdateEnergy(position[0], position[1], quark_density.GetEnergyFraction());
+  }
 
+  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
+
+  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
+  {
+    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+    {
+      initial_energy[i][j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+    }
+  }
+
+  vector<int> quark_bounds = GetIntegrationBounds(x_center, y_center, quark_rad);
+
+  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
+  {
+    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+    {
+      density[1][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
+      density[2][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
+
+      if (quark_density.GetCharge()[2] == -1)
+      {
+        density[3][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
+      }
+  }
+  }
+
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Subtracts energy from initial_energy and adds it to density[0]
+//##########################################################################################
+void Event::UpdateEnergy(int x_center, int y_center, double ratio)
+{
+  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
+
+  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
+  {
+    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+    {
+      initial_energy[i][j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+      density[0][i][j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+    }
+  }
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Gets intigration bounds for density grid manipulations
+//##########################################################################################
+vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double raduis);
+{
+  int glue_x_start = 0;
+  int glue_y_start = 0;
+  int glue_x_end = gluon_dist.size();
+  int glue_y_end = gluon_dist.size();
+  vector<int> bounds;
+  bounds.push_back(0);
+  bounds.push_back(grid_points);
+  bounds.push_back(0);
+  bounds.push_back(grid_points);
+
+  if (x_center - gluon_rad < 0)
+  { bounds[0] = -(x_center - gluon_rad);  }
+  if (y_center - gluon_rad < 0)
+  { bounds[2] = -(y_center - gluon_rad);  }
+
+  if (x_center + gluon_rad > t_b.size())
+  { bounds[1] = t_b.size() - (x_center + gluon_rad);  }
+  if (y_center + gluon_rad > t_b.size())
+  { bounds[3] = t_b.size() - (x_center + gluon_rad);  }
+
+  return bounds;
 }
 //__________________________________________________________________________________________
 

@@ -77,7 +77,10 @@ private:
   Sample GetGlue(int x_center, int y_center);
 
   //  See: RollGlue in ICCING_v0_1_8.nb
-  double GetEtot(int x_center, int y_center);
+  vector<int> GetIntegrationBounds(int x_center, int y_center, double raduis);
+
+  //  Copy function for Event class, called by operator= and implicit copy functions
+  void UpdateEnergy(int x_center, int y_center, double ratio);
   //__________________________________________________________________________________________
 
 public:

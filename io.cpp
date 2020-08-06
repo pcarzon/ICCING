@@ -335,6 +335,10 @@ Event IO::InitializeEvent()
   //  Initialize input grid to 0 with dimensions grid_points + 1
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
 
+  for (int i = 0; i < 4; i++)
+  {
+    event_in.density.push_back(event_in.initial_energy);
+  }
   //  Initialize distribution for selecting points from initial_energy
   event_in.get_grid_point = uniform_int_distribution<int>(0, event_in.initial_energy.size());
 
