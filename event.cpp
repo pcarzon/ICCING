@@ -195,7 +195,7 @@ void Event::UpdateDensity(Quarks quark_density)
 void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 {
   vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
-  cout << "update energy" << endl;
+  cout << "update energy" <<gluon_bounds[0]<<gluon_bounds[2]<<gluon_bounds[1]<<gluon_bounds[3]<< endl;
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
