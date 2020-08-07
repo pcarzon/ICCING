@@ -33,8 +33,8 @@ int main (int argc, char *argv[])
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
-//	while (!inOut.LastEvent())
-	//{
+	while (!inOut.LastEvent())
+	{
 		testEvent = inOut.ReadEvent(initializedEvent);
 
 			while (!testEvent.IsEventDone())
@@ -50,7 +50,7 @@ int main (int argc, char *argv[])
 			cout << "# times through event loop " << eventcount << endl;
 
 //		inOut.WriteEvent(testEvent);
-	//}
+	}
 
 	return 0;
 }
