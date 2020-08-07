@@ -130,7 +130,7 @@ Sample Event::SampleEnergy()
 //  while (!got_point)
 //  {
     //  Initialize distribution for selecting points from initial_energy
-    get_grid_point = uniform_int_distribution<int>(0, valued_points.size());
+    get_grid_point = uniform_int_distribution<int>(0, valued_points.size()-1);
 
     point = get_grid_point(get_random_number);
     num++;
