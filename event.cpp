@@ -119,8 +119,8 @@ Sample Event::SampleEnergy()
   int num = 0;
   Sample out_sample;
 
-  while (!got_point)
-  {
+//  while (!got_point)
+//  {
     //  Initialize distribution for selecting points from initial_energy
     get_grid_point = uniform_int_distribution<int>(0, valued_points.size());
 
@@ -138,7 +138,7 @@ Sample Event::SampleEnergy()
   //    {
         got_point = true;
   //    }
-  }
+//  }
 //  cout << "number of times through loop = " << num << endl;
 //  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
 
@@ -247,6 +247,7 @@ bool Event::IsEventDone()
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
+  cout << "# points " << valued_points.size();
   if (valued_points.size() == 0)
   { return true;  }
   else
