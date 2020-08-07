@@ -86,12 +86,12 @@ Sample Event::GetGlue(int x_center, int y_center)
 {
   double q_s, e_tot;
   int total_points = 0;
-      if (valued_points.size() < 280)
-      cout << "start GetGlue" << endl;
+  //    if (valued_points.size() < 280)
+  //    cout << "start GetGlue" << endl;
   vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_dist.size(), gluon_rad);
 //  cout << "get glue " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
-    if (valued_points.size() < 280)
-    cout << "got GetIntegrationBounds" << endl;
+//    if (valued_points.size() < 280)
+//    cout << "got GetIntegrationBounds" << endl;
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
@@ -101,14 +101,14 @@ Sample Event::GetGlue(int x_center, int y_center)
       total_points++;
     }
   }
-      if (valued_points.size() < 280)
-      cout << "got totals" << endl;
+  //    if (valued_points.size() < 280)
+  //    cout << "got totals" << endl;
 
   Sample samp;
   samp.q_s = q_s/total_points;
   samp.e_tot = pow(grid_step,2)*tau_0*e_tot;
-      if (valued_points.size() < 280)
-      cout << "finished GetGlue" << endl;
+  //    if (valued_points.size() < 280)
+  //    cout << "finished GetGlue" << endl;
 
   return samp;
 }
@@ -134,8 +134,8 @@ Sample Event::SampleEnergy()
 
     point = get_grid_point(get_random_number);
     num++;
-    if (valued_points.size() < 10)
-    cout << "got point " << valued_points[point][0] << " " << valued_points[point][1] << endl;
+//    if (valued_points.size() < 10)
+//    cout << "got point " << valued_points[point][0] << " " << valued_points[point][1] << endl;
 
     out_sample = GetGlue(valued_points[point][0], valued_points[point][1]);
 //    if (valued_points.size() < 280)
@@ -155,8 +155,8 @@ Sample Event::SampleEnergy()
 //  }
 //  cout << "number of times through loop = " << num << endl;
 //  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
-if (valued_points.size() < 280)
-cout << "end SampleEnergy" << endl;
+//if (valued_points.size() < 280)
+//cout << "end SampleEnergy" << endl;
 
   return out_sample;
 }
@@ -268,13 +268,11 @@ bool Event::IsEventDone()
 {
   for (int i = 0; i < valued_points.size(); i++)
   {
-    if (valued_points.size() < 11)
-  cout << "point " << valued_points[i][0] << " " << valued_points[i][1] << " value = " << initial_energy[valued_points[i][0]][valued_points[i][1]] << endl;
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
-  if (valued_points.size() < 280)
-  cout << "# points " << valued_points.size() << endl;
+//  if (valued_points.size() < 280)
+//  cout << "# points " << valued_points.size() << endl;
 //  if (valued_points.size() % 100 == 0)
 //   cout << "# points " << valued_points.size();
   if (valued_points.size() == 0)
