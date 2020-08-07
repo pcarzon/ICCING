@@ -86,7 +86,7 @@ Sample Event::GetGlue(int x_center, int y_center)
 {
   double q_s, e_tot;
   int total_points = 0;
-  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
+  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_dist.size(), gluon_rad);
   cout << "get glue " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
 
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
@@ -195,7 +195,7 @@ void Event::UpdateDensity(Quarks quark_density)
 //##########################################################################################
 void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 {
-  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
+  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_dist.size(), gluon_rad);
   cout << "update energy " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
@@ -214,27 +214,23 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 //##########################################################################################
 //  Gets intigration bounds for density grid manipulations
 //##########################################################################################
-vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double raduis)
+vector<int> Event::GetIntegrationBounds(int x_center, int y_center, int size, double raduis)
 {
-  int glue_x_start = 0;
-  int glue_y_start = 0;
-  int glue_x_end = gluon_dist.size();
-  int glue_y_end = gluon_dist.size();
   vector<int> bounds;
   bounds.push_back(0);
   bounds.push_back(0);
-  bounds.push_back(grid_points);
-  bounds.push_back(grid_points);
+  bounds.push_back(size);
+  bounds.push_back(size);
 
-  if (x_center - gluon_rad < 0)
-  { bounds[0] = -(x_center - gluon_rad);  }
+  if (x_center - raduis < 0)
+  { bounds[0] = -(x_center - raduis);  }
   if (y_center - gluon_rad < 0)
-  { bounds[1] = -(y_center - gluon_rad);  }
+  { bounds[1] = -(y_center - raduis);  }
 
-  if (x_center + gluon_rad > t_b.size())
-  { bounds[2] = t_b.size() - (x_center + gluon_rad);  }
+  if (x_center + raduis > t_b.size())
+  { bounds[2] = grid_points - (x_center + raduis);  }
   if (y_center + gluon_rad > t_b.size())
-  { bounds[3] = t_b.size() - (x_center + gluon_rad);  }
+  { bounds[3] = grid_points - (x_center + raduis);  }
 
   return bounds;
 }
