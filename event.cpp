@@ -84,6 +84,7 @@ Event& Event::operator= (const Event& original)
 //##########################################################################################
 Sample Event::GetGlue(int x_center, int y_center)
 {
+  double q_s, e_tot;
   int total_points = 0;
   vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
 
@@ -151,13 +152,13 @@ Sample Event::SampleEnergy()
 //##########################################################################################
 void Event::UpdateDensity(Quarks quark_density)
 {
-  vector<double> position = quark_density.GetPosition()
+  vector<double> position = quark_density.GetPosition();
   if (quark_density.GetCharge()[0] == 0.)
   {
     UpdateEnergy(position[0], position[1], quark_density.GetEnergyFraction());
   }
 
-  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
+/*  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
 
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
@@ -182,7 +183,7 @@ void Event::UpdateDensity(Quarks quark_density)
       }
   }
   }
-
+*/
 }
 //__________________________________________________________________________________________
 
@@ -209,7 +210,7 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 //##########################################################################################
 //  Gets intigration bounds for density grid manipulations
 //##########################################################################################
-vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double raduis);
+vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double raduis)
 {
   int glue_x_start = 0;
   int glue_y_start = 0;
