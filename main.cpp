@@ -49,7 +49,7 @@ int main (int argc, char *argv[])
 			}
 			cout << "# times through event loop " << eventcount << endl;
 
-		inOut.WriteEvent(testEvent);
+//		inOut.WriteEvent(testEvent);
 	//}
 
 	return 0;
