@@ -202,7 +202,7 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
     {
       cout << "original " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << " ";
-      initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+      initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] = initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] - gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
     }
