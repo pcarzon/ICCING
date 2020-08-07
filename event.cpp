@@ -222,8 +222,8 @@ vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double radui
   int glue_y_end = gluon_dist.size();
   vector<int> bounds;
   bounds.push_back(0);
-  bounds.push_back(grid_points);
   bounds.push_back(0);
+  bounds.push_back(grid_points);
   bounds.push_back(grid_points);
 
   if (x_center - gluon_rad < 0)
