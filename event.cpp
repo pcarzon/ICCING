@@ -199,8 +199,10 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
   {
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
     {
+      cout << initial_energy[i][j] << " ";
       initial_energy[i][j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][i][j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+      cout << initial_energy[i][j] << endl;
     }
   }
 }
@@ -247,7 +249,7 @@ bool Event::IsEventDone()
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
-  cout << "# points " << valued_points.size();
+//  cout << "# points " << valued_points.size();
   if (valued_points.size() == 0)
   { return true;  }
   else

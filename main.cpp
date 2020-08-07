@@ -37,8 +37,8 @@ int main (int argc, char *argv[])
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
 
-			while (!testEvent.IsEventDone())
-			{
+//			while (!testEvent.IsEventDone())
+//			{
 
 		testSample = testEvent.SampleEnergy();
 
@@ -46,7 +46,7 @@ int main (int argc, char *argv[])
 
 //		testEvent.UpdateDensity(testQuarks);
 		eventcount++;
-			}
+	//		}
 			cout << "# times through event loop " << eventcount << endl;
 
 		inOut.WriteEvent(testEvent);
