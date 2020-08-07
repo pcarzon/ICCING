@@ -247,8 +247,8 @@ bool Event::IsEventDone()
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
-  if (valued_points.size() % 100 == 0)
-  { cout << "# points " << valued_points.size(); }
+//  if (valued_points.size() % 100 == 0)
+   cout << "# points " << valued_points.size(); 
   if (valued_points.size() == 0)
   { return true;  }
   else
