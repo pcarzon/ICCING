@@ -269,7 +269,7 @@ bool Event::IsEventDone()
   for (int i = 0; i < valued_points.size(); i++)
   {
     if (valued_points.size() < 11)
-  cout << "point value = " << initial_energy[valued_points[i][0]][valued_points[i][1]];
+  cout << "point " << valued_points[i][0] << " " << valued_points[i][1] << " value = " << initial_energy[valued_points[i][0]][valued_points[i][1]];
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
@@ -277,7 +277,7 @@ bool Event::IsEventDone()
   cout << "# points " << valued_points.size();
 //  if (valued_points.size() % 100 == 0)
 //   cout << "# points " << valued_points.size();
-  if (valued_points.size() < 10)
+  if (valued_points.size() == 0)
   { return true;  }
   else
   { return false; }
