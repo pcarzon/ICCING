@@ -134,8 +134,8 @@ Sample Event::SampleEnergy()
 
     point = get_grid_point(get_random_number);
     num++;
-//    if (valued_points.size() < 280)
-//    cout << "got point" << endl;
+    if (valued_points.size() < 10)
+    cout << "got point " << valued_points[point][0] << " " valued_points[point][1] << endl;
 
     out_sample = GetGlue(valued_points[point][0], valued_points[point][1]);
 //    if (valued_points.size() < 280)
@@ -269,12 +269,12 @@ bool Event::IsEventDone()
   for (int i = 0; i < valued_points.size(); i++)
   {
     if (valued_points.size() < 11)
-  cout << "point " << valued_points[i][0] << " " << valued_points[i][1] << " value = " << initial_energy[valued_points[i][0]][valued_points[i][1]];
+  cout << "point " << valued_points[i][0] << " " << valued_points[i][1] << " value = " << initial_energy[valued_points[i][0]][valued_points[i][1]] << endl;
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
   if (valued_points.size() < 280)
-  cout << "# points " << valued_points.size();
+  cout << "# points " << valued_points.size() << endl;
 //  if (valued_points.size() % 100 == 0)
 //   cout << "# points " << valued_points.size();
   if (valued_points.size() -1 == 0)
