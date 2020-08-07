@@ -229,10 +229,10 @@ vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double radui
   if (x_center - gluon_rad < 0)
   { bounds[0] = -(x_center - gluon_rad);  }
   if (y_center - gluon_rad < 0)
-  { bounds[2] = -(y_center - gluon_rad);  }
+  { bounds[1] = -(y_center - gluon_rad);  }
 
   if (x_center + gluon_rad > t_b.size())
-  { bounds[1] = t_b.size() - (x_center + gluon_rad);  }
+  { bounds[2] = t_b.size() - (x_center + gluon_rad);  }
   if (y_center + gluon_rad > t_b.size())
   { bounds[3] = t_b.size() - (x_center + gluon_rad);  }
 
