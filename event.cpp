@@ -56,6 +56,7 @@ void Event::CopyEvent(const Event &e)
   density = e.density;
   gluon_dist = e.gluon_dist;
   quark_dist = e.quark_dist;
+  valued_points = e.valued_points;
 
   total_initial_energy = e.total_initial_energy;
   total_energy = e.total_energy;
@@ -112,33 +113,33 @@ Sample Event::GetGlue(int x_center, int y_center)
 //##########################################################################################
 Sample Event::SampleEnergy()
 {
-  int x;
-  int y;
+  int point;
   bool got_point = false;
   int num = 0;
   Sample out_sample;
 
   while (!got_point)
   {
-    x = get_grid_point(get_random_number);
-    y = get_grid_point(get_random_number);
+    //  Initialize distribution for selecting points from initial_energy
+    get_grid_point = uniform_int_distribution<int>(0, valued_points.size());
+
+    point = get_grid_point(get_random_number);
     num++;
 
-    out_sample = GetGlue(x,y);
+    out_sample = GetGlue(valued_points[point][0], valued_points[point][1]);
 
-    if (initial_energy[x][y] > 0)
-    {
-      if (out_sample.e_tot < e_thresh)
-      {
-        UpdateEnergy(x, y, 1.);
-        continue;
-      }
-
-      got_point = true;
-    }
+  //    if (out_sample.e_tot < e_thresh)
+  //    {
+        UpdateEnergy(valued_points[point][0], valued_points[point][1], 1.);
+  //      continue;
+  //    }
+  //    else
+  //    {
+        got_point = true;
+  //    }
   }
-  cout << "number of times through loop = " << num << endl;
-  cout << x << " " << y << " " << initial_energy[x][y] << endl;
+//  cout << "number of times through loop = " << num << endl;
+//  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
 
   return out_sample;
 }
@@ -233,6 +234,23 @@ vector<int> Event::GetIntegrationBounds(int x_center, int y_center, double radui
   return bounds;
 }
 //__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Checks Event totals and returns true when initial_total is below a threshold
+//##########################################################################################
+bool Event::IsEventDone()
+{
+  for (int i = 0; i < valued_points.size(); i++)
+  {
+    if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
+    { valued_points.erase(valued_points.begin() + i); }
+  }
+  if (valued_points.size() == 0)
+  { return true;  }
+  else
+  { return false; }
+}
 
 //__________________________________________________________________________________________
 //##########################################################################################

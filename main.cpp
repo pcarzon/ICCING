@@ -29,7 +29,7 @@ int main (int argc, char *argv[])
 
 	Sample testSample;
 	Quarks testQuarks;
-
+	int eventcount = 0;
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
@@ -37,15 +37,17 @@ int main (int argc, char *argv[])
 	//{
 		testEvent = inOut.ReadEvent(initializedEvent);
 
-		//	while (!testEvent.IsEventDone())
-			//{
+			while (!testEvent.IsEventDone())
+			{
 
 		testSample = testEvent.SampleEnergy();
 
-		testQuarks = machine.SplitSample(testSample);
+//		testQuarks = machine.SplitSample(testSample);
 
-		testEvent.UpdateDensity(testQuarks);
-		//	}
+//		testEvent.UpdateDensity(testQuarks);
+		eventcount++;
+			}
+			cout << "# times through event loop " << eventcount << endl;
 
 		inOut.WriteEvent(testEvent);
 	//}

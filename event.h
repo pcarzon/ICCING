@@ -60,6 +60,7 @@ private:
   vector<vector<vector<double>>> density; //  ICCING densities: 0(gluon), 1(baryon), 2(em_charge), 3(strange), 4(charm)
   vector<vector<int>> gluon_dist;  //  Sample from initial_energy for ICCING algorithm
   vector<vector<double>> quark_dist; //  Projectile Input Energy density
+  vector<vector<int>> valued_points;
 
   double total_initial_energy;  //  Records initial total of initial_energy
   double total_energy;  //  Keeps track of the total of initial_energy as ICCING runs

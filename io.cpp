@@ -339,9 +339,6 @@ Event IO::InitializeEvent()
   {
     event_in.density.push_back(event_in.initial_energy);
   }
-  //  Initialize distribution for selecting points from initial_energy
-  event_in.get_grid_point = uniform_int_distribution<int>(0, event_in.initial_energy.size());
-
 
   //******************************************************************************************
   //  Initialze Gluon Distribution for sampling
@@ -621,9 +618,8 @@ Event IO::ReadEvent(Event event_in)
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
+      event_in.valued_points.push_back({{x},{y}});
 
-      if (x == 55)
-      cout << readx << " " << ready << endl;
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
 
