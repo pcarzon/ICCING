@@ -277,8 +277,10 @@ bool Event::IsEventDone()
   cout << "# points " << valued_points.size();
 //  if (valued_points.size() % 100 == 0)
 //   cout << "# points " << valued_points.size();
-  if (valued_points.size() == 0)
-  { return true;  }
+  if (valued_points.size() -1 == 0)
+  {
+    cout << "final points " << valued_points.size() << endl;
+     return true;  }
   else
   { return false; }
 }
