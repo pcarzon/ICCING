@@ -173,17 +173,17 @@ void Event::UpdateDensity(Quarks quark_density)
   {
     UpdateEnergy(position[0], position[1], quark_density.GetEnergyFraction());
   }
+  else {
+    vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
 
-/*  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_rad);
-
-  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
-  {
-    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+    for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
     {
-      initial_energy[i][j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+      for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+      {
+        initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+      }
     }
-  }
-
+/*
   vector<int> quark_bounds = GetIntegrationBounds(x_center, y_center, quark_rad);
 
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
@@ -197,9 +197,9 @@ void Event::UpdateDensity(Quarks quark_density)
       {
         density[3][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
       }
+  }*/
+
   }
-  }
-*/
 }
 //__________________________________________________________________________________________
 

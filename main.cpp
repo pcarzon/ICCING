@@ -36,24 +36,25 @@ int main (int argc, char *argv[])
 
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
-
+	ofstream quark_output;
+	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");
 	while (!inOut.LastEvent())
 	{
 		start = clock();
 		testEvent = inOut.ReadEvent(initializedEvent);
 		cout << "started processing event" << endl;
-//			while (!testEvent.IsEventDone())
-//			{
+			while (!testEvent.IsEventDone())
+			{
 
-		testSample = testEvent.SampleEnergy();
+				testSample = testEvent.SampleEnergy();
 
-		testQuarks = machine.SplitSample(testSample);
+				testQuarks = machine.SplitSample(testSample);
 
-//		testEvent.UpdateDensity(testQuarks);
-		eventcount++;
-//			}
-			cout << "# times through event loop " << eventcount << endl;
-			eventcount = 0;
+				testEvent.UpdateDensity(testQuarks);
+				eventcount++;
+			}
+		cout << "# times through event loop " << eventcount << endl;
+		eventcount = 0;
 		inOut.WriteEvent(testEvent);
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;

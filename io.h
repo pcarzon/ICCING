@@ -189,6 +189,8 @@ public:
   Splitter InitializeSplitter();
   void InitializeEOS();
 
+  string GetOutputDir() { return output_dir;  }
+
   Event ReadEvent(Event event_in);  //  Read single event
 
   void WriteEvent(Event event); //  Writes single event to file
