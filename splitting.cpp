@@ -43,13 +43,13 @@ double Splitter::RollGlue(double e_tot)
   double x, y;
   bool got_glue = false;
   int num_tests = 0;
+  ofstream output;
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
   uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
 
   if (test_ == "GluonEnergyDist")
   {
-    ofstream output;
     output.open(output_dir + "gluon_energy_dist_test.dat");
 
     output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
