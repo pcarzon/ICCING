@@ -174,13 +174,13 @@ void Event::UpdateDensity(Quarks quark_density)
     UpdateEnergy(position[0], position[1], quark_density.GetEnergyFraction());
   }
   else {
-    vector<int> gluon_bounds = GetIntegrationBounds(position[0], position[1], gluon_rad);
+    vector<int> gluon_bounds = GetIntegrationBounds(position[0], position[1], gluon_dist.size(), gluon_rad);
 
     for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
     {
       for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
       {
-        initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+        initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
       }
     }
 /*
