@@ -47,7 +47,7 @@ double Splitter::RollGlue(double e_tot)
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
   uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
-
+  cout << "got here" << endl;
   if (test_ == "GluonEnergyDist")
   {
     cout << "test works " << test_ << endl;

@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
 	{
 		start = clock();
 		testEvent = inOut.ReadEvent(initializedEvent);
-
+		cout << "started processing event" << endl;
 			while (!testEvent.IsEventDone())
 			{
 
@@ -54,7 +54,7 @@ int main (int argc, char *argv[])
 			}
 			cout << "# times through event loop " << eventcount << endl;
 			eventcount = 0;
-//		inOut.WriteEvent(testEvent);
+		inOut.WriteEvent(testEvent);
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
 		cout << "Event processing time: " << duration/60 << " min" << endl;
