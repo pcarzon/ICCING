@@ -42,8 +42,8 @@ int main (int argc, char *argv[])
 		start = clock();
 		testEvent = inOut.ReadEvent(initializedEvent);
 		cout << "started processing event" << endl;
-			while (!testEvent.IsEventDone())
-			{
+//			while (!testEvent.IsEventDone())
+//			{
 
 		testSample = testEvent.SampleEnergy();
 
@@ -51,7 +51,7 @@ int main (int argc, char *argv[])
 
 //		testEvent.UpdateDensity(testQuarks);
 		eventcount++;
-			}
+//			}
 			cout << "# times through event loop " << eventcount << endl;
 			eventcount = 0;
 		inOut.WriteEvent(testEvent);
