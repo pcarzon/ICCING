@@ -1,0 +1,26 @@
+----------------------------------------
+Begin Torque Prologue (Mon Aug 10 10:23:32 2020)
+Job ID:           11677714.cc-mgmt1.campuscluster.illinois.edu
+Username:         pcarzon2
+Group:            qgp
+Job Name:         submitICCING.sh
+Limits:           nodes=1:ppn=1,neednodes=1:ppn=1,walltime=30:00:00
+Job Queue:        qgp
+Account:          qgp
+Nodes:            ccc0117
+End Torque Prologue
+----------------------------------------
+----------------------------------------
+Begin Torque Epilogue (Mon Aug 10 10:40:51 2020)
+Job ID:           11677714.cc-mgmt1.campuscluster.illinois.edu
+Username:         pcarzon2
+Group:            qgp
+Job Name:         submitICCING.sh
+Session:          13406
+Limits:           nodes=1:ppn=1,neednodes=1:ppn=1,walltime=30:00:00
+Resources:        cput=00:17:18,vmem=85472kb,walltime=00:17:18,mem=43328kb,energy_used=0
+Job Queue:        qgp
+Account:          qgp
+Nodes:            ccc0117
+End Torque Epilogue
+----------------------------------------
