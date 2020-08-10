@@ -127,8 +127,8 @@ Sample Event::SampleEnergy()
   int num = 0;
   Sample out_sample;
 
-//  while (!got_point)
-//  {
+  while (!got_point)
+  {
     //  Initialize distribution for selecting points from initial_energy
     get_grid_point = uniform_int_distribution<int>(0, valued_points.size()-1);
 
@@ -141,18 +141,18 @@ Sample Event::SampleEnergy()
 //    if (valued_points.size() < 280)
 //    cout << "got_glue" << endl;
 
-  //    if (out_sample.e_tot < e_thresh)
-  //    {
+    if (out_sample.e_tot < e_thresh)
+    {
 //    cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
-        UpdateEnergy(valued_points[point][0], valued_points[point][1], 1.);
+      UpdateEnergy(valued_points[point][0], valued_points[point][1], 1.);
 
-  //      continue;
-  //    }
-  //    else
-  //    {
-        got_point = true;
-  //    }
-//  }
+      continue;
+    }
+    else
+    {
+      got_point = true;
+    }
+  }
 //  cout << "number of times through loop = " << num << endl;
 //  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
 //if (valued_points.size() < 280)
