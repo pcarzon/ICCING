@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <ctime>
 
 #include "ecc.h"
 #include "eos.h"
@@ -30,11 +31,15 @@ int main (int argc, char *argv[])
 	Sample testSample;
 	Quarks testQuarks;
 	int eventcount = 0;
+	clock_t start;
+	double duration;
+
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
 	while (!inOut.LastEvent())
 	{
+		start = clock();
 		testEvent = inOut.ReadEvent(initializedEvent);
 
 			while (!testEvent.IsEventDone())
@@ -50,6 +55,9 @@ int main (int argc, char *argv[])
 			cout << "# times through event loop " << eventcount << endl;
 
 //		inOut.WriteEvent(testEvent);
+
+		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
+		cout << "Event processing time: " << duration/60 << " min" << endl;
 	}
 
 	return 0;
