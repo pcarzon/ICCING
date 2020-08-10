@@ -24,7 +24,8 @@ void Splitter::CopySplitter(const Splitter &e)
 	r_max = e.r_max;
   e_thresh = e.e_thresh;
   lambda_ = e.lambda_;
-
+  test_ = e.test_;
+  output_dir = e.output_dir
 }
 
 Splitter& Splitter::operator= (const Splitter& original)
@@ -41,32 +42,43 @@ double Splitter::RollGlue(double e_tot)
 {
   double x, y;
   bool got_glue = false;
-  int num = 0;
+  int num_tests = 0;
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
   uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
 
-  cout << "begin RollGlue " << get_probability.max() << " " << e_tot << endl;
-
-  ofstream output;
-  output.open("/projects/jnorhos/pcarzon/ICCING/testOutput/roll_glue_test.dat");
-  for (int i = 0; i < 1000000; i++)
+  if (test == "GluonEnergyDist")
   {
-//    cout << "what" << endl;
+    ofstream output;
+    output.open(output_dir + "gluon_energy_dist_test.dat");
+
+    output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
+  }
+
   while (!got_glue)
   {
     x = get_energy(get_random_number);
     y = get_probability(get_random_number);
 
-    num++;
     if (y < 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
-  //  else {output << "\tno" << endl;}
+
+    if (test == "GluonEnergyDist")
+    {
+      output << x << " " << 1/pow(x, lambda_) << endl;
+
+      num_tests++;
+      if (num_tests < 10000)
+      { got_glue = false; }
+    }
+}
+
+  if (test == "GluonEnergyDist")
+  {
+    output.close();
+    exit(0);
   }
-    output << x << " " << 1/pow(x, lambda_) << endl;
-    got_glue = false;
-  }
+
   return x/e_tot;
-  output.close();
 }
 //__________________________________________________________________________________________
 

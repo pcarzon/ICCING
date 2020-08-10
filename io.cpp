@@ -36,6 +36,8 @@ IO::IO(string configFile)
       case inputtype: input >> input_type; break;
       case outputtype:  input >> output_type; break;
       case seed: input >> seed_; break;
+      case test: input >> test_; break;
+
       case eventlabel: input >> event_label; break;
       case firstevent: input >> first_event; break;
       case lastevent: input >> last_event; break;
@@ -105,6 +107,7 @@ void IO::CopyIO(const IO &e)
   input_type = e.input_type;
   output_type = e.output_type;
   seed_ = e.seed_;
+  test_ = e.test_;
 
   event_label = e.event_label;
   first_event = e.first_event;
@@ -180,6 +183,7 @@ void IO::Initialize()
   input_type = 0;
   output_type = 0;
   seed_ = time(NULL);
+  test_ = "";
 
   event_label = "";
   first_event = 0;
@@ -226,6 +230,7 @@ void IO::Initialize()
   mapConfigParams["input_type"] = inputtype;
   mapConfigParams["output_type"] = outputtype;
   mapConfigParams["seed_"] = seed;
+  mapConfigParams["test_"] = test;
 
   mapConfigParams["event_label"] = eventlabel;
   mapConfigParams["first_event"] = firstevent;
@@ -274,7 +279,8 @@ void IO::OutputConfig(string file_name)
     << "\noutput_dir " << output_dir
     << "\ninput_type " << input_type
     << "\noutput_type " << output_type
-    << "\nseed_ " << seed_;
+    << "\nseed_ " << seed_
+    << "\ntest_ " << test_;
 
   output
     << "\n\nevent_label " << event_label

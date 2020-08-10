@@ -47,6 +47,7 @@ private:
   double tau_0;
   double e_thresh;
   int grid_points;
+  string test_;
   uniform_int_distribution<int> get_grid_point;
   //__________________________________________________________________________________________
 

@@ -29,6 +29,8 @@ private:
 	double r_max;
 	double e_thresh;
 	double lambda_;
+	string test_;
+	string output_dir;
 
 	//  See: RollGlue in ICCING_v0_1_8.nb
   double RollGlue(double e_tot);

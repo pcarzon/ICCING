@@ -49,6 +49,7 @@ private:
     inputtype,
     outputtype,
     seed,
+    test,
 
     eventlabel,
     firstevent,
@@ -93,6 +94,7 @@ private:
   int input_type; //  Type of input: 0 = Full Density Grid, 1 = Sparse Density Grid
   int output_type;  // Type of output: 0 = Full Density Grids, 1 = Sparse Density Grids
   int seed_;
+  string test_;
 
   //******************************************************************************************
   //  Internal Config parameters
