@@ -48,14 +48,14 @@ double Splitter::RollGlue(double e_tot)
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
   uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
   cout << "got here " << test_ << endl;
-/*  if (test_ == "GluonEnergyDist")
+  if (test_ == "GluonEnergyDist")
   {
     cout << "test works " << test_ << endl;
     output.open(output_dir + "gluon_energy_dist_test.dat");
 
     output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
   }
-*/
+
   while (!got_glue)
   {
     x = get_energy(get_random_number);
@@ -63,22 +63,22 @@ double Splitter::RollGlue(double e_tot)
 
     if (y < 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
 
-/*    if (test_ == "GluonEnergyDist")
+    if (test_ == "GluonEnergyDist")
     {
       output << x << " " << 1/pow(x, lambda_) << endl;
 
       num_tests++;
       if (num_tests < 10000)
       { got_glue = false; }
-    }*/
+    }
 }
 
-  /*if (test_ == "GluonEnergyDist")
+  if (test_ == "GluonEnergyDist")
   {
     output.close();
     exit(0);
   }
-*/
+
   return x/e_tot;
 }
 //__________________________________________________________________________________________
