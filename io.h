@@ -190,6 +190,7 @@ public:
   void InitializeEOS();
 
   string GetOutputDir() { return output_dir;  }
+  string GetTest() { return test_;  }
 
   Event ReadEvent(Event event_in);  //  Read single event
 
