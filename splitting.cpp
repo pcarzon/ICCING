@@ -50,6 +50,7 @@ double Splitter::RollGlue(double e_tot)
 
   if (test_ == "GluonEnergyDist")
   {
+    cout << "test works " << test_ << endl;
     output.open(output_dir + "gluon_energy_dist_test.dat");
 
     output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
