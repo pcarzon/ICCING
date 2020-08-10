@@ -53,7 +53,7 @@ int main (int argc, char *argv[])
 		eventcount++;
 			}
 			cout << "# times through event loop " << eventcount << endl;
-
+			eventcount = 0;
 //		inOut.WriteEvent(testEvent);
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
