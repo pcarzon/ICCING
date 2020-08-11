@@ -229,6 +229,7 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 //      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
     }
   }
+  cout << "Total Energy: " << total_initial_energy << endl;
 }
 //__________________________________________________________________________________________
 
