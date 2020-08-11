@@ -514,12 +514,18 @@ void IO::ConvertEvent(vector<vector<double>> &input)
     {
       if (input[i][j] > 0)
   {    SplineSet range;
-      double energy;
-    energy = a_trento*input[i][j];
-    range = FindRange(eos_interped, energy);
+      double entropy, energy;
+    entropy = a_trento*input[i][j];
+    range = FindRange(eos_interped, entropy);
 
+    if (entropy > e_chop)
+    {
   //  cout << i << " " << j << " " << input[i][j] << endl;
-    input[i][j] = InterpolateValue(range, energy);}
+    input[i][j] = InterpolateValue(range, entropy);
+    }
+    else
+    {input[i][j] = 0;}
+  }
     }
   }
 }
