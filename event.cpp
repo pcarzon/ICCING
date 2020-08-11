@@ -183,6 +183,7 @@ void Event::UpdateDensity(Quarks quark_density)
         total_initial_energy -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
         total_energy += gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
         initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
+        cout << "grid point: " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
       }
     }
     cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
@@ -229,7 +230,6 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
       initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
 //      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
-      cout << "grid point: " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
     }
   }
   cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
