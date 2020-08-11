@@ -141,17 +141,17 @@ Sample Event::SampleEnergy()
 //    if (valued_points.size() < 280)
 //    cout << "got_glue" << endl;
 
-    if (out_sample.e_tot < e_thresh)
-    {
+//    if (out_sample.e_tot < e_thresh)
+//    {
 //    cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
       UpdateEnergy(valued_points[point][0], valued_points[point][1], 1.);
 
-      continue;
-    }
-    else
-    {
+//      continue;
+//    }
+//    else
+//    {
       got_point = true;
-    }
+//    }
   }
 //  cout << "number of times through loop = " << num << endl;
 //  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
