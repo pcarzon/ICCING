@@ -642,7 +642,7 @@ Event IO::ReadEvent(Event event_in)
 
   double energy = a_trento*event_in.total_initial_energy;
   SplineSet range = FindRange(eos_interped, energy);
-  event_in.total_initial_energy = InterpolateValue(range, energy);}
+  event_in.total_initial_energy = InterpolateValue(range, energy);
 
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
