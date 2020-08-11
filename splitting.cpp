@@ -47,10 +47,10 @@ double Splitter::RollGlue(double e_tot)
 
   uniform_real_distribution<double> get_energy(e_thresh, e_tot);
   uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
-  cout << "got here " << test_ << endl;
+//  cout << "got here " << test_ << endl;
   if (test_ == "GluonEnergyDist")
   {
-    cout << "test works " << test_ << endl;
+//    cout << "test works " << test_ << endl;
     output.open(output_dir + "gluon_energy_dist_test.dat");
 
     output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
@@ -109,7 +109,7 @@ Charge Splitter::RollFlavor(double Qs)
   else
   { create_charge.Charm(dipole_model);  }
 
-  cout << "qs: "
+/*  cout << "qs: "
   << FindRange(flavor_chemistry[0], Qs).x << " "
   << FindRange(flavor_chemistry[1], Qs).x << " "
   << FindRange(flavor_chemistry[2], Qs).x << " "
@@ -122,7 +122,7 @@ Charge Splitter::RollFlavor(double Qs)
   << u << " "
   << d << " "
   << s << " "
-  << c << endl;
+  << c << endl;*/
   return create_charge;
 }
 
@@ -132,13 +132,13 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   Charge set_charge;
   double gluon_energy_frac;
 
-  cout << "e_tot in SplitSample = " << sampled_energy.e_tot << endl;
+//  cout << "e_tot in SplitSample = " << sampled_energy.e_tot << endl;
 
   gluon_energy_frac = RollGlue(sampled_energy.e_tot);
   set_charge = RollFlavor(sampled_energy.q_s);
   // If statement to check if 2*quark_mass < gluon_energy_frac*e_tot (add now)
   //    If this is false go back to SampleEnergy and find new center point
-  cout << "Flavor " << set_charge.GetCharge()[0] << endl;
+//  cout << "Flavor " << set_charge.GetCharge()[0] << endl;
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
 
   return create_quarks;
