@@ -229,6 +229,7 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
       initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
 //      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
+      cout << "grid point: " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
     }
   }
   cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
