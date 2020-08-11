@@ -47,6 +47,8 @@ int main (int argc, char *argv[])
 		cout << "started processing event" << endl;
 			while (!testEvent.IsEventDone())
 			{
+				Sample testSample;
+				Quarks testQuarks;
 
 				testSample = testEvent.SampleEnergy();
 
