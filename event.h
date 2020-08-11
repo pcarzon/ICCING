@@ -63,7 +63,7 @@ private:
   vector<vector<double>> quark_dist; //  Projectile Input Energy density
   vector<vector<int>> valued_points;
 
-  double total_initial_energy;  //  Records initial total of initial_energy
+  long double total_initial_energy;  //  Records initial total of initial_energy
   double total_energy;  //  Keeps track of the total of initial_energy as ICCING runs
   double seed;  //  Records the random seed used in event
   //__________________________________________________________________________________________
