@@ -634,10 +634,15 @@ Event IO::ReadEvent(Event event_in)
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
 
+      event_in.initial_total += value;
   }
   input.close();  //  Close input stream
 
   ConvertEvent(event_in.initial_energy);
+
+  double energy = a_trento*event_in.initial_total;
+  SplineSet range = FindRange(eos_interped, energy);
+  event_in.initial_total = InterpolateValue(range, energy);}
 
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event

@@ -180,9 +180,11 @@ void Event::UpdateDensity(Quarks quark_density)
     {
       for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
       {
+        initial_total -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
         initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[position[0] - gluon_rad + i][position[1] - gluon_rad + j];
       }
     }
+    cout << "Total Energy: " << initial_total << endl;
 /*
   vector<int> quark_bounds = GetIntegrationBounds(x_center, y_center, quark_rad);
 
@@ -221,6 +223,7 @@ void Event::UpdateEnergy(int x_center, int y_center, double ratio)
 //      cout << "doing UpdateEnergy" << endl;
 
 //      cout << "original " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << " ";
+      initial_total -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
 //      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
