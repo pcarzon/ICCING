@@ -278,7 +278,7 @@ bool Event::IsEventDone()
     { valued_points.erase(valued_points.begin() + i); }
   }
 //  if (valued_points.size() < 280)
-//  cout << "# points " << valued_points.size() << endl;
+  cout << "# points " << valued_points.size() << endl;
 //  if (valued_points.size() % 100 == 0)
 //   cout << "# points " << valued_points.size();
   if (valued_points.size() == 0)
