@@ -187,7 +187,7 @@ void Event::UpdateDensity(Quarks quark_density)
       {
         cout <<  initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << " ";
         if (isnan(gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
-        cout << "Is it here?" << endl;
+        cout << "Is it here?" << gluon_dist[i][j] << " " << quark_density.GetEnergyFraction() << " " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
 
 
         total_initial_energy -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
