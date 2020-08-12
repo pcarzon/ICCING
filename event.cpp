@@ -239,6 +239,8 @@ void Event::UpdateEnergy(double ratio)
       initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
 //      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
+    if (isnan(initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
+      initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] = 0;
     }
   }
   cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
