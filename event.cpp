@@ -240,6 +240,11 @@ void Event::UpdateEnergy(double ratio)
       }
     }
     total_initial_energy = 0;
+    for (int i = 0; i < valued_points.size(); i++)
+    {
+      if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
+      { valued_points.erase(valued_points.begin() + i); }
+    }
   }
 
   vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
