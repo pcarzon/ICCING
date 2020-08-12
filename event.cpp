@@ -172,6 +172,8 @@ Sample Event::SampleEnergy()
 void Event::UpdateDensity(Quarks quark_density)
 {
   vector<double> position = quark_density.GetPosition();
+    if (isnan(quark_density.GetEnergyFraction()))
+    cout << "Well Theres your problem!" << endl;
   if (quark_density.GetCharge()[0] == 0.)
   {
     UpdateEnergy(quark_density.GetEnergyFraction());
