@@ -52,11 +52,11 @@ int main (int argc, char *argv[])
 
 				testSample = testEvent.SampleEnergy();
 
-	/*			testQuarks = machine.SplitSample(testSample);
+				testQuarks = machine.SplitSample(testSample);
 				if (inOut.GetTest() == "QuarkRatio")
 				{	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
 
-				testEvent.UpdateDensity(testQuarks);*/
+				testEvent.UpdateDensity(testQuarks);
 				eventcount++;
 			}
 		cout << "# times through event loop " << eventcount << endl;
