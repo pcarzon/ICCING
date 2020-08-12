@@ -67,12 +67,12 @@ int main (int argc, char *argv[])
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
 
-		if (inOut.GetTest() == "QuarkRatio")
-		{	quark_output.close();	}
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
 		cout << "Event processing time: " << duration/60 << " min" << endl;
 	}
+	if (inOut.GetTest() == "QuarkRatio")
+	{	quark_output.close();	}
 
 	return 0;
 }
