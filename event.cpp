@@ -295,6 +295,18 @@ bool Event::IsEventDone()
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
+
+  if (total_initial_energy < e_thresh)
+  {
+    for (int i = 0; i < initial_energy.size(); i++)
+    {
+      for (int j = 0; j < initial_energy.size(); j++)
+      {
+        density[0][i][j] += initial_energy[i][j];
+      }
+    }
+    return true;
+  }
 //  if (valued_points.size() < 280)
   cout << "# points " << valued_points.size() << endl;
 //  if (valued_points.size() % 100 == 0)
