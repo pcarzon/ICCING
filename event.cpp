@@ -150,6 +150,20 @@ Sample Event::SampleEnergy()
 //    cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
       UpdateEnergy(1.);
 
+      if (total_initial_energy < e_thresh)
+      {
+        for (int i = 0; i < initial_energy.size(); i++)
+        {
+          for (int j = 0; j < initial_energy.size(); j++)
+          {
+            density[0][i][j] += initial_energy[i][j];
+          }
+        }
+        total_initial_energy = 0;
+        out_sample.q_s = -100;
+        got_point = true;
+      }
+      else
       continue;
     }
     else
@@ -157,19 +171,6 @@ Sample Event::SampleEnergy()
       got_point = true;
     }
 
-    if (total_initial_energy < e_thresh)
-    {
-      for (int i = 0; i < initial_energy.size(); i++)
-      {
-        for (int j = 0; j < initial_energy.size(); j++)
-        {
-          density[0][i][j] += initial_energy[i][j];
-        }
-      }
-      total_initial_energy = 0;
-      out_sample.q_s = -100;
-      got_point = true;
-    }
 
   }
 //  cout << "number of times through loop = " << num << endl;

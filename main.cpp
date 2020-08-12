@@ -54,7 +54,7 @@ int main (int argc, char *argv[])
 
 				if (testSample.q_s == -100)
 				{
-					break;
+					continue;
 				}
 				testQuarks = machine.SplitSample(testSample);
 				if (inOut.GetTest() == "QuarkRatio")
