@@ -52,6 +52,10 @@ int main (int argc, char *argv[])
 
 				testSample = testEvent.SampleEnergy();
 
+				if (testSample.q_s == -100)
+				{
+					break;
+				}
 				testQuarks = machine.SplitSample(testSample);
 				if (inOut.GetTest() == "QuarkRatio")
 				{	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
