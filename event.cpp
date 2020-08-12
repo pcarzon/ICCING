@@ -90,7 +90,7 @@ Sample Event::GetGlue()
   int total_points = 0;
   //    if (valued_points.size() < 280)
   //    cout << "start GetGlue" << endl;
-  vector<int> gluon_bounds = GetIntegrationBounds(x_center, y_center, gluon_dist.size(), gluon_rad);
+  vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 //  cout << "get glue " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
 //    if (valued_points.size() < 280)
 //    cout << "got GetIntegrationBounds" << endl;
