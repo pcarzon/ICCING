@@ -168,6 +168,7 @@ Sample Event::SampleEnergy()
       }
       total_initial_energy = 0;
       out_sample.q_s = -100;
+      got_point = true;
     }
 
   }
