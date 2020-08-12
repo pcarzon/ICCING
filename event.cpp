@@ -191,6 +191,8 @@ void Event::UpdateDensity(Quarks quark_density)
 
         initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
   //      cout << "grid point: " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
+        if (isnan(initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
+          initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] = 0;
       }
     }
     cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
