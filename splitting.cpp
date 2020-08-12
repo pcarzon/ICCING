@@ -79,6 +79,7 @@ double Splitter::RollGlue(double e_tot)
     exit(0);
   }
 
+  if (isnan(x/e_tot)) cout << "How does this look? " << x << " " << e_tot << endl;
   return x/e_tot;
 }
 //__________________________________________________________________________________________
