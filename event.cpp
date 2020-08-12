@@ -144,6 +144,7 @@ Sample Event::SampleEnergy()
 //    if (valued_points.size() < 280)
 //    cout << "got_glue" << endl;
 
+
     if (out_sample.e_tot < e_thresh)
     {
 //    cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
@@ -228,6 +229,19 @@ void Event::UpdateDensity(Quarks quark_density)
 //##########################################################################################
 void Event::UpdateEnergy(double ratio)
 {
+
+  if (total_initial_energy < e_thresh)
+  {
+    for (int i = 0; i < initial_energy.size(); i++)
+    {
+      for (int j = 0; j < initial_energy.size(); j++)
+      {
+        density[0][i][j] += initial_energy[i][j];
+      }
+    }
+    total_initial_energy = 0;
+  }
+
   vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 //  if (valued_points.size() < 280)
 //  cout << "start UpdateEnergy" << endl;
@@ -298,13 +312,14 @@ bool Event::IsEventDone()
 
   if (total_initial_energy < e_thresh)
   {
-    for (int i = 0; i < initial_energy.size(); i++)
+/*    for (int i = 0; i < initial_energy.size(); i++)
     {
       for (int j = 0; j < initial_energy.size(); j++)
       {
         density[0][i][j] += initial_energy[i][j];
       }
     }
+    total_initial_energy = 0;*/
     return true;
   }
 //  if (valued_points.size() < 280)
