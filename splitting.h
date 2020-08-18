@@ -37,6 +37,8 @@ private:
 
 	Charge RollFlavor(double Qs);
 
+	vector<double> RollLocation(double mass, double Qs);
+
 	void CopySplitter(const Splitter &e);
 
 public:

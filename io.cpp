@@ -466,8 +466,6 @@ Splitter IO::InitializeSplitter()
 //##########################################################################################
 void IO::InitializeEOS()
 {
-  cout << "start eos" << endl;
-
   //  Output file stream
   ifstream input;
   input.open(eos_file);
@@ -520,7 +518,6 @@ void IO::ConvertEvent(vector<vector<double>> &input, double &total)
 
     if (entropy > e_chop)
     {
-  //  cout << i << " " << j << " " << input[i][j] << endl;
     input[i][j] = InterpolateValue(range, entropy);
     total += input[i][j];
     }
@@ -647,10 +644,6 @@ Event IO::ReadEvent(Event event_in)
   event_in.total_initial_energy = 0;
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
 
-/*  double energy = a_trento*event_in.total_initial_energy;
-  SplineSet range = FindRange(eos_interped, energy);
-  event_in.total_initial_energy = InterpolateValue(range, energy);*/
-
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
@@ -766,7 +759,6 @@ void IO::WriteEvent(Event event)
       OutputSparseDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
     }
   }
-  cout << "Finish writing event" << endl;
 
   current_event++;  //  Used for tracking which event has been processed
 }

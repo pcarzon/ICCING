@@ -1,20 +1,40 @@
 #include "splitting.h"
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Class constructor
+//    Create empty Splitter
+//##########################################################################################
 Splitter::Splitter()
 {
 
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Class deconstructor
+//##########################################################################################
 Splitter::~Splitter()
 {
 
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Implicit Copy
+//##########################################################################################
 Splitter::Splitter(const Splitter &original)
 {
   CopySplitter(original);
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Splitter Copy Function
+//##########################################################################################
 void Splitter::CopySplitter(const Splitter &e)
 {
   flavor_chemistry = e.flavor_chemistry;
@@ -27,12 +47,18 @@ void Splitter::CopySplitter(const Splitter &e)
   test_ = e.test_;
   output_dir = e.output_dir;
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Overide operator=
+//##########################################################################################
 Splitter& Splitter::operator= (const Splitter& original)
 {
 	CopySplitter(original);
 	return *this;
 }
+//__________________________________________________________________________________________
 
 //__________________________________________________________________________________________
 //##########################################################################################
@@ -45,102 +71,127 @@ double Splitter::RollGlue(double e_tot)
   int num_tests = 0;
   ofstream output;
 
-  uniform_real_distribution<double> get_energy(e_thresh, e_tot);
-  uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));
-//  cout << "got here " << test_ << endl;
-  if (test_ == "GluonEnergyDist")
-  {
-//    cout << "test works " << test_ << endl;
-    output.open(output_dir + "gluon_energy_dist_test.dat");
+  //  Initialize distributions for selecting gluon energy
+  uniform_real_distribution<double> get_energy(e_thresh, e_tot);  //  Selects an energy along the x-axis
+  uniform_real_distribution<double> get_probability(0.0, 1.01/pow(e_thresh, lambda_));  //  Selects a probability along the y-axis
 
-    output << "max prob: " << get_probability.max() << " e_tot: " << e_tot << endl;
-  }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //  Flagged statement for reproducing Gluon Energy Distribution for testing
+  if (test_ == "GluonEnergyDist"){ output.open(output_dir + "gluon_energy_dist_test.dat"); }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+  //  Loop until an energy and probability is selected where the probability is less than
+  //  the value of the distribution function at selected energy
   while (!got_glue)
   {
+    //  Sample random energy and probability
     x = get_energy(get_random_number);
     y = get_probability(get_random_number);
 
-    if (y < 1/pow(x, lambda_)) got_glue = true;// output << "\tyes" << endl;}
+    //  Test if the random probability is less than the function at selected energy
+    if (y < 1/pow(x, lambda_)){ got_glue = true; }
 
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //  Flagged statement for reproducing Gluon Energy Distribution for testing
     if (test_ == "GluonEnergyDist")
     {
       output << x << " " << 1/pow(x, lambda_) << endl;
-
       num_tests++;
-      if (num_tests < 10000)
-      { got_glue = false; }
+      if (num_tests < 10000){ got_glue = false; }
     }
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
-  if (test_ == "GluonEnergyDist")
-  {
-    output.close();
-    exit(0);
-  }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //  Flagged statement for reproducing Gluon Energy Distribution for testing
+  if (test_ == "GluonEnergyDist"){ output.close();  exit(0); }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  cout << "How does this look? " << x << " " << e_tot << endl;
+  //  Return fraction of energy that is to be selected
   return x/e_tot;
 }
 //__________________________________________________________________________________________
 
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Select flavor of gluon
+//##########################################################################################
 Charge Splitter::RollFlavor(double Qs)
 {
   Charge create_charge;
 
+  //  Initialize distribution for selecting quark flavor probability
   uniform_real_distribution<double> get_flavor(0, 1);
 
+  //  For given Qs, probabilities to get each flavor are extrapolated
   double u = alpha_s*InterpolateValue(FindRange(flavor_chemistry[0], Qs), Qs);
   double d = alpha_s*InterpolateValue(FindRange(flavor_chemistry[1], Qs), Qs);
   double s = alpha_s*InterpolateValue(FindRange(flavor_chemistry[2], Qs), Qs);
   double c = alpha_s*InterpolateValue(FindRange(flavor_chemistry[3], Qs), Qs);
+
+  //  Get probability to get gluon for given Qs
   double g = 1 - u - d - s - c;
+
+  //  Get probability value of gluon to see if it will split
   double probability = get_flavor(get_random_number);
-  //probability = 0.985;
-  // gluon prob = 1 - sum of q_s_range
+
+  //  Test if gluon remains gluon
   if (0 <= probability && probability <= g)
   { create_charge.Gluon(dipole_model);  }
+  //  Test if gluon becomes up quark pair
   else if (g < probability && probability <= g + u)
   { create_charge.Up(dipole_model);  }
+  //  Test if gluon becomes down quark pair
   else if (g + u < probability && probability <= g + u + d)
   { create_charge.Down(dipole_model);  }
+  //  Test if gluon becomes strange quark pair
   else if (g + u + d < probability && probability <= g + u + d + s)
   { create_charge.Strange(dipole_model);  }
+  //  Test if gluon becomes charm quark pair
   else
   { create_charge.Charm(dipole_model);  }
 
-/*  cout << "qs: "
-  << FindRange(flavor_chemistry[0], Qs).x << " "
-  << FindRange(flavor_chemistry[1], Qs).x << " "
-  << FindRange(flavor_chemistry[2], Qs).x << " "
-  << FindRange(flavor_chemistry[3], Qs).x << endl;
-
-  cout << "flavor probs: "
-  << probability << " "
-  << Qs << " "
-  << g << " "
-  << u << " "
-  << d << " "
-  << s << " "
-  << c << endl;*/
+  //  Return charge of sample
   return create_charge;
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Sample location and momentum fraction of quark pair
+//##########################################################################################
+vector<double> Splitter::RollLocation(double mass, double Qs)
+{
+
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Process energy from Event and create gluon or quark pairs
+//##########################################################################################
 Quarks Splitter::SplitSample(Sample sampled_energy)
 {
   Quarks create_quarks;
   Charge set_charge;
   double gluon_energy_frac;
+  vector<double> quark_location;
 
-//  cout << "e_tot in SplitSample = " << sampled_energy.e_tot << endl;
-
+  //  Get fraction of energy for gluon
   gluon_energy_frac = RollGlue(sampled_energy.e_tot);
+
+  //  Get flavor of gluon
   set_charge = RollFlavor(sampled_energy.q_s);
-  // If statement to check if 2*quark_mass < gluon_energy_frac*e_tot (add now)
-  //    If this is false go back to SampleEnergy and find new center point
-//  cout << "Flavor " << set_charge.GetCharge()[0] << endl;
+
+  //   If this is false go back to SampleEnergy and find new center point
+  if (2*set_charge.GetCharge()[0] > gluon_energy_frac*e_tot)  { gluon_energy_frac = -1; }
+
+  quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s);
+
+  //  Create quarks to be distributed in output density grids
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
 
   return create_quarks;
 }
+//__________________________________________________________________________________________

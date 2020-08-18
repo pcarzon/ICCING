@@ -63,9 +63,6 @@ void Event::CopyEvent(const Event &e)
   total_initial_energy = e.total_initial_energy;
   total_energy = e.total_energy;
   seed = e.seed;
-
-//  cout << "Finished copying event" << endl;
-
 }
 //__________________________________________________________________________________________
 
@@ -87,30 +84,31 @@ Event& Event::operator= (const Event& original)
 Sample Event::GetGlue()
 {
   double q_s, e_tot;
+  Sample samp;
   int total_points = 0;
-  //    if (valued_points.size() < 280)
-  //    cout << "start GetGlue" << endl;
+
+  //  Get bounds of gluon using center point as defined by SampleEnergy
+  //    Makes sure calculations are only done on points in initial_energy
   vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
-//  cout << "get glue " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
-//    if (valued_points.size() < 280)
-//    cout << "got GetIntegrationBounds" << endl;
+
+  //  Loop over gluon_dist using gluon_bounds
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
     {
+      //  Sum up q_s of gluon region
       q_s += t_b[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
+
+      //  Sum up total energy from gluon region
       e_tot += initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]*gluon_dist[i][j];
-      total_points++;
+
+      total_points++; //  Calculate total for normalization of q_s
     }
   }
-  //    if (valued_points.size() < 280)
-  //    cout << "got totals" << endl;
 
-  Sample samp;
+  //  Set normalized q_s and e_tot for output
   samp.q_s = q_s/total_points;
   samp.e_tot = pow(grid_step,2)*tau_0*e_tot;
-  //    if (valued_points.size() < 280)
-  //    cout << "finished GetGlue" << endl;
 
   return samp;
 }
@@ -126,57 +124,57 @@ Sample Event::SampleEnergy()
 {
   int point;
   bool got_point = false;
-  int num = 0;
   Sample out_sample;
 
+  //  Loop until a point gives e_tot > e_thresh
   while (!got_point)
   {
     //  Initialize distribution for selecting points from initial_energy
     get_grid_point = uniform_int_distribution<int>(0, valued_points.size()-1);
 
+    //  Get random valued point for gluon center
     point = get_grid_point(get_random_number);
-    num++;
-//    if (valued_points.size() < 10)
-//    cout << "got point " << valued_points[point][0] << " " << valued_points[point][1] << endl;
+
+    //  Store x and y of gluon center in class variables for use in other functions
     x_center = valued_points[point][0];
     y_center = valued_points[point][1];
+
+    //  Get the total energy and q_s using center picked above
     out_sample = GetGlue();
-//    if (valued_points.size() < 280)
-//    cout << "got_glue" << endl;
 
-
+    //  Test if e_tot of gluon is less than e_thresh
+    //    If true, then just copy energy over to density[0]
+    //    Else, set got_point = true and pass out_sample to Splitter
     if (out_sample.e_tot < e_thresh)
     {
-//    cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
+      //  Copy over energy to density[0], not enough to run though algorithm
       UpdateEnergy(1.);
 
+      //  If total energy is less than e_thresh then no more quarks can be made
+      //  so copy all energy left to density[0]
       if (total_initial_energy < e_thresh)
       {
         for (int i = 0; i < initial_energy.size(); i++)
         {
           for (int j = 0; j < initial_energy.size(); j++)
           {
+            //  Copy all energy left to density[0] and set all initial_energy = 0
             density[0][i][j] += initial_energy[i][j];
+            initial_energy[i][j] = 0;
           }
         }
-        total_initial_energy = 0;
-        out_sample.q_s = -100;
-        got_point = true;
+
+        total_initial_energy = 0; //  Set total_energy = 0
+        out_sample.q_s = -100;  //  Set flag to end event (q_s = -100, unphysical value)
+        got_point = true; //  Set got_point to exit loop
       }
-      else
-      continue;
+
     }
     else
     {
-      got_point = true;
+      got_point = true; //  Set got_point to exit loop
     }
-
-
   }
-//  cout << "number of times through loop = " << num << endl;
-//  cout << valued_points[point][0] << " " << valued_points[point][1] << " " << initial_energy[valued_points[point][0]][valued_points[point][1]] << endl;
-//if (valued_points.size() < 280)
-//cout << "end SampleEnergy" << endl;
 
   return out_sample;
 }
@@ -189,36 +187,25 @@ Sample Event::SampleEnergy()
 void Event::UpdateDensity(Quarks quark_density)
 {
   vector<double> position = quark_density.GetPosition();
-    if (isnan(quark_density.GetEnergyFraction()))
-    cout << "Well Theres your problem!" << endl;
+
   if (quark_density.GetCharge()[0] == 0.)
   {
     UpdateEnergy(quark_density.GetEnergyFraction());
   }
   else {
+    //  Get bounds of gluon using center point as defined by SampleEnergy
+    //    Makes sure calculations are only done on points in initial_energy
     vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 
     for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
     {
       for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
       {
-        cout <<  initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << " ";
-        if (isnan(gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
-        cout << "Is it here?" << gluon_dist[i][j] << " " << quark_density.GetEnergyFraction() << " " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
-
-
         total_initial_energy -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
         total_energy += gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
-        if (isnan(total_initial_energy))
-          cout << "Problem! " << initial_energy[x_center][y_center] << endl;
-
         initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
-  //      cout << "grid point: " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
-        if (isnan(initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
-          initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] = 0;
       }
     }
-    cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
 /*
   vector<int> quark_bounds = GetIntegrationBounds(x_center, y_center, quark_rad);
 
@@ -245,28 +232,23 @@ void Event::UpdateDensity(Quarks quark_density)
 //##########################################################################################
 void Event::UpdateEnergy(double ratio)
 {
+  //  Get bounds of gluon using center point as defined by SampleEnergy
+  //    Makes sure calculations are only done on points in initial_energy
   vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
-//  if (valued_points.size() < 280)
-//  cout << "start UpdateEnergy" << endl;
-//  cout << "update energy " <<gluon_bounds[0]<< " "<<gluon_bounds[2]<< " "<<gluon_bounds[1]<< " "<<gluon_bounds[3]<< " "<< endl;
+
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
     for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
     {
-//      if (valued_points.size() < 280)
-//      cout << "doing UpdateEnergy" << endl;
-
-//      cout << "original " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << " ";
+      //  Change energy totals to reflect change in energy grids
       total_initial_energy -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       total_energy += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+
+      //  Subtract energy proportional to ratio from initial_energy and add it to density[0]
       initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
       density[0][x_center - gluon_rad + i][y_center - gluon_rad + j] += gluon_dist[i][j]*ratio*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
-//      cout << "final " << initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] << endl;
-    if (isnan(initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j]))
-      initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] = 0;
     }
   }
-  cout << "Total Energy: " << total_initial_energy << " " << total_energy << endl;
 }
 //__________________________________________________________________________________________
 
@@ -276,26 +258,25 @@ void Event::UpdateEnergy(double ratio)
 //##########################################################################################
 vector<int> Event::GetIntegrationBounds(int size, double raduis)
 {
-//  if (valued_points.size() < 280)
-//  cout << "start GetIntegrationBounds" << endl;
-
   vector<int> bounds;
+
+  //  Set default values for integration bounds
   bounds.push_back(0);
   bounds.push_back(0);
   bounds.push_back(size);
   bounds.push_back(size);
 
+  //  Update lower bounds of integration to avoid accessing elements out of bounds of density grids
   if (x_center - raduis < 0)
   { bounds[0] = -(x_center - raduis);  }
   if (y_center - gluon_rad < 0)
   { bounds[1] = -(y_center - raduis);  }
 
+  //  Update upper bounds of integration to avoid accessing elements out of bounds of density grids
   if (x_center + raduis > t_b.size())
   { bounds[2] = grid_points - (x_center + raduis);  }
   if (y_center + gluon_rad > t_b.size())
   { bounds[3] = grid_points - (x_center + raduis);  }
-//  if (valued_points.size() < 280)
-//  cout << "end GetIntegrationBounds" << endl;
 
   return bounds;
 }
@@ -307,32 +288,16 @@ vector<int> Event::GetIntegrationBounds(int size, double raduis)
 //##########################################################################################
 bool Event::IsEventDone()
 {
+  //  Check all points in valued points and remove ones that are now 0
   for (int i = 0; i < valued_points.size(); i++)
   {
     if (initial_energy[valued_points[i][0]][valued_points[i][1]] == 0)
     { valued_points.erase(valued_points.begin() + i); }
   }
 
-  if (total_initial_energy < e_thresh)
-  {
-/*    for (int i = 0; i < initial_energy.size(); i++)
-    {
-      for (int j = 0; j < initial_energy.size(); j++)
-      {
-        density[0][i][j] += initial_energy[i][j];
-      }
-    }
-    total_initial_energy = 0;*/
-    return true;
-  }
-//  if (valued_points.size() < 280)
-  cout << "# points " << valued_points.size() << endl;
-//  if (valued_points.size() % 100 == 0)
-//   cout << "# points " << valued_points.size();
+  //  If there are no valued points left, exit algorithm loop and write event to file
   if (valued_points.size() == 0)
-  {
-    cout << "final points " << valued_points.size() << endl;
-     return true;  }
+  { return true;  }
   else
   { return false; }
 }

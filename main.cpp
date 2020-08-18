@@ -36,15 +36,18 @@ int main (int argc, char *argv[])
 
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
+
+	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	ofstream quark_output;
-	if (inOut.GetTest() == "QuarkRatio")
-	{	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
+	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
+	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	while (!inOut.LastEvent())
 	{
 		start = clock();
+
 		testEvent = inOut.ReadEvent(initializedEvent);
-		cout << "started processing event" << endl;
+
 			while (!testEvent.IsEventDone())
 			{
 				Sample testSample;
@@ -52,18 +55,20 @@ int main (int argc, char *argv[])
 
 				testSample = testEvent.SampleEnergy();
 
-				if (testSample.q_s == -100)
-				{
-					continue;
-				}
+				if (testSample.q_s == -100){	continue;	}
+
 				testQuarks = machine.SplitSample(testSample);
-				if (inOut.GetTest() == "QuarkRatio")
-				{	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
+
+				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
+
+				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if (inOut.GetTest() == "QuarkRatio"){	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
+				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 				testEvent.UpdateDensity(testQuarks);
 				eventcount++;
 			}
-		cout << "# times through event loop " << eventcount << endl;
+
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
 
@@ -71,8 +76,10 @@ int main (int argc, char *argv[])
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
 		cout << "Event processing time: " << duration/60 << " min" << endl;
 	}
-	if (inOut.GetTest() == "QuarkRatio")
-	{	quark_output.close();	}
+
+	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (inOut.GetTest() == "QuarkRatio"){	quark_output.close();	}
+	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	return 0;
 }
