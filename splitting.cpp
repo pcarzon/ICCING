@@ -189,7 +189,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   set_charge = RollFlavor(sampled_energy.q_s);
 
   //   If this is false go back to SampleEnergy and find new center point
-  if (2*set_charge.GetCharge()[0] > gluon_energy_frac*e_tot)  { gluon_energy_frac = -1; }
+  if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)  { gluon_energy_frac = -1; }
 
   quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s);
 
