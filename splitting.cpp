@@ -163,6 +163,10 @@ Charge Splitter::RollFlavor(double Qs)
 //##########################################################################################
 vector<double> Splitter::RollLocation(double mass, double Qs)
 {
+  uniform_real_distribution<double> get_r(0, r_max);
+  uniform_real_distribution<double> get_alpha(alpha_min, 1 - alpha_min);
+
+  double maximum = 1.01;
 
 }
 //__________________________________________________________________________________________
