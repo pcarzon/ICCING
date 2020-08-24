@@ -17,6 +17,9 @@ ecc.o : ecc.h event.h ecc.cpp
 eos.o : eos.h event.h eos.cpp
 	$(CC) $(CFLAGS) eos.cpp
 
+correlation.o : correlation.h correlation.cpp
+	$(CC) $(CFLAGS) correlation.cpp
+
 io.o : io.h event.h correlation.h io.cpp
 	$(CC) $(CFLAGS) io.cpp
 
