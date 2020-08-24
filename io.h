@@ -22,6 +22,7 @@
 #include "ecc.h"
 #include "splitting.h"
 #include "functions.h"
+#include "correlation.h"
 //__________________________________________________________________________________________
 
 using namespace std;

@@ -196,7 +196,7 @@ void IO::Initialize()
   qrad_ = 0.0;
   lambda_ = 0.0;
 
-  dipole_model = "BSQ";
+  dipole_model = "";
   alpha_s = 0.0;
   alpha_min = 0.0;
   r_max = 0.0;
@@ -213,7 +213,7 @@ void IO::Initialize()
   grid_step = 0.0;
   tau_0 = 0.0;
   e_thresh = 0.0;
-  charge_type = "";
+  charge_type = "BSQ";
   //#CONFIGPARAM
 
   tracked_charge = 0;
@@ -445,8 +445,8 @@ Splitter IO::InitializeSplitter()
     init_splitter.flavor_chemistry[i] = CubicSpline(ratio_q_s, ratio_quarks[i]);
   }
 
-  if (dipole_model == "BSQ")  { init_splitter.dipole_model = 0;  }
-  if (dipole_model == "UDS")  { init_splitter.dipole_model = 1;  }
+  if (charge_type == "BSQ")  { init_splitter.charge_type = 0;  }
+  if (charge_type == "UDS")  { init_splitter.charge_type = 1;  }
   init_splitter.alpha_s = alpha_s;
   init_splitter.alpha_min = alpha_min;
   init_splitter.r_max = r_max;
@@ -454,6 +454,8 @@ Splitter IO::InitializeSplitter()
   init_splitter.lambda_ = lambda_;
   init_splitter.test_ = test_;
   init_splitter.output_dir = output_dir;
+
+  init_splitter.F = Correlator(dipole_model);
 
   return init_splitter;
 }

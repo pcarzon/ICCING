@@ -38,7 +38,7 @@ Splitter::Splitter(const Splitter &original)
 void Splitter::CopySplitter(const Splitter &e)
 {
   flavor_chemistry = e.flavor_chemistry;
-	dipole_model = e.dipole_model;
+	charge_type = e.charge_type;
 	alpha_s = e.alpha_s;
 	alpha_min = e.alpha_min;
 	r_max = e.r_max;
@@ -46,6 +46,8 @@ void Splitter::CopySplitter(const Splitter &e)
   lambda_ = e.lambda_;
   test_ = e.test_;
   output_dir = e.output_dir;
+
+  F = e.F;
 }
 //__________________________________________________________________________________________
 
@@ -138,19 +140,19 @@ Charge Splitter::RollFlavor(double Qs)
 
   //  Test if gluon remains gluon
   if (0 <= probability && probability <= g)
-  { create_charge.Gluon(dipole_model);  }
+  { create_charge.Gluon(charge_type);  }
   //  Test if gluon becomes up quark pair
   else if (g < probability && probability <= g + u)
-  { create_charge.Up(dipole_model);  }
+  { create_charge.Up(charge_type);  }
   //  Test if gluon becomes down quark pair
   else if (g + u < probability && probability <= g + u + d)
-  { create_charge.Down(dipole_model);  }
+  { create_charge.Down(charge_type);  }
   //  Test if gluon becomes strange quark pair
   else if (g + u + d < probability && probability <= g + u + d + s)
-  { create_charge.Strange(dipole_model);  }
+  { create_charge.Strange(charge_type);  }
   //  Test if gluon becomes charm quark pair
   else
-  { create_charge.Charm(dipole_model);  }
+  { create_charge.Charm(charge_type);  }
 
   //  Return charge of sample
   return create_charge;
@@ -165,6 +167,7 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
 {
   uniform_real_distribution<double> get_r(0, r_max);
   uniform_real_distribution<double> get_alpha(alpha_min, 1 - alpha_min);
+  uniform_real_distribution<double> get_phi(0, 2*M_PI);
 
   double maximum = 1.01;
 
