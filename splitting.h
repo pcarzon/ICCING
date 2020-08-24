@@ -9,6 +9,7 @@
 
 #include "global.h"
 #include "functions.h"
+#include "correlation.h"
 
 using namespace std;
 
