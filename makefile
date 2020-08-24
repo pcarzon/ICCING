@@ -1,6 +1,6 @@
 CC = g++
 DEBUG = -g
-CFLAGS = -std=c++11 -Wall -c $(DEBUG)
+CFLAGS = -std=gnu++11 -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
