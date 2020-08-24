@@ -68,7 +68,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
     corr = MVModel;
   }
 
-  (*corr)(r, alpha, m, Qs);
+  //(*corr)(r, alpha, m, Qs);
 
 /*  double f1, f2, x0, x1, x2, x3;
 
@@ -96,7 +96,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   return (*corr)((lower + upper) / 2., alpha, m, Qs);
 }
 
-vector<double> Correlator::F(double r, double alpha, double m, double Qs)
+double Correlator::F(double r, double alpha, double m, double Qs)
 {
   if (dipole_model == "MV")
   {

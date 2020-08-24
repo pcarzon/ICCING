@@ -18,9 +18,9 @@ private:
   string dipole_model;
   double gamma;
 
-  const double GeVfm = 1/0.19732687;
-  const double R = 0.61803399;
-  const double C = 1.0 - R;
+  double GeVfm = 1/0.19732687;
+  double R = 0.61803399;
+  double C = 1.0 - R;
 	void CopyCorrelator(const Correlator &e);
 
 public:
@@ -35,6 +35,6 @@ public:
 
   double FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance);
 
-  vector<double> F(double r = 0., double alpha = 0., double m = 0., double Qs = 0.);
+  double F(double r = 0., double alpha = 0., double m = 0., double Qs = 0.);
 };
 #endif
