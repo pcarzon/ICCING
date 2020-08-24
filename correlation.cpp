@@ -65,7 +65,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   double (*corr)(double, double, double, double);
   if (dipole_model == "MV")
   {
-    corr = MVModel;
+    (*corr) = (*MVModel);
   }
 
   //(*corr)(r, alpha, m, Qs);
