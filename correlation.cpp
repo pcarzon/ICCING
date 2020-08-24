@@ -52,7 +52,7 @@ Correlator& Correlator::operator= (const Correlator& original)
 }
 //__________________________________________________________________________________________
 
-double MVModel(double r, double alpha, double m, double Qs)
+double Correlator::MVModel(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
   double term2 = (1 - exp(-0.25*(pow(alpha, 2)*log(1/(alpha*GeVfm*r*gamma)) + pow(1 - alpha, 2)*log(1/((1 - alpha)*GeVfm*r*gamma)))*pow(GeVfm*r*Qs, 2)));
