@@ -4,7 +4,7 @@ CFLAGS = -std=c++11 -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
-CPP_FILES = ecc.cpp eos.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cxx
+CPP_FILES = ecc.cpp eos.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cpp
 HEADER_FILES = ecc.h eos.h event.h io.h functions.h splitting.h global.h correlation.h
 OBJECT_FILES = ecc.o eos.o event.o io.o functions.o main.o splitting.o correlation.o
 
