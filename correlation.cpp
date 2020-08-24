@@ -78,7 +78,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   double k = (sqrt(5.) - 1.) / 2.;
   double xL = upper - k * (upper - lower);
   double xR = lower + k * (upper - lower);
-  while (upper - lower > EPSILON)
+  while (upper - lower > 0.01)
   {
     if ((*corr)(xL, alpha, m, Qs) > (*corr)(xR, alpha, m, Qs))
     {
