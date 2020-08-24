@@ -33,7 +33,7 @@ private:
 	string test_;
 	string output_dir;
 
-	Correlator F("");
+	Correlator F = Correlator("");
 	//  See: RollGlue in ICCING_v0_1_8.nb
   double RollGlue(double e_tot);
 
