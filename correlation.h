@@ -1,7 +1,7 @@
 #ifndef Correlator_H
 #define Correlator_H
 
-#undef __STRICT_ANSI__
+//#undef __STRICT_ANSI__
 
 #include <iostream>
 #include <string>
