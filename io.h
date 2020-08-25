@@ -67,6 +67,7 @@ private:
     alphas,
     alphamin,
     rmax,
+    lambdabym,
 
     eosemmitlines,
     eosscol,
@@ -121,6 +122,7 @@ private:
   double alpha_s;
   double alpha_min;
   double r_max;
+  double lambda_bym;
 
   //******************************************************************************************
   //  EOS Config parameters

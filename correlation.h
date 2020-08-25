@@ -19,7 +19,7 @@ class Correlator
 private:
 
   string dipole_model;
-  double gamma;
+  double lambda_bym;
 
   double GeVfm = 1/0.19732687;
   double R = 0.61803399;
@@ -28,7 +28,7 @@ private:
 
 public:
 
-  Correlator(string model);
+  Correlator(string model, double lambda);
   ~Correlator();
 
   Correlator(const Correlator &original);
