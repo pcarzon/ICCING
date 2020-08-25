@@ -54,6 +54,10 @@ Correlator& Correlator::operator= (const Correlator& original)
 
 double Correlator::Vaccum(double r, double alpha, double m, double Qs)
 {
+  double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
+  double term2 = (1 - exp(-0.25*(pow(alpha, 2)*log(1/(alpha*GeVfm*r*gamma)) + pow(1 - alpha, 2)*log(1/((1 - alpha)*GeVfm*r*gamma)))*pow(GeVfm*r*Qs, 2)));
+  double term3 = (pow(alpha, 2) + pow(1 - alpha, 2))*pow(cyl_bessel_k(1, GeVfm*m*r), 2) + pow(cyl_bessel_k(0, GeVfm*m*r), 2);
+  return term1*term2*term3;
 }
 
 double Correlator::MVModel(double r, double alpha, double m, double Qs)
