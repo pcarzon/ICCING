@@ -60,12 +60,14 @@ double Correlator::MVModel(double r, double alpha, double m, double Qs)
   return term1*term2*term3;
 }
 
+auto corr = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+
 double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance)
 {
-//  if (dipole_model == "MV")
-//  {
-    auto corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
-//  }
+  if (dipole_model == "MV")
+  {
+    corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+  }
 
   //(*corr)(r, alpha, m, Qs);
 
