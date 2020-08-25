@@ -40,7 +40,8 @@ int main (int argc, char *argv[])
 
 	Correlator testCorrelator("MV", 0.001);
 
-	cout << "Testing MVModel: " << testCorrelator.F(0.5, 0.1, 0.0023, 1) << endl;
+	cout << "Testing MVModel: " << testCorrelator.F(0.5, 0.1, 0.0023, 1) << endl
+	<<	"FindMaximum: " << testCorrelator.FindMaximum(pow(10, -5), 0.0023, 1, 0, 1, 0.001) << endl;
 /*
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	ofstream quark_output;
