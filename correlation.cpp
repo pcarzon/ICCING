@@ -68,13 +68,17 @@ double Correlator::MVModel(double r, double alpha, double m, double Qs)
   return term1*term2*term3;
 }
 
-function<double(double, double, double, double)> corr;// = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+function<double(double, double, double, double)> corr;
 
 double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance)
 {
   if (dipole_model == "MV")
   {
     corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+  }
+  else
+  {
+    corr = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
 
   //(*corr)(r, alpha, m, Qs);
@@ -110,5 +114,9 @@ double Correlator::F(double r, double alpha, double m, double Qs)
   if (dipole_model == "MV")
   {
     return MVModel(r, alpha, m, Qs);
+  }
+  else
+  {
+    return Vaccum(r, alpha, m, Qs);
   }
 }

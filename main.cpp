@@ -10,6 +10,7 @@
 #include "event.h"
 #include "io.h"
 #include "splitting.h"
+#include "correlation.h"
 
 using namespace std;
 
@@ -37,6 +38,10 @@ int main (int argc, char *argv[])
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
+	Correlator testCorrelator("MVModel");
+
+	cout << "Testing MVModel: " << testCorrelator.F(0.5, 0., 0.0023, 1) << endl;
+/*
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	ofstream quark_output;
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
@@ -80,6 +85,6 @@ int main (int argc, char *argv[])
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.close();	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+*/
 	return 0;
 }
