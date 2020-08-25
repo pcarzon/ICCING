@@ -34,6 +34,8 @@ public:
   Correlator(const Correlator &original);
   Correlator& operator=(const Correlator& original);
 
+  double Vaccum(double r, double alpha, double m, double Qs);
+
   double MVModel(double r, double alpha, double m, double Qs);
 
   double FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance);
