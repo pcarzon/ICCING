@@ -38,7 +38,7 @@ int main (int argc, char *argv[])
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
-	Correlator testCorrelator("MVModel");
+	Correlator testCorrelator("MV");
 
 	cout << "Testing MVModel: " << testCorrelator.F(0.5, 0.1, 0.0023, 1) << endl;
 /*
