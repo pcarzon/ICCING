@@ -8,6 +8,7 @@
 #include <cmath>
 #include <vector>
 #include <numeric>
+#include <functional>
 
 using namespace std;
 
