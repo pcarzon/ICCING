@@ -52,6 +52,10 @@ Correlator& Correlator::operator= (const Correlator& original)
 }
 //__________________________________________________________________________________________
 
+double Correlator::Vaccum(double r, double alpha, double m, double Qs)
+{
+}
+
 double Correlator::MVModel(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
