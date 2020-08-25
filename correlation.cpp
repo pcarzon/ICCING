@@ -68,7 +68,7 @@ double Correlator::MVModel(double r, double alpha, double m, double Qs)
   return term1*term2*term3;
 }
 
-auto corr;// = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+function<double(double, double, double, double)> corr;// = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
 
 double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance)
 {
