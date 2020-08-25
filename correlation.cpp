@@ -62,10 +62,10 @@ double Correlator::MVModel(double r, double alpha, double m, double Qs)
 
 double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance)
 {
-//  if (dipole_model == "MV")
-//  {
-    auto corr = bind(&Correlator::MVModel, this, placeholders::_1);
-//  }
+  if (dipole_model == "MV")
+  {
+    auto corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+  }
 
   //(*corr)(r, alpha, m, Qs);
 
@@ -79,7 +79,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   double xR = lower + k * (upper - lower);
   while (upper - lower > 0.01)
   {
-    if ((*corr)(xL, alpha, m, Qs) > (*corr)(xR, alpha, m, Qs))
+    if (corr(xL, alpha, m, Qs) > corr(xR, alpha, m, Qs))
     {
       upper = xR;
       xR = xL;
@@ -92,7 +92,7 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
       xR = lower + k * (upper - lower);
     }
   }
-  return (*corr)((lower + upper) / 2., alpha, m, Qs);
+  return corr((lower + upper) / 2., alpha, m, Qs);
 }
 
 double Correlator::F(double r, double alpha, double m, double Qs)
