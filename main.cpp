@@ -46,24 +46,24 @@ int main (int argc, char *argv[])
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//	while (!inOut.LastEvent())
-//	{
+	while (!inOut.LastEvent())
+	{
 		start = clock();
 
 		testEvent = inOut.ReadEvent(initializedEvent);
 
-//			while (!testEvent.IsEventDone())
-//			{
+			while (!testEvent.IsEventDone())
+			{
 				Sample testSample;
 				Quarks testQuarks;
 
 				testSample = testEvent.SampleEnergy();
 
-//				if (testSample.q_s == -100){	continue;	}
+				if (testSample.q_s == -100){	continue;	}
 
 				testQuarks = machine.SplitSample(testSample);
 
-//				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
+				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
 
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				if (inOut.GetTest() == "QuarkRatio"){	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
@@ -71,7 +71,7 @@ int main (int argc, char *argv[])
 
 				testEvent.UpdateDensity(testQuarks);
 				eventcount++;
-//			}
+			}
 
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
