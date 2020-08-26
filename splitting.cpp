@@ -177,10 +177,11 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
     alpha = get_alpha(get_random_number);
 
     ceiling = 1.01*Model_Correlator.FindMaximum(alpha, mass, Qs, 0, 1, 0.001);
+    cout << "parameters: " << r << " " << alpha << " " << mass << " " << Qs << endl;
 
     uniform_real_distribution<double> get_location_prob(0, ceiling);
     prob = get_location_prob(get_random_number);
-cout << "Got here " << prob << " < " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
+cout << "probabilities: " << prob << " < " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
     if (prob < Model_Correlator.F(r, alpha, mass, Qs))
     { r_final = r;  }
   }
