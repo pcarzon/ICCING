@@ -460,7 +460,7 @@ Splitter IO::InitializeSplitter()
   init_splitter.test_ = test_;
   init_splitter.output_dir = output_dir;
 
-  init_splitter.F = Correlator(dipole_model, lambda_bym);
+  init_splitter.Model_Correlator = Correlator(dipole_model, lambda_bym);
 
   return init_splitter;
 }
