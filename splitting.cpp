@@ -47,7 +47,7 @@ void Splitter::CopySplitter(const Splitter &e)
   test_ = e.test_;
   output_dir = e.output_dir;
 
-  F = e.F;
+  Model_Correlator = e.Model_Correlator;
 }
 //__________________________________________________________________________________________
 
@@ -169,8 +169,24 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
   uniform_real_distribution<double> get_alpha(alpha_min, 1 - alpha_min);
   uniform_real_distribution<double> get_phi(0, 2*M_PI);
 
-  double maximum = 1.01;
+  double r, r_final = 0, alpha, phi, prob, ceiling;
 
+  while (r_final == 0)
+  {
+    r = get_r(get_random_number);
+    alpha = get_alpha(get_random_number);
+
+    ceiling = 1.01*Model_Correlator.FindMaximum(alpha, mass, Qs, 0, 1, 0.001);
+
+    uniform_real_distribution<double> get_location_prob(0, ceiling);
+    prob = get_location_prob(get_random_number);
+
+    if (prob < Model_Correlator.F(r, alpha, mass, Qs))
+    { r_final = r;  }
+  }
+
+  phi = get_phi(get_random_number);
+  return {alpha, r_final*Cos(phi), r_final*Sin(phi)};
 }
 //__________________________________________________________________________________________
 
@@ -197,7 +213,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s);
 
   //  Create quarks to be distributed in output density grids
-  create_quarks.CreateQuarks(set_charge, gluon_energy_frac, 0.1, 0.1, 0.1);
+  create_quarks.CreateQuarks(set_charge, gluon_energy_frac, quark_location[0], quark_location[1], quark_location[2]);
 
   return create_quarks;
 }

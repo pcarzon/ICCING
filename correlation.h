@@ -1,8 +1,6 @@
 #ifndef Correlator_H
 #define Correlator_H
 
-//#undef __STRICT_ANSI__
-
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -26,6 +24,10 @@ private:
   double C = 1.0 - R;
 	void CopyCorrelator(const Correlator &e);
 
+  double Vaccum(double r, double alpha, double m, double Qs);
+
+  double MVModel(double r, double alpha, double m, double Qs);
+
 public:
 
   Correlator(string model, double lambda);
@@ -33,10 +35,6 @@ public:
 
   Correlator(const Correlator &original);
   Correlator& operator=(const Correlator& original);
-
-  double Vaccum(double r, double alpha, double m, double Qs);
-
-  double MVModel(double r, double alpha, double m, double Qs);
 
   double FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance);
 

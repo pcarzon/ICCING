@@ -57,7 +57,7 @@ Correlator& Correlator::operator= (const Correlator& original)
 double Correlator::Vaccum(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
-  double term2 = (1 - exp(-0.25*(pow(alpha, 2)*log(1/(alpha*GeVfm*r*lambda_bym)) + pow(1 - alpha, 2)*log(1/((1 - alpha)*GeVfm*r*lambda_bym)))*pow(GeVfm*r*Qs, 2)));
+  double term2 = (1 - exp(-0.25*(pow(alpha, 2) + pow(1 - alpha, 2))*pow(GeVfm*r*Qs, 2)));
   double term3 = (pow(alpha, 2) + pow(1 - alpha, 2))*pow(cyl_bessel_k(1, GeVfm*m*r), 2) + pow(cyl_bessel_k(0, GeVfm*m*r), 2);
   return term1*term2*term3;
 }
@@ -65,13 +65,13 @@ double Correlator::Vaccum(double r, double alpha, double m, double Qs)
 double Correlator::MVModel(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
-  double term2 = (1. - exp(-0.25*(pow(alpha, 2)*log(1./(alpha*GeVfm*r*lambda_bym)) + pow(1. - alpha, 2)*log(1./((1. - alpha)*GeVfm*r*lambda_bym)))*pow(GeVfm*r*Qs, 2)));
+  double term2 = (1 - exp(-0.25*(pow(alpha, 2)*log(1/(alpha*GeVfm*r*lambda_bym)) + pow(1 - alpha, 2)*log(1/((1 - alpha)*GeVfm*r*lambda_bym)))*pow(GeVfm*r*Qs, 2)));
   double term3 = (pow(alpha, 2) + pow(1 - alpha, 2))*pow(cyl_bessel_k(1, GeVfm*m*r), 2) + pow(cyl_bessel_k(0, GeVfm*m*r), 2);
-  cout << "term1: " << term1 << endl;
+/*  cout << "term1: " << term1 << endl;
   cout << "term2: " << term2 << endl;
   cout << "term3: " << term3 << endl;
   cout << "Bessel 1: " << cyl_bessel_k(1, GeVfm*m*r) << endl;
-  cout << "Bessel 2: " << cyl_bessel_k(0, GeVfm*m*r) << endl;
+  cout << "Bessel 2: " << cyl_bessel_k(0, GeVfm*m*r) << endl;*/
   return term1*term2*term3;
 }
 
@@ -87,13 +87,6 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   {
     corr = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
-
-  //(*corr)(r, alpha, m, Qs);
-
-/*  double f1, f2, x0, x1, x2, x3;
-
-  x0 = lower;
-  x3 = upper;*/
 
   double k = (sqrt(5.) - 1.) / 2.;
   double xL = upper - k * (upper - lower);
