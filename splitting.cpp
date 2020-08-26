@@ -170,7 +170,6 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
   uniform_real_distribution<double> get_phi(0, 2*M_PI);
 
   double r, r_final = 0, alpha, phi, prob, ceiling;
-  cout << "start roll location" << endl;
 
   while (r_final == 0)
   {
@@ -181,7 +180,7 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
 
     uniform_real_distribution<double> get_location_prob(0, ceiling);
     prob = get_location_prob(get_random_number);
-cout << "Got here" << endl;
+cout << "Got here " << prob << " < " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
     if (prob < Model_Correlator.F(r, alpha, mass, Qs))
     { r_final = r;  }
   }
