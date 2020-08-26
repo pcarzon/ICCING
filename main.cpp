@@ -38,24 +38,24 @@ int main (int argc, char *argv[])
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
 
-	Correlator testCorrelator("MV", 0.001);
+/*	Correlator testCorrelator("MV", 0.001);
 
 	cout << "Testing MVModel: " << testCorrelator.F(0.5, 0.1, 0.0023, 1) << endl
 	<<	"FindMaximum: " << testCorrelator.FindMaximum(pow(10, -5), 0.0023, 1, 0, 1, 0.0001) << endl;
-/*
+*/
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	ofstream quark_output;
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	while (!inOut.LastEvent())
-	{
+//	while (!inOut.LastEvent())
+//	{
 		start = clock();
 
 		testEvent = inOut.ReadEvent(initializedEvent);
 
-			while (!testEvent.IsEventDone())
-			{
+//			while (!testEvent.IsEventDone())
+//			{
 				Sample testSample;
 				Quarks testQuarks;
 
@@ -73,7 +73,7 @@ int main (int argc, char *argv[])
 
 				testEvent.UpdateDensity(testQuarks);
 				eventcount++;
-			}
+//			}
 
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
@@ -81,11 +81,11 @@ int main (int argc, char *argv[])
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
 		cout << "Event processing time: " << duration/60 << " min" << endl;
-	}
+//	}
 
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.close();	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-*/
+
 	return 0;
 }
