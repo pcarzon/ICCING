@@ -186,7 +186,7 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
   }
 
   phi = get_phi(get_random_number);
-  return {alpha, r_final*Cos(phi), r_final*Sin(phi)};
+  return {alpha, r_final*cos(phi), r_final*sin(phi)};
 }
 //__________________________________________________________________________________________
 
