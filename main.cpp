@@ -29,8 +29,6 @@ int main (int argc, char *argv[])
 
 	Event testEvent, initializedEvent;
 
-	Sample testSample;
-	Quarks testQuarks;
 	int eventcount = 0;
 	clock_t start;
 	double duration;
@@ -61,11 +59,11 @@ int main (int argc, char *argv[])
 
 				testSample = testEvent.SampleEnergy();
 
-				if (testSample.q_s == -100){	continue;	}
+//				if (testSample.q_s == -100){	continue;	}
 
 				testQuarks = machine.SplitSample(testSample);
 
-				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
+//				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
 
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				if (inOut.GetTest() == "QuarkRatio"){	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
