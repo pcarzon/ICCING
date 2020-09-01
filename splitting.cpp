@@ -216,6 +216,10 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   {
     quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s);
   }
+  else
+  {
+    quark_location = {0, 0, 0};
+  }
 
   cout << "quark location: " << quark_location[0] << " " << quark_location[1] << " " << quark_location[2] << endl;
   //  Create quarks to be distributed in output density grids
