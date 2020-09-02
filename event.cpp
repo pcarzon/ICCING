@@ -199,6 +199,7 @@ bool Event::UpdateDensity(Quarks quark_density)
     int quark_y =  y_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[1]);
     x_center = quark_x;
     y_center = quark_y;
+    cout << "quark center " << x_center << " " << y_center << endl;
     vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
     if (quark_bounds[0] - quark_bounds[2] || quark_bounds[1] - quark_bounds[3])
     { cout << "error checking works" << endl; return false; }
