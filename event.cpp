@@ -197,6 +197,7 @@ bool Event::UpdateDensity(Quarks quark_density)
     //    Makes sure calculations are only done on points in initial_energy
     int temp_x = x_center;
     int temp_y = y_center;
+    x_center = 0;
     int quark_x = x_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[0]);
     int quark_y =  y_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[1]);
     x_center = quark_x;
