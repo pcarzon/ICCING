@@ -201,7 +201,7 @@ bool Event::UpdateDensity(Quarks quark_density)
     y_center = quark_y;
     cout << "quark center " << x_center << " " << y_center << endl;
     vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
-    if (quark_bounds[0] - quark_bounds[2] || quark_bounds[1] - quark_bounds[3])
+    if (quark_bounds[0] - quark_bounds[2] < quark_dist.size() || quark_bounds[1] - quark_bounds[3] < quark_dist.size())
     { cout << "error checking works" << endl; return false; }
 
     x_center = 0;
@@ -210,7 +210,7 @@ bool Event::UpdateDensity(Quarks quark_density)
     x_center = antiquark_x;
     y_center = antiquark_y;
     vector<int> antiquark_bounds = GetIntegrationBounds(quark_dist.size() , quark_rad);
-    if (antiquark_bounds[0] - antiquark_bounds[2] || antiquark_bounds[1] - antiquark_bounds[3])
+    if (antiquark_bounds[0] - antiquark_bounds[2] < quark_dist.size() || antiquark_bounds[1] - antiquark_bounds[3] < quark_dist.size())
     { cout << "anti quark error checking works" << endl; return false; }
 
     vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
