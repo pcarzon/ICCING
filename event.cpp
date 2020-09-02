@@ -184,7 +184,7 @@ Sample Event::SampleEnergy()
 //##########################################################################################
 //  Propogates Results of Splitter
 //##########################################################################################
-void Event::UpdateDensity(Quarks quark_density)
+bool Event::UpdateDensity(Quarks quark_density)
 {
   vector<double> position = quark_density.GetPosition();
 
@@ -195,6 +195,15 @@ void Event::UpdateDensity(Quarks quark_density)
   else {
     //  Get bounds of gluon using center point as defined by SampleEnergy
     //    Makes sure calculations are only done on points in initial_energy
+    x_center = 0;
+    vector<int> quark_bounds = GetIntegrationBounds(x_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[0]), y_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[1]), quark_rad);
+    if (quark_bounds[0] - quark_bounds[2] || quark_bounds[1] - quark_bounds[3])
+    { cout << "error checking works" << endl; return false; }
+
+    vector<int> antiquark_bounds = GetIntegrationBounds(x_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[0]), x_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[1]), quark_rad);
+    if (antiquark_bounds[0] - antiquark_bounds[2] || antiquark_bounds[1] - antiquark_bounds[3])
+    { cout << "error checking works" << endl; return false; }
+
     vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 
     for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
@@ -207,7 +216,6 @@ void Event::UpdateDensity(Quarks quark_density)
       }
     }
 /*
-  vector<int> quark_bounds = GetIntegrationBounds(x_center, y_center, quark_rad);
 
   for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
   {
@@ -223,6 +231,8 @@ void Event::UpdateDensity(Quarks quark_density)
   }*/
 
   }
+
+  return true;
 }
 //__________________________________________________________________________________________
 

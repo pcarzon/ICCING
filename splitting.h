@@ -30,6 +30,7 @@ private:
 	double r_max;
 	double e_thresh;
 	double lambda_;
+	double grid_step;
 	string test_;
 	string output_dir;
 

@@ -457,6 +457,7 @@ Splitter IO::InitializeSplitter()
   init_splitter.r_max = r_max;
   init_splitter.e_thresh = e_thresh;
   init_splitter.lambda_ = lambda_;
+  init_splitter.grid_step = grid_step;
   init_splitter.test_ = test_;
   init_splitter.output_dir = output_dir;
 

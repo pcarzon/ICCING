@@ -44,6 +44,7 @@ void Splitter::CopySplitter(const Splitter &e)
 	r_max = e.r_max;
   e_thresh = e.e_thresh;
   lambda_ = e.lambda_;
+  grid_step = e.grid_step;
   test_ = e.test_;
   output_dir = e.output_dir;
 
@@ -177,18 +178,18 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
     alpha = get_alpha(get_random_number);
 
     ceiling = 1.01*Model_Correlator.FindMaximum(alpha, mass, Qs, 0, 1, 0.001);
-    cout << "parameters: " << r << " " << alpha << " " << mass << " " << Qs << endl;
+  //  cout << "parameters: " << r << " " << alpha << " " << mass << " " << Qs << endl;
 
     uniform_real_distribution<double> get_location_prob(0, ceiling);
     prob = get_location_prob(get_random_number);
-cout << "probabilities: " << prob << " < " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
+//cout << "probabilities: " << prob << " < " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
     if (prob < Model_Correlator.F(r, alpha, mass, Qs))
     { r_final = r;  }
   }
-  cout << "end roll location" << endl;
+//  cout << "end roll location" << endl;
 
   phi = get_phi(get_random_number);
-  return {alpha, r_final*cos(phi), r_final*sin(phi)};
+  return {alpha, round((r_final*cos(phi))/grid_step), round((r_final*sin(phi))/grid_step)};
 }
 //__________________________________________________________________________________________
 

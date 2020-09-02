@@ -109,7 +109,7 @@ public:
     //  Calls RollGlue
 
   //  Propogates Results of Splitter
-  void UpdateDensity(Quarks quark_density);
+  bool UpdateDensity(Quarks quark_density);
 
   //  Clears Event variables as a cautionary measure
   void CleanEvent();

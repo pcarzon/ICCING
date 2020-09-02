@@ -66,10 +66,10 @@ int main (int argc, char *argv[])
 				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
 
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				if (inOut.GetTest() == "QuarkRatio"){	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
+				if (inOut.GetTest() == "QuarkRatio") {	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-				testEvent.UpdateDensity(testQuarks);
+				if (!testEvent.UpdateDensity(testQuarks)) { exit(0); }
 				eventcount++;
 			}
 
