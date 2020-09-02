@@ -195,23 +195,29 @@ bool Event::UpdateDensity(Quarks quark_density)
   else {
     //  Get bounds of gluon using center point as defined by SampleEnergy
     //    Makes sure calculations are only done on points in initial_energy
+    int temp_x = x_center;
+    int temp_y = y_center;
     int quark_x = x_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[0]);
     int quark_y =  y_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[1]);
     x_center = quark_x;
     y_center = quark_y;
-    cout << "quark center " << x_center << " " << y_center << endl;
+    cout << "quark center " << x_center << " " << y_center << " " << initial_energy.size() << endl;
     vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
     if (quark_bounds[0] - quark_bounds[2] < quark_dist.size() || quark_bounds[1] - quark_bounds[3] < quark_dist.size())
     { cout << "error checking works" << endl; return false; }
+    else { cout << "passed quark check" << endl;}
 
-    x_center = 0;
+    x_center = temp_x;
+    y_center = temp_y;
     int antiquark_x = x_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[0]);
     int antiquark_y = y_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[1]);
     x_center = antiquark_x;
     y_center = antiquark_y;
+    cout << "antiquark center " << x_center << " " << y_center << " " << initial_energy.size() << endl;
     vector<int> antiquark_bounds = GetIntegrationBounds(quark_dist.size() , quark_rad);
     if (antiquark_bounds[0] - antiquark_bounds[2] < quark_dist.size() || antiquark_bounds[1] - antiquark_bounds[3] < quark_dist.size())
     { cout << "anti quark error checking works" << endl; return false; }
+    else { cout << "passed antiquark check" << endl;}
 
     vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 
