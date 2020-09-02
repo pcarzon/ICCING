@@ -204,8 +204,8 @@ bool Event::UpdateDensity(Quarks quark_density)
     y_center = quark_y;
     cout << "quark center " << x_center << " " << y_center << " " << initial_energy.size() << endl;
     vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
-    cout << "quark sizes " << quark_bounds[0] - quark_bounds[2] << " " << quark_bounds[1] - quark_bounds[3] << " " << quark_dist.size() << endl;
-    if (quark_bounds[0] - quark_bounds[2] < quark_dist.size() || quark_bounds[1] - quark_bounds[3] < quark_dist.size())
+    cout << "quark sizes " << abs(quark_bounds[0] - quark_bounds[2]) << " " << abs(quark_bounds[1] - quark_bounds[3]) << " " << quark_dist.size() << endl;
+    if (abs(quark_bounds[0] - quark_bounds[2]) < quark_dist.size() || abs(quark_bounds[1] - quark_bounds[3]) < quark_dist.size())
     { cout << "error checking works" << endl; return false; }
     else { cout << "passed quark check" << endl;}
 
