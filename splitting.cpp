@@ -123,7 +123,7 @@ double Splitter::RollGlue(double e_tot)
 Charge Splitter::RollFlavor(double Qs)
 {
   Charge create_charge;
-
+  charge_type = 0;
   //  Initialize distribution for selecting quark flavor probability
   uniform_real_distribution<double> get_flavor(0, 1);
 
@@ -155,6 +155,7 @@ Charge Splitter::RollFlavor(double Qs)
   else
   { create_charge.Charm(charge_type);  }
 
+  cout << "quark charges " << " " << create_charge.GetCharge()[0] << " " << create_charge.GetCharge()[1] << " " << create_charge.GetCharge()[2] << " " << create_charge.GetCharge()[3] << endl;
   //  Return charge of sample
   return create_charge;
 }
