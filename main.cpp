@@ -66,7 +66,7 @@ int main (int argc, char *argv[])
 
 				if (!testEvent.UpdateDensity(testQuarks)) { exit(0); }
 
-				if (testQuarks.GetCharge()[0] > 0)	{ cout << "sampled quark charge " << testQuarks.GetCharge()[0] << endl; break; }
+//				if (testQuarks.GetCharge()[0] > 0)	{ cout << "sampled quark charge " << testQuarks.GetCharge()[0] << endl; break; }
 				eventcount++;
 			}
 
