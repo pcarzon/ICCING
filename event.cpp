@@ -197,7 +197,7 @@ bool Event::UpdateDensity(Quarks quark_density)
     int temp_x = x_center;
     int temp_y = y_center;
     double energy;
-
+    cout << "Got quark " << quark_density.GetCharge()[0] << endl;
     //******************************************************************************************
     //  Calculate centers of Quark and Anti-Quark
     //******************************************************************************************

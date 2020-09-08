@@ -608,7 +608,7 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
   output.open(file_name);
 
   double x, y;
-
+  cout << "Reading out full densities" << endl;
   for (int i = 0; i < density_grid[0].size(); i++)
   {
     for (int j = 0; j < density_grid[0][0].size(); j++)
