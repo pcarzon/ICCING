@@ -21,7 +21,7 @@ private:
   //    particle_type[BSQ=0,UDS=1][Mass=0,baryon#=1,strangeness=2,em_charge=3]
   vector<vector<double>> gluon = {{0., 0., 0., 0.},{0., 0., 0., 0.}};
   vector<vector<double>> up = {{0.0023, 1/3, 0., 1/6},{0.0023, 1., 0., 0.}};
-  vector<vector<double>> down = {{0.0048, 1/3, 0., -1/3},{0.0048, 0., 1., 0.}};
+  vector<vector<double>> down = {{0.0048, 0.33333, 0., -0.33333},{0.0048, 0., 1., 0.}};
   vector<vector<double>> strange = {{0.095, 1/3, -1., -1/3},{0.095, 0., 0., 1.}};
   vector<vector<double>> charm = {{1.29, 1/3, 0., 1/6},{1.29, 0., 0., 0.}};
 
