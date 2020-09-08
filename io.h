@@ -168,6 +168,7 @@ private:
   void OutputConfig(string file_name);  //  Prints copy of config file to output directory for reference
   void OutputFullDensityGrids(vector<vector<double>> &density_grid, string file_name); //  Prints full density grids with 0s
   void OutputSparseDensityGrids(vector<vector<double>> &density_grid, string file_name);  //  Only prints valued points
+  void OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, string file_name);  //  Only prints valued points
   void OutputEccentricities(Eccentricity &ecc, string file_name); //  Prints eccentricities
 //__________________________________________________________________________________________
 

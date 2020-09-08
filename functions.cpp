@@ -64,7 +64,6 @@ vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y)
 double InterpolateValue(SplineSet range, double value)
 {
   double change_x = value - range.x;
-//  cout << "interped value " << range.a + range.b*change_x + range.c*pow(change_x, 2) + range.d*pow(change_x, 3) << endl;
   return (range.a + range.b*change_x + range.c*pow(change_x, 2) + range.d*pow(change_x, 3));
 }
 

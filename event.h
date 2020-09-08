@@ -67,6 +67,7 @@ private:
 
   double total_initial_energy;  //  Records initial total of initial_energy
   double total_energy;  //  Keeps track of the total of initial_energy as ICCING runs
+  Sample out_sample;
   double seed;  //  Records the random seed used in event
   //__________________________________________________________________________________________
 

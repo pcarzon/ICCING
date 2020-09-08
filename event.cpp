@@ -37,8 +37,6 @@ Event::Event(const Event &original)
 //##########################################################################################
 void Event::CopyEvent(const Event &e)
 {
-//  cout << "started copying event" << endl;
-
   kappa_ = e.kappa_;
   gluon_rad = e.gluon_rad;
   quark_rad = e.quark_rad;
@@ -124,7 +122,6 @@ Sample Event::SampleEnergy()
 {
   int point;
   bool got_point = false;
-  Sample out_sample;
 
   //  Loop until a point gives e_tot > e_thresh
   while (!got_point)
@@ -186,67 +183,103 @@ Sample Event::SampleEnergy()
 //##########################################################################################
 bool Event::UpdateDensity(Quarks quark_density)
 {
-  vector<double> position = quark_density.GetPosition();
-
+  //******************************************************************************************
+  //  If quark charge is an gluon, copy that energy over to output
+  //******************************************************************************************
   if (quark_density.GetCharge()[0] == 0.)
   {
     UpdateEnergy(quark_density.GetEnergyFraction());
   }
+  //******************************************************************************************
+  //  If quark charge is not a gluon, move quark to output
+  //******************************************************************************************
   else {
-    //  Get bounds of gluon using center point as defined by SampleEnergy
-    //    Makes sure calculations are only done on points in initial_energy
     int temp_x = x_center;
     int temp_y = y_center;
-    x_center = 0;
+    double energy;
+
+    //******************************************************************************************
+    //  Calculate centers of Quark and Anti-Quark
+    //******************************************************************************************
     int quark_x = x_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[0]);
     int quark_y =  y_center + round((1 - quark_density.GetAlpha())*quark_density.GetPosition()[1]);
-    x_center = quark_x;
-    y_center = quark_y;
-    cout << "quark center " << x_center << " " << y_center << " " << initial_energy.size() << endl;
-    vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
-    cout << "quark sizes " << abs(quark_bounds[0] - quark_bounds[2]) << " " << abs(quark_bounds[1] - quark_bounds[3]) << " " << quark_dist.size() << endl;
-    if (abs(quark_bounds[0] - quark_bounds[2]) < quark_dist.size() || abs(quark_bounds[1] - quark_bounds[3]) < quark_dist.size())
-    { cout << "error checking works" << endl; return false; }
-    else { cout << "passed quark check" << endl;}
-
-    x_center = temp_x;
-    y_center = temp_y;
     int antiquark_x = x_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[0]);
     int antiquark_y = y_center - round(quark_density.GetAlpha()*quark_density.GetPosition()[1]);
+
+    //******************************************************************************************
+    //  Test if Quark is in bounds
+    //******************************************************************************************
+    x_center = quark_x;
+    y_center = quark_y;
+    vector<int> quark_bounds = GetIntegrationBounds(quark_dist.size(), quark_rad);
+    if (abs(quark_bounds[0] - quark_bounds[2]) < quark_dist.size() || abs(quark_bounds[1] - quark_bounds[3]) < quark_dist.size())
+    { return false; }
+
+    //******************************************************************************************
+    //  Test if Anti-Quark is in bounds
+    //******************************************************************************************
+    x_center = temp_x;
+    y_center = temp_y;
     x_center = antiquark_x;
     y_center = antiquark_y;
-    cout << "antiquark center " << x_center << " " << y_center << " " << initial_energy.size() << endl;
     vector<int> antiquark_bounds = GetIntegrationBounds(quark_dist.size() , quark_rad);
     if (antiquark_bounds[0] - antiquark_bounds[2] < quark_dist.size() || antiquark_bounds[1] - antiquark_bounds[3] < quark_dist.size())
-    { cout << "anti quark error checking works" << endl; return false; }
-    else { cout << "passed antiquark check" << endl;}
+    { return false; }
 
+    //******************************************************************************************
+    //  Update Total energies and initial_energy
+    //******************************************************************************************
+    x_center = temp_x;
+    y_center = temp_y;
     vector<int> gluon_bounds = GetIntegrationBounds(gluon_dist.size(), gluon_rad);
 
     for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
     {
       for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
       {
-        total_initial_energy -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
-        total_energy += gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
-        initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j] -= gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[x_center - gluon_rad + i][y_center - gluon_rad + j];
+        temp_x = x_center - gluon_rad + i;
+        temp_y = y_center - gluon_rad + j;
+        energy = gluon_dist[i][j]*quark_density.GetEnergyFraction()*initial_energy[temp_x][temp_y];
+
+        total_initial_energy -= energy;
+        total_energy += energy;
+        initial_energy[temp_x][temp_y] -= energy;
       }
     }
-/*
 
-  for (int i = gluon_bounds[0]; i < gluon_bounds[2]; i++)
-  {
-    for (int j = gluon_bounds[1]; j < gluon_bounds[3]; j++)
+    //******************************************************************************************
+    //  Update Output Densities
+    //******************************************************************************************
+    for (int i = quark_bounds[0]; i < quark_bounds[2]; i++)
     {
-      density[1][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
-      density[2][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
-
-      if (quark_density.GetCharge()[2] == -1)
+      for (int j = quark_bounds[1]; j < quark_bounds[3]; j++)
       {
-        density[3][i][j] -= quark_dist[i][j]*initial_energy[x_center - quark_rad + i][y_center - quark_rad + j];
-      }
-  }*/
 
+        //  Deposit Quark Energy and Charges
+        temp_x = quark_x - quark_rad + i;
+        temp_y = quark_y - quark_rad + j;
+        //  Energy = alpha*(E_glueon/E_tot)*E_tot*quark_dist
+        density[0][temp_x][temp_y] += quark_density.GetAlpha()*(quark_density.GetEnergyFraction()*out_sample.e_tot)*quark_dist[i][j];
+        //  Baryon = baron_number*quark_dist
+        density[1][temp_x][temp_y] += quark_density.GetCharge()[1]*quark_dist[i][j];
+        //  Strangeness = strangeness*quark_dist
+        density[2][temp_x][temp_y] += quark_density.GetCharge()[2]*quark_dist[i][j];
+        //  EM_charge = em_charge*quark_dist
+        density[3][temp_x][temp_y] += quark_density.GetCharge()[3]*quark_dist[i][j];
+
+        //  Deposit Anti-Quark Energy and Charges
+        temp_x = antiquark_x - quark_rad + i;
+        temp_y = antiquark_y - quark_rad + j;
+        //  Energy = alpha*(E_glueon/E_tot)*E_tot*quark_dist
+        density[0][temp_x][temp_y] += (1 - quark_density.GetAlpha())*(quark_density.GetEnergyFraction()*out_sample.e_tot)*quark_dist[i][j];
+        //  Baryon = baron_number*quark_dist
+        density[1][temp_x][temp_y] -= quark_density.GetCharge()[1]*quark_dist[i][j];
+        //  Strangeness = strangeness*quark_dist
+        density[2][temp_x][temp_y] -= quark_density.GetCharge()[2]*quark_dist[i][j];
+        //  EM_charge = em_charge*quark_dist
+        density[3][temp_x][temp_y] -= quark_density.GetCharge()[3]*quark_dist[i][j];
+      }
+    }
   }
 
   return true;

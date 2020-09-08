@@ -600,6 +600,41 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> &density_grid, string f
 
 //__________________________________________________________________________________________
 //##########################################################################################
+// Print Density Grids without filler 0s (Overload for output densities)
+//##########################################################################################
+void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, string file_name)
+{
+  ofstream output;
+  output.open(file_name);
+
+  double x, y;
+
+  for (int i = 0; i < density_grid[0].size(); i++)
+  {
+    for (int j = 0; j < density_grid[0][0].size(); j++)
+    {
+      if (density_grid[0][i][j] != 0
+          || density_grid[1][i][j] != 0
+          || density_grid[2][i][j] != 0
+          || density_grid[3][i][j] != 0)
+      {
+        x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
+        y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value
+        output << x << " " << y << " "
+        << density_grid[0][i][j] << " "
+        << density_grid[1][i][j] << " "
+        << density_grid[2][i][j] << " "
+        << density_grid[3][i][j] << endl;
+      }
+    }
+  }
+
+  output.close();
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
 //  Print Eccentricities
 //##########################################################################################
 void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
@@ -727,7 +762,6 @@ Event IO::ReadEvent(Event event_in)
 void IO::WriteEvent(Event event)
 {
   vector<vector<double>> output_energy;
-  cout << "Start writing event" << endl;
 
   //******************************************************************************************
   //  Output Full Density Grids
@@ -755,6 +789,9 @@ void IO::WriteEvent(Event event)
   {
     output_energy = event.initial_energy;
     OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
+
+    output_energy = event.density;
+    OutputSparseDensityGrids(output_energy, output_dir + "densities" + to_string(current_event) + ".dat");
 
     if (t_a)  //  Output T_a if flag is true
     {
