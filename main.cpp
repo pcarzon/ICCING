@@ -64,9 +64,8 @@ int main (int argc, char *argv[])
 				if (inOut.GetTest() == "QuarkRatio") {	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-				if (!testEvent.UpdateDensity(testQuarks)) { exit(0); }
+				if (!testEvent.UpdateDensity(testQuarks)) { continue; }
 
-//				if (testQuarks.GetCharge()[0] > 0)	{ cout << "sampled quark charge " << testQuarks.GetCharge()[0] << endl; break; }
 				eventcount++;
 			}
 

@@ -155,7 +155,6 @@ Charge Splitter::RollFlavor(double Qs)
   else
   { create_charge.Charm(charge_type);  }
 
-  cout << "quark charges " << " " << create_charge.GetCharge()[0] << " " << create_charge.GetCharge()[1] << " " << create_charge.GetCharge()[2] << " " << create_charge.GetCharge()[3] << endl;
   //  Return charge of sample
   return create_charge;
 }

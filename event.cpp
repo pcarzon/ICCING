@@ -197,7 +197,6 @@ bool Event::UpdateDensity(Quarks quark_density)
     int temp_x = x_center;
     int temp_y = y_center;
     double energy;
-    cout << "Got quark " << quark_density.GetCharge()[0] << endl;
     //******************************************************************************************
     //  Calculate centers of Quark and Anti-Quark
     //******************************************************************************************
@@ -261,7 +260,6 @@ bool Event::UpdateDensity(Quarks quark_density)
         //  Energy = alpha*(E_glueon/E_tot)*E_tot*quark_dist
         density[0][temp_x][temp_y] += quark_density.GetAlpha()*(quark_density.GetEnergyFraction()*out_sample.e_tot)*quark_dist[i][j];
         //  Baryon = baron_number*quark_dist
-        cout << "test value " << quark_density.GetCharge()[1] << " " << quark_dist[i][j] << endl;
         density[1][temp_x][temp_y] += quark_density.GetCharge()[1]*quark_dist[i][j];
         //  Strangeness = strangeness*quark_dist
         density[2][temp_x][temp_y] += quark_density.GetCharge()[2]*quark_dist[i][j];
