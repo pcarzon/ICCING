@@ -804,6 +804,8 @@ void IO::WriteEvent(Event event)
     }
   }
 
+  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
+
   current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________
