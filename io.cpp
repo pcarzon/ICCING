@@ -602,10 +602,12 @@ void IO::OutputSparseDensityGrids(vector<vector<double>> &density_grid, string f
 //##########################################################################################
 // Print Density Grids without filler 0s (Overload for output densities)
 //##########################################################################################
-void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, string file_name)
+void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, double tot_energy, string file_name)
 {
   ofstream output;
   output.open(file_name);
+
+  output << current_event << " " << grid_step << " " << grid_step << " " << tot_energy << " " << -grid_max << " " << -grid_max << endl;
 
   double x, y;
   for (int i = 0; i < density_grid[0].size(); i++)
@@ -786,7 +788,7 @@ void IO::WriteEvent(Event event)
     output_energy = event.initial_energy;
     OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
-    OutputSparseDensityGrids(event.density, output_dir + "densities" + to_string(current_event) + ".dat");
+    OutputSparseDensityGrids(event.density, event.total_energy, output_dir + "densities" + to_string(current_event) + ".dat");
 
     if (t_a)  //  Output T_a if flag is true
     {

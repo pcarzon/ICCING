@@ -62,6 +62,7 @@ private:
   vector<vector<int>> gluon_dist;  //  Sample from initial_energy for ICCING algorithm
   vector<vector<double>> quark_dist; //  Projectile Input Energy density
   vector<vector<int>> valued_points;
+  vector<double> eccentricities;
   int number_up = 0;
   int number_down = 0;
   int number_strange = 0;
@@ -115,6 +116,8 @@ public:
 
   //  Propogates Results of Splitter
   bool UpdateDensity(Quarks quark_density);
+
+  void CalculateEccentricities();
 
   //  Clears Event variables as a cautionary measure
   void CleanEvent();
