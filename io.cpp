@@ -612,10 +612,7 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
   {
     for (int j = 0; j < density_grid[0][0].size(); j++)
     {
-      if (density_grid[0][i][j] != 0
-          || density_grid[1][i][j] != 0
-          || density_grid[2][i][j] != 0
-          || density_grid[3][i][j] != 0)
+      if (density_grid[0][i][j] != 0)
       {
         x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
         y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value

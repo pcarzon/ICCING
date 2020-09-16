@@ -225,6 +225,15 @@ bool Event::UpdateDensity(Quarks quark_density)
     if (antiquark_bounds[0] - antiquark_bounds[2] < quark_dist.size() || antiquark_bounds[1] - antiquark_bounds[3] < quark_dist.size())
     { return false; }
 
+    if (quark_density.GetCharge()[0] == 0.0023)
+    { number_up++; }
+    else if (quark_density.GetCharge()[0] == 0.0048)
+    { number_down++; }
+    else if (quark_density.GetCharge()[0] == 0.095)
+    { number_strange++; }
+    else if (quark_density.GetCharge()[0] == 1.29)
+    { number_charm++; }
+
     //******************************************************************************************
     //  Update Total energies and initial_energy
     //******************************************************************************************
