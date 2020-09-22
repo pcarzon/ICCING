@@ -2,6 +2,7 @@
 
 vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
 {
+  cout << "started eccs" << endl;
   complex<double> i = sqrt(-1);
 
   double x_center_of_mass = 0, y_center_of_mass = 0, total = 0;
@@ -21,6 +22,7 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
       total += grid[p][q];
     }
   }
+  cout << "got center of mass" << endl;
 
   x_center_of_mass = (1/total)*x_center_of_mass;
   y_center_of_mass = (1/total)*y_center_of_mass;
@@ -46,11 +48,13 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
       denominator5 += pow(pow(del_x, 2.) + pow(del_y, 2.), 5/2)*grid[p][q];
     }
   }
+  cout << "got num and denom" << endl;
 
   epsilon_2 = -numerator2/denominator2;
   epsilon_3 = -numerator3/denominator3;
   epsilon_4 = -numerator4/denominator4;
   epsilon_5 = -numerator5/denominator5;
+  cout << "got eccs" << endl;
 
   return {abs(epsilon_2), abs(epsilon_3), abs(epsilon_4), abs(epsilon_5)};
 }

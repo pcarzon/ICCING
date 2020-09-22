@@ -637,6 +637,8 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
 //##########################################################################################
 void IO::OutputEccentricities(vector<double> eccentricities, string file_name)
 {
+  cout << "output eccs" << endl;
+
   ofstream output;
   output.open(file_name, ios::app);
 
