@@ -69,6 +69,8 @@ int main (int argc, char *argv[])
 				eventcount++;
 			}
 
+		testEvent.CalculateEccentricities();
+
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
 

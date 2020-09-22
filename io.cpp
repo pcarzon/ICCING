@@ -635,9 +635,19 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
 //##########################################################################################
 //  Print Eccentricities
 //##########################################################################################
-void IO::OutputEccentricities(Eccentricity &ecc, string file_name)
+void IO::OutputEccentricities(vector<double> eccentricities, string file_name)
 {
+  ofstream output;
+  output.open(file_name, ios::app);
 
+  for (int i = 0; i < eccentricities.size(); i++)
+  {
+    output << eccentricities[i] << "\t";
+  }
+
+  output << endl;
+
+  output.close();
 }
 //__________________________________________________________________________________________
 
@@ -802,6 +812,7 @@ void IO::WriteEvent(Event event)
     }
   }
 
+  OutputEccentricities(event.eccentricities,  output_dir + "eccentricities_" + to_string(seed) + ".dat");
   OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 
   current_event++;  //  Used for tracking which event has been processed

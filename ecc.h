@@ -4,25 +4,13 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <complex>
 #include <vector>
 
 using namespace std;
 
-class Event;
+vector<double> Eccentricities(vector<vector<double>> grid, double grid_step);
 
-class Eccentricity
-{
-private:
+vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step);
 
-	void CopyEccentricity(const Eccentricity &e);
-
-public:
-
-  Eccentricity();
-  ~Eccentricity();
-
-  Eccentricity(const Eccentricity &original);
-  Eccentricity& operator=(const Eccentricity& original);
-
-};
 #endif
