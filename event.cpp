@@ -55,6 +55,7 @@ void Event::CopyEvent(const Event &e)
   gluon_dist = e.gluon_dist;
   quark_dist = e.quark_dist;
   valued_points = e.valued_points;
+  eccentricities = e.eccentricities;
   x_center = e.x_center;
   y_center = e.y_center;
 

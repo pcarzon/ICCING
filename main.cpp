@@ -23,7 +23,6 @@ default_random_engine get_random_number;
 
 int main (int argc, char *argv[])
 {
-	cout << "started program" << endl;
 	IO inOut(argv[1]);
 /*"/projects/jnorhos/pcarzon/ICCING/testInput/run_parameters.conf"*/
 	Splitter machine = inOut.InitializeSplitter();
@@ -41,7 +40,6 @@ int main (int argc, char *argv[])
 	ofstream quark_output;
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	cout << "starting event loop" << endl;
 
 	while (!inOut.LastEvent())
 	{
@@ -70,15 +68,12 @@ int main (int argc, char *argv[])
 
 				eventcount++;
 			}
-			cout << "ended event" << endl;
 
 		testEvent.CalculateEccentricities();
-		cout << "calculated eccs" << endl;
 
 		eventcount = 0;
 		inOut.WriteEvent(testEvent);
 
-		cout << "write event" << endl;
 
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;
 		cout << "Event processing time: " << duration/60 << " min" << endl;
