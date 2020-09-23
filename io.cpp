@@ -23,6 +23,7 @@ IO::IO(string configFile)
   while (!input.eof())
 	{
     input >> var_type;  //  Read parameter type
+    cout << var_type << endl;
 
     //  Switch through the possible parameter types
     //  uses var_type as key to map then reads value to class variable
