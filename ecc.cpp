@@ -36,10 +36,11 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
       del_y += (q - y_center_of_mass)*grid_step;
 
       numerator2 += pow(complex<double>(del_x, del_y), 2.)*grid[p][q];
-      cout << i*del_y + pow(complex<double>(del_x, del_y), 2.) << endl;
+      cout << pow(complex<double>(del_x, del_y), 2.) << endl;
       denominator2 += pow(pow(del_x, 2.) + pow(del_y, 2.), 2/2)*grid[p][q];
 
       numerator3 += pow(complex<double>(del_x, del_y), 3.)*grid[p][q];
+      cout << pow(complex<double>(del_x, del_y), 3.) << endl;
       denominator3 += pow(pow(del_x, 2.) + pow(del_y, 2.), 3/2)*grid[p][q];
 
       numerator4 += pow(complex<double>(del_x, del_y), 4.)*grid[p][q];
