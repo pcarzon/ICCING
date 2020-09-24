@@ -3,10 +3,9 @@
 vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
 {
   cout << "started eccs" << endl;
-  complex<double> i = sqrt(-1);
 
   double x_center_of_mass = 0, y_center_of_mass = 0, total = 0;
-  complex<double> epsilon_2, epsilon_3, epsilon_4, epsilon_5;
+  complex<double> epsilon_2 = {0, 0}, epsilon_3 = {0, 0}, epsilon_4 = {0, 0}, epsilon_5 = {0, 0};
 
   complex<double> numerator2 = {0, 0}, denominator2 = {0, 0};
   complex<double> numerator3 = {0, 0}, denominator3 = {0, 0};
@@ -32,16 +31,16 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
   {
     for (int q = 0; q < grid[0].size(); q++)
     {
-      del_x += (p - x_center_of_mass)*grid_step;
-      del_y += (q - y_center_of_mass)*grid_step;
+      del_x = (p - x_center_of_mass)*grid_step;
+      del_y = (q - y_center_of_mass)*grid_step;
 
       numerator2 += pow(complex<double>(del_x, del_y), 2.)*grid[p][q];
-      cout << pow(complex<double>(del_x, del_y), 2.) << endl;
       denominator2 += pow(pow(del_x, 2.) + pow(del_y, 2.), 2/2)*grid[p][q];
 
       numerator3 += pow(complex<double>(del_x, del_y), 3.)*grid[p][q];
-      cout << pow(complex<double>(del_x, del_y), 3.) << endl;
+//      cout << pow(complex<double>(del_x, del_y), 3.) << endl;
       denominator3 += pow(pow(del_x, 2.) + pow(del_y, 2.), 3/2)*grid[p][q];
+//      cout << pow(pow(del_x, 2.) + pow(del_y, 2.), 3/2) << endl;
 
       numerator4 += pow(complex<double>(del_x, del_y), 4.)*grid[p][q];
       denominator4 += pow(pow(del_x, 2.) + pow(del_y, 2.), 4/2)*grid[p][q];
