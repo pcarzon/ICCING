@@ -388,6 +388,7 @@ void Event::CleanEvent()
   density.clear();
   gluon_dist.clear();
   quark_dist.clear();
+  eccentricities.clear();
 
   total_initial_energy = 0;
   total_energy = 0;
