@@ -1,5 +1,111 @@
 #include "ecc.h"
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Class constructor
+//    Create empty Eccentricity
+//##########################################################################################
+Eccentricity::Eccentricity(string model, double lambda)
+{
+  dipole_model = model;
+  lambda_bym = lambda;
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Class deconstructor
+//##########################################################################################
+Eccentricity::~Eccentricity()
+{
+
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Implicit Copy
+//##########################################################################################
+Eccentricity::Eccentricity(const Eccentricity &original)
+{
+  CopyEccentricity(original);
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Eccentricity Copy Function
+//##########################################################################################
+void Eccentricity::CopyEccentricity(const Eccentricity &e)
+{
+
+}
+//__________________________________________________________________________________________
+
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Overide operator=
+//##########################################################################################
+Eccentricity& Eccentricity::operator= (const Eccentricity& original)
+{
+	CopyEccentricity(original);
+	return *this;
+}
+//__________________________________________________________________________________________
+
+vector<double> Eccentricity::StandardCalculation(string density_type, int m, int n)
+{
+  int column;
+  int max = sparse_density.size();
+  vector <double> distance_squared, phi;
+  double psi, radius;
+	double psi_top = 0, psi_bottom = 0, normalization = 0, x_component = 0, y_component = 0, weight = 0;
+  double eccentricity = 0, etot = 0;
+
+  distance_squared.resize(max);
+  phi.resize(max);
+
+  if (density_type == "Energy") { column = 2; }
+
+	for (int s=0;s<max;s++)
+  {
+	   x_component = (sparse_density[0][s] - x_center_of_mass);
+	   y_component = (sparse_density[1][s] - y_center_of_mass);
+	   distance_squared[s] = pow(x_component, 2) + pow(y_component, 2);
+
+     weight = sparse_density[column][s]*pow(distance_squared[s], (m/2.));
+     normalization += weight;
+
+     phi[s] = atan2(y_component, x_component); // angle of fluid cells
+
+     psi_top += weight*sin(1.0*n*phi[s]);
+	   psi_bottom += weight*cos(1.0*n*phi[s]);
+
+     etot += sparse_density[column][s];
+	}
+  // m is radial weight
+  // n is anglular weight
+
+	psi_top /= max;
+	psi_bottom /= max;
+
+  // relative event plane angle (perp to major axis) (coming out of flat sides of shape)
+	psi = 1./(1.0*n)*atan2(psi_top, psi_bottom);
+
+	for (int s=0;s<max;s++)
+  {
+    eccentricity += sparse_density[column][s]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
+  }
+
+  eccentricity /= normalization;
+
+  // top and bottom of eccentricity is technically divided by number of particles (max)
+	radius = normalization/etot;
+
+	return {eccentricity, psi, radius};
+
+}
+/*
 vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
 {
   cout << "started eccs" << endl;
@@ -7,7 +113,7 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
   double x_center_of_mass = 0, y_center_of_mass = 0, total = 0;
   complex<double> epsilon_2 = {0, 0}, epsilon_3 = {0, 0}, epsilon_4 = {0, 0}, epsilon_5 = {0, 0};
 
-  complex<double> numerator2 = {0, 0}, denominator2 = {0, 0};
+  complex<double> numeratodistance_squared = {0, 0}, denominatodistance_squared = {0, 0};
   complex<double> numerator3 = {0, 0}, denominator3 = {0, 0};
   complex<double> numerator4 = {0, 0}, denominator4 = {0, 0};
   complex<double> numerator5 = {0, 0}, denominator5 = {0, 0};
@@ -34,8 +140,8 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
       del_x = (p - x_center_of_mass)*grid_step;
       del_y = (q - y_center_of_mass)*grid_step;
 
-      numerator2 += pow(complex<double>(del_x, del_y), 2.)*grid[p][q];
-      denominator2 += pow(pow(del_x, 2.) + pow(del_y, 2.), 2/2)*grid[p][q];
+      numeratodistance_squared += pow(complex<double>(del_x, del_y), 2.)*grid[p][q];
+      denominatodistance_squared += pow(pow(del_x, 2.) + pow(del_y, 2.), 2/2)*grid[p][q];
 
       numerator3 += pow(complex<double>(del_x, del_y), 3.)*grid[p][q];
 //      cout << pow(complex<double>(del_x, del_y), 3.) << endl;
@@ -50,8 +156,8 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
     }
   }
   cout << "got num and denom" << endl;
-  cout << numerator2 << " " << denominator2 << " " << numerator3 << " " << denominator3 << " " << numerator4 << " " << denominator4 << endl;
-  epsilon_2 = -numerator2/denominator2;
+  cout << numeratodistance_squared << " " << denominatodistance_squared << " " << numerator3 << " " << denominator3 << " " << numerator4 << " " << denominator4 << endl;
+  epsilon_2 = -numeratodistance_squared/denominatodistance_squared;
   epsilon_3 = -numerator3/denominator3;
   epsilon_4 = -numerator4/denominator4;
   epsilon_5 = -numerator5/denominator5;
@@ -60,8 +166,50 @@ vector<double> Eccentricities(vector<vector<double>> grid, double grid_step)
 
   return {abs(epsilon_2), abs(epsilon_3), abs(epsilon_4), abs(epsilon_5)};
 }
-
+*/
 vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step)
 {
+
+}
+
+vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> &density)
+{
+  double x, y, energy = 0;
+  sparse_density.resize(6);
+  for (int i = 0; i < density[0].size(); i++)
+  {
+    for (int j = 0; j < density[0][0].size(); j++)
+    {
+      if (density[0][i][j] != 0)
+      {
+        x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
+        y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value
+        x_center_of_mass += x*density[0][i][j];
+        y_center_of_mass += y*density[0][i][j];
+        energy += density[0][i][j];
+        sparse_density.push_back(x);
+        sparse_density.push_back(y);
+        sparse_density.push_back(density[0][i][j]);
+        sparse_density.push_back(density[1][i][j]);
+        sparse_density.push_back(density[2][i][j]);
+        sparse_density.push_back(density[3][i][j]);
+      }
+    }
+  }
+
+  x_center_of_mass /= energy;
+  y_center_of_mass /= energy;
+
+
+
+  eccentricities.push_back(StandardCalculation("Energy",2,2));
+
+  eccentricities.push_back(StandardCalculation("Energy",3,3));
+
+  eccentricities.push_back(StandardCalculation("Energy",4,4));
+
+  eccentricities.push_back(StandardCalculation("Energy",5,5));
+
+//  eccentricities = Eccentricities(density[0], grid_step);
 
 }

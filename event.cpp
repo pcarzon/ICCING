@@ -297,7 +297,7 @@ bool Event::UpdateDensity(Quarks quark_density)
 
 void Event::CalculateEccentricities()
 {
-  eccentricities = Eccentricities(density[0], grid_step);
+  eccentricities = CalculateEccentricities(grid_max, grid_step, density);
 }
 
 //__________________________________________________________________________________________

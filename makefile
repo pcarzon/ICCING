@@ -8,11 +8,11 @@ CPP_FILES = ecc.cpp eos.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cp
 HEADER_FILES = ecc.h eos.h event.h io.h functions.h splitting.h global.h correlation.h
 OBJECT_FILES = ecc.o eos.o event.o io.o functions.o main.o splitting.o correlation.o
 
-event.o : event.h global.h event.cpp
-	$(CC) $(CFLAGS) event.cpp
-
-ecc.o : ecc.h event.h ecc.cpp
+ecc.o : ecc.h ecc.cpp
 	$(CC) $(CFLAGS) ecc.cpp
+
+event.o : event.h global.h ecc.h event.cpp
+	$(CC) $(CFLAGS) event.cpp
 
 eos.o : eos.h event.h eos.cpp
 	$(CC) $(CFLAGS) eos.cpp

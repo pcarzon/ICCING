@@ -8,9 +8,34 @@
 #include <vector>
 
 using namespace std;
+// Do these systems PbPb, XeXe, OO(woods saxon), pPb (nucleon width = 0.3)
+// 3 million events each
+class Eccentricity
+{
+private:
 
-vector<double> Eccentricities(vector<vector<double>> grid, double grid_step);
+  double x_center_of_mass = 0;
+  double y_center_of_mass = 0;
+  vector<vector<double>> sparse_density;
 
-vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step);
+	void CopyEccentricity(const Eccentricity &e);
+
+  //vector<double> Eccentricities(vector<vector<double>> grid, double grid_step);
+
+  vector<double> StandardCalculation(string density_type, int m, int n);
+
+  vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step);
+
+public:
+
+  Eccentricity(string model, double lambda);
+  ~Eccentricity();
+
+  Eccentricity(const Eccentricity &original);
+  Eccentricity& operator=(const Eccentricity& original);
+
+  vector<vector<double>> CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> &density);
+};
+#endif
 
 #endif

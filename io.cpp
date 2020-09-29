@@ -643,7 +643,7 @@ void IO::OutputEccentricities(vector<double> eccentricities, string file_name)
 
   for (int i = 0; i < eccentricities.size(); i++)
   {
-    output << eccentricities[i] << "\t";
+    output << eccentricities[i][0] << "\t";
   }
 
   output << endl;
