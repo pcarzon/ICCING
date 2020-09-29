@@ -96,8 +96,9 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
   {
     eccentricity += sparse_density[column][s]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
   }
-
+  cout << "eccentricity " << eccentricity << endl;
   eccentricity /= normalization;
+  cout << "eccentricity/normalized " << eccentricity << endl;
 
   // top and bottom of eccentricity is technically divided by number of particles (max)
 	radius = normalization/etot;
