@@ -170,7 +170,7 @@ vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step)
 
 }
 
-vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density)
+void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density)
 {
   double x, y, energy = 0;
   for (int i = 0; i < density[0].size(); i++)
