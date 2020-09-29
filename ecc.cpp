@@ -184,7 +184,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
-//        sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
+        sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
       }
     }
   }
@@ -192,7 +192,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
   x_center_of_mass /= energy;
   y_center_of_mass /= energy;
   cout << x_center_of_mass << " " << y_center_of_mass << endl;
-
+  cout << StandardCalculation("Energy",2,2) << " " << StandardCalculation("Energy",3,3) << endl;
 
 //  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
 
