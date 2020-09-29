@@ -184,7 +184,7 @@ vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, doubl
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
-        sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
+//        sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
       }
     }
   }
