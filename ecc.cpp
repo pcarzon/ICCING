@@ -195,7 +195,7 @@ vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, doubl
 
 
 
-  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
+//  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
 
 
 //  eccentricities = Eccentricities(density[0], grid_step);

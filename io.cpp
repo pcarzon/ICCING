@@ -813,7 +813,7 @@ void IO::WriteEvent(Event event)
     }
   }
 
-  OutputEccentricities(event.eccentricities,  output_dir + "eccentricities_" + to_string(seed) + ".dat");
+//  OutputEccentricities(event.eccentricities,  output_dir + "eccentricities_" + to_string(seed) + ".dat");
   OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 
   current_event++;  //  Used for tracking which event has been processed
