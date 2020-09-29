@@ -74,7 +74,7 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
      weight = sparse_density[column][s]*pow(distance_squared[s], (m/2.));
      normalization += weight;
      if (isnan(normalization))
-     cout << "x_component " << x_component << " y_component " << y_component << endl;
+     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
 
