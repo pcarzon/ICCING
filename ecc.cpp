@@ -5,10 +5,8 @@
 //  Class constructor
 //    Create empty Eccentricity
 //##########################################################################################
-Eccentricity::Eccentricity(string model, double lambda)
+Eccentricity::Eccentricity()
 {
-  dipole_model = model;
-  lambda_bym = lambda;
 }
 //__________________________________________________________________________________________
 
@@ -187,12 +185,7 @@ vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, doubl
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
-        sparse_density.push_back(x);
-        sparse_density.push_back(y);
-        sparse_density.push_back(density[0][i][j]);
-        sparse_density.push_back(density[1][i][j]);
-        sparse_density.push_back(density[2][i][j]);
-        sparse_density.push_back(density[3][i][j]);
+        sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
       }
     }
   }
@@ -202,13 +195,8 @@ vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, doubl
 
 
 
-  eccentricities.push_back(StandardCalculation("Energy",2,2));
+  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
 
-  eccentricities.push_back(StandardCalculation("Energy",3,3));
-
-  eccentricities.push_back(StandardCalculation("Energy",4,4));
-
-  eccentricities.push_back(StandardCalculation("Energy",5,5));
 
 //  eccentricities = Eccentricities(density[0], grid_step);
 

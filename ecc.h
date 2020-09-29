@@ -28,7 +28,7 @@ private:
 
 public:
 
-  Eccentricity(string model, double lambda);
+  Eccentricity();
   ~Eccentricity();
 
   Eccentricity(const Eccentricity &original);
@@ -36,6 +36,4 @@ public:
 
   vector<vector<double>> CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> &density);
 };
-#endif
-
 #endif
