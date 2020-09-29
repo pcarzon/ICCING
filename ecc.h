@@ -34,6 +34,6 @@ public:
   Eccentricity(const Eccentricity &original);
   Eccentricity& operator=(const Eccentricity& original);
 
-  vector<vector<double>> CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> &density);
+  vector<vector<double>> CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density);
 };
 #endif
