@@ -192,7 +192,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
   x_center_of_mass /= energy;
   y_center_of_mass /= energy;
   cout << x_center_of_mass << " " << y_center_of_mass << endl;
-  cout << StandardCalculation("Energy",2,2) << " " << StandardCalculation("Energy",3,3) << endl;
+  cout << StandardCalculation("Energy",2,2)[0] << " " << StandardCalculation("Energy",3,3)[0] << endl;
 
 //  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
 
