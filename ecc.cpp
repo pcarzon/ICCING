@@ -72,6 +72,7 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 	   distance_squared[s] = pow(x_component, 2) + pow(y_component, 2);
 
      weight = sparse_density[column][s]*pow(distance_squared[s], (m/2.));
+     cout << "weight " << weight << endl;
      normalization += weight;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
@@ -81,8 +82,8 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
      etot += sparse_density[column][s];
 	}
-  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
-  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
+//  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
+//  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
   // m is radial weight
   // n is anglular weight
 
@@ -96,9 +97,9 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
   {
     eccentricity += sparse_density[column][s]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
   }
-  cout << "eccentricity " << eccentricity << endl;
+//  cout << "eccentricity " << eccentricity << endl;
   eccentricity /= normalization;
-  cout << "eccentricity/normalized " << eccentricity << endl;
+//  cout << "eccentricity/normalized " << eccentricity << endl;
 
   // top and bottom of eccentricity is technically divided by number of particles (max)
 	radius = normalization/etot;
