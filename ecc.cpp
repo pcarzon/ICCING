@@ -173,7 +173,6 @@ vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step)
 vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> &density)
 {
   double x, y, energy = 0;
-  sparse_density.resize(6);
   for (int i = 0; i < density[0].size(); i++)
   {
     for (int j = 0; j < density[0][0].size(); j++)
@@ -192,7 +191,7 @@ vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, doubl
 
   x_center_of_mass /= energy;
   y_center_of_mass /= energy;
-
+  cout << x_center_of_mass << " " << y_center_of_mass << endl;
 
 
 //  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
