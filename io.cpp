@@ -344,7 +344,7 @@ Event IO::InitializeEvent()
   event_in.grid_step = grid_step;
   event_in.grid_points = grid_points;
 
-  event_in.ecc = new Eccentricity;
+  event_in.ecc = new Eccentricity();
   //  Initialize input grid to 0 with dimensions grid_points + 1
   event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
 
