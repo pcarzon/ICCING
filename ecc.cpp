@@ -186,11 +186,13 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
       {
         x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
         y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value
-        if (y > 1) cout << "grid_max " << grid_max << " j " << j << " grid_step " << grid_step << endl;
+      //  if (y > 1) cout << "grid_max " << grid_max << " j " << j << " grid_step " << grid_step << endl;
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
         sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
+        if (sparse_density[sparse_density.size()][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
+
       }
     }
   }
