@@ -64,6 +64,7 @@ private:
   vector<vector<double>> quark_dist; //  Projectile Input Energy density
   vector<vector<int>> valued_points;
   vector<vector<double>> eccentricities;
+  Eccentricity ecc;
   int number_up = 0;
   int number_down = 0;
   int number_strange = 0;

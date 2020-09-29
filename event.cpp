@@ -48,6 +48,7 @@ void Event::CopyEvent(const Event &e)
   grid_points = e.grid_points;
   get_grid_point = e.get_grid_point;
 
+  ecc = e.ecc;
   initial_energy = e.initial_energy;
   t_a = e.t_a;
   t_b = e.t_b;
