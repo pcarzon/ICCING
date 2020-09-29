@@ -81,6 +81,8 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
      etot += sparse_density[column][s];
 	}
+  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
+  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
   // m is radial weight
   // n is anglular weight
 
