@@ -67,21 +67,22 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
 	for (int s=0;s<max;s++)
   {
-	   x_component = (sparse_density[0][s] - x_center_of_mass);
-	   y_component = (sparse_density[1][s] - y_center_of_mass);
+	   x_component = (sparse_density[s][0] - x_center_of_mass);
+	   y_component = (sparse_density[s][1] - y_center_of_mass);
 	   distance_squared[s] = pow(x_component, 2) + pow(y_component, 2);
 
-     weight = sparse_density[column][s]*pow(distance_squared[s], (m/2.));
+     weight = sparse_density[s][column]*pow(distance_squared[s], (m/2.));
      normalization += weight;
-     if (isnan(normalization))
+//     if (isnan(normalization))
 //     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
+//  if (sparse_density[s][column] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
 
      psi_top += weight*sin(1.0*n*phi[s]);
 	   psi_bottom += weight*cos(1.0*n*phi[s]);
 
-     etot += sparse_density[column][s];
+     etot += sparse_density[s][column];
 	}
 //  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
 //  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
@@ -96,7 +97,7 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
 	for (int s=0;s<max;s++)
   {
-    eccentricity += sparse_density[column][s]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
+    eccentricity += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
   }
 //  cout << "eccentricity " << eccentricity << endl;
   eccentricity /= normalization;
@@ -191,7 +192,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
         sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
-        if (sparse_density[sparse_density.size()-1][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
+//        if (sparse_density[sparse_density.size()-1][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
 
       }
     }
