@@ -74,7 +74,7 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
      weight = sparse_density[column][s]*pow(distance_squared[s], (m/2.));
      normalization += weight;
      if (isnan(normalization))
-     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
+//     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
 
@@ -186,6 +186,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
       {
         x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
         y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value
+        if (y > 1) cout << "grid_max " << grid_max << " j " << j << " grid_step " << grid_step << endl;
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
