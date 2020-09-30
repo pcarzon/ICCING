@@ -817,7 +817,7 @@ void IO::WriteEvent(Event event)
     }
   }
 
-  OutputEccentricities(event.total_entropy, event.eccentricities,  output_dir + "eccentricities" + ".dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities,  output_dir + "eccentricities" + ".dat");
 
   current_event++;  //  Used for tracking which event has been processed
 }
