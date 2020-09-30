@@ -61,7 +61,9 @@ void Event::CopyEvent(const Event &e)
   y_center = e.y_center;
 
   total_initial_energy = e.total_initial_energy;
+  total_initial_entropy = e.total_initial_entropy;
   total_energy = e.total_energy;
+  total_entropy = e.total_entropy;
   seed = e.seed;
 }
 //__________________________________________________________________________________________
