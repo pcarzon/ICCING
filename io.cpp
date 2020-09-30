@@ -642,12 +642,15 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
   ofstream output;
   output.open(file_name, ios::app);
 
+  cout << "total entropy " << total_entropy << endl;
   output << total_entropy << " ";
   for (int i = 0; i < eccentricities.size(); i++)
   {
+    cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+
     output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
   }
-
+  cout << eccentricities[0][2] << endl;
   output << eccentricities[0][2] << endl;
 
   output.close();
