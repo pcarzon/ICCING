@@ -176,7 +176,7 @@ vector<double> NewEccentricities(vector<vector<double>> grid, double grid_step)
 
 }
 
-void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density)
+vector<vector<double>> Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density)
 {
   double x, y, energy = 0;
   for (int i = 0; i < density[0].size(); i++)
@@ -203,7 +203,7 @@ void Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vecto
   cout << x_center_of_mass << " " << y_center_of_mass << endl;
   cout << StandardCalculation("Energy",2,2)[0] << " " << StandardCalculation("Energy",3,3)[0] << endl;
 
-//  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
+  return {StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)};
 
 
 //  eccentricities = Eccentricities(density[0], grid_step);
