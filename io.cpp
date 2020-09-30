@@ -83,6 +83,7 @@ IO::IO(string configFile)
 
   grid_points = 2*(grid_max/grid_step); //  Calculate # grid_points
 
+  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
 //__________________________________________________________________________________________
 
@@ -636,17 +637,18 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
 //##########################################################################################
 //  Print Eccentricities
 //##########################################################################################
-void IO::OutputEccentricities(vector<vector<double>> eccentricities, string file_name)
+void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string file_name)
 {
   ofstream output;
   output.open(file_name, ios::app);
 
+  output << total_entropy << " ";
   for (int i = 0; i < eccentricities.size(); i++)
   {
-    output << eccentricities[i][0] << "\t";
+    output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
   }
 
-  output << endl;
+  output << eccentricities[0][2] << endl;
 
   output.close();
 }
@@ -690,10 +692,9 @@ Event IO::ReadEvent(Event event_in)
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
 
-      event_in.total_initial_energy += value;
+      event_in.total_initial_entropy += value;
   }
   input.close();  //  Close input stream
-  event_in.total_initial_energy = 0;
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
 
   //******************************************************************************************
@@ -813,8 +814,7 @@ void IO::WriteEvent(Event event)
     }
   }
 
-//  OutputEccentricities(event.eccentricities,  output_dir + "eccentricities_" + to_string(seed) + ".dat");
-  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
+  OutputEccentricities(event.total_entropy, event.eccentricities,  output_dir + "eccentricities" + ".dat");
 
   current_event++;  //  Used for tracking which event has been processed
 }
