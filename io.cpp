@@ -817,7 +817,10 @@ void IO::WriteEvent(Event event)
     }
   }
 
-  OutputEccentricities(event.total_initial_entropy, event.eccentricities,  output_dir + "eccentricities" + ".dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[0],  output_dir + "energy_eccentricities.dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[1],  output_dir + "baryon_eccentricities.dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[2],  output_dir + "strange_eccentricities.dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[3],  output_dir + "charge_eccentricities.dat");
 
   current_event++;  //  Used for tracking which event has been processed
 }
