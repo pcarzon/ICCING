@@ -7,6 +7,7 @@
 //##########################################################################################
 IO::IO(string configFile)
 {
+  cout << "started config read" << endl;
   Initialize(); // Initialze config params and map for reading in config params
 
   //  config input stream
@@ -82,7 +83,7 @@ IO::IO(string configFile)
   current_event = first_event;  //  Set current_event to first_event
 
   grid_points = 2*(grid_max/grid_step); //  Calculate # grid_points
-
+cout << "output config" << endl;
   OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
 //__________________________________________________________________________________________
@@ -665,6 +666,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
 //##########################################################################################
 Event IO::ReadEvent(Event event_in)
 {
+  cout << "reading event" << endl;
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
@@ -762,7 +764,7 @@ Event IO::ReadEvent(Event event_in)
     }
     input.close();  //  Close input stream
   }
-
+cout << "end reading event" << endl;
   return event_in;  //  Return event with data
 }
 //__________________________________________________________________________________________
