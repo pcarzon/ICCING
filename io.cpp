@@ -671,6 +671,7 @@ Event IO::ReadEvent(Event event_in)
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
 
+  if (input.is_open()) cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
   // Loop input variables
   int x, y;
   double readx,ready,value;
