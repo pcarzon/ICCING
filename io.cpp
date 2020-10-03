@@ -707,6 +707,7 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_a)
   {
+    cout << "read ta" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TA" + to_string(current_event) + ".dat");
     //  Initialize t_a grid to 0 with dimensions grid_points + 1
@@ -739,6 +740,7 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_b)
   {
+    cout << "read tb" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TB" + to_string(current_event) + ".dat");
     //  Initialize t_b grid to 0 with dimensions grid_points + 1
