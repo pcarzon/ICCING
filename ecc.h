@@ -24,7 +24,7 @@ private:
 
   vector<double> StandardCalculation(string density_type, int m, int n);
 
-  vector<double> NewCalculation(vector<vector<double>> grid, double grid_step);
+  vector<double> NewCalculation(string density_type, int m, int n);
 
 public:
 
