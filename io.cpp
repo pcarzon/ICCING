@@ -638,23 +638,49 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
 //##########################################################################################
 //  Print Eccentricities
 //##########################################################################################
-void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string file_name)
+void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string density_type, string file_name)
 {
-  ofstream output;
-  output.open(file_name, ios::app);
-
-  cout << "total entropy " << total_entropy << endl;
-  output << total_entropy << " ";
-  for (int i = 0; i < eccentricities.size(); i++)
+  if (density_type == "Energy")
   {
-    cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+    ofstream output;
+    output.open(file_name, ios::app);
 
-    output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+    cout << "total entropy " << total_entropy << endl;
+    output << total_entropy << " ";
+    for (int i = 0; i < eccentricities.size(); i++)
+    {
+      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+
+      output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+    }
+    cout << eccentricities[0][2] << endl;
+    output << eccentricities[0][2] << endl;
+    output.close();
   }
-  cout << eccentricities[0][2] << endl;
-  output << eccentricities[0][2] << endl;
+  else if (density_type == "Charge")
+  {
+    ofstream output_pos, output_neg;
+    output_neg.open(file_name + "_neg.dat", ios::app);
+    output_pos.open(file_name + "_pos.dat", ios::app);
 
-  output.close();
+    cout << "total entropy " << total_entropy << endl;
+    output_neg << total_entropy << " ";
+    output_pos << total_entropy << " ";
+    for (int i = 0; i < eccentricities.size()/2; i++)
+    {
+      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+      cout << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
+
+      output_neg << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+      output_pos << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
+    }
+    cout << eccentricities[0][2] << endl;
+    output_neg << eccentricities[0][2] << endl;
+    output_pos << eccentricities[0][5] << endl;
+
+    output_neg.close();
+    output_pos.close();
+  }
 }
 //__________________________________________________________________________________________
 
@@ -822,10 +848,10 @@ void IO::WriteEvent(Event event)
     }
   }
 
-  OutputEccentricities(event.total_initial_entropy, event.eccentricities[0],  output_dir + "energy_eccentricities.dat");
-  OutputEccentricities(event.total_initial_entropy, event.eccentricities[1],  output_dir + "baryon_eccentricities.dat");
-  OutputEccentricities(event.total_initial_entropy, event.eccentricities[2],  output_dir + "strange_eccentricities.dat");
-  OutputEccentricities(event.total_initial_entropy, event.eccentricities[3],  output_dir + "charge_eccentricities.dat");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[0], "Energy", output_dir + "energy_eccentricities");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[1], "Charge", output_dir + "baryon_eccentricities");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
+  OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
 
   current_event++;  //  Used for tracking which event has been processed
 }
