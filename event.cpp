@@ -393,7 +393,7 @@ void Event::CleanEvent()
   gluon_dist.clear();
   quark_dist.clear();
   eccentricities.clear();
-  ~ecc;
+  ecc.CleanEccentricity();
 
   total_initial_energy = 0;
   total_energy = 0;
