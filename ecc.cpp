@@ -220,7 +220,7 @@ vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_ma
         energy += density[0][i][j];
         sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
 //        if (sparse_density[sparse_density.size()-1][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
-//        cout << "Density " << density[1][i][j] << " " <<  density[2][i][j] << " " << density[3][i][j] << endl;
+        cout << "Density " << density[1][i][j] << " " <<  density[2][i][j] << " " << density[3][i][j] << endl;
       }
     }
   }
