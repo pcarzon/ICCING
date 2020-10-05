@@ -142,8 +142,8 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
      {  normalization_neg += weight;  }
      else if (sparse_density[s][column] > 0)
      {  normalization_pos += weight;  }
-//     if (isnan(normalization))
-//     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
+     if (isnan(normalization_neg))
+     cout << "y1_component " << sparse_density[s][1] << " y2_component " << y_center_of_mass << endl;
 //  if (sparse_density[s][column] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
@@ -169,7 +169,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 
 	}
 //  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
-//  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
+  cout << "Eccentricity calcs " << normalization_neg << " " << psi_top_neg << " " << psi_bottom_neg << endl;
   // m is radial weight
   // n is anglular weight
 

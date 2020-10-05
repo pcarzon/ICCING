@@ -666,7 +666,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
     cout << "total entropy " << total_entropy << endl;
     output_neg << total_entropy << " ";
     output_pos << total_entropy << " ";
-    for (int i = 0; i < eccentricities.size()/2; i++)
+    for (int i = 0; i < eccentricities.size(); i++)
     {
       cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
       cout << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
