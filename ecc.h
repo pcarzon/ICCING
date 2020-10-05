@@ -19,6 +19,7 @@ private:
   vector<vector<double>> sparse_density;
 
 	void CopyEccentricity(const Eccentricity &e);
+  void CleanEccentricity();
 
   //vector<double> Eccentricities(vector<vector<double>> grid, double grid_step);
 

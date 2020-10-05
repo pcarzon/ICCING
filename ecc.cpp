@@ -16,7 +16,7 @@ Eccentricity::Eccentricity()
 //##########################################################################################
 Eccentricity::~Eccentricity()
 {
-
+  CleanEccentricity();
 }
 //__________________________________________________________________________________________
 
@@ -238,4 +238,11 @@ vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_ma
 
 //  eccentricities = Eccentricities(density[0], grid_step);
 
+}
+
+void Eccentricity::CleanEccentricity()
+{
+  x_center_of_mass = 0;
+  y_center_of_mass = 0;
+  sparse_density.clear();
 }
