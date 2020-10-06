@@ -840,7 +840,7 @@ void IO::WriteEvent(Event event)
   else if (output_type == 1)
   {
     output_energy = event.initial_energy;
-    OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
+//    OutputSparseDensityGrids(output_energy, output_dir + "ic" + to_string(current_event) + ".dat");
 
     OutputSparseDensityGrids(event.density, event.total_energy, output_dir + "densities" + to_string(current_event) + ".dat");
 
