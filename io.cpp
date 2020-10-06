@@ -643,7 +643,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
   if (density_type == "Energy")
   {
     ofstream output;
-    output.open(file_name, ios::app);
+    output.open(file_name + ".dat", ios::app);
 
     cout << "total entropy " << total_entropy << endl;
     output << total_entropy << " ";
@@ -683,6 +683,14 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
   }
 }
 //__________________________________________________________________________________________
+
+void IO::OutputQuarkCounts(int up, int down, int strange, int charm, string file_name)
+{
+  ofstream output;
+  output.open(file_name, ios::app);
+
+  output << up << " " << down << " " << strange << " " << charm << endl;
+}
 
 //__________________________________________________________________________________________
 //##########################################################################################
@@ -852,7 +860,7 @@ void IO::WriteEvent(Event event)
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[1], "Charge", output_dir + "baryon_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
-
+  OutputQuarkCounts(event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
   current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________

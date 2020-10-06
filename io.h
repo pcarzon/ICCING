@@ -170,6 +170,7 @@ private:
   void OutputSparseDensityGrids(vector<vector<double>> &density_grid, string file_name);  //  Only prints valued points
   void OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, double tot_energy, string file_name);  //  Only prints valued points
   void OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string density_type, string file_name); //  Prints eccentricities
+  void OutputQuarkCounts(int up, int down, int strange, int charm, string file_name); //  Prints eccentricities
 //__________________________________________________________________________________________
 
 public:
