@@ -708,7 +708,7 @@ Event IO::ReadEvent(Event event_in)
   cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
   // Loop input variables
   int x, y;
-  double readx,ready,value;
+  double readx,ready,value,numpoints=0;
 
   //  Ignore first line of input file (Trento specific, needs to be changed)
   input.ignore(10000, '\n');
@@ -728,15 +728,16 @@ Event IO::ReadEvent(Event event_in)
 
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
+      event_in.total_initial_entropy += value;
+      numpoints++;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
 
-      event_in.total_initial_entropy += value;
   }
   input.close();  //  Close input stream
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
-
+  event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
