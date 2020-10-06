@@ -36,7 +36,9 @@ Eccentricity::Eccentricity(const Eccentricity &original)
 //##########################################################################################
 void Eccentricity::CopyEccentricity(const Eccentricity &e)
 {
-
+  x_center_of_mass = e.x_center_of_mass;
+  y_center_of_mass = e.y_center_of_mass;
+  sparse_density = e.sparse_density;
 }
 //__________________________________________________________________________________________
 

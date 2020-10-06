@@ -46,9 +46,9 @@ void Event::CopyEvent(const Event &e)
   tau_0 = e.tau_0;
   e_thresh = e.e_thresh;
   grid_points = e.grid_points;
+  test_ = e.test_;
   get_grid_point = e.get_grid_point;
 
-  ecc = e.ecc;
   initial_energy = e.initial_energy;
   t_a = e.t_a;
   t_b = e.t_b;
@@ -57,6 +57,11 @@ void Event::CopyEvent(const Event &e)
   quark_dist = e.quark_dist;
   valued_points = e.valued_points;
   eccentricities = e.eccentricities;
+  ecc = e.ecc;
+  number_up = e.number_up;
+  number_down = e.number_down;
+  number_strange = e.number_strange;
+  number_charm = e.number_charm;
   x_center = e.x_center;
   y_center = e.y_center;
 
@@ -64,6 +69,7 @@ void Event::CopyEvent(const Event &e)
   total_initial_entropy = e.total_initial_entropy;
   total_energy = e.total_energy;
   total_entropy = e.total_entropy;
+  out_sample = e.out_sample;
   seed = e.seed;
 }
 //__________________________________________________________________________________________
