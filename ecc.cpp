@@ -168,7 +168,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 
 	}
 //  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
-  cout << "Eccentricity calcs " << max_neg << " " << max_pos << endl;
+//  cout << "Eccentricity calcs " << max_neg << " " << max_pos << endl;
   // m is radial weight
   // n is anglular weight
 
@@ -181,9 +181,9 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 
 
   // relative event plane angle (perp to major axis) (coming out of flat sides of shape)
-	psi_neg = 1./(1.0*n)*atan2(psi_top_neg, psi_bottom_neg);
+	psi_neg = 1./(1.0*n)*atan2(psi_top_neg/normalization_neg, psi_bottom_neg/normalization_neg);
 
-  psi_pos = 1./(1.0*n)*atan2(psi_top_pos, psi_bottom_pos);
+  psi_pos = 1./(1.0*n)*atan2(psi_top_pos/normalization_pos, psi_bottom_pos/normalization_pos);
 
 	for (int s=0;s<max;s++)
   {
@@ -192,7 +192,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
     else if (sparse_density[s][column] > 0)
     {  eccentricity_pos += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi_pos));  }
   }
-  cout << "eccentricity_neg " << eccentricity_neg << " " << normalization_neg << endl;
+
   eccentricity_neg /= normalization_neg;
   eccentricity_pos /= normalization_pos;
 //  cout << "eccentricity/normalized " << eccentricity << endl;
@@ -222,7 +222,7 @@ vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_ma
         energy += density[0][i][j];
         sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
 //        if (sparse_density[sparse_density.size()-1][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
-        cout << "Density " << density[1][i][j] << " " <<  density[2][i][j] << " " << density[3][i][j] << endl;
+//        cout << "Density " << density[1][i][j] << " " <<  density[2][i][j] << " " << density[3][i][j] << endl;
       }
     }
   }
