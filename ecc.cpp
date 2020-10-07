@@ -192,7 +192,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
     else if (sparse_density[s][column] > 0)
     {  eccentricity_pos += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi_pos));  }
   }
-//  cout << "eccentricity " << eccentricity << endl;
+  cout << "eccentricity_neg " << eccentricity_neg << " " << normalization_neg << endl;
   eccentricity_neg /= normalization_neg;
   eccentricity_pos /= normalization_pos;
 //  cout << "eccentricity/normalized " << eccentricity << endl;
