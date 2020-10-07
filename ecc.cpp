@@ -188,7 +188,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 	for (int s=0;s<max;s++)
   {
     if (sparse_density[s][column] < 0)
-    {  eccentricity_neg += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi_neg));  }
+    {  eccentricity_neg += sparse_density[s][column]*pow(distance_squared[s], m/2.)*sin(n*(phi[s] - psi_neg));  }
     else if (sparse_density[s][column] > 0)
     {  eccentricity_pos += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi_pos));  }
   }
