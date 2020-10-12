@@ -181,6 +181,7 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 
 
   // relative event plane angle (perp to major axis) (coming out of flat sides of shape)
+  // need to divide parts by normalization so atan2 gets the quadrant correct and thus give positive eccs
 	psi_neg = 1./(1.0*n)*atan2(psi_top_neg/normalization_neg, psi_bottom_neg/normalization_neg);
 
   psi_pos = 1./(1.0*n)*atan2(psi_top_pos/normalization_pos, psi_bottom_pos/normalization_pos);

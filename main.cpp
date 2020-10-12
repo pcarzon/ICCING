@@ -41,7 +41,8 @@ int main (int argc, char *argv[])
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	while (!inOut.LastEvent())
+	for (int i = 0; i < 100000; i++)
+//	while (!inOut.LastEvent())
 	{
 		start = clock();
 

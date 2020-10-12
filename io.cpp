@@ -862,7 +862,7 @@ void IO::WriteEvent(Event event)
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
   OutputQuarkCounts(event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
-  current_event++;  //  Used for tracking which event has been processed
+//  current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________
 
