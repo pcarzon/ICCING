@@ -7,7 +7,7 @@
 //##########################################################################################
 IO::IO(string configFile)
 {
-  cout << "started config read" << endl;
+//  cout << "started config read" << endl;
   Initialize(); // Initialze config params and map for reading in config params
 
   //  config input stream
@@ -83,7 +83,7 @@ IO::IO(string configFile)
   current_event = first_event;  //  Set current_event to first_event
 
   grid_points = 2*(grid_max/grid_step); //  Calculate # grid_points
-cout << "output config" << endl;
+//cout << "output config" << endl;
   OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
 //__________________________________________________________________________________________
@@ -645,7 +645,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
     ofstream output;
     output.open(file_name + ".dat", ios::app);
 
-    cout << "total entropy " << total_entropy << endl;
+  //  cout << "total entropy " << total_entropy << endl;
     output << total_entropy << " ";
     for (int i = 0; i < eccentricities.size(); i++)
     {
@@ -653,7 +653,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
 
       output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
     }
-    cout << eccentricities[0][2] << endl;
+//    cout << eccentricities[0][2] << endl;
     output << eccentricities[0][2] << endl;
     output.close();
   }
@@ -663,18 +663,18 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
     output_neg.open(file_name + "_neg.dat", ios::app);
     output_pos.open(file_name + "_pos.dat", ios::app);
 
-    cout << "total entropy " << total_entropy << endl;
+//    cout << "total entropy " << total_entropy << endl;
     output_neg << total_entropy << " ";
     output_pos << total_entropy << " ";
     for (int i = 0; i < eccentricities.size(); i++)
     {
-      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
-      cout << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
+//      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
+//      cout << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
 
       output_neg << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
       output_pos << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
     }
-    cout << eccentricities[0][2] << endl;
+//    cout << eccentricities[0][2] << endl;
     output_neg << eccentricities[0][2] << endl;
     output_pos << eccentricities[0][5] << endl;
 
@@ -700,12 +700,12 @@ void IO::OutputQuarkCounts(int up, int down, int strange, int charm, string file
 //##########################################################################################
 Event IO::ReadEvent(Event event_in)
 {
-  cout << "reading event" << endl;
+//  cout << "reading event" << endl;
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
 
-  cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
+//  cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
   // Loop input variables
   int x, y;
   double readx,ready,value,numpoints=0;
@@ -743,7 +743,7 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_a)
   {
-    cout << "read ta" << endl;
+//    cout << "read ta" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TA" + to_string(current_event) + ".dat");
     //  Initialize t_a grid to 0 with dimensions grid_points + 1
@@ -776,7 +776,7 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_b)
   {
-    cout << "read tb" << endl;
+//    cout << "read tb" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TB" + to_string(current_event) + ".dat");
     //  Initialize t_b grid to 0 with dimensions grid_points + 1
@@ -802,7 +802,7 @@ Event IO::ReadEvent(Event event_in)
     }
     input.close();  //  Close input stream
   }
-cout << "end reading event" << endl;
+//cout << "end reading event" << endl;
   return event_in;  //  Return event with data
 }
 //__________________________________________________________________________________________

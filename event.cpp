@@ -307,7 +307,7 @@ bool Event::UpdateDensity(Quarks quark_density)
 void Event::CalculateEccentricities()
 {
   eccentricities = ecc.CalculateEccentricities(grid_max, grid_step, density);
-  cout << "made it past calc eccs" << endl;
+//  cout << "made it past calc eccs" << endl;
 }
 
 //__________________________________________________________________________________________
