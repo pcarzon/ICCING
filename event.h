@@ -92,7 +92,6 @@ private:
   //  See: RollGlue in ICCING_v0_1_8.nb
   vector<int> GetIntegrationBounds(int size, double raduis);
 
-  //  Copy function for Event class, called by operator= and implicit copy functions
   void UpdateEnergy(double ratio);
   //__________________________________________________________________________________________
 

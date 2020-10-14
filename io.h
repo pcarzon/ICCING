@@ -27,9 +27,6 @@
 
 using namespace std;
 extern default_random_engine get_random_number;
-//extern vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
-//extern SplineSet SplineInterval(double value);
-//extern double InterpolateValue(SplineSet poly, double value);
 
 class IO
 {

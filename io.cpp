@@ -7,7 +7,6 @@
 //##########################################################################################
 IO::IO(string configFile)
 {
-//  cout << "started config read" << endl;
   Initialize(); // Initialze config params and map for reading in config params
 
   //  config input stream
@@ -83,7 +82,7 @@ IO::IO(string configFile)
   current_event = first_event;  //  Set current_event to first_event
 
   grid_points = 2*(grid_max/grid_step); //  Calculate # grid_points
-//cout << "output config" << endl;
+
   OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
 //__________________________________________________________________________________________
@@ -862,7 +861,7 @@ void IO::WriteEvent(Event event)
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
   OutputQuarkCounts(event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
-//  current_event++;  //  Used for tracking which event has been processed
+  current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________
 

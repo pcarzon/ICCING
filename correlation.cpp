@@ -9,6 +9,20 @@ Correlator::Correlator(string model, double lambda)
 {
   dipole_model = model;
   lambda_bym = lambda;
+
+  //  Statement that ties chosen correlation function to general corr function variable
+  //  Done this way so that the correlation function only has to be determined once
+  if (dipole_model == "MV")
+  {
+    //  If using the MV Model, attach the MVModel function to corr
+    corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+  }
+  else
+  {
+    //  If using no particular model, attach the Vaccum correlation function to corr
+    corr = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+  }
+
 }
 //__________________________________________________________________________________________
 
@@ -54,6 +68,10 @@ Correlator& Correlator::operator= (const Correlator& original)
 }
 //__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Correlation function in Vaccum
+//##########################################################################################
 double Correlator::Vaccum(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
@@ -61,7 +79,12 @@ double Correlator::Vaccum(double r, double alpha, double m, double Qs)
   double term3 = (pow(alpha, 2) + pow(1 - alpha, 2))*pow(cyl_bessel_k(1, GeVfm*m*r), 2) + pow(cyl_bessel_k(0, GeVfm*m*r), 2);
   return term1*term2*term3;
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Correlation function in MV Model
+//##########################################################################################
 double Correlator::MVModel(double r, double alpha, double m, double Qs)
 {
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
@@ -70,31 +93,31 @@ double Correlator::MVModel(double r, double alpha, double m, double Qs)
 
   return term1*term2*term3;
 }
+//__________________________________________________________________________________________
 
-function<double(double, double, double, double)> corr;
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Find Maximum Probability given quark flavor, random alpha, and Qs
+//  Golden Section Search
+//##########################################################################################
 double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, double upper, double tolerance)
 {
-  if (dipole_model == "MV")
+  double k = (sqrt(5.) - 1.) / 2.;  //  Golden Ratio
+  double xL = upper - k * (upper - lower);  //  Value on the Left
+  double xR = lower + k * (upper - lower);  //  Value on the Right
+  //  While the difference between the upper and lower bound are greater than the chosen tolerance, keep searching
+  while (upper - lower > tolerance)
   {
-    corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
-  }
-  else
-  {
-    corr = bind(&Correlator::Vaccum, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
-  }
-
-  double k = (sqrt(5.) - 1.) / 2.;
-  double xL = upper - k * (upper - lower);
-  double xR = lower + k * (upper - lower);
-  while (upper - lower > 0.01)
-  {
+    // If the value on the left is greater than the value on the right,
+    // then make the left position the new Right position
     if (corr(xL, alpha, m, Qs) > corr(xR, alpha, m, Qs))
     {
       upper = xR;
       xR = xL;
       xL = upper - k*(upper - lower);
     }
+    // else make the Right position the new Left position
     else
     {
       lower = xL;
@@ -104,15 +127,15 @@ double Correlator::FindMaximum(double alpha, double m, double Qs, double lower, 
   }
   return corr((lower + upper) / 2., alpha, m, Qs);
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+// Given quark pair data, determine distance and momentum fraction
+//##########################################################################################
 double Correlator::F(double r, double alpha, double m, double Qs)
 {
-  if (dipole_model == "MV")
-  {
-    return MVModel(r, alpha, m, Qs);
-  }
-  else
-  {
-    return Vaccum(r, alpha, m, Qs);
-  }
+  //  Since correlation function type was determined in constructor only need to call corr
+  return corr(r, alpha, m, Qs);
 }
+//__________________________________________________________________________________________
