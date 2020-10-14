@@ -645,7 +645,7 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
     output.open(file_name + ".dat", ios::app);
 
   //  cout << "total entropy " << total_entropy << endl;
-    output << total_entropy << " ";
+    output << current_event << " " << total_entropy << " ";
     for (int i = 0; i < eccentricities.size(); i++)
     {
       cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
@@ -663,8 +663,8 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
     output_pos.open(file_name + "_pos.dat", ios::app);
 
 //    cout << "total entropy " << total_entropy << endl;
-    output_neg << total_entropy << " ";
-    output_pos << total_entropy << " ";
+    output_neg << current_event << " " << total_entropy << " ";
+    output_pos << current_event << " " << total_entropy << " ";
     for (int i = 0; i < eccentricities.size(); i++)
     {
 //      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
@@ -688,7 +688,7 @@ void IO::OutputQuarkCounts(int up, int down, int strange, int charm, string file
   ofstream output;
   output.open(file_name, ios::app);
 
-  output << up << " " << down << " " << strange << " " << charm << endl;
+  output << current_event << " " << up << " " << down << " " << strange << " " << charm << endl;
 }
 
 //__________________________________________________________________________________________

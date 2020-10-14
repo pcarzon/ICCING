@@ -166,26 +166,37 @@ Charge Splitter::RollFlavor(double Qs)
 //##########################################################################################
 vector<double> Splitter::RollLocation(double mass, double Qs)
 {
+  //  Set up distributions to pick random r, alpha, and phi values
   uniform_real_distribution<double> get_r(0, r_max);
   uniform_real_distribution<double> get_alpha(alpha_min, 1 - alpha_min);
   uniform_real_distribution<double> get_phi(0, 2*M_PI);
 
   double r, r_final = 0, alpha, phi, prob, ceiling;
 
+  //  Get random r, alpha, and probability until the chosen probability is within the bounds
+  //  of the correlation function at r and alpha
   while (r_final == 0)
   {
+    //  Get random r and alpha
     r = get_r(get_random_number);
     alpha = get_alpha(get_random_number);
 
+    //  Get the largest value of the correlation function at the given alpha, mass, and Qs
     ceiling = 1.01*Model_Correlator.FindMaximum(alpha, mass, Qs, 0, 1, 0.001);
 
+    // Set up distribution to pick probability between 0 and the largest value of the correlation function
     uniform_real_distribution<double> get_location_prob(0, ceiling);
     prob = get_location_prob(get_random_number);
+
+    //  If the chosen probability is within the bounds of the correlation function save r and exit loop
     if (prob < Model_Correlator.F(r, alpha, mass, Qs))
     { r_final = r;  }
   }
 
+  //  Get random phi to calculate the x and y displacement for the quark pair
   phi = get_phi(get_random_number);
+
+  //  return {momentum fraction, delta_x, delta_y}
   return {alpha, round((r_final*cos(phi))/grid_step), round((r_final*sin(phi))/grid_step)};
 }
 //__________________________________________________________________________________________
@@ -207,17 +218,17 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   //  Get flavor of gluon
   set_charge = RollFlavor(sampled_energy.q_s);
 
-  //   If this is false go back to SampleEnergy and find new center point
-  if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)  { gluon_energy_frac = -1; }
+  //  If there is not enough energy to create 2 quarks of given flavor,
+  //  go back to SampleEnergy and find new center point
+  if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)
+  { gluon_energy_frac = -1; }
 
+  // If flavor is that of quarks get momentum fraction and position of quark pair
   if (set_charge.GetCharge()[0] != 0)
-  {
-    quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s);
-  }
+  { quark_location = RollLocation(set_charge.GetCharge()[0], sampled_energy.q_s); }
+  //  else it is a gluon and the momentum fraction and position are 0
   else
-  {
-    quark_location = {0, 0, 0};
-  }
+  { quark_location = {0, 0, 0}; }
 
   //  Create quarks to be distributed in output density grids
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, quark_location[0], quark_location[1], quark_location[2]);
