@@ -40,8 +40,8 @@ private:
 	//  Copy function for Correlator class, called by operator= and implicit copy functions
 	void CopyCorrelator(const Correlator &e);
 
-  //  Correlation function in Vaccum
-  double Vaccum(double r, double alpha, double m, double Qs);
+  //  Correlation function in GBWModel
+  double GBWModel(double r, double alpha, double m, double Qs);
 
   //  Correlation function in MV Model
   double MVModel(double r, double alpha, double m, double Qs);
