@@ -73,7 +73,7 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
-  if (seed_ == 0) {   seed_ = time(NULL); }
+  seed_ = time(NULL);
   get_random_number.seed(seed_);  //  Set random seed from input or timestamp
 
   //  Setting flag for type of charge tracked
