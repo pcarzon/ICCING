@@ -1,0 +1,37 @@
+trento_input_dir /projects/jnorhos/pcarzon/ICCING/testInput/
+output_dir /projects/jnorhos/pcarzon/ICCING/testOutput/
+input_type 1
+output_type 1
+seed_ 1601474150
+test_ ""
+
+event_label 
+first_event 0
+last_event 1
+t_a 1
+t_b 1
+
+kappa_ 1
+rad_ 0.5
+qrad_ 0.5
+lambda_ 1
+
+dipole_model 
+alpha_s 0.3
+alpha_min 0.01
+r_max 1
+lambda_bym 0.001
+
+eos_emmit_lines 0
+eos_s_col 0
+eos_e_col 0
+a_trento 119
+e_chop 1e-19
+
+b_min 0
+b_max 0
+grid_max 12
+grid_step 0.06
+tau_0 0.6
+e_thresh 0.25
+charge_type BSQ

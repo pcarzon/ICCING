@@ -1,19 +1,14 @@
 #!/bin/bash
 
-#source ../../../../ect/profile.d/module.sh
-
-#module load gcc
-#module load cmake
-#module load boost/1.71.0
-#module load mathematica/12
+module load gcc
+module load cmake
+module load boost/.1.71.0
+module load mathematica/12
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #	Variable Declaration
 #__________________________________________________________________________________________
 #
-
-#SBATCH --mem-per-cpu=4450
-
 ConfigFile=$1
 
 cd /projects/jnorhos/pcarzon/ICCING;
@@ -30,7 +25,7 @@ chmod 755 submitICCING.sh;
 #	'755' is complicated and accomplishes the same thing as '+x'
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 make iccing;
-sbatch -p qgp --export=All,ConfigFile="run_parameters.conf" ./submitICCING.sh;
+sbatch -q qgp -F " $ConfigFile " ./submitICCING.sh;
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #	qsub: submit job to UIUC Campus Cluster
 #	'-q qgp' submit job to 'qgp' queue

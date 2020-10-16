@@ -105,7 +105,7 @@ int main (int argc, char *argv[]) //execute with ./a.out start_event# end_event#
 	for(int ev=ev1;ev<=ev2;ev++)
 	{
 	// you would change the name of the input files HERE
-	string name=infile+"/ic"+convertInt(ev)+".dat";
+	string name=infile+"/densities"+convertInt(ev)+".dat";
 //	cout << name << endl;
 	ifstream input(name.c_str());
 	if (!input.is_open())

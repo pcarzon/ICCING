@@ -1,8 +1,13 @@
 #!/bin/bash
 
-module load gcc
-module load cmake
-module load boost/.1.71.0
+#source /ect/profile.d/modules.sh
+
+#SBATCH --mem-per-cpu=8450
+
+module load gcc/7.2.0
+module load cmake/3.12.0
+module load boost/1.71.0
 
 cd /projects/jnorhos/pcarzon/ICCING
-./iccing $1
+
+./iccing $ConfigFile
