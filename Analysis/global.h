@@ -10,6 +10,7 @@ using namespace std;
 
 struct pars{
 
+	// p momentum bin?
 	int m,n,p;
 	int fm,fn,fp;
 
@@ -17,29 +18,39 @@ struct pars{
 
 	int swit;
 	};
-	
+
 struct cent{
 // ways to define centrality
-	double cls,M,npart;
+//cls centrality class?
+	double cls, multiplicity, number_of_participants;
 	};
 
 struct eccs
 	{
-		int npart;
-		double si,b;
-		double v[7],M,pT,R,MID;
-		double psi[7],vND[7],psiND[7];
-		double ec[7],phi[7];
+		// si is entropy
+		// M multiplicity
+		// pT average pT
+		// MID multiplicity of identified particles
+		// psi for flow usually
+		// phi for eccs
+		// ND uses no decays
+		int number_of_participants;
+		double entropy, impact_parameter;
+		double flow_harmonics[7], multiplicity, average_pt, radius;
+		double psi[7], flow_harmonics_no_decays[7], psi_no_decays[7];
+		double eccentricity[7], phi[7];
 	};
 
 struct SCsub
 	{
+		// symetric cummulants without normalization
 		double vnvm,m4,v4,v6,m6;
 	};
 
 
 struct serr
 	{
+		//
 		double cen,ans,ans2,err,err2;
 	};
 
@@ -67,4 +78,3 @@ inline std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 #endif
-
