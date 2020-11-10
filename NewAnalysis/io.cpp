@@ -37,22 +37,22 @@ IO::IO(string configFile)
         while (datatypes >> variabletype)
         {
           if (variabletype == "ev") { cout << "got event number " << variabletype << endl; data[0] = num;}
-          if (variabletype == "s") data[1] = num;
-          if (variabletype == "e2") data[2] = num;
-          if (variabletype == "phi2") data[3] = num;
-          if (variabletype == "e3") data[4] = num;
-          if (variabletype == "phi3") data[5] = num;
-          if (variabletype == "e4") data[6] = num;
-          if (variabletype == "phi4") data[7] = num;
-          if (variabletype == "e5") data[8] = num;
-          if (variabletype == "phi5") data[9] = num;
-          if (variabletype == "rad") data[10] = num;
+          if (variabletype == "s") data_locations[1] = num;
+          if (variabletype == "e2") data_locations[2] = num;
+          if (variabletype == "phi2") data_locations[3] = num;
+          if (variabletype == "e3") data_locations[4] = num;
+          if (variabletype == "phi3") data_locations[5] = num;
+          if (variabletype == "e4") data_locations[6] = num;
+          if (variabletype == "phi4") data_locations[7] = num;
+          if (variabletype == "e5") data_locations[8] = num;
+          if (variabletype == "phi5") data_locations[9] = num;
+          if (variabletype == "rad") data_locations[10] = num;
           num++;
         }
-        cout << "data size " << data.size() << endl;
+        cout << "data_locations size " << data_locations.size() << endl;
 
-        for (int i = 0; i < data.size(); i++)
-        cout << i << " " << data[i] << endl;
+        for (int i = 0; i < data_locations.size(); i++)
+        cout << i << " " << data_locations[i] << endl;
         exit(0);
       //#CONFIGPARAM
     }// End of switch
@@ -78,7 +78,7 @@ IO::~IO()
 //##########################################################################################
 void IO::CopyIO(const IO &e)
 {
-  data = e.data;
+  data_locations = e.data_locations;
 }
 //__________________________________________________________________________________________
 
@@ -112,8 +112,8 @@ void IO::Initialize()
   //******************************************************************************************
   //  Set variables to default values
   //******************************************************************************************
-  data.resize(11, 0);
-  cout << "data size " << data.size() << endl;
+  data_locations.resize(11, 0);
+  cout << "data_locations size " << data_locations.size() << endl;
   //******************************************************************************************
   //  Initialze map for reading in config file
   //******************************************************************************************
