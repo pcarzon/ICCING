@@ -38,6 +38,7 @@ IO::IO(string configFile)
         {
           cout << variabletype << endl;
         }
+        exit();
       //#CONFIGPARAM
     }// End of switch
   }// End of while loop
