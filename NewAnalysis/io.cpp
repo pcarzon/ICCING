@@ -33,11 +33,24 @@ IO::IO(string configFile)
       case dataformat:
         getline(input, data);
         istringstream datatypes(data);
-
+        int num = 0;
         while (datatypes >> variabletype)
         {
-          cout << variabletype << endl;
+          if (variabletype == "ev") data[0] = num;
+          if (variabletype == "s") data[1] = num;
+          if (variabletype == "e2") data[2] = num;
+          if (variabletype == "phi2") data[3] = num;
+          if (variabletype == "e3") data[4] = num;
+          if (variabletype == "phi3") data[5] = num;
+          if (variabletype == "e4") data[6] = num;
+          if (variabletype == "phi4") data[7] = num;
+          if (variabletype == "e5") data[8] = num;
+          if (variabletype == "phi5") data[9] = num;
+          if (variabletype == "rad") data[10] = num;
+          num++;
         }
+        for (int i = 0; i < data.size(); i++)
+        cout << i << " " << data[i] << endl;
         exit(0);
       //#CONFIGPARAM
     }// End of switch
@@ -63,6 +76,7 @@ IO::~IO()
 //##########################################################################################
 void IO::CopyIO(const IO &e)
 {
+  data = e.data;
 }
 //__________________________________________________________________________________________
 
