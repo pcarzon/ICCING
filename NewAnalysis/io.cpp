@@ -36,7 +36,7 @@ IO::IO(string configFile)
         int num = 0;
         while (datatypes >> variabletype)
         {
-          if (variabletype == "ev") { cout << "got event number" << endl; data[0] = num;}
+          if (variabletype == 'ev') { cout << "got event number " << variabletype << endl; data[0] = num;}
           if (variabletype == "s") data[1] = num;
           if (variabletype == "e2") data[2] = num;
           if (variabletype == "phi2") data[3] = num;
