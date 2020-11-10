@@ -49,6 +49,8 @@ IO::IO(string configFile)
           if (variabletype == "rad") data[10] = num;
           num++;
         }
+        cout << "data size " << data.size() << endl;
+
         for (int i = 0; i < data.size(); i++)
         cout << i << " " << data[i] << endl;
         exit(0);
