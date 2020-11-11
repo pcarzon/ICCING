@@ -17,6 +17,7 @@
 //##########################################################################################
 //  ICCING Header Files
 //##########################################################################################
+#include "event.h"
 //__________________________________________________________________________________________
 
 using namespace std;
@@ -33,6 +34,7 @@ private:
   {
     //  Equivalent to a data type with values that can be those inside
     //  ConfigParams is used to identify parameters from config file
+    eventinputfile,
     dataformat
     //#CONFIGPARAM
   };
@@ -41,6 +43,7 @@ private:
   map<string, ConfigParams> mapConfigParams;
 
   //  File variables
+  string event_input_file;
 
   //******************************************************************************************
   //  Internal Config parameters
@@ -97,6 +100,7 @@ public:
 //##########################################################################################
 //  IO Specific Functions
 //##########################################################################################
+vector<Event> ReadEvents();
 //__________________________________________________________________________________________
 };
 #endif
