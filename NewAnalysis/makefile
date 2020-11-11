@@ -5,10 +5,10 @@ LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
 CPP_FILES = io.cpp main.cpp
-HEADER_FILES = io.h
-OBJECT_FILES = io.o main.o
+HEADER_FILES = io.h event.h
+OBJECT_FILES = io.o event.h main.o
 
-io.o : io.h io.cpp
+io.o : io.h event.h io.cpp
 	$(CC) $(CFLAGS) io.cpp
 
 main.o : $(HEADER_FILES) main.cpp
