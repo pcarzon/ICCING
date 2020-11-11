@@ -149,6 +149,7 @@ vector<Event> IO::ReadEvents()
   //  Input file stream
   ifstream input;
   input.open(event_input_file);
+  cout << event_input_file << endl;
 
   string input_data;
   vector<double> event_data;
