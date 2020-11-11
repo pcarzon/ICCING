@@ -157,10 +157,10 @@ vector<Event> IO::ReadEvents()
   event_data.resize(data_locations.size(), 0.0);
 
   vector<Event> event_list;
-
-//  while(getline(input, input_data))
-//  {
-    getline(input, input_data);
+  int count = 0;
+  while(getline(input, input_data))
+  {
+//    getline(input, input_data);
     istringstream split_data(input_data);
     x = 0;
     while (split_data >> event_data[x]) { cout << event_data[x] << endl; x++;  }
@@ -185,19 +185,21 @@ vector<Event> IO::ReadEvents()
 //    if (data_locations[1] != -1) cout << current_event.impact_parameter << endl;
 //    if (data_locations[2] != -1) cout << current_event.number_of_participants << endl;
 //    if (data_locations[3] != -1) cout << current_event.multiplicity << endl;
-    if (data_locations[4] != -1) cout << current_event.entropy << endl;
-    if (data_locations[5] != -1) cout << current_event.eccentricity[2] << endl;
-    if (data_locations[6] != -1) cout << current_event.phi[2] << endl;
-    if (data_locations[7] != -1) cout << current_event.eccentricity[3] << endl;
-    if (data_locations[8] != -1) cout << current_event.phi[3] << endl;
-    if (data_locations[9] != -1) cout << current_event.eccentricity[4] << endl;
-    if (data_locations[10] != -1) cout << current_event.phi[4] << endl;
-    if (data_locations[11] != -1) cout << current_event.eccentricity[5] << endl;
-    if (data_locations[12] != -1) cout << current_event.phi[5] << endl;
+    if (data_locations[4] != -1) cout << current_event.entropy << " ";
+    if (data_locations[5] != -1) cout << current_event.eccentricity[2] << " ";
+    if (data_locations[6] != -1) cout << current_event.phi[2] << " ";
+    if (data_locations[7] != -1) cout << current_event.eccentricity[3] << " ";
+    if (data_locations[8] != -1) cout << current_event.phi[3] << " ";
+    if (data_locations[9] != -1) cout << current_event.eccentricity[4] << " ";
+    if (data_locations[10] != -1) cout << current_event.phi[4] << " ";
+    if (data_locations[11] != -1) cout << current_event.eccentricity[5] << " ";
+    if (data_locations[12] != -1) cout << current_event.phi[5] << " ";
     if (data_locations[13] != -1) cout << current_event.radius << endl;
 
     event_list.push_back(current_event);
-//  }
+    count++;
+    if (count == 10) exit(0);
+  }
 
   input.close();
 
