@@ -51,7 +51,7 @@ IO::IO(string configFile)
           if (variabletype == "phi4") data_locations[10] = num;
           if (variabletype == "e5") data_locations[11] = num;
           if (variabletype == "phi5") data_locations[12] = num;
-          if (variabletype == "rad") data_locations[13] = num;
+          if (variabletype == "rad") { cout << "Here " << num << endl; data_locations[13] = num;}
           num++;
         }
       //#CONFIGPARAM
