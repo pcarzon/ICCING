@@ -194,7 +194,7 @@ vector<Event> IO::ReadEvents()
     if (data_locations[10] != -1) cout << current_event.phi[4] << endl;
     if (data_locations[11] != -1) cout << current_event.eccentricity[5] << endl;
     if (data_locations[12] != -1) cout << current_event.phi[5] << endl;
-  */  if (data_locations[13] != -1) cout << data_locations[13] << " " << current_event.radius << endl;
+  */  if (data_locations[13] != -1) cout << event_data[data_locations[13]] << " " << current_event.radius << endl;
 
     event_list.push_back(current_event);
 //  }
