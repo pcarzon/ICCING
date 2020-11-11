@@ -181,10 +181,10 @@ vector<Event> IO::ReadEvents()
     if (data_locations[12] != -1) current_event.phi[5] = event_data[data_locations[12]];
     if (data_locations[13] != -1) current_event.radius = event_data[data_locations[13]];
 
-  /*  if (data_locations[0] != -1) cout << current_event.event_num << endl;
-    if (data_locations[1] != -1) cout << current_event.impact_parameter << endl;
-    if (data_locations[2] != -1) cout << current_event.number_of_participants << endl;
-    if (data_locations[3] != -1) cout << current_event.multiplicity << endl;
+//    if (data_locations[0] != -1) cout << current_event.event_num << endl;
+//    if (data_locations[1] != -1) cout << current_event.impact_parameter << endl;
+//    if (data_locations[2] != -1) cout << current_event.number_of_participants << endl;
+//    if (data_locations[3] != -1) cout << current_event.multiplicity << endl;
     if (data_locations[4] != -1) cout << current_event.entropy << endl;
     if (data_locations[5] != -1) cout << current_event.eccentricity[2] << endl;
     if (data_locations[6] != -1) cout << current_event.phi[2] << endl;
@@ -194,7 +194,7 @@ vector<Event> IO::ReadEvents()
     if (data_locations[10] != -1) cout << current_event.phi[4] << endl;
     if (data_locations[11] != -1) cout << current_event.eccentricity[5] << endl;
     if (data_locations[12] != -1) cout << current_event.phi[5] << endl;
-  */  if (data_locations[13] != -1) cout << event_data[data_locations[13]] << " " << current_event.radius << endl;
+    if (data_locations[13] != -1) cout << current_event.radius << endl;
 
     event_list.push_back(current_event);
 //  }
