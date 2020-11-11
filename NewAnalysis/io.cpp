@@ -38,12 +38,11 @@ cout << var_type << endl;
         int num = 0;
         while (datatypes >> variabletype)
         {
-          cout << "Here " << num << endl;
           if (variabletype == "ev") data_locations[0] = num;
           if (variabletype == "b") data_locations[1] = num;
           if (variabletype == "Npart") data_locations[2] = num;
           if (variabletype == "Mult") data_locations[3] = num;
-          if (variabletype == "s") data_locations[4] = num;
+          if (variabletype == "s") {cout << "Here " << num << endl; data_locations[4] = num;}
           if (variabletype == "e2") data_locations[5] = num;
           if (variabletype == "phi2") data_locations[6] = num;
           if (variabletype == "e3") data_locations[7] = num;
