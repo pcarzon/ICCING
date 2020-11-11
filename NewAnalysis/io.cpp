@@ -159,7 +159,7 @@ vector<Event> IO::ReadEvents()
 
 //  while(getline(input, input_data))
 //  {
-    getline(input, input_data)
+    getline(input, input_data);
     istringstream split_data(input_data);
     x = 0;
     while (split_data >> event_data[x]) { x++;  }
