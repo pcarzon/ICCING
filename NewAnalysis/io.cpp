@@ -162,7 +162,7 @@ vector<Event> IO::ReadEvents()
     getline(input, input_data);
     istringstream split_data(input_data);
     x = 0;
-    while (split_data >> event_data[x]) { x++;  }
+    while (split_data >> event_data[x]) { cout << event_data[x] << endl; x++;  }
 
     Event current_event;
     if (data_locations[0] != -1) current_event.event_num = event_data[data_locations[0]];
