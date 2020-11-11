@@ -14,6 +14,7 @@ struct cent{
 	double cls, multiplicity, number_of_participants;
 	};
 
+
 struct Event
 	{
 		// si is entropy
