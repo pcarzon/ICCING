@@ -165,20 +165,20 @@ vector<Event> IO::ReadEvents()
     while (split_data >> event_data[x]) { x++;  }
 
     Event current_event;
-    if (data_locations[0] != -1) current_event.event_num = split_data[data_locations[0]];
-    if (data_locations[1] != -1) current_event.impact_parameter = split_data[data_locations[1]];
-    if (data_locations[2] != -1) current_event.number_of_participants = split_data[data_locations[2]];
-    if (data_locations[3] != -1) current_event.multiplicity = split_data[data_locations[3]];
-    if (data_locations[4] != -1) current_event.entropy = split_data[data_locations[4]];
-    if (data_locations[5] != -1) current_event.eccentricity[2] = split_data[data_locations[5]];
-    if (data_locations[6] != -1) current_event.phi[2] = split_data[data_locations[6]];
-    if (data_locations[7] != -1) current_event.eccentricity[3] = split_data[data_locations[7]];
-    if (data_locations[8] != -1) current_event.phi[3] = split_data[data_locations[8]];
-    if (data_locations[9] != -1) current_event.eccentricity[4] = split_data[data_locations[9]];
-    if (data_locations[10] != -1) current_event.phi[4] = split_data[data_locations[10]];
-    if (data_locations[11] != -1) current_event.eccentricity[5] = split_data[data_locations[11]];
-    if (data_locations[12] != -1) current_event.phi[5] = split_data[data_locations[12]];
-    if (data_locations[13] != -1) current_event.radius = split_data[data_locations[13]];
+    if (data_locations[0] != -1) current_event.event_num = event_data[data_locations[0]];
+    if (data_locations[1] != -1) current_event.impact_parameter = event_data[data_locations[1]];
+    if (data_locations[2] != -1) current_event.number_of_participants = event_data[data_locations[2]];
+    if (data_locations[3] != -1) current_event.multiplicity = event_data[data_locations[3]];
+    if (data_locations[4] != -1) current_event.entropy = event_data[data_locations[4]];
+    if (data_locations[5] != -1) current_event.eccentricity[2] = event_data[data_locations[5]];
+    if (data_locations[6] != -1) current_event.phi[2] = event_data[data_locations[6]];
+    if (data_locations[7] != -1) current_event.eccentricity[3] = event_data[data_locations[7]];
+    if (data_locations[8] != -1) current_event.phi[3] = event_data[data_locations[8]];
+    if (data_locations[9] != -1) current_event.eccentricity[4] = event_data[data_locations[9]];
+    if (data_locations[10] != -1) current_event.phi[4] = event_data[data_locations[10]];
+    if (data_locations[11] != -1) current_event.eccentricity[5] = event_data[data_locations[11]];
+    if (data_locations[12] != -1) current_event.phi[5] = event_data[data_locations[12]];
+    if (data_locations[13] != -1) current_event.radius = event_data[data_locations[13]];
 
     if (data_locations[0] != -1) cout << current_event.event_num << endl;
     if (data_locations[1] != -1) cout << current_event.impact_parameter << endl;
