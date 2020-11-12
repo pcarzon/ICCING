@@ -60,9 +60,13 @@ public:
 //##########################################################################################
 void CalculateCummulants();
 
-void CalculateCummulantsWithoutRatios();
+void Calculate_2Particle_Cummulants();
 
-void CalculatePtObservables()
+void Calculate_4and6Particle_Cummulants();
+
+void Calculate_V2_V3_CummulantRatio();
+
+void CalculatePtObservables();
 
 //__________________________________________________________________________________________
 };
