@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 
+
 using namespace std;
 
 struct cent{
@@ -33,16 +34,5 @@ struct Event
 
 	};
 
-	// compareByLength - compare by multiplicity
-	bool compareByEntropy(const Event &a, const Event &b)
-	{
-			return a.entropy > b.entropy;
-	}
-
-	// compareByNpart -
-	bool compareByNpart(const Event &a, const Event &b)
-	{
-			return a.number_of_participants > b.number_of_participants;
-	}
 
 #endif
