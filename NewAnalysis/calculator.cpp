@@ -2,19 +2,20 @@
 
 Calculator::Calculator(vector<vector<Event>> sorted_events)
 {
-  for (int bin = 0; bin < sorted_events.size(); bin++)
+  binned_events = sorted_events;
+  for (int bin = 0; bin < binned_events.size(); bin++)
   {
     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     //	Calculate Values
-    int evs = sorted_events[bin].size();
+    int evs = binned_events[bin].size();
     for(int ev = 0; ev < evs; ev++)
     {
       //	Calculate average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        avg_Vn[n] += pow(sorted_events[bin][ev].eccentricity[n], 2)/evs;
-        avg_Vn_2nd[n] += pow(sorted_events[bin][ev].eccentricity[n], 4)/evs;
-        avg_Vn_3rd[n] += pow(sorted_events[bin][ev].eccentricity[n], 6)/evs;
+        avg_Vn[n] += pow(binned_events[bin][ev].eccentricity[n], 2)/evs;
+        avg_Vn_2nd[n] += pow(binned_events[bin][ev].eccentricity[n], 4)/evs;
+        avg_Vn_3rd[n] += pow(binned_events[bin][ev].eccentricity[n], 6)/evs;
       }
     }
 
@@ -62,11 +63,11 @@ Calculator& Calculator::operator= (const Calculator& original)
 
 void Calculator::CalculateCummulants()
 {
-	for (int bin = 0; bin < sorted_events.size(); bin++)
+	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate Values
-		int evs = sorted_events[bin].size();
+		int evs = binned_events[bin].size();
 		double Vn_4part[7] = {0}, Vn_6part[7] = {0};
 		//	Calculate 4 and 6 particle cummulants
 		for (int n = 2; n <= 5; n++)
@@ -91,9 +92,9 @@ void Calculator::CalculateCummulants()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(sorted_events[bin][ev].eccenricity[n], 2))/(evs - 1);
-        EvErr_avg_Vn_2nd[n] = (avg_Vn_2nd[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 4))/(evs - 1);
-        EvErr_avg_Vn_3rd[n] = (avg_Vn_3rd[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 6))/(evs - 1);
+        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(binned_events[bin][ev].eccenricity[n], 2))/(evs - 1);
+        EvErr_avg_Vn_2nd[n] = (avg_Vn_2nd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 4))/(evs - 1);
+        EvErr_avg_Vn_3rd[n] = (avg_Vn_3rd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 6))/(evs - 1);
       }
 
 			//	Calculate error for 4 and 6 particle cummulants (Also 4 particle cummulant to the 4th power)
@@ -130,9 +131,9 @@ void Calculator::CalculateCummulants()
 
 void Calculator::Calculate_2Particle_Cummulants()
 {
-	for (int bin = 0; bin < sorted_events.size(); bin++)
+	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
-		int evs = sorted_events[bin].size();
+		int evs = binned_events[bin].size();
 		double Vn_2part[7] = {0};
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -155,7 +156,7 @@ void Calculator::Calculate_2Particle_Cummulants()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 2))/(evs - 1);
+        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
       }
 
 			//	Calculate error for 2, 4, and 6 particle cummulants
@@ -178,9 +179,9 @@ void Calculator::Calculate_2Particle_Cummulants()
 
 void Calculator::Calculate_4and6Particle_Cummulants()
 {
-	for (int bin = 0; bin < sorted_events.size(); bin++)
+	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
-		int evs = sorted_events[bin].size();
+		int evs = binned_events[bin].size();
 		double Vn_4part[7] = {0}, Vn_6part[7] = {0};
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -204,8 +205,8 @@ void Calculator::Calculate_4and6Particle_Cummulants()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn_2nd[n] = (avg_Vn_2nd[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 4))/(evs - 1);
-        EvErr_avg_Vn_3rd[n] = (avg_Vn_3rd[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 6))/(evs - 1);
+        EvErr_avg_Vn_2nd[n] = (avg_Vn_2nd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 4))/(evs - 1);
+        EvErr_avg_Vn_3rd[n] = (avg_Vn_3rd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 6))/(evs - 1);
       }
 
 			//	Calculate error for 2, 4, and 6 particle cummulants
@@ -231,9 +232,9 @@ void Calculator::Calculate_4and6Particle_Cummulants()
 
 void Calculator::Calculate_V2_V3_CummulantRatio()
 {
-	for (int bin = 0; bin < sorted_events.size(); bin++)
+	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
-		int evs = sorted_events[bin].size();
+		int evs = binned_events[bin].size();
 		double V2_2part_V3_2part = 0;
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -251,7 +252,7 @@ void Calculator::Calculate_V2_V3_CummulantRatio()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(sorted_events[bin][ev].eccentricity[n], 2))/(evs - 1);
+        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
       }
 
 			err_V2_2part_V3_2part += pow(V2_2part_V3_2part - sqrt(EvErr_avg_Vn[2]/EvErr_avg_Vn[3]), 2);
@@ -267,15 +268,15 @@ void Calculator::Calculate_V2_V3_CummulantRatio()
 
 void Calculator::CalculatePtObservables()
 {
-	for (int bin = 0; bin < sorted_events.size(); bin++)
+	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
-		int evs = sorted_events[bin].size();
+		int evs = binned_events[bin].size();
 
 		double mean_pt = 0, mean_pt_2nd = 0, RMS_pt = 0;
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
-		for(int ev = 0; ev < evs; ev++) mean_pt += sorted_events[bin][ev].average_pt;
+		for(int ev = 0; ev < evs; ev++) mean_pt += binned_events[bin][ev].average_pt;
 		mean_pt /= evs;
 
       //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -283,7 +284,7 @@ void Calculator::CalculatePtObservables()
       for(int ev = 0; ev < evs; ev++)
       {
         //	Calculate average Vn, Vn^2, Vn^3
-        mean_pt_2nd += pow(sorted_events[bin][ev].average_pt - mean_pt, 2.);
+        mean_pt_2nd += pow(binned_events[bin][ev].average_pt - mean_pt, 2.);
       }
 
 
@@ -297,8 +298,8 @@ void Calculator::CalculatePtObservables()
 
 		for(int ev = 0; ev < evs; ev++)
 		{
-			double EvErr_mean_pt = (mean_pt*evs - sorted_events[bin][ev].average_pt)/(evs - 1.);
-			double EvErr_mean_pt_2nd = (mean_pt_2nd*evs - pow(sorted_events[bin][ev].average_pt - subpt, 2))/(evs - 1);
+			double EvErr_mean_pt = (mean_pt*evs - binned_events[bin][ev].average_pt)/(evs - 1.);
+			double EvErr_mean_pt_2nd = (mean_pt_2nd*evs - pow(binned_events[bin][ev].average_pt - subpt, 2))/(evs - 1);
 
 		 	err_mean_pt += pow(mean_pt - EvErr_mean_pt, 2);
 		 	err_mean_pt_2nd += pow(mean_pt_2nd - EvErr_mean_pt_2nd, 2);
