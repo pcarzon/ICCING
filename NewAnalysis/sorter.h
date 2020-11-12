@@ -76,7 +76,7 @@ public:
 //##########################################################################################
 
 // sort - sorting events into centrality bins (actually does the work) (sorted_eccentricities[centrality][i])
-void SortEccentricitiesIntoCentralityBins(string name,string sfile,vector<eccs> all_eccentricities,  vector< vector<eccs> > & out, vector<double> & cens,int bin);
+void SortEccentricitiesIntoCentralityBins(int bin);
 //__________________________________________________________________________________________
 };
 #endif
