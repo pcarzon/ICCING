@@ -22,7 +22,7 @@ IO::IO(string configFile)
   while (!input.eof())
 	{
     input >> var_type;  //  Read parameter type
-cout << var_type << endl;
+
     //  Switch through the possible parameter types
     //  uses var_type as key to map then reads value to class variable
     switch(mapConfigParams[var_type])
@@ -42,7 +42,7 @@ cout << var_type << endl;
           if (variabletype == "b") data_locations[1] = num;
           if (variabletype == "Npart") data_locations[2] = num;
           if (variabletype == "Mult") data_locations[3] = num;
-          if (variabletype == "s") {cout << "Here " << num << endl; data_locations[4] = num;}
+          if (variabletype == "s") data_locations[4] = num;
           if (variabletype == "e2") data_locations[5] = num;
           if (variabletype == "phi2") data_locations[6] = num;
           if (variabletype == "e3") data_locations[7] = num;
@@ -51,7 +51,7 @@ cout << var_type << endl;
           if (variabletype == "phi4") data_locations[10] = num;
           if (variabletype == "e5") data_locations[11] = num;
           if (variabletype == "phi5") data_locations[12] = num;
-          if (variabletype == "rad") {  data_locations[13] = num;}
+          if (variabletype == "rad") data_locations[13] = num;
           num++;
         }
       //#CONFIGPARAM
@@ -157,13 +157,12 @@ vector<Event> IO::ReadEvents()
   event_data.resize(data_locations.size(), 0.0);
 
   vector<Event> event_list;
-  int count = 0;
+
   while(getline(input, input_data))
   {
-//    getline(input, input_data);
     istringstream split_data(input_data);
     x = 0;
-    while (split_data >> event_data[x]) { cout << event_data[x] << endl; x++;  }
+    while (split_data >> event_data[x]) { x++;  }
 
     Event current_event;
     if (data_locations[0] != -1) current_event.event_num = event_data[data_locations[0]];
@@ -181,24 +180,7 @@ vector<Event> IO::ReadEvents()
     if (data_locations[12] != -1) current_event.phi[5] = event_data[data_locations[12]];
     if (data_locations[13] != -1) current_event.radius = event_data[data_locations[13]];
 
-//    if (data_locations[0] != -1) cout << current_event.event_num << endl;
-//    if (data_locations[1] != -1) cout << current_event.impact_parameter << endl;
-//    if (data_locations[2] != -1) cout << current_event.number_of_participants << endl;
-//    if (data_locations[3] != -1) cout << current_event.multiplicity << endl;
-    if (data_locations[4] != -1) cout << current_event.entropy << " ";
-    if (data_locations[5] != -1) cout << current_event.eccentricity[2] << " ";
-    if (data_locations[6] != -1) cout << current_event.phi[2] << " ";
-    if (data_locations[7] != -1) cout << current_event.eccentricity[3] << " ";
-    if (data_locations[8] != -1) cout << current_event.phi[3] << " ";
-    if (data_locations[9] != -1) cout << current_event.eccentricity[4] << " ";
-    if (data_locations[10] != -1) cout << current_event.phi[4] << " ";
-    if (data_locations[11] != -1) cout << current_event.eccentricity[5] << " ";
-    if (data_locations[12] != -1) cout << current_event.phi[5] << " ";
-    if (data_locations[13] != -1) cout << current_event.radius << endl;
-
     event_list.push_back(current_event);
-    count++;
-    if (count == 10) exit(0);
   }
 
   input.close();
