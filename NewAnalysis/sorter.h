@@ -45,13 +45,13 @@ private:
   int GenerateNumberOfParticipantsCuts(string folder, vector<eccs> all_eccentricities);
   */
   // compareByLength - compare by multiplicity
-  bool compareByEntropy(const eccs &a, const eccs &b)
+  bool compareByEntropy(const Event &a, const Event &b)
   {
       return a.entropy > b.entropy;
   }
 
   // compareByNpart -
-  bool compareByNpart(const eccs &a, const eccs &b)
+  bool compareByNpart(const Event &a, const Event &b)
   {
       return a.number_of_participants > b.number_of_participants;
   }
