@@ -21,18 +21,6 @@
 
 using namespace std;
 
-// compareByLength - compare by multiplicity
-bool compareByEntropy(const Event &a, const Event &b)
-{
-    return a.entropy > b.entropy;
-}
-
-// compareByNpart -
-bool compareByNpart(const Event &a, const Event &b)
-{
-    return a.number_of_participants > b.number_of_participants;
-}
-
 class Sorter
 {
 private:
@@ -49,6 +37,18 @@ private:
 //##########################################################################################
   //  Copy function for Sorter class, called by operator= and implicit copy functions
 	void CopySorter(const Sorter &e);
+
+  // compareByLength - compare by multiplicity
+  static bool compareByEntropy(const Event &a, const Event &b)
+  {
+      return a.entropy > b.entropy;
+  }
+
+  // compareByNpart -
+  static bool compareByNpart(const Event &a, const Event &b)
+  {
+      return a.number_of_participants > b.number_of_participants;
+  }
 
   // GenerateCentralityCuts - sort in centrality (make file of cuttoffs)
 /*  double GenerateCentralityCuts(string folder, string sort_file, vector<eccs> all_eccentricities);
