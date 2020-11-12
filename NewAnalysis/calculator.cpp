@@ -1,4 +1,4 @@
-#include "sorter.h"
+#include "calculator.h"
 
 Calculator::Calculator(vector<vector<Event>> sorted_events)
 {
