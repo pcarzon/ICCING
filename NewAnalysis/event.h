@@ -8,18 +8,6 @@
 
 using namespace std;
 
-// compareByLength - compare by multiplicity
-bool compareByEntropy(const Event &a, const Event &b)
-{
-		return a.entropy > b.entropy;
-}
-
-// compareByNpart -
-bool compareByNpart(const Event &a, const Event &b)
-{
-		return a.number_of_participants > b.number_of_participants;
-}
-
 struct cent{
 // ways to define centrality
 //cls centrality class?
@@ -44,5 +32,17 @@ struct Event
 		double flow_harmonics[7], psi[7], flow_harmonics_no_decays[7], psi_no_decays[7];
 
 	};
+
+	// compareByLength - compare by multiplicity
+	bool compareByEntropy(const Event &a, const Event &b)
+	{
+			return a.entropy > b.entropy;
+	}
+
+	// compareByNpart -
+	bool compareByNpart(const Event &a, const Event &b)
+	{
+			return a.number_of_participants > b.number_of_participants;
+	}
 
 #endif
