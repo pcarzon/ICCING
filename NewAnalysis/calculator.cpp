@@ -246,7 +246,8 @@ void Calculator::Calculate_V2_V3_CummulantRatio()
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate errors
-		double err_V2_2part_V3_2part = 0;
+		double EvErr_avg_Vn[7] = {0};
+    double err_V2_2part_V3_2part = 0;
 
 		for(int ev = 0; ev < evs; ev++)
 		{
