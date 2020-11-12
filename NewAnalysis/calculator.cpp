@@ -205,7 +205,7 @@ void Calculator::Calculate_4and6Particle_Cummulants()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(sorted_eccentricities[cent][ev].eccentricity[n], 2))/(evs - 1);
+        EvErr_avg_Vn[n] = (avg_Vn[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
         EvErr_avg_Vn_2nd[n] = (avg_Vn_2nd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 4))/(evs - 1);
         EvErr_avg_Vn_3rd[n] = (avg_Vn_3rd[n]*evs - pow(binned_events[bin][ev].eccentricity[n], 6))/(evs - 1);
       }
