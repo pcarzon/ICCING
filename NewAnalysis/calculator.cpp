@@ -301,7 +301,7 @@ void Calculator::CalculatePtObservables()
 		for(int ev = 0; ev < evs; ev++)
 		{
 			double EvErr_mean_pt = (mean_pt*evs - binned_events[bin][ev].average_pt)/(evs - 1.);
-			double EvErr_mean_pt_2nd = (mean_pt_2nd*evs - pow(binned_events[bin][ev].average_pt - subpt, 2))/(evs - 1);
+			double EvErr_mean_pt_2nd = (mean_pt_2nd*evs - pow(binned_events[bin][ev].average_pt - EvErr_mean_pt, 2))/(evs - 1);
 
 		 	err_mean_pt += pow(mean_pt - EvErr_mean_pt, 2);
 		 	err_mean_pt_2nd += pow(mean_pt_2nd - EvErr_mean_pt_2nd, 2);
