@@ -205,7 +205,7 @@ Sorter& Sorter::operator= (const Sorter& original)
 }
 //__________________________________________________________________________________________
 
-void Sorter::SortEccentricitiesIntoCentralityBins(int bin_width)
+vector<vector<Event>> Sorter::SortEccentricitiesIntoCentralityBins(int bin_width)
 {
   vector<vector<Event>> binned_events;
   binned_events.resize(100/bin_width);
