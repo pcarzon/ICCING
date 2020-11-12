@@ -19,7 +19,7 @@ int main (int argc, char *argv[])
 	vector<Event> events = inOut.ReadEvents();
 
 	Sorter Centrality_10percent_bins(events);
-	Centrality_10percent_bins.SortEccentricitiesIntoCentralityBins(10);
+	Centrality_10percent_bins.SortEccentricitiesIntoCentralityBins(5);
 
 	return 0;
 }
