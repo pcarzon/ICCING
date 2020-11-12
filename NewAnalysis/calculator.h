@@ -47,7 +47,7 @@ public:
 //##########################################################################################
 //  Basic Class Functions
 //##########################################################################################
-  Calculator();  //  Class constructor, must specify path to configuration file
+  Calculator(vector<vector<Event>> sorted_events);  //  Class constructor, must specify path to configuration file
   ~Calculator();  //  Destructor, used to clear all data stored by class
 
   Calculator(const Calculator &original); //  Implicit copy function, newCalculatorObject(oldCalculatorObject)
