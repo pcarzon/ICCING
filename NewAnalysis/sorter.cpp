@@ -214,7 +214,7 @@ void Sorter::SortEccentricitiesIntoCentralityBins(int bin_width)
   {
     for (int i = 0; i < events_1percent_centrality_bin*bin_width; i++)
     {
-      binned_events.push_back(sorted_events[events_1percent_centrality_bin*bin + i]);
+      binned_events[bin].push_back(sorted_events[events_1percent_centrality_bin*bin + i]);
     }
   }
   cout << "events per bin " << events_1percent_centrality_bin*bin_width << endl;
