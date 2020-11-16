@@ -165,20 +165,20 @@ void Calculator::Calculate_2Particle_Cummulants()
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
-        EvErr_avg_Vn[n] = (avg_Vn[bin][n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
+        EvErr_avg_Vn[bin][n] = (avg_Vn[bin][n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
       }
 
 			//	Calculate error for 2, 4, and 6 particle cummulants
 		 	for (int n = 2; n <= 5; n++)
 			{
-		 		err_Vn_2part[n] += pow(Vn_2part[n] - sqrt(EvErr_avg_Vn[n]), 2);
+		 		err_Vn_2part[bin][n] += pow(Vn_2part[bin][n] - sqrt(EvErr_avg_Vn[bin][n]), 2);
 			}
 		}
 
 		//	Normalize errors
 		for (int n = 2; n <= 5; n++)
 		{
-			err_Vn_2part[n] = sqrt(err_Vn_2part[n]*(evs - 1)/evs);
+			err_Vn_2part[bin][n] = sqrt(err_Vn_2part[bin][n]*(evs - 1)/evs);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -186,7 +186,7 @@ void Calculator::Calculate_2Particle_Cummulants()
     cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
 
     for (int n = 2; n <= 5; n++)
-    cout <<  Vn_2part[n] << " " << err_Vn_2part[n] << " ";
+    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
 
 	}
 
