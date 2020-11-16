@@ -137,10 +137,13 @@ void Calculator::Calculate_2Particle_Cummulants()
 {
   cout << "2 particle cummulants " << binned_events.size() << endl;
 
+  vector<vector<double>> Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
+  vector<vector<double>> EvErr_avg_Vn.resize(binned_events.size(), vector<double>(7, 0));
+  vector<vector<double>> err_Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
+
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
-		double Vn_2part[7] = {0};
 //cout << "1" << endl;
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
@@ -149,14 +152,12 @@ void Calculator::Calculate_2Particle_Cummulants()
 		for (int n = 2; n <= 5; n++)
 		{
   //    cout << "2" << endl;
-			Vn_2part[n] = sqrt(avg_Vn[bin][n]);
+			Vn_2part[bin][n] = sqrt(avg_Vn[bin][n]);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate errors
-    double EvErr_avg_Vn[7] = {0};
-		double err_Vn_2part[7] = {0};
 
 		for(int ev = 0; ev < evs; ev++)
 		{
