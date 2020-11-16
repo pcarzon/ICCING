@@ -8,7 +8,7 @@ Calculator::Calculator(vector<vector<Event>> sorted_events)
     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     //	Calculate Values
     int evs = binned_events[bin].size();
-    for(int ev = 0; ev < evs; ev++)
+  /*  for(int ev = 0; ev < evs; ev++)
     {
       //	Calculate average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
@@ -18,7 +18,7 @@ Calculator::Calculator(vector<vector<Event>> sorted_events)
         avg_Vn_3rd[n] += pow(binned_events[bin][ev].eccentricity[n], 6)/evs;
       }
     }
-
+*/
   }
 }
 //__________________________________________________________________________________________
@@ -141,6 +141,17 @@ void Calculator::Calculate_2Particle_Cummulants()
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
 
+    for(int ev = 0; ev < evs; ev++)
+    {
+      //	Calculate average Vn, Vn^2, Vn^3
+      for (int n = 2; n <= 5; n++)
+      {
+        avg_Vn[n] += pow(binned_events[bin][ev].eccentricity[n], 2)/evs;
+        avg_Vn_2nd[n] += pow(binned_events[bin][ev].eccentricity[n], 4)/evs;
+        avg_Vn_3rd[n] += pow(binned_events[bin][ev].eccentricity[n], 6)/evs;
+      }
+    }
+
 		//	Calculate 2, 4, and 6 particle cummulants
 		for (int n = 2; n <= 5; n++)
 		{
@@ -178,7 +189,7 @@ void Calculator::Calculate_2Particle_Cummulants()
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
   //  cout << "Got here" << endl;
-    cout << endl << (0.5 + bin)*(100/binned_events.size());
+    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
 
     for (int n = 2; n <= 5; n++)
     cout <<  Vn_2part[n] << " " << err_Vn_2part[n] << " ";
