@@ -185,9 +185,9 @@ void Calculator::Calculate_2Particle_Cummulants()
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-//    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
-//    for (int n = 2; n <= 5; n++)
-//    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
+    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
+    for (int n = 2; n <= 5; n++)
+    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
 
 	}
 
