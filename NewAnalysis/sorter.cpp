@@ -222,4 +222,5 @@ vector<vector<Event>> Sorter::SortEccentricitiesIntoCentralityBins(int bin_width
 //  {
   //  cout << "bin " << bin << " size = " << binned_events[bin].size() << endl;
 //  }
+  return binned_events;
 }
