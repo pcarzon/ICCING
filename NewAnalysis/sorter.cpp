@@ -6,6 +6,7 @@ Sorter::Sorter(vector<Event> all_events)
   sorted_events = all_events;
 
   events_1percent_centrality_bin = int(sorted_events.size()/100);
+  cout << "smallest entropy " << sorted_events[sorted_events.size()].entropy << endl;
 }
 
 /*double Sorter::GenerateCentralityCuts(string folder, string sort_file, vector<Event> all_events)
