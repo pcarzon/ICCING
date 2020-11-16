@@ -212,10 +212,14 @@ vector<vector<Event>> Sorter::SortEccentricitiesIntoCentralityBins(int bin_width
 
   for (int bin = 0; bin < binned_events.size(); bin++)
   {
+    double average_entropy = 0;
+
     for (int i = 0; i < events_1percent_centrality_bin*bin_width; i++)
     {
       binned_events[bin].push_back(sorted_events[events_1percent_centrality_bin*bin + i]);
+      average_entropy += sorted_events[events_1percent_centrality_bin*bin + i].entropy;
     }
+    cout << "bin " << bin << " entropy " << average_entropy/binned_events[bin].size() << endl;
   }
 //  cout << "events per bin " << events_1percent_centrality_bin*bin_width << endl;
 //  for (int bin = 0; bin < binned_events.size(); bin++)

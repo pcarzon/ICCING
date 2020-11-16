@@ -67,19 +67,25 @@ Calculator& Calculator::operator= (const Calculator& original)
 
 void Calculator::CalculateCummulants()
 {
+  vector<vector<double>> Vn_4part, Vn_6part, error_Vn_4part, error_Vn_4part_4th, error_Vn_6part;
+  Vn_4part.resize(binned_events.size(), vector<double>(7, 0));
+  Vn_6part.resize(binned_events.size(), vector<double>(7, 0));
+  error_Vn_4part.resize(binned_events.size(), vector<double>(7, 0));
+  error_Vn_4part_4th.resize(binned_events.size(), vector<double>(7, 0));
+  error_Vn_6part.resize(binned_events.size(), vector<double>(7, 0));
+
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate Values
 		int evs = binned_events[bin].size();
-		double Vn_4part[7] = {0}, Vn_6part[7] = {0};
 		//	Calculate 4 and 6 particle cummulants
 		for (int n = 2; n <= 5; n++)
 		{
-			Vn_4part[n] = pow(2.*pow(avg_Vn[bin][n], 2)
+			Vn_4part[bin][n] = pow(2.*pow(avg_Vn[bin][n], 2)
 												- avg_Vn_2nd[bin][n], 0.25)
 										/sqrt(avg_Vn[bin][n]);
-			Vn_6part[n] = pow(0.25*(avg_Vn_3rd[bin][n]
+			Vn_6part[bin][n] = pow(0.25*(avg_Vn_3rd[bin][n]
 													- 9.*avg_Vn[bin][n]*avg_Vn_2nd[bin][n]
 													+ 12.*pow(avg_Vn[bin][n], 3)), 1./6.)
 										/pow(2.*pow(avg_Vn[bin][n], 2) - avg_Vn_2nd[bin][n], 0.25);
@@ -89,7 +95,6 @@ void Calculator::CalculateCummulants()
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate Errors
     double EvErr_avg_Vn[7] = {0}, EvErr_avg_Vn_2nd[7] = {0},  EvErr_avg_Vn_3rd[7] = {0};
-		double error_Vn_4part[7] = {0}, error_Vn_4part_4th[7] = {0},  error_Vn_6part[7] = {0};
 		for(int ev = 0; ev < evs; ev++)
 		{
 
@@ -104,15 +109,15 @@ void Calculator::CalculateCummulants()
 			//	Calculate error for 4 and 6 particle cummulants (Also 4 particle cummulant to the 4th power)
 		 	for (int n = 2; n <= 5; n++)
 			{
-		 		error_Vn_4part[n] += pow(Vn_4part[n]
+		 		error_Vn_4part[bin][n] += pow(Vn_4part[bin][n]
 																- pow(2.*pow(EvErr_avg_Vn[n], 2)
 																 			- EvErr_avg_Vn_2nd[n], 0.25)
 														/sqrt(EvErr_avg_Vn[n]), 2);
-      	error_Vn_4part_4th[n] += pow(pow(Vn_4part[n], 4)
+      	error_Vn_4part_4th[bin][n] += pow(pow(Vn_4part[bin][n], 4)
 																		- (2.*pow(EvErr_avg_Vn[n], 2)
 																				- EvErr_avg_Vn_2nd[n])
 																	/pow(EvErr_avg_Vn[n], 2), 2);
-				error_Vn_6part[n] += pow(Vn_6part[n]
+				error_Vn_6part[bin][n] += pow(Vn_6part[bin][n]
 																- pow(0.25*(EvErr_avg_Vn_3rd[n]
 																			- 9.*EvErr_avg_Vn[n]*EvErr_avg_Vn_2nd[n]
 																			+ 12.*pow(EvErr_avg_Vn[n], 3)), 1./6.)
@@ -123,9 +128,9 @@ void Calculator::CalculateCummulants()
 		//	Normalize Errors
 		for (int n = 2; n <= 5; n++)
 		{
-			error_Vn_4part[n] = sqrt(error_Vn_4part[n]*(evs - 1)/evs);
-      error_Vn_4part_4th[n] = sqrt(error_Vn_4part_4th[n]*(evs - 1)/evs);
-			error_Vn_6part[n] = sqrt(error_Vn_6part[n]*(evs - 1)/evs);
+			error_Vn_4part[bin][n] = sqrt(error_Vn_4part[bin][n]*(evs - 1)/evs);
+      error_Vn_4part_4th[bin][n] = sqrt(error_Vn_4part_4th[bin][n]*(evs - 1)/evs);
+			error_Vn_6part[bin][n] = sqrt(error_Vn_6part[bin][n]*(evs - 1)/evs);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -141,17 +146,16 @@ void Calculator::Calculate_2Particle_Cummulants()
   Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
   EvErr_avg_Vn.resize(binned_events.size(), vector<double>(7, 0));
   err_Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
+
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
-//cout << "1" << endl;
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
 
 		//	Calculate 2, 4, and 6 particle cummulants
 		for (int n = 2; n <= 5; n++)
 		{
-  //    cout << "2" << endl;
 			Vn_2part[bin][n] = sqrt(avg_Vn[bin][n]);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -161,7 +165,6 @@ void Calculator::Calculate_2Particle_Cummulants()
 
 		for(int ev = 0; ev < evs; ev++)
 		{
-//      cout << "3" << endl;
       // Calculate error by event of average Vn, Vn^2, Vn^3
       for (int n = 2; n <= 5; n++)
       {
@@ -182,11 +185,9 @@ void Calculator::Calculate_2Particle_Cummulants()
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-  //  cout << "Got here" << endl;
-    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
-
+//    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
     for (int n = 2; n <= 5; n++)
-    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
+//    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
 
 	}
 
@@ -194,10 +195,15 @@ void Calculator::Calculate_2Particle_Cummulants()
 
 void Calculator::Calculate_4and6Particle_Cummulants()
 {
+  vector<vector<double>> Vn_4part, Vn_6part, err_Vn_4part, err_Vn_6part;
+  Vn_4part.resize(binned_events.size(), vector<double>(7, 0));
+  Vn_6part.resize(binned_events.size(), vector<double>(7, 0));
+  err_Vn_4part.resize(binned_events.size(), vector<double>(7, 0));
+  err_Vn_6part.resize(binned_events.size(), vector<double>(7, 0));
+
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
-		double Vn_4part[7] = {0}, Vn_6part[7] = {0};
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
@@ -205,15 +211,14 @@ void Calculator::Calculate_4and6Particle_Cummulants()
 		//	Calculate 2, 4, and 6 particle cummulants
 		for (int n = 2; n <= 5; n++)
 		{
-			Vn_4part[n] = 2.*pow(avg_Vn[bin][n], 2) - avg_Vn_2nd[bin][n];
-			Vn_6part[n] = 0.25*(avg_Vn_3rd[bin][n] - 9.*avg_Vn[bin][n]*avg_Vn_2nd[bin][n] + 12.*pow(avg_Vn[bin][n], 3));
+			Vn_4part[bin][n] = 2.*pow(avg_Vn[bin][n], 2) - avg_Vn_2nd[bin][n];
+			Vn_6part[bin][n] = 0.25*(avg_Vn_3rd[bin][n] - 9.*avg_Vn[bin][n]*avg_Vn_2nd[bin][n] + 12.*pow(avg_Vn[bin][n], 3));
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate errors
     double EvErr_avg_Vn[7] = {0}, EvErr_avg_Vn_2nd[7] = {0},  EvErr_avg_Vn_3rd[7] = {0};
-	  double err_Vn_4part[7] = {0},  err_Vn_6part[7] = {0};
 
 		for(int ev = 0; ev < evs; ev++)
 		{
@@ -228,8 +233,8 @@ void Calculator::Calculate_4and6Particle_Cummulants()
 			//	Calculate error for 2, 4, and 6 particle cummulants
 		 	for (int n = 2; n <= 5; n++)
 			{
-				err_Vn_4part[n] += pow(Vn_4part[n] - (2.*pow(EvErr_avg_Vn[n], 2) - EvErr_avg_Vn_2nd[n]), 2);
-				err_Vn_6part[n] += pow(Vn_6part[n] - 0.25*(EvErr_avg_Vn_3rd[n] - 9.*EvErr_avg_Vn[n]*EvErr_avg_Vn_2nd[n] + 12.*pow(EvErr_avg_Vn[n], 3)), 2);
+				err_Vn_4part[bin][n] += pow(Vn_4part[bin][n] - (2.*pow(EvErr_avg_Vn[n], 2) - EvErr_avg_Vn_2nd[n]), 2);
+				err_Vn_6part[bin][n] += pow(Vn_6part[bin][n] - 0.25*(EvErr_avg_Vn_3rd[n] - 9.*EvErr_avg_Vn[n]*EvErr_avg_Vn_2nd[n] + 12.*pow(EvErr_avg_Vn[n], 3)), 2);
 			}
 
 		}
@@ -237,8 +242,8 @@ void Calculator::Calculate_4and6Particle_Cummulants()
 		//	Normalize errors
 		for (int n = 2; n <= 5; n++)
 		{
-			err_Vn_4part[n] = sqrt(err_Vn_4part[n]*(evs - 1)/evs);
-			err_Vn_6part[n] = sqrt(err_Vn_6part[n]*(evs - 1)/evs);
+			err_Vn_4part[bin][n] = sqrt(err_Vn_4part[bin][n]*(evs - 1)/evs);
+			err_Vn_6part[bin][n] = sqrt(err_Vn_6part[bin][n]*(evs - 1)/evs);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -248,35 +253,36 @@ void Calculator::Calculate_4and6Particle_Cummulants()
 
 void Calculator::Calculate_V2_V3_CummulantRatio()
 {
-	for (int bin = 0; bin < binned_events.size(); bin++)
+  vector<double> V2_2part_V3_2part, EvErr_avg_V2, EvErr_avg_V3, err_V2_2part_V3_2part;
+  V2_2part_V3_2part.resize(binned_events.size(), 0);
+  EvErr_avg_V2.resize(binned_events.size(), 0);
+  EvErr_avg_V3.resize(binned_events.size(), 0);
+  err_V2_2part_V3_2part.resize(binned_events.size(), 0);
+
+  for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
-		double V2_2part_V3_2part = 0;
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate values
 
-		V2_2part_V3_2part = sqrt(avg_Vn[bin][2]/avg_Vn[bin][3]);
+		V2_2part_V3_2part[bin] = sqrt(avg_Vn[bin][2]/avg_Vn[bin][3]);
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//	Calculate errors
-		double EvErr_avg_Vn[7] = {0};
-    double err_V2_2part_V3_2part = 0;
 
 		for(int ev = 0; ev < evs; ev++)
 		{
       // Calculate error by event of average Vn, Vn^2, Vn^3
-      for (int n = 2; n <= 5; n++)
-      {
-        EvErr_avg_Vn[n] = (avg_Vn[bin][n]*evs - pow(binned_events[bin][ev].eccentricity[n], 2))/(evs - 1);
-      }
+      EvErr_avg_V2[bin] = (avg_Vn[bin][2]*evs - pow(binned_events[bin][ev].eccentricity[2], 2))/(evs - 1);
+      EvErr_avg_V3[bin] = (avg_Vn[bin][3]*evs - pow(binned_events[bin][ev].eccentricity[3], 2))/(evs - 1);
 
-			err_V2_2part_V3_2part += pow(V2_2part_V3_2part - sqrt(EvErr_avg_Vn[2]/EvErr_avg_Vn[3]), 2);
+			err_V2_2part_V3_2part[bin] += pow(V2_2part_V3_2part[bin] - sqrt(EvErr_avg_Vn[bin]/EvErr_avg_Vn[bin]), 2);
 		}
 
 		//	Normalize errors
-		err_V2_2part_V3_2part = sqrt(err_V2_2part_V3_2part*(evs - 1)/evs);
+		err_V2_2part_V3_2part[bin] = sqrt(err_V2_2part_V3_2part[bin]*(evs - 1)/evs);
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 	}
