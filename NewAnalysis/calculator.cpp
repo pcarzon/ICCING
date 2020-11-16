@@ -137,10 +137,10 @@ void Calculator::Calculate_2Particle_Cummulants()
 {
   cout << "2 particle cummulants " << binned_events.size() << endl;
 
-  vector<vector<double>> Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
-  vector<vector<double>> EvErr_avg_Vn.resize(binned_events.size(), vector<double>(7, 0));
-  vector<vector<double>> err_Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
-
+  vector<vector<double>> Vn_2part, EvErr_avg_Vn, err_Vn_2part;
+  Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
+  EvErr_avg_Vn.resize(binned_events.size(), vector<double>(7, 0));
+  err_Vn_2part.resize(binned_events.size(), vector<double>(7, 0));
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
