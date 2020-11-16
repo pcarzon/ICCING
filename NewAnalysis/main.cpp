@@ -24,7 +24,7 @@ int main (int argc, char *argv[])
 	vector<vector<Event>> events_5per_centbins = sort_events.SortEccentricitiesIntoCentralityBins(5);
 	vector<vector<Event>> events_10per_centbins = sort_events.SortEccentricitiesIntoCentralityBins(10);
 
-	Calculator calculate_10per_centbins(events_10per_centbins);
+	Calculator calculate_10per_centbins(events_5per_centbins);
 	calculate_10per_centbins.CalculateCummulants();
 	calculate_10per_centbins.Calculate_2Particle_Cummulants();
 	calculate_10per_centbins.Calculate_4and6Particle_Cummulants();

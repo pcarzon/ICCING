@@ -131,6 +131,8 @@ void Calculator::CalculateCummulants()
 
 void Calculator::Calculate_2Particle_Cummulants()
 {
+  cout << "2 particle cummulants" << endl;
+
 	for (int bin = 0; bin < binned_events.size(); bin++)
 	{
 		int evs = binned_events[bin].size();
@@ -172,6 +174,11 @@ void Calculator::Calculate_2Particle_Cummulants()
 			err_Vn_2part[n] = sqrt(err_Vn_2part[n]*(evs - 1)/evs);
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+    cout << endl << (0.5 + bin)*(100/binned_events.size());
+
+    for (int n = 2; n <= 5; n++)
+    cout <<  Vn_2part[n] << " " << err_Vn_2part[n] << " ";
 
 	}
 
