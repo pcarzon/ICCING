@@ -186,7 +186,7 @@ void Calculator::Calculate_2Particle_Cummulants()
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 //    cout << endl << (0.5 + bin)*(100/binned_events.size()) << " ";
-    for (int n = 2; n <= 5; n++)
+//    for (int n = 2; n <= 5; n++)
 //    cout <<  Vn_2part[bin][n] << " " << err_Vn_2part[bin][n] << " ";
 
 	}
@@ -278,7 +278,7 @@ void Calculator::Calculate_V2_V3_CummulantRatio()
       EvErr_avg_V2[bin] = (avg_Vn[bin][2]*evs - pow(binned_events[bin][ev].eccentricity[2], 2))/(evs - 1);
       EvErr_avg_V3[bin] = (avg_Vn[bin][3]*evs - pow(binned_events[bin][ev].eccentricity[3], 2))/(evs - 1);
 
-			err_V2_2part_V3_2part[bin] += pow(V2_2part_V3_2part[bin] - sqrt(EvErr_avg_Vn[bin]/EvErr_avg_Vn[bin]), 2);
+			err_V2_2part_V3_2part[bin] += pow(V2_2part_V3_2part[bin] - sqrt(EvErr_avg_V2[bin]/EvErr_avg_V3[bin]), 2);
 		}
 
 		//	Normalize errors
