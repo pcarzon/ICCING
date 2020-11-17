@@ -34,7 +34,6 @@ IO::IO(string configFile)
       case outputfolder: input >> output_folder;
 
       case dataformat:
-        input.ignore(10, '\n');
         getline(input, data);
         istringstream datatypes(data);
         int num = 0;
@@ -58,6 +57,8 @@ IO::IO(string configFile)
         }
       //#CONFIGPARAM
     }// End of switch
+    input.ignore(10, '\n');
+
   }// End of while loop
 cout << output_folder << endl;
   input.close();
