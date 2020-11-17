@@ -117,7 +117,7 @@ void IO::Initialize()
   //  Set variables to default values
   //******************************************************************************************
   event_input_file = "";
-  output_folder = "";
+  output_folder = "/projects/jnorhos/pcarzon/ICCING/Testing";
   data_locations.resize(14, -1);
   //******************************************************************************************
   //  Initialze map for reading in config file
