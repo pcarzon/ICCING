@@ -206,4 +206,5 @@ cout << output_folder + file << endl;
     }
     output << endl;
   }
+  output.close();
 }
