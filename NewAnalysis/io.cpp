@@ -59,7 +59,6 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
-  cout << output_folder << endl;
   input.close();
 //  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
@@ -198,7 +197,6 @@ void IO::OutputObservables(vector<vector<double>> observables, string file)
 {
   ofstream output;
   output.open(output_folder + file);
-  cout << output_folder + file << endl;
 
   for (int i = 0; i < observables.size(); i++)
   {
