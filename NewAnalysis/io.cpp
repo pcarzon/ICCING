@@ -197,6 +197,7 @@ void IO::OutputObservables(vector<vector<double>> observables, string file)
 {
   ofstream output;
   output.open(output_folder + file);
+  cout << output_folder + file << endl;
 
   for (int i = 0; i < observables.size(); i++)
   {
