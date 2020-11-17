@@ -58,7 +58,7 @@ IO::IO(string configFile)
       //#CONFIGPARAM
     }// End of switch
   }// End of while loop
-
+cout << output_folder << endl;
   input.close();
 //  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
