@@ -219,7 +219,7 @@ vector<vector<Event>> Sorter::SortEccentricitiesIntoCentralityBins(int bin_width
     for (int i = 0; i < events_1percent_centrality_bin*bin_width; i++)
     {
       binned_events[bin].push_back(*event_iterator);
-      average_entropy += *event_iterator.entropy;
+      average_entropy += (*event_iterator).entropy;
       advance(event_iterator, 1);
     }
     cout << "bin " << bin << " entropy " << average_entropy/binned_events[bin].size() << " lower bound " << binned_events[bin][binned_events.size()].entropy << endl;
