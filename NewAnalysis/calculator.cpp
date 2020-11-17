@@ -331,7 +331,7 @@ vector<vector<double>> Calculator::CalculatePtObservables()
       for(int ev = 0; ev < evs; ev++)
       {
         //	Calculate average Vn, Vn^2, Vn^3
-        mean_pt_2nd[bin] += pow(binned_events[bin][ev].average_pt - mean_pt, 2.);
+        mean_pt_2nd[bin] += pow(binned_events[bin][ev].average_pt - mean_pt[bin], 2.);
       }
 
 
