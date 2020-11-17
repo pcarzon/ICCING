@@ -31,9 +31,10 @@ IO::IO(string configFile)
       //  input >> input_var (Read in value of var_type)
       //  break; (Stop checking switch and move on)
       case eventinputfile: input >> event_input_file;
-    //  case outputfolder: input >> output_folder;
+      case outputfolder: input >> output_folder;
 
       case dataformat:
+        input.ignore(10, '\n');
         getline(input, data);
         istringstream datatypes(data);
         int num = 0;
