@@ -24,13 +24,26 @@ int main (int argc, char *argv[])
 	vector<vector<Event>> events_5per_centbins = sort_events.SortEccentricitiesIntoCentralityBins(5);
 	vector<vector<Event>> events_10per_centbins = sort_events.SortEccentricitiesIntoCentralityBins(10);
 
-	cout << "Before calc " << events_5per_centbins.size() << endl;
-	Calculator calculate_10per_centbins(events_5per_centbins);
-	calculate_10per_centbins.CalculateCummulants();
-	calculate_10per_centbins.Calculate_2Particle_Cummulants();
-	calculate_10per_centbins.Calculate_4and6Particle_Cummulants();
-	calculate_10per_centbins.Calculate_V2_V3_CummulantRatio();
-	calculate_10per_centbins.CalculatePtObservables();
+	Calculator calculate_10per_centbins(events_1per_centbins);
+	inOut.OutputObservables(calculate_1per_centbins.CalculateCummulants(), "/1per_centbins/Cummulants_4and6part.dat");
+	inOut.OutputObservables(calculate_1per_centbins.Calculate_2Particle_Cummulants(), "/1per_centbins/Cummulants_2part.dat");
+	inOut.OutputObservables(calculate_1per_centbins.Calculate_4and6Particle_Cummulants(), "/1per_centbins/Cummulants_4and6part_noRatio.dat");
+	inOut.OutputObservables(calculate_1per_centbins.Calculate_V2_V3_CummulantRatio(), "/1per_centbins/Cummulants_E2_E3_Ratio.dat");
+	inOut.OutputObservables(calculate_1per_centbins.CalculatePtObservables(), "/1per_centbins/Cummulants_PtObservables.dat");
+
+	Calculator calculate_5per_centbins(events_5per_centbins);
+	inOut.OutputObservables(calculate_5per_centbins.CalculateCummulants(), "/5per_centbins/Cummulants_4and6part.dat");
+	inOut.OutputObservables(calculate_5per_centbins.Calculate_2Particle_Cummulants(), "/5per_centbins/Cummulants_2part.dat");
+	inOut.OutputObservables(calculate_5per_centbins.Calculate_4and6Particle_Cummulants(), "/5per_centbins/Cummulants_4and6part_noRatio.dat");
+	inOut.OutputObservables(calculate_5per_centbins.Calculate_V2_V3_CummulantRatio(), "/5per_centbins/Cummulants_E2_E3_Ratio.dat");
+	inOut.OutputObservables(calculate_5per_centbins.CalculatePtObservables(), "/5per_centbins/Cummulants_PtObservables.dat");
+
+	Calculator calculate_10per_centbins(events_10per_centbins);
+	inOut.OutputObservables(calculate_10per_centbins.CalculateCummulants(), "/10per_centbins/Cummulants_4and6part.dat");
+	inOut.OutputObservables(calculate_10per_centbins.Calculate_2Particle_Cummulants(), "/10per_centbins/Cummulants_2part.dat");
+	inOut.OutputObservables(calculate_10per_centbins.Calculate_4and6Particle_Cummulants(), "/10per_centbins/Cummulants_4and6part_noRatio.dat");
+	inOut.OutputObservables(calculate_10per_centbins.Calculate_V2_V3_CummulantRatio(), "/10per_centbins/Cummulants_E2_E3_Ratio.dat");
+	inOut.OutputObservables(calculate_10per_centbins.CalculatePtObservables(), "/10per_centbins/Cummulants_PtObservables.dat");
 
 	return 0;
 }

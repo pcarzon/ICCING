@@ -57,15 +57,15 @@ public:
 //##########################################################################################
 //  Calculator Specific Functions
 //##########################################################################################
-void CalculateCummulants();
+vector<vector<double>> CalculateCummulants();
 
-void Calculate_2Particle_Cummulants();
+vector<vector<double>> Calculate_2Particle_Cummulants();
 
-void Calculate_4and6Particle_Cummulants();
+vector<vector<double>> Calculate_4and6Particle_Cummulants();
 
-void Calculate_V2_V3_CummulantRatio();
+vector<vector<double>> Calculate_V2_V3_CummulantRatio();
 
-void CalculatePtObservables();
+vector<vector<double>> CalculatePtObservables();
 
 //__________________________________________________________________________________________
 };

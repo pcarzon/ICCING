@@ -35,6 +35,7 @@ private:
     //  Equivalent to a data type with values that can be those inside
     //  ConfigParams is used to identify parameters from config file
     eventinputfile,
+    outputfolder,
     dataformat
     //#CONFIGPARAM
   };
@@ -44,7 +45,8 @@ private:
 
   //  File variables
   string event_input_file;
-
+  string output_folder;
+  
   //******************************************************************************************
   //  Internal Config parameters
   //******************************************************************************************
@@ -101,6 +103,8 @@ public:
 //  IO Specific Functions
 //##########################################################################################
 vector<Event> ReadEvents();
+
+void OutputObservables(vector<vector<double>> observables, string file);
 //__________________________________________________________________________________________
 };
 #endif

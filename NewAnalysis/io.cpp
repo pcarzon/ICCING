@@ -31,6 +31,7 @@ IO::IO(string configFile)
       //  input >> input_var (Read in value of var_type)
       //  break; (Stop checking switch and move on)
       case eventinputfile: input >> event_input_file;
+      case outputfolder: input >> output_folder;
 
       case dataformat:
         getline(input, data);
@@ -80,6 +81,7 @@ IO::~IO()
 void IO::CopyIO(const IO &e)
 {
   event_input_file = e.event_input_file;
+  output_folder = e.output_folder;
   data_locations = e.data_locations;
 }
 //__________________________________________________________________________________________
@@ -115,11 +117,13 @@ void IO::Initialize()
   //  Set variables to default values
   //******************************************************************************************
   event_input_file = "";
+  output_folder = "";
   data_locations.resize(14, -1);
   //******************************************************************************************
   //  Initialze map for reading in config file
   //******************************************************************************************
   mapConfigParams["event_input_file"] = eventinputfile;
+  mapConfigParams["output_folder"] = outputfolder;
   mapConfigParams["data_format"] = dataformat;
   //#CONFIGPARAM
 }
@@ -188,3 +192,18 @@ vector<Event> IO::ReadEvents()
   return event_list;
 }
 //__________________________________________________________________________________________
+
+void IO::OutputObservables(vector<vector<double>> observables, string file)
+{
+  ofstream output;
+  output.open(output_folder + file);
+
+  for (int i = 0; i < observables.size(); i++)
+  {
+    for (int j = 0; j < observables[i].size(); j++)
+    {
+      output << observables[i][j];
+    }
+    output << endl;
+  }
+}
