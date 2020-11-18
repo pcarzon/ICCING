@@ -38,7 +38,6 @@ IO::IO(string configFile)
         while (input.peek() != '\n' && input.peek() != EOF)
         {
           input >> variabletype;
-          cout << variabletype << endl;
           if (variabletype == "ev") data_locations[0] = num;
           if (variabletype == "b") data_locations[1] = num;
           if (variabletype == "Npart") data_locations[2] = num;

@@ -49,13 +49,6 @@ private:
   {
       return a.number_of_participants > b.number_of_participants;
   }
-
-  // GenerateCentralityCuts - sort in centrality (make file of cuttoffs)
-/*  double GenerateCentralityCuts(string folder, string sort_file, vector<eccs> all_eccentricities);
-
-  // GenerateNumberOfParticipantsCuts - sort in npart (make file of cuttoffs)
-  int GenerateNumberOfParticipantsCuts(string folder, vector<eccs> all_eccentricities);
-  */
 //__________________________________________________________________________________________
 
 public:
