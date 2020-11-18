@@ -203,7 +203,7 @@ cout << output_folder + file << endl;
   {
     for (int j = 0; j < observables[i].size(); j++)
     {
-      output << observables[i][j];
+      output << observables[i][j] << " ";
     }
     output << endl;
   }
