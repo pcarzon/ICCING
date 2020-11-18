@@ -59,7 +59,6 @@ IO::IO(string configFile)
     input.ignore(10, '\n');
 
   }// End of while loop
-cout << output_folder << endl;
   input.close();
 //  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
 }// End of Class constructor
@@ -154,7 +153,6 @@ vector<Event> IO::ReadEvents()
   //  Input file stream
   ifstream input;
   input.open(event_input_file);
-  cout << event_input_file << endl;
 
   string input_data;
   vector<double> event_data;
@@ -198,7 +196,7 @@ void IO::OutputObservables(vector<vector<double>> observables, string file)
 {
   ofstream output;
   output.open(output_folder + file);
-cout << output_folder + file << endl;
+
   for (int i = 0; i < observables.size(); i++)
   {
     for (int j = 0; j < observables[i].size(); j++)
@@ -207,5 +205,6 @@ cout << output_folder + file << endl;
     }
     output << endl;
   }
+
   output.close();
 }
