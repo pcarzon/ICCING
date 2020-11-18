@@ -30,14 +30,15 @@ IO::IO(string configFile)
       //  case ConfigParam (Does var_type map to ConfigParam?)
       //  input >> input_var (Read in value of var_type)
       //  break; (Stop checking switch and move on)
-      case eventinputfile: input >> event_input_file;
-//      case outputfolder: input >> output_folder;
+      case eventinputfile: {input >> event_input_file; cout << event_input_file << endl;}
+      case outputfolder: {input >> output_folder; cout << output_folder << endl;}
 
       case dataformat:
         int num = 0;
         while (input.peek() != '\n' && input.peek() != EOF)
         {
           input >> variabletype;
+          cout << variabletype << endl;
           if (variabletype == "ev") data_locations[0] = num;
           if (variabletype == "b") data_locations[1] = num;
           if (variabletype == "Npart") data_locations[2] = num;
@@ -117,7 +118,7 @@ void IO::Initialize()
   //  Set variables to default values
   //******************************************************************************************
   event_input_file = "";
-  output_folder = "/projects/jnorhos/pcarzon/ICCING/Testing";
+  output_folder = "";
   data_locations.resize(14, -1);
   //******************************************************************************************
   //  Initialze map for reading in config file
