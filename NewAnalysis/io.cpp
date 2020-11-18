@@ -34,11 +34,10 @@ IO::IO(string configFile)
       case outputfolder: input >> output_folder;
 
       case dataformat:
-        getline(input, data);
-        istringstream datatypes(data);
         int num = 0;
-        while (datatypes >> variabletype)
+        while (input.peek() != '\n' && input.peek() != EOF)
         {
+          input >> variabletype;
           if (variabletype == "ev") data_locations[0] = num;
           if (variabletype == "b") data_locations[1] = num;
           if (variabletype == "Npart") data_locations[2] = num;
