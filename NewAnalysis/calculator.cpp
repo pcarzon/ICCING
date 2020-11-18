@@ -142,6 +142,7 @@ vector<vector<double>> Calculator::CalculateCummulants()
     });
 	}
 
+  return output;
 }
 
 vector<vector<double>> Calculator::Calculate_2Particle_Cummulants()
