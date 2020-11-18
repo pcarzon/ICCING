@@ -30,8 +30,8 @@ IO::IO(string configFile)
       //  case ConfigParam (Does var_type map to ConfigParam?)
       //  input >> input_var (Read in value of var_type)
       //  break; (Stop checking switch and move on)
-      case eventinputfile: {input >> event_input_file; cout << event_input_file << endl;}
-      case outputfolder: {input >> output_folder; cout << output_folder << endl;}
+      case eventinputfile: input >> event_input_file; break;
+      case outputfolder: input >> output_folder; break;
 
       case dataformat:
         int num = 0;
@@ -55,9 +55,10 @@ IO::IO(string configFile)
           if (variabletype == "rad") data_locations[13] = num;
           num++;
         }
+        break;
       //#CONFIGPARAM
     }// End of switch
-    input.ignore(10, '\n');
+  //  input.ignore(10, '\n');
 
   }// End of while loop
   input.close();
