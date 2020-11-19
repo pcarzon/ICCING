@@ -8,6 +8,6 @@ module load gcc/7.2.0
 module load cmake/3.12.0
 module load boost/1.71.0
 
-cd /projects/jnorhos/pcarzon/ICCING/NewAnalysis
+cd $ANALYSISDir
 
 ./analysis $ConfigFile

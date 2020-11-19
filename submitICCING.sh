@@ -8,6 +8,6 @@ module load gcc/7.2.0
 module load cmake/3.12.0
 module load boost/1.71.0
 
-cd /projects/jnorhos/pcarzon/ICCING
+cd $ICCINGDIR
 
 ./iccing $ConfigFile
