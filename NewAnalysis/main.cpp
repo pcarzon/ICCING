@@ -27,6 +27,7 @@ int main (int argc, char *argv[])
 		vector<vector<Event>> events_centbins = sort_events.SortEccentricitiesIntoCentralityBins(centrality_cuts[cent]);
 
 		Calculator calculate_centbins(events_centbins);
+		inOut.MakeDirectory(centrality_cuts[cent]);
 		inOut.OutputObservables(calculate_centbins.CalculateCummulants(), to_string(centrality_cuts[cent]) + "per_centbins/Cummulants_4and6part.dat");
 		inOut.OutputObservables(calculate_centbins.Calculate_2Particle_Cummulants(), to_string(centrality_cuts[cent]) + "per_centbins/Cummulants_2part.dat");
 		inOut.OutputObservables(calculate_centbins.Calculate_4and6Particle_Cummulants(), to_string(centrality_cuts[cent]) + "per_centbins/Cummulants_4and6part_noRatio.dat");

@@ -193,6 +193,11 @@ vector<Event> IO::ReadEvents()
 }
 //__________________________________________________________________________________________
 
+void IO::MakeDirectory(int bin)
+{
+  create_directory(output_folder + to_string(centrality_cuts[cent]) + "per_centbins");
+}
+
 void IO::OutputObservables(vector<vector<double>> observables, string file)
 {
   ofstream output;
