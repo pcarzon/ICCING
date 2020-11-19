@@ -192,19 +192,19 @@ then
 	mkdir $DataDir/Observables/charge_neg/;
 	mkdir $DataDir/Observables/charge_pos/;
 
-	sed -e "s|INPUTFILE|$DataDir/energy_eccentricities.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/energy|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_energy.conf;
-	sed -e "s|INPUTFILE|$DataDir/baryon_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/baryon_neg|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_baryon_neg.conf;
-	sed -e "s|INPUTFILE|$DataDir/baryon_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/baryon_pos|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_baryon_pos.conf;
-	sed -e "s|INPUTFILE|$DataDir/strange_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/strange_neg|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_strange_neg.conf;
-	sed -e "s|INPUTFILE|$DataDir/strange_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/strange_pos|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_strange_pos.conf;
-	sed -e "s|INPUTFILE|$DataDir/charge_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/charge_neg|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_charge_neg.conf;
-	sed -e "s|INPUTFILE|$DataDir/charge_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/charge_pos|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_charge_pos.conf;
+	sed -e "s|INPUTFILE|$DataDir/energy_eccentricities.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/energy/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_energy.conf;
+	sed -e "s|INPUTFILE|$DataDir/baryon_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/baryon_neg/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_baryon_neg.conf;
+	sed -e "s|INPUTFILE|$DataDir/baryon_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/baryon_pos/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_baryon_pos.conf;
+	sed -e "s|INPUTFILE|$DataDir/strange_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/strange_neg/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_strange_neg.conf;
+	sed -e "s|INPUTFILE|$DataDir/strange_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/strange_pos/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_strange_pos.conf;
+	sed -e "s|INPUTFILE|$DataDir/charge_eccentricities_neg.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/charge_neg/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_charge_neg.conf;
+	sed -e "s|INPUTFILE|$DataDir/charge_eccentricities_pos.dat|" -e "s|OUTPUTFOLDER|$DataDir/Observables/charge_pos/|" /NewAnalysis/ANALYSIS_GEN.conf > ANALYSISParameters_charge_pos.conf;
 
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_energy.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_baryon_neg.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_baryon_pos.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_strange_neg.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_strange_pos.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_charge_neg.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
-	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_charge_pos.conf",ANALYSISDir="$AnalysisDir" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_energy.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/energy/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_baryon_neg.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/baryon_neg/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_baryon_pos.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/baryon_pos/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_strange_neg.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/strange_neg/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_strange_pos.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/strange_pos/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_charge_neg.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/charge_neg/" ./submitANALYSIS.sh;
+	sbatch -p qgp -A qgp --export=All,ConfigFile="$ShellDir/ANALYSISParameters_charge_pos.conf",ANALYSISDir="$AnalysisDir",OUTPUTFOLDER="$DataDir/Observables/charge_pos/" ./submitANALYSIS.sh;
 fi
