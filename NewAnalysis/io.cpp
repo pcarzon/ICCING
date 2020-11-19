@@ -195,7 +195,7 @@ vector<Event> IO::ReadEvents()
 
 void IO::MakeDirectory(int bin)
 {
-  create_directory(output_folder + to_string(centrality_cuts[cent]) + "per_centbins");
+  mkdir(output_folder + to_string(centrality_cuts[cent]) + "per_centbins");
 }
 
 void IO::OutputObservables(vector<vector<double>> observables, string file)
