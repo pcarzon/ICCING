@@ -14,8 +14,7 @@ IO::IO(string configFile)
   input.open(configFile);
 
   string var_type;  //  Used to record parameter type read from file
-  string data;
-  string variabletype;
+
   //******************************************************************************************
   //  Loop through config file
   //******************************************************************************************
@@ -33,35 +32,35 @@ IO::IO(string configFile)
       case eventinputfile: input >> event_input_file; break;
       case outputfolder: input >> output_folder; break;
 
+      //  Read in data layout of event data file
       case dataformat:
         int num = 0;
         while (input.peek() != '\n' && input.peek() != EOF)
         {
-          input >> variabletype;
-          if (variabletype == "ev") data_locations[0] = num;
-          if (variabletype == "b") data_locations[1] = num;
-          if (variabletype == "Npart") data_locations[2] = num;
-          if (variabletype == "Mult") data_locations[3] = num;
-          if (variabletype == "s") data_locations[4] = num;
-          if (variabletype == "e2") data_locations[5] = num;
-          if (variabletype == "phi2") data_locations[6] = num;
-          if (variabletype == "e3") data_locations[7] = num;
-          if (variabletype == "phi3") data_locations[8] = num;
-          if (variabletype == "e4") data_locations[9] = num;
-          if (variabletype == "phi4") data_locations[10] = num;
-          if (variabletype == "e5") data_locations[11] = num;
-          if (variabletype == "phi5") data_locations[12] = num;
-          if (variabletype == "rad") data_locations[13] = num;
+          input >> var_type;
+          if (var_type == "ev") data_locations[0] = num;
+          if (var_type == "b") data_locations[1] = num;
+          if (var_type == "Npart") data_locations[2] = num;
+          if (var_type == "Mult") data_locations[3] = num;
+          if (var_type == "s") data_locations[4] = num;
+          if (var_type == "e2") data_locations[5] = num;
+          if (var_type == "phi2") data_locations[6] = num;
+          if (var_type == "e3") data_locations[7] = num;
+          if (var_type == "phi3") data_locations[8] = num;
+          if (var_type == "e4") data_locations[9] = num;
+          if (var_type == "phi4") data_locations[10] = num;
+          if (var_type == "e5") data_locations[11] = num;
+          if (var_type == "phi5") data_locations[12] = num;
+          if (var_type == "rad") data_locations[13] = num;
           num++;
         }
         break;
       //#CONFIGPARAM
     }// End of switch
-  //  input.ignore(10, '\n');
 
   }// End of while loop
   input.close();
-//  OutputConfig(output_dir + "run_parameters" + to_string(current_event) + ".dat");
+
 }// End of Class constructor
 //__________________________________________________________________________________________
 
@@ -132,22 +131,7 @@ void IO::Initialize()
 
 //__________________________________________________________________________________________
 //##########################################################################################
-// Copy config file to ICCING output folder for future reference
-//##########################################################################################
-void IO::OutputConfig(string file_name)
-{
-  ofstream output;
-  output.open(file_name);
-
-    //#CONFIGPARAM
-
-    output.close();
-}
-//__________________________________________________________________________________________
-
-//__________________________________________________________________________________________
-//##########################################################################################
-// Read event data
+// Read event data with respect to given data_format
 //##########################################################################################
 vector<Event> IO::ReadEvents()
 {
@@ -169,20 +153,20 @@ vector<Event> IO::ReadEvents()
     while (split_data >> event_data[x]) { x++;  }
 
     Event current_event;
-    if (data_locations[0] != -1) current_event.event_num = event_data[data_locations[0]];
+    if (data_locations[0] != -1) {current_event.event_num = event_data[data_locations[0]]; cout << current_event.event_num << " ";}
     if (data_locations[1] != -1) current_event.impact_parameter = event_data[data_locations[1]];
     if (data_locations[2] != -1) current_event.number_of_participants = event_data[data_locations[2]];
     if (data_locations[3] != -1) current_event.multiplicity = event_data[data_locations[3]];
-    if (data_locations[4] != -1) current_event.entropy = event_data[data_locations[4]];
-    if (data_locations[5] != -1) current_event.eccentricity[2] = event_data[data_locations[5]];
-    if (data_locations[6] != -1) current_event.phi[2] = event_data[data_locations[6]];
-    if (data_locations[7] != -1) current_event.eccentricity[3] = event_data[data_locations[7]];
-    if (data_locations[8] != -1) current_event.phi[3] = event_data[data_locations[8]];
-    if (data_locations[9] != -1) current_event.eccentricity[4] = event_data[data_locations[9]];
-    if (data_locations[10] != -1) current_event.phi[4] = event_data[data_locations[10]];
-    if (data_locations[11] != -1) current_event.eccentricity[5] = event_data[data_locations[11]];
-    if (data_locations[12] != -1) current_event.phi[5] = event_data[data_locations[12]];
-    if (data_locations[13] != -1) current_event.radius = event_data[data_locations[13]];
+    if (data_locations[4] != -1) {current_event.entropy = event_data[data_locations[4]]; cout << current_event.entropy << " ";}
+    if (data_locations[5] != -1) {current_event.eccentricity[2] = event_data[data_locations[5]]; cout << current_event.eccentricity[2] << " ";}
+    if (data_locations[6] != -1) {current_event.phi[2] = event_data[data_locations[6]]; cout << current_event.phi[2] << " ";}
+    if (data_locations[7] != -1) {current_event.eccentricity[3] = event_data[data_locations[7]]; cout << current_event.eccentricity[3] << " ";}
+    if (data_locations[8] != -1) {current_event.phi[3] = event_data[data_locations[8]]; cout << current_event.phi[3] << " ";}
+    if (data_locations[9] != -1) {current_event.eccentricity[4] = event_data[data_locations[9]]; cout << current_event.eccentricity[4] << " ";}
+    if (data_locations[10] != -1) {current_event.phi[4] = event_data[data_locations[10]]; cout << current_event.phi[4] << " ";}
+    if (data_locations[11] != -1) {current_event.eccentricity[5] = event_data[data_locations[11]]; cout << current_event.eccentricity[5] << " ";}
+    if (data_locations[12] != -1) {current_event.phi[5] = event_data[data_locations[12]]; cout << current_event.phi[5] << " ";}
+    if (data_locations[13] != -1) {current_event.radius = event_data[data_locations[13]]; cout << current_event.radius << " ";}
 
     event_list.push_back(current_event);
   }
@@ -193,6 +177,10 @@ vector<Event> IO::ReadEvents()
 }
 //__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+// Output list of observables to provided file path
+//##########################################################################################
 void IO::OutputObservables(vector<vector<double>> observables, string file)
 {
   ofstream output;
@@ -210,3 +198,4 @@ void IO::OutputObservables(vector<vector<double>> observables, string file)
 
   output.close();
 }
+//__________________________________________________________________________________________

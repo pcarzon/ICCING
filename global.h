@@ -27,6 +27,7 @@ private:
 
   //  Stores the currently set particle
   vector<double> current_charge;
+  
 public:
   //  Function to set the charge of the Charge object
   void Gluon(int charge_type) {  current_charge = gluon[charge_type]; }

@@ -6,7 +6,6 @@
 #include <ctime>
 
 #include "ecc.h"
-#include "eos.h"
 #include "event.h"
 #include "io.h"
 #include "splitting.h"

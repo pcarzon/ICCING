@@ -53,6 +53,10 @@ Eccentricity& Eccentricity::operator= (const Eccentricity& original)
 }
 //__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Calculate eccentricity
+//##########################################################################################
 vector<double> Eccentricity::StandardCalculation(string density_type, int m, int n)
 {
   int column;
@@ -75,9 +79,6 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
      weight = sparse_density[s][column]*pow(distance_squared[s], (m/2.));
      normalization += weight;
-//     if (isnan(normalization))
-//     cout << "y1_component " << sparse_density[1][s] << " y2_component " << y_center_of_mass << endl;
-//  if (sparse_density[s][column] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
 
@@ -86,8 +87,6 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 
      etot += sparse_density[s][column];
 	}
-//  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
-//  cout << normalization << " " << psi_top << " " << psi_bottom << endl;
   // m is radial weight
   // n is anglular weight
 
@@ -101,9 +100,8 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
   {
     eccentricity += sparse_density[s][column]*pow(distance_squared[s], m/2.)*cos(n*(phi[s] - psi));
   }
-//  cout << "eccentricity " << eccentricity << endl;
+
   eccentricity /= normalization;
-//  cout << "eccentricity/normalized " << eccentricity << endl;
 
   // top and bottom of eccentricity is technically divided by number of particles (max)
 	radius = normalization/etot;
@@ -111,7 +109,12 @@ vector<double> Eccentricity::StandardCalculation(string density_type, int m, int
 	return {eccentricity, psi, radius};
 
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Calculate eccentricities, seperating positive and negative density values
+//##########################################################################################
 vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 {
   int column;
@@ -141,12 +144,9 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
      {  normalization_neg += weight;  }
      else if (sparse_density[s][column] > 0)
      {  normalization_pos += weight;  }
-//     if (isnan(normalization_neg))
-//     cout << "y1_component " << sparse_density[s][1] << " y2_component " << y_center_of_mass << endl;
-//  if (sparse_density[s][column] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
 
      phi[s] = atan2(y_component, x_component); // angle of fluid cells
-//     cout << "Inside calc " << sparse_density[s][column] << " " << pow(distance_squared[s], (m/2.)) << endl;
+
      if (sparse_density[s][column] < 0)
      {
        psi_top_neg += weight*sin(1.0*n*phi[s]);
@@ -160,25 +160,19 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
        max_pos++;
      }
 
-
      if (sparse_density[s][column] < 0)
      {  etot_neg += sparse_density[s][column];  }
      else if (sparse_density[s][column] > 0)
      {  etot_pos += sparse_density[s][column];  }
-
 	}
-//  cout << phi[1] << " " << phi[2] << " " << phi[3] << endl;
-//  cout << "Eccentricity calcs " << max_neg << " " << max_pos << endl;
   // m is radial weight
   // n is anglular weight
-
 
     psi_top_neg /= max_neg;
     psi_bottom_neg /= max_neg;
 
     psi_top_pos /= max_pos;
     psi_bottom_pos /= max_pos;
-
 
   // relative event plane angle (perp to major axis) (coming out of flat sides of shape)
   // need to divide parts by normalization so atan2 gets the quadrant correct and thus give positive eccs
@@ -196,19 +190,26 @@ vector<double> Eccentricity::NewCalculation(string density_type, int m, int n)
 
   eccentricity_neg /= normalization_neg;
   eccentricity_pos /= normalization_pos;
-//  cout << "eccentricity/normalized " << eccentricity << endl;
 
   // top and bottom of eccentricity is technically divided by number of particles (max)
 	radius_neg = normalization_neg/etot_neg;
   radius_pos = normalization_pos/etot_pos;
 
 	return {eccentricity_neg, psi_neg, radius_neg, eccentricity_pos, psi_pos, radius_pos};
-
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Calculate All eccentricities for given event
+//##########################################################################################
 vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_max, double grid_step, vector<vector<vector<double>>> density)
 {
   double x, y, energy = 0;
+
+  //******************************************************************************************
+  //  Take full density grid and convert to sparse density structure for easy and quick processing
+  //******************************************************************************************
   for (int i = 0; i < density[0].size(); i++)
   {
     for (int j = 0; j < density[0][0].size(); j++)
@@ -217,13 +218,11 @@ vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_ma
       {
         x = -grid_max + i*grid_step;  //  Converts grid point to physical x-value
         y = -grid_max + j*grid_step;  //  Converts grid point to physical y-value
-      //  if (y > 1) cout << "grid_max " << grid_max << " j " << j << " grid_step " << grid_step << endl;
+
         x_center_of_mass += x*density[0][i][j];
         y_center_of_mass += y*density[0][i][j];
         energy += density[0][i][j];
         sparse_density.push_back({x, y, density[0][i][j], density[1][i][j], density[2][i][j], density[3][i][j]});
-//        if (sparse_density[sparse_density.size()-1][1] > 24) cout << "y " << y << " sparse y " << sparse_density[sparse_density.size()][1] << endl;
-//        cout << "Density " << density[1][i][j] << " " <<  density[2][i][j] << " " << density[3][i][j] << endl;
       }
     }
   }
@@ -231,18 +230,24 @@ vector<vector<vector<double>>> Eccentricity::CalculateEccentricities(int grid_ma
   x_center_of_mass /= energy;
   y_center_of_mass /= energy;
 
+  //******************************************************************************************
+  //  Calculate eccentricities and return in structure for easy output
+  //******************************************************************************************
   return {{StandardCalculation("Energy",2,2), StandardCalculation("Energy",3,3), StandardCalculation("Energy",4,4), StandardCalculation("Energy",5,5)}
          ,{NewCalculation("Baryon",2,2), NewCalculation("Baryon",3,3), NewCalculation("Baryon",4,4), NewCalculation("Baryon",5,5)}
          ,{NewCalculation("Strange",2,2), NewCalculation("Strange",3,3), NewCalculation("Strange",4,4), NewCalculation("Strange",5,5)}
          ,{NewCalculation("Charge",2,2), NewCalculation("Charge",3,3), NewCalculation("Charge",4,4), NewCalculation("Charge",5,5)}};
-
-//  eccentricities = Eccentricities(density[0], grid_step);
-
 }
+//__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Clean class
+//##########################################################################################
 void Eccentricity::CleanEccentricity()
 {
   x_center_of_mass = 0;
   y_center_of_mass = 0;
   sparse_density.clear();
 }
+//__________________________________________________________________________________________

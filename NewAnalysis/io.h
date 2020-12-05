@@ -15,7 +15,7 @@
 
 //__________________________________________________________________________________________
 //##########################################################################################
-//  ICCING Header Files
+//  Analysis Header Files
 //##########################################################################################
 #include "event.h"
 //__________________________________________________________________________________________
@@ -64,9 +64,6 @@ private:
 
   //  Copy function for IO class, called by operator= and implicit copy functions
 	void CopyIO(const IO &e);
-
-  //  Definitions of possible output formats
-  void OutputConfig(string file_name);  //  Prints copy of config file to output directory for reference
 //__________________________________________________________________________________________
 
 public:
@@ -86,8 +83,9 @@ public:
 //##########################################################################################
 //  IO Specific Functions
 //##########################################################################################
-vector<Event> ReadEvents();
+vector<Event> ReadEvents(); //  Read event data from input file
 
+//  Write observables to file, generic function for any list of observables
 void OutputObservables(vector<vector<double>> observables, string file);
 //__________________________________________________________________________________________
 };
