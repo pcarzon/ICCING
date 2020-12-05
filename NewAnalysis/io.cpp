@@ -42,7 +42,7 @@ IO::IO(string configFile)
           if (var_type == "b") data_locations[1] = num;
           if (var_type == "Npart") data_locations[2] = num;
           if (var_type == "Mult") data_locations[3] = num;
-          if (var_type == "s") data_locations[4] = num;
+          if (var_type == "s") {data_locations[4] = num; cout << "s" << endl;}
           if (var_type == "e2") data_locations[5] = num;
           if (var_type == "phi2") data_locations[6] = num;
           if (var_type == "e3") data_locations[7] = num;
@@ -169,6 +169,7 @@ vector<Event> IO::ReadEvents()
     if (data_locations[13] != -1) {current_event.radius = event_data[data_locations[13]]; cout << current_event.radius << " ";}
 
     event_list.push_back(current_event);
+    cout << endl;
   }
 
   input.close();
