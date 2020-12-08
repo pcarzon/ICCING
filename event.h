@@ -1,6 +1,5 @@
 #ifndef Event_H
 #define Event_H
-
 //__________________________________________________________________________________________
 //##########################################################################################
 //  C++ Libraries
@@ -86,12 +85,13 @@ private:
 	//  Copy function for Event class, called by operator= and implicit copy functions
   void CopyEvent(const Event &e);
 
-  //  See: RollGlue in ICCING_v0_1_8.nb
+  //  Select energy of gluon
   Sample GetGlue();
 
-  //  See: RollGlue in ICCING_v0_1_8.nb
+  //  Gets intigration bounds for density grid manipulations
   vector<int> GetIntegrationBounds(int size, double raduis);
 
+  //  Subtracts energy from initial_energy and adds it to density[0]
   void UpdateEnergy(double ratio);
   //__________________________________________________________________________________________
 
@@ -113,17 +113,16 @@ public:
   //  Event Specific Functions
   //##########################################################################################
   //  Sample Initial Energy for ICCING algorithm
-  Sample SampleEnergy(); //  See: First 2 commands in While in DistributeCharge in ICCING_v0_1_8.nb
-    //  Calls RollGlue
+  Sample SampleEnergy();
 
   //  Propogates Results of Splitter
   bool UpdateDensity(Quarks quark_density);
 
+  //  Calculate Eccentricities from density grids
   void CalculateEccentricities();
 
   //  Clears Event variables as a cautionary measure
   void CleanEvent();
-  //__________________________________________________________________________________________
 
   //  Checks Event totals and returns true when initial_total is below a threshold
   bool IsEventDone();

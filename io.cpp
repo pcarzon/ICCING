@@ -640,41 +640,45 @@ void IO::OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, 
 //##########################################################################################
 void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string density_type, string file_name)
 {
+  //  If outputing energy eccentricities, run these commands
   if (density_type == "Energy")
   {
     ofstream output;
-    output.open(file_name + ".dat", ios::app);
+    output.open(file_name + ".dat", ios::app);  //  Append event to end of file
 
-  //  cout << "total entropy " << total_entropy << endl;
+    //  Print event number and total entropy
     output << current_event << " " << total_entropy << " ";
+
+    //  Print magnitude and angle of eccentricities
     for (int i = 0; i < eccentricities.size(); i++)
     {
-      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
-
       output << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
     }
-//    cout << eccentricities[0][2] << endl;
+
+    //  Output radius
     output << eccentricities[0][2] << endl;
+
     output.close();
   }
+  //  If outputing charge eccentricities, print negative and positive to different files
   else if (density_type == "Charge")
   {
     ofstream output_pos, output_neg;
-    output_neg.open(file_name + "_neg.dat", ios::app);
-    output_pos.open(file_name + "_pos.dat", ios::app);
+    output_neg.open(file_name + "_neg.dat", ios::app);  //  Append event to end of file
+    output_pos.open(file_name + "_pos.dat", ios::app);  //  Append event to end of file
 
-//    cout << "total entropy " << total_entropy << endl;
+    //  Print event number and total entropy
     output_neg << current_event << " " << total_entropy << " ";
     output_pos << current_event << " " << total_entropy << " ";
+
+    //  Print magnitude and angle of eccentricities
     for (int i = 0; i < eccentricities.size(); i++)
     {
-//      cout << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
-//      cout << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
-
       output_neg << eccentricities[i][0] << " " << eccentricities[i][1] << " ";
       output_pos << eccentricities[i][3] << " " << eccentricities[i][4] << " ";
     }
-//    cout << eccentricities[0][2] << endl;
+
+    //  Output radius
     output_neg << eccentricities[0][2] << endl;
     output_pos << eccentricities[0][5] << endl;
 
@@ -684,13 +688,18 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
 }
 //__________________________________________________________________________________________
 
+//__________________________________________________________________________________________
+//##########################################################################################
+//  Print quark counts
+//##########################################################################################
 void IO::OutputQuarkCounts(int up, int down, int strange, int charm, string file_name)
 {
   ofstream output;
-  output.open(file_name, ios::app);
+  output.open(file_name, ios::app);  //  Append event to end of file
 
   output << current_event << " " << up << " " << down << " " << strange << " " << charm << endl;
 }
+//__________________________________________________________________________________________
 
 //__________________________________________________________________________________________
 //##########################################################################################
@@ -700,12 +709,10 @@ void IO::OutputQuarkCounts(int up, int down, int strange, int charm, string file
 //##########################################################################################
 Event IO::ReadEvent(Event event_in)
 {
-//  cout << "reading event" << endl;
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
 
-//  cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
   // Loop input variables
   int x, y;
   double readx,ready,value,numpoints=0;
@@ -743,7 +750,6 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_a)
   {
-//    cout << "read ta" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TA" + to_string(current_event) + ".dat");
     //  Initialize t_a grid to 0 with dimensions grid_points + 1
@@ -776,7 +782,6 @@ Event IO::ReadEvent(Event event_in)
   //******************************************************************************************
   if (t_b)
   {
-//    cout << "read tb" << endl;
     //  Open T_a energy density file
     input.open(trento_input_dir + "TB" + to_string(current_event) + ".dat");
     //  Initialize t_b grid to 0 with dimensions grid_points + 1
@@ -802,7 +807,7 @@ Event IO::ReadEvent(Event event_in)
     }
     input.close();  //  Close input stream
   }
-//cout << "end reading event" << endl;
+
   return event_in;  //  Return event with data
 }
 //__________________________________________________________________________________________

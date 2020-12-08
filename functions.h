@@ -42,8 +42,10 @@ struct SplineSet{
 //##########################################################################################
 vector<SplineSet> CubicSpline(vector<double> &x, vector<double> &y);
 
+//  Interpolate Value in given SplineSet range
 double InterpolateValue(SplineSet range, double value);
 
+//  Find the range that contains the value
 SplineSet FindRange(vector<SplineSet> function, double value);
 
 #endif

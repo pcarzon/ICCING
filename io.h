@@ -152,13 +152,13 @@ private:
 //##########################################################################################
 //  Internal Functions
 //##########################################################################################
-
   //  Initializes map used to read config file
   void Initialize();
 
   //  Copy function for IO class, called by operator= and implicit copy functions
 	void CopyIO(const IO &e);
 
+  // Convert event input to energy
   void ConvertEvent(vector<vector<double>> &input, double &total);
 
   //  Definitions of possible output formats
@@ -167,7 +167,7 @@ private:
   void OutputSparseDensityGrids(vector<vector<double>> &density_grid, string file_name);  //  Only prints valued points
   void OutputSparseDensityGrids(vector<vector<vector<double>>> &density_grid, double tot_energy, string file_name);  //  Only prints valued points
   void OutputEccentricities(double total_entropy, vector<vector<double>> eccentricities, string density_type, string file_name); //  Prints eccentricities
-  void OutputQuarkCounts(int up, int down, int strange, int charm, string file_name); //  Prints eccentricities
+  void OutputQuarkCounts(int up, int down, int strange, int charm, string file_name); //  Prints quark counts
 //__________________________________________________________________________________________
 
 public:
@@ -187,18 +187,24 @@ public:
 //##########################################################################################
 //  IO Specific Functions
 //##########################################################################################
+  // Initialize the Event Object
   Event InitializeEvent();
+  // Initialize the Splitter Object
   Splitter InitializeSplitter();
+  // Initialize equation of state
   void InitializeEOS();
 
   string GetOutputDir() { return output_dir;  }
   string GetTest() { return test_;  }
 
-  Event ReadEvent(Event event_in);  //  Read single event
+  //  Read single event
+  Event ReadEvent(Event event_in);
 
-  void WriteEvent(Event event); //  Writes single event to file
+  //  Writes single event to file
+  void WriteEvent(Event event);
 
-  bool LastEvent(); //  Test for end of event list
+  //  Test for end of event list
+  bool LastEvent();
 //__________________________________________________________________________________________
 };
 #endif
