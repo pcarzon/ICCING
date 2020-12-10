@@ -25,7 +25,6 @@ private:
   //##########################################################################################
   // Flag for type of correlation function used in quark position and momentum selection
   string dipole_model;
-  double lambda_bym;
 
   // Function data type which stores a reference to correlation function being used
   function<double(double, double, double, double)> corr;
@@ -52,7 +51,7 @@ public:
   //##########################################################################################
   //  Basic Class Functions
   //##########################################################################################
-  Correlator(string model, double lambda);  // Class Constructor
+  Correlator(string model);  // Class Constructor
   ~Correlator();  //  Class Destructor
 
   Correlator(const Correlator &original); //  Implicit copy function, newIOObject(oldIOObject)

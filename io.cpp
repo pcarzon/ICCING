@@ -53,7 +53,6 @@ IO::IO(string configFile)
       case alphas:  input >> alpha_s; break;
       case alphamin:  input >> alpha_min; break;
       case rmax:  input >> r_max; break;
-      case lambdabym:  input >> lambda_bym; break;
 
       case eosemmitlines:  input >> eos_emmit_lines; break;
       case eosscol:  input >> eos_s_col; break;
@@ -61,8 +60,6 @@ IO::IO(string configFile)
       case atrento:  input >> a_trento; break;
       case echop:  input >> e_chop; break;
 
-      case bmin:  input >> b_min; break;
-      case bmax:  input >> b_max; break;
       case gridmax: input >> grid_max;  break;
       case gridstep:  input >> grid_step; break;
       case tau0:  input >> tau_0; break;
@@ -128,7 +125,6 @@ void IO::CopyIO(const IO &e)
   alpha_s = e.alpha_s;
   alpha_min = e.alpha_min;
   r_max = e.r_max;
-  lambda_bym = e.lambda_bym;
 
   eos_emmit_lines = e.eos_emmit_lines;
   eos_s_col = e.eos_s_col;
@@ -136,8 +132,6 @@ void IO::CopyIO(const IO &e)
   a_trento = e.a_trento;
   e_chop = e.e_chop;
 
-  b_min = e.b_min;
-  b_max = e.b_max;
   grid_max = e.grid_max;
   grid_step = e.grid_step;
   tau_0 = e.tau_0;
@@ -205,7 +199,6 @@ void IO::Initialize()
   alpha_s = 0.0;
   alpha_min = 0.0;
   r_max = 0.0;
-  lambda_bym = 0.0;
 
   eos_emmit_lines = 0.0;
   eos_s_col = 0;
@@ -213,8 +206,6 @@ void IO::Initialize()
   a_trento = 0.0;
   e_chop = 0.0;
 
-  b_min = 0;
-  b_max = 0;
   grid_max = 0.0;
   grid_step = 0.0;
   tau_0 = 0.0;
@@ -253,7 +244,6 @@ void IO::Initialize()
   mapConfigParams["alpha_s"] = alphas;
   mapConfigParams["alpha_min"] = alphamin;
   mapConfigParams["r_max"] = rmax;
-  mapConfigParams["lambda_bym"] = lambdabym;
 
   mapConfigParams["eos_emmit_lines"] = eosemmitlines;
   mapConfigParams["eos_s_col"] = eosscol;
@@ -261,8 +251,6 @@ void IO::Initialize()
   mapConfigParams["a_trento"] = atrento;
   mapConfigParams["e_chop"] = echop;
 
-  mapConfigParams["b_min"] = bmin;
-  mapConfigParams["b_max"] = bmax;
   mapConfigParams["grid_max"] = gridmax;
   mapConfigParams["grid_step"] = gridstep;
   mapConfigParams["tau_0"] = tau0;
@@ -306,8 +294,7 @@ void IO::OutputConfig(string file_name)
     << "\n\ndipole_model " << dipole_model
     << "\nalpha_s " << alpha_s
     << "\nalpha_min " << alpha_min
-    << "\nr_max " << r_max
-    << "\nlambda_bym " << lambda_bym;
+    << "\nr_max " << r_max;
 
   output
     << "\n\neos_emmit_lines " << eos_emmit_lines
@@ -316,8 +303,6 @@ void IO::OutputConfig(string file_name)
     << "\na_trento " << a_trento
     << "\ne_chop " << e_chop;
   output
-    << "\n\nb_min " << b_min
-    << "\nb_max " << b_max
     << "\ngrid_max " << grid_max
     << "\ngrid_step " << grid_step
     << "\ntau_0 " << tau_0
@@ -464,7 +449,7 @@ Splitter IO::InitializeSplitter()
   init_splitter.test_ = test_;
   init_splitter.output_dir = output_dir;
 
-  init_splitter.Model_Correlator = Correlator(dipole_model, lambda_bym);
+  init_splitter.Model_Correlator = Correlator(dipole_model);
 
   return init_splitter;
 }

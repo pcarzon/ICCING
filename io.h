@@ -72,8 +72,6 @@ private:
     atrento,
     echop,
 
-    bmin,
-    bmax,
     gridmax,
     gridstep,
     tau0,
@@ -119,7 +117,6 @@ private:
   double alpha_s;
   double alpha_min;
   double r_max;
-  double lambda_bym;
 
   //******************************************************************************************
   //  EOS Config parameters
@@ -134,8 +131,6 @@ private:
   //******************************************************************************************
   //  Multiple Use Config parameters
   //******************************************************************************************
-  int b_min;
-  int b_max;
   double grid_max;
   double grid_step;
   double tau_0; //  EOS, Event, Splitting
