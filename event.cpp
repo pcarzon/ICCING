@@ -58,6 +58,7 @@ void Event::CopyEvent(const Event &e)
   valued_points = e.valued_points;
   eccentricities = e.eccentricities;
   ecc = e.ecc;
+  number_gluon = e.number_gluon;
   number_up = e.number_up;
   number_down = e.number_down;
   number_strange = e.number_strange;
