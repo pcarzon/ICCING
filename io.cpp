@@ -697,7 +697,7 @@ Event IO::ReadEvent(Event event_in)
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
-
+cout << "A" << endl;
   // Loop input variables
   int x, y;
   double readx,ready,value,numpoints=0;
@@ -712,7 +712,7 @@ Event IO::ReadEvent(Event event_in)
   {
       //  Read in point from energy density
       input >> readx >> ready >> value;
-
+cout << "B" << endl;
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
@@ -730,6 +730,7 @@ Event IO::ReadEvent(Event event_in)
   input.close();  //  Close input stream
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
   event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
+cout << "C" << endl;
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
@@ -792,7 +793,7 @@ Event IO::ReadEvent(Event event_in)
     }
     input.close();  //  Close input stream
   }
-
+cout << "D" << endl;
   return event_in;  //  Return event with data
 }
 //__________________________________________________________________________________________

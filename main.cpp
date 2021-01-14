@@ -74,7 +74,7 @@ cout << "3" << endl;
 				//	Declare Sample and Quarks for individual event processing
 				Sample testSample;
 				Quarks testQuarks;
-
+cout << "X" << endl;
 				//	Get an energy sample from event
 				testSample = testEvent.SampleEnergy();
 
@@ -83,10 +83,10 @@ cout << "3" << endl;
 
 				//	Generate Quarks from event energy sample
 				testQuarks = machine.SplitSample(testSample);
-
+cout << "Y" << endl;
 				//	If there was not enough energy to create 2 quarks of given flavor mass, sample event again
 				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
-
+cout << "Z" << endl;
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				if (inOut.GetTest() == "QuarkRatio") {	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
