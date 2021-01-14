@@ -197,6 +197,7 @@ bool Event::UpdateDensity(Quarks quark_density)
   //******************************************************************************************
   if (quark_density.GetCharge()[0] == 0.)
   {
+    number_gluon++;
     UpdateEnergy(quark_density.GetEnergyFraction());
   }
   //******************************************************************************************

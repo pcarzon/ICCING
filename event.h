@@ -63,6 +63,7 @@ private:
   vector<vector<int>> valued_points;
   vector<vector<vector<double>>> eccentricities;
   Eccentricity ecc;
+  int number_gluon = 0;
   int number_up = 0;
   int number_down = 0;
   int number_strange = 0;

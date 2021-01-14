@@ -677,12 +677,12 @@ void IO::OutputEccentricities(double total_entropy, vector<vector<double>> eccen
 //##########################################################################################
 //  Print quark counts
 //##########################################################################################
-void IO::OutputQuarkCounts(double total_entropy, int up, int down, int strange, int charm, string file_name)
+void IO::OutputQuarkCounts(double total_entropy, int gluon, int up, int down, int strange, int charm, string file_name)
 {
   ofstream output;
   output.open(file_name, ios::app);  //  Append event to end of file
 
-  output << current_event << " " << total_entropy << " " << up << " " << down << " " << strange << " " << charm << endl;
+  output << current_event << " " << total_entropy << " " << gluon << " " << up << " " << down << " " << strange << " " << charm << endl;
 }
 //__________________________________________________________________________________________
 
@@ -851,7 +851,7 @@ void IO::WriteEvent(Event event)
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[1], "Charge", output_dir + "baryon_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
-  OutputQuarkCounts(event.total_initial_entropy, event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
+  OutputQuarkCounts(event.total_initial_entropy, event.number_gluon, event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
   current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________
