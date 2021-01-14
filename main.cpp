@@ -33,7 +33,7 @@ default_random_engine get_random_number;
 int main (int argc, char *argv[])
 {
 	IO inOut(argv[1]);
-cout << "1" << endl;
+
 	//******************************************************************************************
   //  Declare relevent variables and objects
   //******************************************************************************************
@@ -50,7 +50,7 @@ cout << "1" << endl;
 
 	initializedEvent = inOut.InitializeEvent();
 	inOut.InitializeEOS();
-cout << "2" << endl;
+
 	//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	ofstream quark_output;
 	if (inOut.GetTest() == "QuarkRatio"){	quark_output.open(inOut.GetOutputDir() + "quark_ratio_test.dat");	}
@@ -62,7 +62,7 @@ cout << "2" << endl;
 	while (!inOut.LastEvent())
 	{
 		start = clock();	//	Start Clock for timing event
-cout << "3" << endl;
+
 		//	Read next event using initializedEvent as base
 		testEvent = inOut.ReadEvent(initializedEvent);
 
@@ -74,7 +74,7 @@ cout << "3" << endl;
 				//	Declare Sample and Quarks for individual event processing
 				Sample testSample;
 				Quarks testQuarks;
-cout << "X" << endl;
+
 				//	Get an energy sample from event
 				testSample = testEvent.SampleEnergy();
 
@@ -83,10 +83,10 @@ cout << "X" << endl;
 
 				//	Generate Quarks from event energy sample
 				testQuarks = machine.SplitSample(testSample);
-cout << "Y" << endl;
+
 				//	If there was not enough energy to create 2 quarks of given flavor mass, sample event again
 				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
-cout << "Z" << endl;
+
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				if (inOut.GetTest() == "QuarkRatio") {	quark_output << testSample.q_s << " " << testQuarks.GetCharge()[0] << endl;	}
 				//  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -94,13 +94,13 @@ cout << "Z" << endl;
 				//	Update Density grids with sampled quarks, if quarks are out of bounds of grid, sample event again
 				if (!testEvent.UpdateDensity(testQuarks)) { continue; }
 			}
-cout << "4" << endl;
+
 		//	Calculate Eccentricities of event
 		testEvent.CalculateEccentricities();
-cout << "5" << endl;
+
 		//	Write event data to files
 		inOut.WriteEvent(testEvent);
-cout << "6" << endl;
+
 		//	Clean event and print time taken to process
 		testEvent.CleanEvent();
 		duration = (clock() - start)/(double)CLOCKS_PER_SEC;

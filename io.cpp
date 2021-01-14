@@ -697,7 +697,7 @@ Event IO::ReadEvent(Event event_in)
   //  Input file stream
   ifstream input;
   input.open(trento_input_dir + "ic" + to_string(current_event) + ".dat");
-cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
+
   // Loop input variables
   int x, y;
   double readx,ready,value,numpoints=0;
@@ -728,10 +728,8 @@ cout << trento_input_dir + "ic" + to_string(current_event) + ".dat" << endl;
 
   }
   input.close();  //  Close input stream
-  cout << "B" << endl;
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
   event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
-cout << "C" << endl;
   //******************************************************************************************
   //  If method requires T_a energy density, read it into event
   //******************************************************************************************
@@ -794,7 +792,7 @@ cout << "C" << endl;
     }
     input.close();  //  Close input stream
   }
-cout << "D" << endl;
+
   return event_in;  //  Return event with data
 }
 //__________________________________________________________________________________________
@@ -853,7 +851,7 @@ void IO::WriteEvent(Event event)
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[1], "Charge", output_dir + "baryon_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[2], "Charge", output_dir + "strange_eccentricities");
   OutputEccentricities(event.total_initial_entropy, event.eccentricities[3], "Charge", output_dir + "charge_eccentricities");
-//  OutputQuarkCounts(event.total_initial_entropy, event.number_gluon, event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
+  OutputQuarkCounts(event.total_initial_entropy, event.number_gluon, event.number_up, event.number_down, event.number_strange, event.number_charm, output_dir + "quark_counts.dat");
   current_event++;  //  Used for tracking which event has been processed
 }
 //__________________________________________________________________________________________
