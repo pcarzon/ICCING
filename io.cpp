@@ -728,6 +728,7 @@ cout << "A" << endl;
 
   }
   input.close();  //  Close input stream
+  cout << "B" << endl;
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
   event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
 cout << "C" << endl;
