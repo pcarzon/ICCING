@@ -712,7 +712,7 @@ cout << "A" << endl;
   {
       //  Read in point from energy density
       input >> readx >> ready >> value;
-cout << "B" << endl;
+
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
