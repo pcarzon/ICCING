@@ -182,7 +182,7 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
     alpha = get_alpha(get_random_number);
 
     //  Get the largest value of the correlation function at the given alpha, mass, and Qs
-    ceiling = 1.01*Model_Correlator.FindMaximum(alpha, mass, Qs, 0, 1, 0.001);
+    ceiling = 1.01*Model_Correlator.FindMaximum(pow(10, -5), mass, Qs, 0, 1, 0.001);
 
     // Set up distribution to pick probability between 0 and the largest value of the correlation function
     uniform_real_distribution<double> get_location_prob(0, ceiling);
