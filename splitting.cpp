@@ -173,6 +173,23 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
 
   double r, r_final = 0, alpha, phi, prob, ceiling;
 
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //  Flagged statement for reproducing Correlation Function for testing
+  if (test_ == "CorrelationFunction")
+  {
+    int num_tests = 0;
+    ofstream output.open(output_dir + "correlation_function_test.dat");
+    mass = 0.095;
+    Qs = 2;
+  }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  //  Get the largest value of the correlation function at the given mass, and Qs
+  ceiling = 1.01*Model_Correlator.FindMaximum(pow(10, -5), mass, Qs, 0, 1, 0.001);
+
+  // Set up distribution to pick probability between 0 and the largest value of the correlation function
+  uniform_real_distribution<double> get_location_prob(0, ceiling);
+
   //  Get random r, alpha, and probability until the chosen probability is within the bounds
   //  of the correlation function at r and alpha
   while (r_final == 0)
@@ -181,20 +198,38 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
     r = get_r(get_random_number);
     alpha = get_alpha(get_random_number);
 
-    //  Get the largest value of the correlation function at the given alpha, mass, and Qs
-    ceiling = 1.01*Model_Correlator.FindMaximum(pow(10, -5), mass, Qs, 0, 1, 0.001);
-
-    // Set up distribution to pick probability between 0 and the largest value of the correlation function
-    uniform_real_distribution<double> get_location_prob(0, ceiling);
+    // Pick probability between 0 and the largest value of the correlation function
     prob = get_location_prob(get_random_number);
 
     //  If the chosen probability is within the bounds of the correlation function save r and exit loop
     if (prob < Model_Correlator.F(r, alpha, mass, Qs))
     { r_final = r;  }
+
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //  Flagged statement for reproducing Correlation Function for testing
+    if (test_ == "CorrelationFunction")
+    {
+      if (prob < Model_Correlator.F(r, alpha, mass, Qs))
+      {
+        r_final = 0;
+
+        output << r << " " << alpha << " " << prob << " " << Model_Correlator.F(r, alpha, mass, Qs) << endl;
+        num_tests++;
+      }
+
+      if (num_tests >= 10000){ r_final = 1; }
+    }
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
   }
 
   //  Get random phi to calculate the x and y displacement for the quark pair
   phi = get_phi(get_random_number);
+
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //  Flagged statement for reproducing Correlation Function for testing
+  if (test_ == "CorrelationFunction"){ output.close();  exit(0); }
+  //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   //  return {momentum fraction, delta_x, delta_y}
   return {alpha, round((r_final*cos(phi))/grid_step), round((r_final*sin(phi))/grid_step)};
