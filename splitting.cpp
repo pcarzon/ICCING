@@ -173,12 +173,14 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
 
   double r, r_final = 0, alpha, phi, prob, ceiling;
 
+  int num_tests = 0;
+  ofstream output;
+
   //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //  Flagged statement for reproducing Correlation Function for testing
   if (test_ == "CorrelationFunction")
   {
-    int num_tests = 0;
-    ofstream output.open(output_dir + "correlation_function_test.dat");
+    output.open(output_dir + "correlation_function_test.dat");
     mass = 0.095;
     Qs = 2;
   }
