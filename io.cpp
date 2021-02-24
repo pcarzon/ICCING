@@ -53,6 +53,7 @@ IO::IO(string configFile)
       case alphas:  input >> alpha_s; break;
       case alphamin:  input >> alpha_min; break;
       case rmax:  input >> r_max; break;
+      case lambdabym: input >> lambda_bym; break;
 
       case eosemmitlines:  input >> eos_emmit_lines; break;
       case eosscol:  input >> eos_s_col; break;
@@ -125,6 +126,7 @@ void IO::CopyIO(const IO &e)
   alpha_s = e.alpha_s;
   alpha_min = e.alpha_min;
   r_max = e.r_max;
+  lambda_bym = e.lambda_bym;
 
   eos_emmit_lines = e.eos_emmit_lines;
   eos_s_col = e.eos_s_col;
@@ -199,6 +201,7 @@ void IO::Initialize()
   alpha_s = 0.0;
   alpha_min = 0.0;
   r_max = 0.0;
+  lambda_bym = 0.0;
 
   eos_emmit_lines = 0.0;
   eos_s_col = 0;
@@ -244,6 +247,7 @@ void IO::Initialize()
   mapConfigParams["alpha_s"] = alphas;
   mapConfigParams["alpha_min"] = alphamin;
   mapConfigParams["r_max"] = rmax;
+  mapConfigParams["lambda_bym"] = lambdabym;
 
   mapConfigParams["eos_emmit_lines"] = eosemmitlines;
   mapConfigParams["eos_s_col"] = eosscol;
@@ -294,8 +298,8 @@ void IO::OutputConfig(string file_name)
     << "\n\ndipole_model " << dipole_model
     << "\nalpha_s " << alpha_s
     << "\nalpha_min " << alpha_min
-    << "\nr_max " << r_max;
-
+    << "\nr_max " << r_max
+    << "\nlambda_bym " << lambda_bym;
   output
     << "\n\neos_emmit_lines " << eos_emmit_lines
     << "\neos_s_col " << eos_s_col
@@ -449,7 +453,7 @@ Splitter IO::InitializeSplitter()
   init_splitter.test_ = test_;
   init_splitter.output_dir = output_dir;
 
-  init_splitter.Model_Correlator = Correlator(dipole_model);
+  init_splitter.Model_Correlator = Correlator(dipole_model, lambda_bym);
 
   return init_splitter;
 }

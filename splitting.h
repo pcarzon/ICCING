@@ -55,7 +55,7 @@ private:
 	string test_;
 	string output_dir;
 
-	Correlator Model_Correlator = Correlator("");
+	Correlator Model_Correlator = Correlator("", 0.0);
 	//__________________________________________________________________________________________
 
 	//__________________________________________________________________________________________
