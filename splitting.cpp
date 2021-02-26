@@ -185,6 +185,8 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
     Qs = 2;
   }
   //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  mass = 0.095;
+  Qs = 2;
 
   //  Get the largest value of the correlation function at the given mass, and Qs
   ceiling = 1.01*Model_Correlator.FindMaximum(pow(10, -5), mass, Qs, 0, 1, 0.001);
