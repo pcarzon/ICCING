@@ -15,7 +15,7 @@ Correlator::Correlator(string model, double lambda)
   if (dipole_model == "MV")
   {
     //  If using the MV Model, attach the MVModel function to corr
-    cout << "Correct MV Model" << endl;
+    cout << "Correct " << dipole_model << " Model" << endl;
     corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
   else
