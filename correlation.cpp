@@ -22,7 +22,7 @@ Correlator::Correlator(string model, double lambda)
   {
     cout << "Incorrect " << dipole_model << " Model" << endl;
     //  If using no particular model, attach the GBWModel correlation function to corr
-    corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
+    corr = bind(&Correlator::GBWModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
 
 }
