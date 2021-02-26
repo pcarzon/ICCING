@@ -219,7 +219,7 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
         num_tests++;
       }
 
-      if (num_tests >= 10000){ r_final = 1; }
+      if (num_tests >= 100000){ r_final = 1; }
     }
     //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
