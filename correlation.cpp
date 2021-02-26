@@ -15,12 +15,10 @@ Correlator::Correlator(string model, double lambda)
   if (dipole_model == "MV")
   {
     //  If using the MV Model, attach the MVModel function to corr
-    cout << "Correct " << dipole_model << " Model" << endl;
     corr = bind(&Correlator::MVModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
   else
   {
-    cout << "Incorrect " << dipole_model << " Model" << endl;
     //  If using no particular model, attach the GBWModel correlation function to corr
     corr = bind(&Correlator::GBWModel, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
   }
@@ -90,7 +88,6 @@ double Correlator::GBWModel(double r, double alpha, double m, double Qs)
 //##########################################################################################
 double Correlator::MVModel(double r, double alpha, double m, double Qs)
 {
-  cout << "testing mv model" << endl;
   double term1 = r*(pow(m, 2)/(8*pow(M_PI, 2)))*pow(GeVfm, 2);
   double term2 = (1 - exp(-0.25*(pow(alpha, 2)*log(1/(alpha*GeVfm*r*lambda_bym)) + pow(1 - alpha, 2)*log(1/((1 - alpha)*GeVfm*r*lambda_bym)))*pow(GeVfm*r*Qs, 2)));
   double term3 = (pow(alpha, 2) + pow(1 - alpha, 2))*pow(cyl_bessel_k(1, GeVfm*m*r), 2) + pow(cyl_bessel_k(0, GeVfm*m*r), 2);
