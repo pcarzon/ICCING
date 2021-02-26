@@ -181,8 +181,8 @@ vector<double> Splitter::RollLocation(double mass, double Qs)
   if (test_ == "CorrelationFunction")
   {
     output.open(output_dir + "correlation_function_test.dat");
-    mass = 0.0023;
-    Qs = 1;
+    mass = 0.095;
+    Qs = 2;
   }
   //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
