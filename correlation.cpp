@@ -52,7 +52,7 @@ Correlator::Correlator(const Correlator &original)
 //##########################################################################################
 void Correlator::CopyCorrelator(const Correlator &e)
 {
-  corr = e.corr;
+//  corr = e.corr;
   dipole_model = e.dipole_model;
   lambda_bym = e.lambda_bym;
 }
