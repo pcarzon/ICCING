@@ -123,7 +123,13 @@ double Splitter::RollGlue(double e_tot)
 Charge Splitter::RollFlavor(double Qs)
 {
   Charge create_charge;
-  charge_type = 0;
+
+  if (test_ == "GreensFunction")
+  {
+    create_charge.Strange(charge_type);
+    return create_charge;
+  }
+  
   //  Initialize distribution for selecting quark flavor probability
   uniform_real_distribution<double> get_flavor(0, 1);
 

@@ -146,6 +146,12 @@ Sample Event::SampleEnergy()
     x_center = valued_points[point][0];
     y_center = valued_points[point][1];
 
+    if (test_ == "GreensFunction")
+    {
+      x_center = initial_energy.size()/2;
+      y_center = initial_energy.size()/2;
+    }
+    
     //  Get the total energy and q_s using center picked above
     out_sample = GetGlue();
 
