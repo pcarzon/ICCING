@@ -124,12 +124,6 @@ Charge Splitter::RollFlavor(double Qs)
 {
   Charge create_charge;
 
-  if (test_ == "GreensFunction")
-  {
-    create_charge.Strange(charge_type);
-    return create_charge;
-  }
-  
   //  Initialize distribution for selecting quark flavor probability
   uniform_real_distribution<double> get_flavor(0, 1);
 
@@ -160,6 +154,11 @@ Charge Splitter::RollFlavor(double Qs)
   //  Test if gluon becomes charm quark pair
   else
   { create_charge.Charm(charge_type);  }
+
+  if (test_ == "GreensFunction")
+  {
+    create_charge.Strange(0);
+  }
 
   //  Return charge of sample
   return create_charge;
