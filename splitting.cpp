@@ -263,10 +263,16 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   //  Get flavor of gluon
   set_charge = RollFlavor(sampled_energy.q_s);
 
+  cout << "qs " << sampled_energy.q_s << endl;
+  cout << "etot " << sampled_energy.e_tot << endl;
+  cout << "efrac " << gluon_energy_frac << endl;
+
   //  If there is not enough energy to create 2 quarks of given flavor,
   //  go back to SampleEnergy and find new center point
   if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)
   { gluon_energy_frac = -1; }
+
+  cout << "qs " << sampled_energy.q_s << endl;
 
   // If flavor is that of quarks get momentum fraction and position of quark pair
   if (set_charge.GetCharge()[0] != 0)
