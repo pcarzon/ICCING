@@ -66,12 +66,12 @@ int main (int argc, char *argv[])
 		//	Read next event using initializedEvent as base
 		testEvent = inOut.ReadEvent(initializedEvent);
 
-		if (inOut.GetTest() == "GreensFunction")
+/*		if (inOut.GetTest() == "GreensFunction")
 		{
 			testEvent = initializedEvent;
 			cout << "initializedEvent" << endl;
 
-		}
+		}*/
 			//******************************************************************************************
 	  	//  Event Loop, Process event until initial energy density is empty
 	  	//******************************************************************************************
