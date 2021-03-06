@@ -71,8 +71,11 @@ IO::IO(string configFile)
     }// End of switch
   }// End of while loop
 
-  seed_ = time(NULL);
-  get_random_number.seed(seed_);  //  Set random seed from input or timestamp
+  if (seed_ == 0)
+  {
+    seed_ = time(NULL);
+    get_random_number.seed(seed_);  //  Set random seed from input or timestamp
+  }
 
   //  Setting flag for type of charge tracked
   if(charge_type == "BSQ") {  tracked_charge = 0; }
@@ -183,7 +186,7 @@ void IO::Initialize()
   output_dir = "";
   input_type = 0;
   output_type = 0;
-  seed_ = time(NULL);
+  seed_ = 0;
   test_ = "";
 
   event_label = "";
@@ -336,26 +339,13 @@ Event IO::InitializeEvent()
   event_in.grid_points = grid_points;
 
   //  Initialize input grid to 0 with dimensions grid_points + 1
-  if (test_ == "GreensFunction")
-  {
-    vector<vector<double>> temp;
-    event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 1.));
-    temp.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
-    event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 1.));
-    for (int i = 0; i < 4; i++)
-    {
-      event_in.density.push_back(temp);
-    }
-  }
-  else
-  {
-    event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
+  event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
 
-    for (int i = 0; i < 4; i++)
-    {
-      event_in.density.push_back(event_in.initial_energy);
-    }
+  for (int i = 0; i < 4; i++)
+  {
+    event_in.density.push_back(event_in.initial_energy);
   }
+
   //******************************************************************************************
   //  Initialze Gluon Distribution for sampling
   //******************************************************************************************
@@ -735,6 +725,7 @@ Event IO::ReadEvent(Event event_in)
       y = (int)round((ready + grid_max)/grid_step);
       event_in.valued_points.push_back({{x},{y}});
 
+      if (test_ == "GreensFunction") { value = 1.; }
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
       event_in.total_initial_entropy += value;
