@@ -158,6 +158,7 @@ Charge Splitter::RollFlavor(double Qs)
   if (test_ == "GreensFunction")
   {
     create_charge.Strange(charge_type);
+    cout << "Created strange quarks " << create_charge.GetCharge()[0] << endl;
   }
 
   //  Return charge of sample
@@ -273,6 +274,8 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   //  else it is a gluon and the momentum fraction and position are 0
   else
   { quark_location = {0, 0, 0}; }
+
+  cout << "Made strange quarks " << set_charge.GetCharge()[0] << endl;
 
   //  Create quarks to be distributed in output density grids
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, quark_location[0], quark_location[1], quark_location[2]);
