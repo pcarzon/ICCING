@@ -99,7 +99,7 @@ int main (int argc, char *argv[])
 				if (!testEvent.UpdateDensity(testQuarks)) { continue; }
 
 				if (inOut.GetTest() == "GreensFunction")
-				{	break;	}
+				{	cout << "Created strange quarks " << testQuarks.GetCharge()[0] << endl; break;	}
 			}
 
 		//	Calculate Eccentricities of event

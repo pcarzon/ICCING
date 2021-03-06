@@ -338,18 +338,24 @@ Event IO::InitializeEvent()
   //  Initialize input grid to 0 with dimensions grid_points + 1
   if (test_ == "GreensFunction")
   {
+    vector<vector<double>> temp;
     event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 10.));
+    temp.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
+
+    for (int i = 0; i < 4; i++)
+    {
+      event_in.density.push_back(temp);
+    }
   }
   else
   {
     event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
-  }
-  
-  for (int i = 0; i < 4; i++)
-  {
-    event_in.density.push_back(event_in.initial_energy);
-  }
 
+    for (int i = 0; i < 4; i++)
+    {
+      event_in.density.push_back(event_in.initial_energy);
+    }
+  }
   //******************************************************************************************
   //  Initialze Gluon Distribution for sampling
   //******************************************************************************************

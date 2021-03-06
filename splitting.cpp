@@ -157,7 +157,7 @@ Charge Splitter::RollFlavor(double Qs)
 
   if (test_ == "GreensFunction")
   {
-    create_charge.Strange(0);
+    create_charge.Strange(charge_type);
   }
 
   //  Return charge of sample
