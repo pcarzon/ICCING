@@ -339,7 +339,7 @@ Event IO::InitializeEvent()
   if (test_ == "GreensFunction")
   {
     vector<vector<double>> temp;
-    event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 10.));
+    event_in.initial_energy.resize(grid_points + 1, vector<double>(grid_points + 1, 1.));
     temp.resize(grid_points + 1, vector<double>(grid_points + 1, 0.));
 
     for (int i = 0; i < 4; i++)
