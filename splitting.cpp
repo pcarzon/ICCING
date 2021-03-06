@@ -262,7 +262,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
 
   //  Get flavor of gluon
   set_charge = RollFlavor(sampled_energy.q_s);
-
+  sampled_energy.q_s = 2;
   cout << "qs " << sampled_energy.q_s << endl;
   cout << "etot " << sampled_energy.e_tot << endl;
   cout << "efrac " << gluon_energy_frac << endl;
