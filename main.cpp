@@ -69,6 +69,8 @@ int main (int argc, char *argv[])
 		if (inOut.GetTest() == "GreensFunction")
 		{
 			testEvent = initializedEvent;
+			cout << "initializedEvent" << endl;
+
 		}
 			//******************************************************************************************
 	  	//  Event Loop, Process event until initial energy density is empty
@@ -81,7 +83,7 @@ int main (int argc, char *argv[])
 
 				//	Get an energy sample from event
 				testSample = testEvent.SampleEnergy();
-
+	cout << "sampled energy" << endl;
 				// If initial energy density is empty, end event loop and start new event
 				if (testSample.q_s == -100){	continue;	}
 
