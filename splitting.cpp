@@ -158,7 +158,7 @@ Charge Splitter::RollFlavor(double Qs)
   if (test_ == "GreensFunction")
   {
     create_charge.Strange(charge_type);
-    cout << "Created strange quarks " << create_charge.GetCharge()[0] << endl;
+//    cout << "Created strange quarks " << create_charge.GetCharge()[0] << endl;
   }
 
   //  Return charge of sample
@@ -262,17 +262,12 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
 
   //  Get flavor of gluon
   set_charge = RollFlavor(sampled_energy.q_s);
-  sampled_energy.q_s = 2;
-  cout << "qs " << sampled_energy.q_s << endl;
-  cout << "etot " << sampled_energy.e_tot << endl;
-  cout << "efrac " << gluon_energy_frac << endl;
-
+  if (test_ == "GreensFunction")
+  { sampled_energy.q_s = 2; }
   //  If there is not enough energy to create 2 quarks of given flavor,
   //  go back to SampleEnergy and find new center point
   if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)
   { gluon_energy_frac = -1; }
-
-  cout << "qs " << sampled_energy.q_s << endl;
 
   // If flavor is that of quarks get momentum fraction and position of quark pair
   if (set_charge.GetCharge()[0] != 0)
@@ -280,8 +275,6 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   //  else it is a gluon and the momentum fraction and position are 0
   else
   { quark_location = {0, 0, 0}; }
-
-  cout << "Made strange quarks " << set_charge.GetCharge()[0] << endl;
 
   //  Create quarks to be distributed in output density grids
   create_quarks.CreateQuarks(set_charge, gluon_energy_frac, quark_location[0], quark_location[1], quark_location[2]);

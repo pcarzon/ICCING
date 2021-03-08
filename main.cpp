@@ -83,14 +83,11 @@ int main (int argc, char *argv[])
 
 				//	Get an energy sample from event
 				testSample = testEvent.SampleEnergy();
-	cout << "sampled energy" << endl;
 				// If initial energy density is empty, end event loop and start new event
 				if (testSample.q_s == -100){	continue;	}
 
 				//	Generate Quarks from event energy sample
 				testQuarks = machine.SplitSample(testSample);
-
-				cout << "Did not get strange quarks " << testQuarks.GetCharge()[0] << endl;
 
 				//	If there was not enough energy to create 2 quarks of given flavor mass, sample event again
 				if (testQuarks.GetEnergyFraction() == -1)	{	continue;	}
@@ -102,8 +99,6 @@ int main (int argc, char *argv[])
 				//	Update Density grids with sampled quarks, if quarks are out of bounds of grid, sample event again
 				if (!testEvent.UpdateDensity(testQuarks)) { continue; }
 
-				if (inOut.GetTest() == "GreensFunction")
-				{	cout << "Updated strange quarks " << testQuarks.GetCharge()[0] << endl; break;	}
 			}
 
 		//	Calculate Eccentricities of event
