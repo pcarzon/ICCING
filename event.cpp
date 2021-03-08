@@ -146,12 +146,6 @@ Sample Event::SampleEnergy()
     x_center = valued_points[point][0];
     y_center = valued_points[point][1];
 
-    if (test_ == "GreensFunction")
-    {
-      x_center = initial_energy.size()/2;
-      y_center = initial_energy.size()/2;
-    }
-
     //  Get the total energy and q_s using center picked above
     out_sample = GetGlue();
 
@@ -305,6 +299,17 @@ bool Event::UpdateDensity(Quarks quark_density)
         density[3][temp_x][temp_y] -= quark_density.GetCharge()[3]*quark_dist[i][j];
       }
     }
+    if (test_ == "GreensFunction")
+    {
+      for (int i = 0; i < valued_points.size(); i++)
+      {
+        density[0][valued_points[i][0]][valued_points[i][1]] = initial_energy[valued_points[i][0]][valued_points[i][1]];
+        initial_energy[valued_points[i][0]][valued_points[i][1]] = 0;
+        valued_points.erase(valued_points.begin() + i);
+      }
+      return true;
+    }
+
   }
 
   return true;
@@ -383,7 +388,7 @@ vector<int> Event::GetIntegrationBounds(int size, double raduis)
 //##########################################################################################
 bool Event::IsEventDone()
 {
-/*  if (test_ == "EChop")
+  if (test_ == "EChop")
   {
     for (int i = 0; i < valued_points.size(); i++)
     {
@@ -393,7 +398,7 @@ bool Event::IsEventDone()
     }
     return true;
   }
-*/
+
   //  Check all points in valued points and remove ones that are now 0
   for (int i = 0; i < valued_points.size(); i++)
   {
