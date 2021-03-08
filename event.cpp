@@ -299,17 +299,18 @@ bool Event::UpdateDensity(Quarks quark_density)
         density[3][temp_x][temp_y] -= quark_density.GetCharge()[3]*quark_dist[i][j];
       }
     }
-    if (test_ == "GreensFunction")
-    {
-      for (int i = 0; i < valued_points.size(); i++)
-      {
-        density[0][valued_points[i][0]][valued_points[i][1]] = initial_energy[valued_points[i][0]][valued_points[i][1]];
-        initial_energy[valued_points[i][0]][valued_points[i][1]] = 0;
-        valued_points.erase(valued_points.begin() + i);
-      }
-      return true;
-    }
+  }
 
+  if (test_ == "GreensFunction")
+  {
+    for (int i = 0; i < initial_energy.size(); i++)
+    {
+      for (int j = 0; j < initial_energy.size(); j++)
+      {
+        density[0][i][j] = initial_energy[i][j];
+      }
+    }
+    return true;
   }
 
   return true;
