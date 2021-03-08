@@ -86,6 +86,7 @@ namespace GreensFunctions{
         GssdXdTAcc=new gsl_interp_accel*[NumberOfOpenMPThreads];
 
         #pragma omp parallel for
+        {
         for(int i=0;i<NumberOfOpenMPThreads;i++){
 
             FsswTAcc[i] = gsl_interp_accel_alloc ();
@@ -94,7 +95,7 @@ namespace GreensFunctions{
             FssdXdTAcc[i] = gsl_interp_accel_alloc ();
             GssdXdTAcc[i] = gsl_interp_accel_alloc ();
             }
-
+        }
         FssInt=gsl_spline2d_alloc(gsl_interp2d_bilinear,NumberOfTimes,NumberOfPoints);
         GssInt=gsl_spline2d_alloc(gsl_interp2d_bilinear,NumberOfTimes,NumberOfPoints);
 
