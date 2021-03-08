@@ -725,7 +725,6 @@ Event IO::ReadEvent(Event event_in)
       y = (int)round((ready + grid_max)/grid_step);
       event_in.valued_points.push_back({{x},{y}});
 
-      if (test_ == "GreensFunction") { value = 10.; }
       //  Set point in event's initial energy density grid
       event_in.initial_energy[x][y] = value;
       event_in.total_initial_entropy += value;
@@ -736,6 +735,18 @@ Event IO::ReadEvent(Event event_in)
 
   }
   input.close();  //  Close input stream
+
+  if (test_ == "GreensFunction")
+  {
+    for (int i = 0; i < event_in.initial_energy.size(); i++)
+    {
+      for (int j = 0; j < event_in.initial_energy.size(); j++)
+      {
+        event_in.initial_energy[i][j] = 10.;
+      }
+    }
+  }
+  
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
   event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
   //******************************************************************************************
