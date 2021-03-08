@@ -301,8 +301,8 @@ bool Event::UpdateDensity(Quarks quark_density)
     }
   }
 
-  if (test_ == "GreensFunction")
-  {
+//  if (test_ == "GreensFunction")
+//  {
     for (int i = 0; i < initial_energy.size(); i++)
     {
       for (int j = 0; j < initial_energy.size(); j++)
@@ -310,8 +310,7 @@ bool Event::UpdateDensity(Quarks quark_density)
         density[0][i][j] = initial_energy[i][j];
       }
     }
-    return true;
-  }
+//  }
 
   return true;
 }
