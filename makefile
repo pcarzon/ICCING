@@ -7,7 +7,7 @@ MALLOC_CHECK = 2
 #-lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs`
 #greenfunction.h
 CPP_FILES = ecc.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cpp
-HEADER_FILES = ecc.h event.h io.h functions.h splitting.h global.h correlation.h greenfunction.h
+HEADER_FILES = ecc.h event.h io.h functions.h splitting.h global.h correlation.h 
 OBJECT_FILES = ecc.o event.o io.o functions.o main.o splitting.o correlation.o
 
 ecc.o : ecc.h ecc.cpp
