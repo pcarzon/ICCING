@@ -1,19 +1,22 @@
 CC = g++
 DEBUG = -g
-CFLAGS = -std=c++17 -Wall -c -lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
+CFLAGS = -std=c++17 -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
 #-lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs`
 #greenfunction.h
-CPP_FILES = ecc.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cpp
-HEADER_FILES = ecc.h event.h io.h functions.h splitting.h global.h correlation.h 
-OBJECT_FILES = ecc.o event.o io.o functions.o main.o splitting.o correlation.o
+CPP_FILES = ecc.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cpp greenfunction.cpp
+HEADER_FILES = ecc.h event.h io.h functions.h splitting.h global.h correlation.h
+OBJECT_FILES = ecc.o event.o io.o functions.o main.o splitting.o correlation.o greenfunction.o
 
 ecc.o : ecc.h ecc.cpp
 	$(CC) $(CFLAGS) ecc.cpp
 
-event.o : event.h global.h ecc.h greenfunction.h event.cpp
+greenfunction.o : greenfunction.cpp
+	$(CC) $(CFLAGS) -lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs` greenfunction.cpp
+
+event.o : event.h global.h ecc.h greenfunction.cpp event.cpp
 	$(CC) $(CFLAGS) event.cpp
 
 correlation.o : correlation.h correlation.cpp
