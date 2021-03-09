@@ -1,7 +1,7 @@
 CC = g++
 DEBUG = -g
 CFLAGS = -std=c++17 -Wall -c -lstdc++ -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
-LFLAGS = -Wall -fopenmp $(DEBUG)
+LFLAGS = -Wall -lstdc++ -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
 MALLOC_CHECK = 2
 
 #-lstdc++ -fopenmp `gsl-config --cflags` `gsl-config --libs`
