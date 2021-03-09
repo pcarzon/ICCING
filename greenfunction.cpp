@@ -5,6 +5,15 @@ namespace GreensFunctions{
     ///////////////////////////////////////////////
     // EVALUTE GREENS FUNCTIONS BY INTERPOLATION //
     ///////////////////////////////////////////////
+    // EVALUATE BETWEEN dXdTMin,dXdTMax AND wTMin,wTMax //
+    double dXdTMin,dXdTMax,wTMin,wTMax;
+
+    // GSL INTERPOLATION OBJECTS //
+    gsl_interp_accel **FsswTAcc,**GsswTAcc;
+    gsl_interp_accel **FssdXdTAcc,**GssdXdTAcc;
+
+    gsl_spline2d *FssInt,*GssInt;
+
 
     double FssScalingCurve(double wT,double dXdT){
         int tID=omp_get_thread_num();
@@ -30,6 +39,11 @@ namespace GreensFunctions{
     //    INTERPOLATE COORDINATE SPACE GRRENS FUNCTIONS    //
     // AS FUNCTIONS OF wTilde and (\Delta x)/(\Delta \tau) //
     /////////////////////////////////////////////////////////
+    double *wTValues,*dXdTValues;
+
+    double *FssValues;
+    double *GssValues;
+
 
     void Setup(int NumberOfTimes,int NumberOfPoints){
 
