@@ -1,6 +1,6 @@
 CC = g++
 DEBUG = -g
-CFLAGS = -std=c++17 -Wall -c $(DEBUG)
+CFLAGS = -std=c++17 -Wall -c -lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
@@ -14,7 +14,7 @@ ecc.o : ecc.h ecc.cpp
 	$(CC) $(CFLAGS) ecc.cpp
 
 event.o : event.h global.h ecc.h greenfunction.h event.cpp
-	$(CC) $(CFLAGS)  -lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs` event.cpp
+	$(CC) $(CFLAGS) event.cpp
 
 correlation.o : correlation.h correlation.cpp
 	$(CC) $(CFLAGS) correlation.cpp
