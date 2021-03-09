@@ -19,6 +19,7 @@
 #include "io.h"
 #include "splitting.h"
 #include "correlation.h"
+#include "greenfunction.h"
 //__________________________________________________________________________________________
 
 using namespace std;
