@@ -1,4 +1,11 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <ctime>
+#include <string>
+#include <sstream>
 #include <omp.h>
+
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_spline.h>
 #include <gsl/gsl_spline2d.h>
