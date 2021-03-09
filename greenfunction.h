@@ -1,3 +1,6 @@
+#ifndef GreensFunction_H
+#define GreensFunction_H
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -241,3 +244,4 @@ namespace GreensFunctions{
 
 
 } // GreensFunctions
+#endif
