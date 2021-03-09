@@ -1,6 +1,6 @@
 CC = g++
 DEBUG = -g
-CFLAGS = -std=c++17 -Wall -c -lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
+CFLAGS = -std=c++17 -Wall -c -lstdc++ -fopenmp $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
