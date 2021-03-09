@@ -1,10 +1,10 @@
 CC = g++
 DEBUG = -g
-CFLAGS = -std=c++17 -Wall -c -lstdc++ -fopenmp $(DEBUG)
+CFLAGS = -std=c++17 -Wall -c -lstdc++ -fopenmp `gsl-config --cflags` `gsl-config --libs` $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 MALLOC_CHECK = 2
 
-#-lstdc++ -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -fopenmp `gsl-config --cflags` `gsl-config --libs`
+#-lstdc++ -fopenmp `gsl-config --cflags` `gsl-config --libs`
 #greenfunction.h
 CPP_FILES = ecc.cpp event.cpp io.cpp functions.cpp main.cpp splitting.cpp correlation.cpp
 HEADER_FILES = ecc.h event.h io.h functions.h splitting.h global.h correlation.h greenfunction.h
