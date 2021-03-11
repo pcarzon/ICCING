@@ -712,7 +712,7 @@ Event IO::ReadEvent(Event event_in)
   //  Ignore first line of input file (Trento specific, needs to be changed)
   input.ignore(10000, '\n');
 
-  cout << "Reading Event" << endl;
+//  cout << "Reading Event" << endl;
 
   //******************************************************************************************
   //  Loop through file until end is reached
@@ -731,7 +731,7 @@ Event IO::ReadEvent(Event event_in)
       event_in.initial_energy[x][y] = value;
       event_in.total_initial_entropy += value;
       numpoints++;
-      cout << "Energy " << value << endl;
+//      cout << "Energy " << value << endl;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
@@ -793,6 +793,7 @@ Event IO::ReadEvent(Event event_in)
     input.open(trento_input_dir + "TB" + to_string(current_event) + ".dat");
     //  Initialize t_b grid to 0 with dimensions grid_points + 1
     event_in.t_b.resize(grid_points + 1, vector<double>(grid_points + 1, 0));
+    cout << "Reading qs " << trento_input_dir + "TB" + to_string(current_event) + ".dat" << endl;
 
     //  Ignore first line of input file (Trento specific, needs to be changed)
     input.ignore(10000, '\n');
@@ -802,7 +803,7 @@ Event IO::ReadEvent(Event event_in)
     {
       //  Read in point from energy density
       input >> readx >> ready >> value;
-      cout << "Qs " << value << endl;
+//      cout << "Qs " << value << endl;
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
