@@ -377,7 +377,7 @@ vector<int> Event::GetIntegrationBounds(int size, double raduis)
 //##########################################################################################
 bool Event::IsEventDone()
 {
-/*  if (test_ == "EChop")
+  if (test_ == "EChop")
   {
     for (int i = 0; i < valued_points.size(); i++)
     {
@@ -387,7 +387,7 @@ bool Event::IsEventDone()
     }
     return true;
   }
-*/
+
   //  Check all points in valued points and remove ones that are now 0
   for (int i = 0; i < valued_points.size(); i++)
   {
