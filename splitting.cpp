@@ -264,6 +264,7 @@ Quarks Splitter::SplitSample(Sample sampled_energy)
   set_charge = RollFlavor(sampled_energy.q_s);
   if (test_ == "GreensFunction")
   { sampled_energy.q_s = 2; }
+  cout << set_charge.GetCharge()[0] << endl;
   //  If there is not enough energy to create 2 quarks of given flavor,
   //  go back to SampleEnergy and find new center point
   if (2*set_charge.GetCharge()[0] > gluon_energy_frac*sampled_energy.e_tot)
