@@ -182,7 +182,7 @@ Sample Event::SampleEnergy()
       got_point = true; //  Set got_point to exit loop
     }
   }
-  cout << "Qs " << out_sample.q_s << endl;
+//  cout << "Qs " << out_sample.q_s << endl;
   return out_sample;
 }
 //__________________________________________________________________________________________

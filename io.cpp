@@ -746,7 +746,7 @@ Event IO::ReadEvent(Event event_in)
       }
     }
   }
-  
+
   ConvertEvent(event_in.initial_energy, event_in.total_initial_energy);
   event_in.total_initial_entropy = a_trento*event_in.total_initial_entropy/numpoints;
   //******************************************************************************************
@@ -799,7 +799,7 @@ Event IO::ReadEvent(Event event_in)
     {
       //  Read in point from energy density
       input >> readx >> ready >> value;
-
+      cout << "Qs " << value << endl;
       //  Take physical point and convert x and y values into grid indicies
       x = (int)round((readx + grid_max)/grid_step);
       y = (int)round((ready + grid_max)/grid_step);
