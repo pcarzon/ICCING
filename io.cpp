@@ -712,6 +712,8 @@ Event IO::ReadEvent(Event event_in)
   //  Ignore first line of input file (Trento specific, needs to be changed)
   input.ignore(10000, '\n');
 
+  cout << "Reading Event" << endl;
+
   //******************************************************************************************
   //  Loop through file until end is reached
   //******************************************************************************************
@@ -729,6 +731,7 @@ Event IO::ReadEvent(Event event_in)
       event_in.initial_energy[x][y] = value;
       event_in.total_initial_entropy += value;
       numpoints++;
+      cout << "Energy " << value << endl;
 
       input.ignore(10000, '\n');  //  Ignore rest of line
       if (input.peek() == '\n') {break;}  //  Saftey check for empty line at end of file
