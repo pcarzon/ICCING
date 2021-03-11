@@ -840,12 +840,12 @@ void IO::WriteEvent(Event event)
     if (t_a)  //  Output T_a if flag is true
     {
       output_energy = event.t_a;
-      OutputFullDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_dir + "ta" + to_string(current_event) + ".dat");
     }
     if (t_b)  //  Output T_b if flag is true
     {
       output_energy = event.t_b;
-      OutputFullDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
+      OutputFullDensityGrids(output_energy, output_dir + "ta" + to_string(current_event) + ".dat");
     }
   }
   //******************************************************************************************
@@ -861,12 +861,12 @@ void IO::WriteEvent(Event event)
     if (t_a)  //  Output T_a if flag is true
     {
       output_energy = event.t_a;
-      OutputSparseDensityGrids(output_energy, output_dir + "TA" + to_string(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_dir + "ta" + to_string(current_event) + ".dat");
     }
     if (t_b)  //  Output T_b if flag is true
     {
       output_energy = event.t_b;
-      OutputSparseDensityGrids(output_energy, output_dir + "TB" + to_string(current_event) + ".dat");
+      OutputSparseDensityGrids(output_energy, output_dir + "ta" + to_string(current_event) + ".dat");
     }
   }
 
