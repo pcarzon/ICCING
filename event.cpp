@@ -377,8 +377,8 @@ vector<int> Event::GetIntegrationBounds(int size, double raduis)
 //##########################################################################################
 bool Event::IsEventDone()
 {
-//  if (test_ == "EChop")
-//  {
+  if (test_ == "EChop")
+  {
     for (int i = 0; i < valued_points.size(); i++)
     {
       density[0][valued_points[i][0]][valued_points[i][1]] = initial_energy[valued_points[i][0]][valued_points[i][1]];
@@ -386,7 +386,7 @@ bool Event::IsEventDone()
       valued_points.erase(valued_points.begin() + i);
     }
     return true;
-//  }
+  }
 
   //  Check all points in valued points and remove ones that are now 0
   for (int i = 0; i < valued_points.size(); i++)
